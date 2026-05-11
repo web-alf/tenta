@@ -35,7 +35,7 @@ plans:
     features: ["Semua benefit Pro", "Halaman, user & fitur sesuai kebutuhan", "Shared Hosting Business KVM8 Hostinger", "Integrasi ke sistem CRM", "Multi-language ready", "Payment gateway integration", "Performance monitoring", "15× revisi (priority list, 3 bulan)"]
   - name: "Custom"
     tagline: "Stack & scope sepenuhnya menyesuaikan"
-    price: "Menyesuaikan"
+    price: "Negotiable"
     unit: ""
     features: ["Semua benefit Business", "Stack tech request sesuai kebutuhan", "Payment gateway + dedicated support", "VPS / Shared Host", "Custom dashboards & reports", "Multi-language + dark mode", "Unlimited revisi (priority list)"]
 process:
