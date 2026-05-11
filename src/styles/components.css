@@ -556,7 +556,7 @@ section { padding: 80px 0; }
   font-weight: 600;
 }
 .pricing-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-.price { font-size: 34px; font-weight: 800; font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif; }
+.price { font-size: 34px; font-weight: 800; font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif; word-break: break-word; overflow-wrap: anywhere; }
 .price small { font-size: 14px; color: var(--ink-500); font-weight: 500; }
 .feat-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .feat-list li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink-700); }
