@@ -5,10 +5,9 @@ import Footer from '@components/layout/Footer.astro';
 import StickyWA from '@components/layout/StickyWA.astro';
 import { site } from '@data/site';
 import { organizationJsonLd, localBusinessJsonLd, websiteJsonLd } from '@lib/seo';
-import { PUBLIC_GA_ID, PUBLIC_GA_ID2 } from 'astro:env/client';
+import { PUBLIC_GA_ID } from 'astro:env/client';
 
-const gaId  = PUBLIC_GA_ID;
-const gaId2 = PUBLIC_GA_ID2 || 'G-T6YX6NJRTK';
+const gaId = PUBLIC_GA_ID;
 const gscVerification = site.verification.google;
 
 interface Props {
@@ -188,13 +187,7 @@ const cspContent = [
     {gaId && (
       <script
         is:inline
-        set:html={[
-          `window.dataLayer=window.dataLayer||[];`,
-          `function gtag(){dataLayer.push(arguments);}`,
-          `gtag('js',new Date());`,
-          `gtag('config','${gaId}');`,
-          gaId2 ? `gtag('config','${gaId2}');` : '',
-        ].join('')}
+        set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}');`}
       />
     )}
 
