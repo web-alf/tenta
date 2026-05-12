@@ -166,7 +166,9 @@ const cspContent = [
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    {preloadHeroSrc && <link rel="preload" as="image" href={preloadHeroSrc} fetchpriority="high" type="image/avif" />}
+    {preloadHeroSrc && (
+      <Fragment set:html={`<link rel="preload" as="image" imagesrcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" imagesizes="(max-width: 760px) min(480px, 95vw), 560px" type="image/avif" fetchpriority="high" />`} />
+    )}
 
     <link rel="dns-prefetch" href="https://wa.me" />
 

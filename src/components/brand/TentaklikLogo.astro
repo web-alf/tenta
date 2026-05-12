@@ -10,12 +10,14 @@ const { size = 22, variant = 'default', class: className = '' } = Astro.props;
 // logo-full.png  = logo lengkap (kraken + teks) untuk background terang (header)
 // logo-white.png = logo putih/kuning untuk background gelap (footer)
 const src = variant === 'white' ? '/logo-white.png' : '/logo-full.png';
-const h = Math.round(size * 1.8); // height in px; width auto (logo landscape 1694:397)
+const h = Math.round(size * 1.8);
+const w = Math.round(h * 1694 / 397);
 ---
 <span class={`t-logo ${className}`} style="display:inline-flex;align-items:center;line-height:1;">
   <img
     src={src}
     alt="Tentaklik"
+    width={w}
     height={h}
     style={`height:${h}px;width:auto;display:block;`}
     loading="eager"
