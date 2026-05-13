@@ -195,5 +195,30 @@ const cspContent = [
       import { initReveal } from '@lib/reveal';
       initReveal();
     </script>
+
+    <script is:inline>
+      // Centralized Zaraz event tracking via event delegation
+      // 1. Klik link ke /kontak → begin_checkout
+      // 2. Klik link ke wa.me → whatsapp_click
+      // 3. Submit form di /kontak → generate_lead
+      document.addEventListener('click', function(e) {
+        var link = e.target.closest('a');
+        if (!link || !window.zaraz) return;
+        try {
+          var url = new URL(link.href, window.location.origin);
+          if (url.pathname === '/kontak' || url.pathname === '/kontak/') {
+            window.zaraz.track('begin_checkout');
+          }
+          if (url.hostname === 'wa.me') {
+            window.zaraz.track('whatsapp_click');
+          }
+        } catch (err) {}
+      });
+      document.addEventListener('submit', function() {
+        if (window.location.pathname.indexOf('/kontak') === 0 && window.zaraz) {
+          window.zaraz.track('generate_lead');
+        }
+      });
+    </script>
   </body>
 </html>
