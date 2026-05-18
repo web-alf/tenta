@@ -227,22 +227,15 @@ const jsonLd = [
 
       lastSubmitAt = now;
 
-      // Save to Google Spreadsheet (fire-and-forget, no-cors for cross-origin Apps Script)
+      // Save to Google Spreadsheet via GET (fire-and-forget)
+      // GET dipakai karena POST ke Apps Script drop body saat 302 redirect
       if (SHEET_URL) {
-        fetch(SHEET_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          redirect: 'follow',
-          body: JSON.stringify({
-            nama: name,
-            email: email,
-            whatsapp: phone,
-            layanan: service,
-            budget: budget,
-            pesan: message,
-            source: window.location.href,
-          }),
-        }).catch(() => {});
+        var params = new URLSearchParams({
+          nama: name, email: email, whatsapp: phone,
+          layanan: service, budget: budget,
+          pesan: message, source: window.location.href,
+        });
+        fetch(SHEET_URL + '?' + params.toString(), { mode: 'no-cors' }).catch(function(){});
       }
 
       const msg =
