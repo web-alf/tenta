@@ -180,6 +180,7 @@ const jsonLd = [
 <script>
   const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285177111104';
   const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
+  const SHEET_URL = import.meta.env.PUBLIC_SHEET_URL ?? '';
   const form = document.getElementById('kontak-form') as HTMLFormElement | null;
   const sentMsg = document.getElementById('form-sent');
   const errMsg = document.getElementById('form-error');
@@ -225,6 +226,24 @@ const jsonLd = [
       if (message.length < 10)   { showErr('Pesan minimal 10 karakter.'); return; }
 
       lastSubmitAt = now;
+
+      // Save to Google Spreadsheet (fire-and-forget)
+      if (SHEET_URL) {
+        fetch(SHEET_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify({
+            nama: name,
+            email: email,
+            whatsapp: phone,
+            layanan: service,
+            budget: budget,
+            pesan: message,
+            source: window.location.href,
+          }),
+        }).catch(() => {});
+      }
+
       const msg =
         `Halo Tentaklik, saya tertarik diskusi:\n\n` +
         `Nama: ${name}\n` +
