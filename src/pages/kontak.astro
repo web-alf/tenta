@@ -227,11 +227,12 @@ const jsonLd = [
 
       lastSubmitAt = now;
 
-      // Save to Google Spreadsheet (fire-and-forget)
+      // Save to Google Spreadsheet (fire-and-forget, no-cors for cross-origin Apps Script)
       if (SHEET_URL) {
         fetch(SHEET_URL, {
           method: 'POST',
-          headers: { 'Content-Type': 'text/plain' },
+          mode: 'no-cors',
+          redirect: 'follow',
           body: JSON.stringify({
             nama: name,
             email: email,
