@@ -4,7 +4,7 @@ export const TERMS_HERO = {
   eyebrow: 'Legal',
   title: 'Ketentuan Layanan Tenta<span class="accent">Klik</span>',
   lede: 'Perjanjian antara Anda dan Tentaklik saat menggunakan situs web, layanan, dan produk digital kami. Ditulis dalam bahasa yang jelas biar tidak ada kejutan.',
-  lastUpdated: '2026-05-05',
+  lastUpdated: '2026-06-09',
 };
 
 export const TERMS_SECTIONS: TermsSection[] = [
@@ -149,6 +149,49 @@ export const TERMS_SECTIONS: TermsSection[] = [
                 <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285177111104" target="_blank" rel="noopener noreferrer">085177111104</a></li>
                 <li><strong>Email:</strong> <a href="mailto:admin@tentaklik.com">admin@tentaklik.com</a></li>
                 <li><strong>Alamat:</strong> Semarang, Indonesia</li>
+              </ul>`,
+  },
+  {
+    id: 'sewa-syarat-umum',
+    num: '15',
+    title: 'Syarat Umum Layanan Sewa Akun',
+    contentHtml: `<p>Ketentuan berikut berlaku khusus untuk layanan <strong>Sewa Akun</strong> (akun iklan whitelist Google & Meta):</p>
+              <ul>
+                <li>Klien wajib memiliki Business Manager Meta atau akun Google yang aktif dan valid.</li>
+                <li>Klien tidak boleh menggunakan akun whitelist untuk mengiklankan produk/jasa yang dilarang oleh platform.</li>
+                <li>Satu klien, satu Business Manager ID — tidak boleh menggunakan BM yang sudah pernah terhubung ke whitelist provider lain.</li>
+                <li>Klien wajib mengikuti seluruh kebijakan iklan Meta dan Google yang berlaku.</li>
+                <li>Tentaklik berhak menonaktifkan layanan tanpa pengembalian saldo jika terbukti ada pelanggaran berat yang disengaja.</li>
+              </ul>`,
+  },
+  {
+    id: 'sewa-produk-dilarang',
+    num: '16',
+    title: 'Produk / Layanan yang Tidak Bisa Diiklankan',
+    contentHtml: `<p>Berikut kategori yang tidak dapat menggunakan layanan Sewa Akun Tentaklik:</p>
+              <ul>
+                <li>Produk ilegal atau semi-legal (narkotika, obat keras tanpa resep, dll)</li>
+                <li>Judi online / permainan uang yang tidak berlisensi resmi</li>
+                <li>Penipuan investasi atau skema Ponzi</li>
+                <li>Konten dewasa / pornografi</li>
+                <li>Produk palsu atau pembajakan</li>
+                <li>Senjata api, amunisi, atau bahan berbahaya</li>
+                <li>Layanan hacking / phishing / penyerangan siber</li>
+                <li>Konten yang menyebarkan ujaran kebencian atau disinformasi</li>
+              </ul>
+              <div class="callout callout-warn"><strong>Catatan:</strong> Daftar ini mengikuti kebijakan resmi Meta dan Google. Jika ragu, konsultasikan jenis produk Anda ke CS Tentaklik sebelum mendaftar.</div>`,
+  },
+  {
+    id: 'sewa-produk-verifikasi',
+    num: '17',
+    title: 'Produk / Layanan yang Perlu Verifikasi Tambahan',
+    contentHtml: `<p>Kategori berikut tetap bisa diiklankan, namun memerlukan dokumen / verifikasi tambahan sebelum akun diaktifkan:</p>
+              <ul>
+                <li>Suplemen kesehatan dan obat-obatan (butuh izin edar BPOM)</li>
+                <li>Layanan keuangan / investasi (butuh izin OJK)</li>
+                <li>Produk rokok / vape (terbatas dan ada syarat khusus)</li>
+                <li>Layanan pinjaman uang (butuh izin resmi)</li>
+                <li>Konten yang menyangkut isu politik atau sosial sensitif</li>
               </ul>`,
   },
 ];

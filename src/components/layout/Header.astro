@@ -3,14 +3,13 @@ import TentaklikLogo from '../brand/TentaklikLogo.astro';
 import ServiceIcon from '../icons/ServiceIcon.astro';
 
 interface Props {
-  active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'faq' | 'kontak';
+  active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'snk' | 'faq' | 'kontak';
 }
 const { active = 'beranda' } = Astro.props;
 
 const services = [
   { label: 'Website Development',          href: '/services/website',     icon: 'code' as const },
-  { label: 'Google Ads',                   href: '/services/google-ads',  icon: 'google' as const },
-  { label: 'Meta Ads',                     href: '/services/meta-ads',    icon: 'meta' as const },
+  { label: 'Sewa Akun',                    href: '/services/sewa-akun',   icon: 'shield' as const },
   { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: 'lightbulb' as const },
 ];
 
@@ -18,7 +17,7 @@ const links = [
   { id: 'beranda', label: 'Beranda',      href: '/' },
   { id: 'case',    label: 'Case Study',   href: '/case-study' },
   { id: 'tentang', label: 'Tentang Kami', href: '/tentang' },
-  { id: 'karir',   label: 'Karir',        href: '/karir' },
+  { id: 'snk',     label: 'S&K',          href: '/terms' },
   { id: 'kontak',  label: 'Kontak',       href: '/kontak' },
 ];
 ---
