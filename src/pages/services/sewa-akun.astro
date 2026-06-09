@@ -54,9 +54,9 @@ const jsonLd = [
   </ServiceHero>
 
   <!-- Layanan whitelist: Meta + Google -->
-  <section>
+  <section aria-labelledby="wl-heading">
     <div class="container">
-      <h2 class="section-title">Layanan yang Tersedia</h2>
+      <h2 id="wl-heading" class="section-title">Layanan yang Tersedia</h2>
       <p class="section-sub" style="margin-bottom:48px;">Dua jalur akun premium — pilih sesuai platform iklan Anda.</p>
       <div class="wl-grid">
         {wlBlocks.map((wl) => (
@@ -88,16 +88,16 @@ const jsonLd = [
   <PricingSection plans={SEWA_PLANS} service="Sewa Akun" />
 
   <!-- Alur pendaftaran + topup -->
-  <section style="background:var(--bg-warm);">
+  <section aria-labelledby="flow-heading" style="background:var(--bg-warm);">
     <div class="container">
-      <h2 class="section-title">Cara Kerja & Alur Pendaftaran</h2>
+      <h2 id="flow-heading" class="section-title">Cara Kerja & Alur Pendaftaran</h2>
       <p class="section-sub" style="margin-bottom:40px;">Dari daftar sampai mulai beriklan — transparan dan cepat.</p>
 
       <div class="flow-block">
         <h3 class="flow-title">Alur Meta Ads Whitelist</h3>
         <div class="flow-table-wrap">
           <table class="flow-table">
-            <thead><tr><th style="width:48px;">#</th><th style="width:30%;">Tahap</th><th>Yang Perlu Dilakukan</th></tr></thead>
+            <thead><tr><th scope="col" style="width:48px;">#</th><th scope="col" style="width:30%;">Tahap</th><th scope="col">Yang Perlu Dilakukan</th></tr></thead>
             <tbody>
               {FLOW_META.map((s: FlowStep) => (
                 <tr><td class="flow-no">{s.no}</td><td class="flow-tahap">{s.tahap}</td><td>{s.aksi}</td></tr>
@@ -111,7 +111,7 @@ const jsonLd = [
         <h3 class="flow-title">Alur Google Ads Whitelist</h3>
         <div class="flow-table-wrap">
           <table class="flow-table">
-            <thead><tr><th style="width:48px;">#</th><th style="width:30%;">Tahap</th><th>Yang Perlu Dilakukan</th></tr></thead>
+            <thead><tr><th scope="col" style="width:48px;">#</th><th scope="col" style="width:30%;">Tahap</th><th scope="col">Yang Perlu Dilakukan</th></tr></thead>
             <tbody>
               {FLOW_GOOGLE.map((s: FlowStep) => (
                 <tr><td class="flow-no">{s.no}</td><td class="flow-tahap">{s.tahap}</td><td>{s.aksi}</td></tr>
@@ -125,7 +125,7 @@ const jsonLd = [
         <h3 class="flow-title">Cara Topup Saldo</h3>
         <div class="flow-table-wrap">
           <table class="flow-table">
-            <thead><tr><th style="width:34%;">Metode</th><th>Cara</th></tr></thead>
+            <thead><tr><th scope="col" style="width:34%;">Metode</th><th scope="col">Cara</th></tr></thead>
             <tbody>
               {TOPUP_METHODS.map((m) => (
                 <tr><td class="flow-tahap">{m.metode}</td><td>{m.cara}</td></tr>
@@ -133,7 +133,7 @@ const jsonLd = [
             </tbody>
           </table>
         </div>
-        <p class="flow-note">⚡ Saldo aktif dalam <strong>15–60 menit</strong> setelah konfirmasi diterima. Topup bisa kapan saja — 24 jam, termasuk weekend.</p>
+        <p class="flow-note"><span aria-hidden="true">⚡</span> Saldo aktif dalam <strong>15–60 menit</strong> setelah konfirmasi diterima. Topup bisa kapan saja — 24 jam, termasuk weekend.</p>
       </div>
     </div>
   </section>
