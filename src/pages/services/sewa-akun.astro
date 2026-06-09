@@ -1,0 +1,204 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ServiceHero from '@components/sections/service/ServiceHero.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
+import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import Check from '@components/icons/Check.astro';
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import {
+  SEWA_HERO, META_WL, GOOGLE_WL, SEWA_PLANS,
+  FLOW_META, FLOW_GOOGLE, TOPUP_METHODS, SEWA_FAQS, SEWA_SEO, SEWA_KEYWORDS,
+  type WhitelistInfo, type FlowStep,
+} from '@data/sewa-akun';
+
+const url = `${site.url}/services/sewa-akun`;
+const wlBlocks: WhitelistInfo[] = [META_WL, GOOGLE_WL];
+
+const jsonLd = [
+  serviceJsonLd({
+    name: SEWA_SEO.title,
+    description: SEWA_SEO.description,
+    url,
+    serviceType: 'Sewa Akun Ads Whitelist',
+  }),
+  faqJsonLd(SEWA_FAQS),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Layanan', url: `${site.url}/#layanan` },
+    { name: 'Sewa Akun', url },
+  ]),
+];
+---
+<BaseLayout
+  title={SEWA_SEO.title}
+  description={SEWA_SEO.description}
+  active="layanan"
+  jsonLd={jsonLd}
+  keywords={SEWA_KEYWORDS}
+>
+  <ServiceHero
+    eyebrow={SEWA_HERO.eyebrow}
+    title={SEWA_HERO.title}
+    titleAccent={SEWA_HERO.titleAccent}
+    desc={SEWA_HERO.desc}
+  >
+    <div slot="illustration" class="kraken-float" style="width:100%;max-width:480px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
+      <picture>
+        <source type="image/avif" srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" sizes="(max-width: 760px) min(480px, 95vw), 480px" />
+        <source type="image/webp" srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w" sizes="(max-width: 760px) min(480px, 95vw), 480px" />
+        <img src="/assets/kraken-hero.png" alt="Tentaklik Sewa Akun Whitelist" width="1200" height="960" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:auto;display:block;" />
+      </picture>
+    </div>
+  </ServiceHero>
+
+  <!-- Layanan whitelist: Meta + Google -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Layanan yang Tersedia</h2>
+      <p class="section-sub" style="margin-bottom:48px;">Dua jalur akun premium — pilih sesuai platform iklan Anda.</p>
+      <div class="wl-grid">
+        {wlBlocks.map((wl) => (
+          <article class="wl-card reveal">
+            <h3 class="wl-title">{wl.title}</h3>
+            <p class="wl-desc">{wl.desc}</p>
+            <div class="wl-cols">
+              <div>
+                <h4 class="wl-sub">Keunggulan</h4>
+                <ul class="wl-benefits">
+                  {wl.benefits.map((b) => (
+                    <li><span class="wl-check" aria-hidden="true"><Check size={12} /></span>{b}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 class="wl-sub">Syarat Mendaftar</h4>
+                <ol class="wl-reqs">
+                  {wl.requirements.map((r) => (<li>{r}</li>))}
+                </ol>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <PricingSection plans={SEWA_PLANS} service="Sewa Akun" />
+
+  <!-- Alur pendaftaran + topup -->
+  <section style="background:var(--bg-warm);">
+    <div class="container">
+      <h2 class="section-title">Cara Kerja & Alur Pendaftaran</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Dari daftar sampai mulai beriklan — transparan dan cepat.</p>
+
+      <div class="flow-block">
+        <h3 class="flow-title">Alur Meta Ads Whitelist</h3>
+        <div class="flow-table-wrap">
+          <table class="flow-table">
+            <thead><tr><th style="width:48px;">#</th><th style="width:30%;">Tahap</th><th>Yang Perlu Dilakukan</th></tr></thead>
+            <tbody>
+              {FLOW_META.map((s: FlowStep) => (
+                <tr><td class="flow-no">{s.no}</td><td class="flow-tahap">{s.tahap}</td><td>{s.aksi}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="flow-block">
+        <h3 class="flow-title">Alur Google Ads Whitelist</h3>
+        <div class="flow-table-wrap">
+          <table class="flow-table">
+            <thead><tr><th style="width:48px;">#</th><th style="width:30%;">Tahap</th><th>Yang Perlu Dilakukan</th></tr></thead>
+            <tbody>
+              {FLOW_GOOGLE.map((s: FlowStep) => (
+                <tr><td class="flow-no">{s.no}</td><td class="flow-tahap">{s.tahap}</td><td>{s.aksi}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="flow-block">
+        <h3 class="flow-title">Cara Topup Saldo</h3>
+        <div class="flow-table-wrap">
+          <table class="flow-table">
+            <thead><tr><th style="width:34%;">Metode</th><th>Cara</th></tr></thead>
+            <tbody>
+              {TOPUP_METHODS.map((m) => (
+                <tr><td class="flow-tahap">{m.metode}</td><td>{m.cara}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="flow-note">⚡ Saldo aktif dalam <strong>15–60 menit</strong> setelah konfirmasi diterima. Topup bisa kapan saja — 24 jam, termasuk weekend.</p>
+      </div>
+    </div>
+  </section>
+
+  <ServiceFAQ items={SEWA_FAQS} />
+  <ServiceCTA />
+</BaseLayout>
+
+<style>
+  /* Whitelist cards */
+  .wl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .wl-card {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+  }
+  .wl-title { font-size: 22px; margin-bottom: 8px; }
+  .wl-desc { font-size: 14.5px; color: var(--ink-500); margin-bottom: 22px; line-height: 1.6; }
+  .wl-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .wl-sub {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange-700); margin-bottom: 12px;
+  }
+  .wl-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .wl-benefits li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink-700); line-height: 1.5; }
+  .wl-check {
+    width: 18px; height: 18px; border-radius: 999px;
+    background: var(--orange-100); color: var(--orange-700);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .wl-reqs { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .wl-reqs li { font-size: 14px; color: var(--ink-700); line-height: 1.5; }
+  .wl-reqs li::marker { color: var(--orange-500); font-weight: 700; }
+
+  /* Flow tables */
+  .flow-block { margin-bottom: 36px; }
+  .flow-block:last-of-type { margin-bottom: 0; }
+  .flow-title { font-size: 19px; margin-bottom: 16px; color: var(--ink-900); }
+  .flow-table-wrap { overflow-x: auto; border-radius: var(--radius-lg); border: 1px solid var(--ink-100); background: white; }
+  .flow-table { width: 100%; border-collapse: collapse; min-width: 540px; }
+  .flow-table th {
+    text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--ink-500); padding: 14px 18px; background: var(--bg-warm); border-bottom: 1px solid var(--ink-100);
+  }
+  .flow-table td { padding: 14px 18px; font-size: 14px; color: var(--ink-700); border-bottom: 1px solid var(--ink-100); vertical-align: top; line-height: 1.5; }
+  .flow-table tbody tr:last-child td { border-bottom: none; }
+  .flow-no {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; color: var(--orange-600);
+  }
+  .flow-tahap { font-weight: 600; color: var(--ink-900); }
+  .flow-note {
+    margin-top: 16px; padding: 14px 18px;
+    background: var(--orange-50); border: 1px solid var(--orange-200); border-radius: var(--radius-lg);
+    font-size: 14px; color: var(--ink-700);
+  }
+  .flow-note strong { color: var(--ink-900); }
+
+  @media (max-width: 900px) {
+    .wl-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wl-cols { grid-template-columns: 1fr; gap: 18px; }
+    .wl-card { padding: 22px; }
+  }
+</style>
