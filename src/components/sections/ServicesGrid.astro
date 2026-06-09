@@ -3,8 +3,7 @@ import ArrowRight from '../icons/ArrowRight.astro';
 
 const services = [
   { title: 'Website Development',           desc: 'Landing page, company profile, dan website yang fokus pada konversi.', slug: 'website',     icon: 'web' },
-  { title: 'Google Ads',                    desc: 'Campaign search, display, dan lead generation dengan tracking yang rapi.', slug: 'google-ads', icon: 'google' },
-  { title: 'Meta Ads',                      desc: 'Iklan Facebook & Instagram untuk awareness, leads, dan sales.', slug: 'meta-ads',    icon: 'meta' },
+  { title: 'Sewa Akun',                     desc: 'Akun iklan whitelist Google & Meta — limit tanpa batas, tanpa PPN, anti random banned.', slug: 'sewa-akun', icon: 'shield' },
   { title: 'Konsultasi Digital Marketing',  desc: 'Audit funnel, strategi channel, dan rekomendasi prioritas yang actionable.', slug: 'konsultasi', icon: 'konsul' },
 ] as const;
 ---
@@ -16,7 +15,7 @@ const services = [
       <span class="spark" style="top:-10px;left:15%;font-size:18px;" aria-hidden="true">✦</span>
       <span class="spark" style="top:20px;right:12%;font-size:14px;" aria-hidden="true">✦</span>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+    <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
       {services.map(s => (
         <div class="service-card reveal">
           <div class="service-icon">
@@ -31,11 +30,11 @@ const services = [
                 <rect x="7" y="25" width="16" height="2" fill="var(--ink-200)"/>
               </svg>
             )}
-            {s.icon === 'google' && (
-              <picture><source type="image/avif" srcset="/assets/icon-google-ads.avif" /><source type="image/webp" srcset="/assets/icon-google-ads.webp" /><img src="/assets/icon-google-ads.png" alt="" width="40" height="40" loading="lazy" decoding="async" /></picture>
-            )}
-            {s.icon === 'meta' && (
-              <picture><source type="image/avif" srcset="/assets/icon-meta-ads.avif" /><source type="image/webp" srcset="/assets/icon-meta-ads.webp" /><img src="/assets/icon-meta-ads.png" alt="" width="42" height="32" loading="lazy" decoding="async" /></picture>
+            {s.icon === 'shield' && (
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--orange-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <path d="m9 12 2 2 4-4"/>
+              </svg>
             )}
             {s.icon === 'konsul' && (
               <svg width="36" height="36" viewBox="0 0 40 40" aria-hidden="true">
