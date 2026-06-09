@@ -78,47 +78,47 @@ export const GOOGLE_WL: WhitelistInfo = {
   ],
 };
 
-// Struktur harga — model rental: fee topup 4%, value-props utama.
-// Google Whitelist = featured.
+// Struktur harga — tier pricing volume besar (lihat docs section 4.4).
+// Fee topup menurun seiring volume topup bulanan. Growth = best value (featured).
 export const SEWA_PLANS: SewaPlan[] = [
   {
-    name: 'Meta Whitelist',
-    tagline: 'Facebook & Instagram Ads, anti random restrict',
-    price: '4%',
+    name: 'Starter',
+    tagline: 'Default untuk semua akun baru',
+    price: '5%',
     unit: 'fee topup',
     features: [
-      'Akun whitelist Business Manager resmi',
+      'Topup Rp 300rb – Rp 5jt / bulan',
+      'Berlaku untuk Meta & Google Whitelist',
       'Tanpa PPN',
       'Tanpa limit spending harian',
       'Saldo pindah otomatis jika disable*',
-      'Support appeal jalur partner Meta',
     ],
   },
   {
-    name: 'Google Whitelist',
-    tagline: 'Akun Google Ads kelola Google Partner',
-    price: '4%',
+    name: 'Growth',
+    tagline: 'Request via CS — fee lebih hemat',
+    price: '4,5%',
     unit: 'fee topup',
     featured: true,
     features: [
-      'Akun terhubung MCC resmi Google Partner',
+      'Topup Rp 5jt – Rp 15jt / bulan',
+      'Aktivasi via CS Tentaklik',
       'Tanpa PPN',
       'Tanpa batas spending harian',
-      'Saldo pindah otomatis jika disable*',
-      'Appeal lebih cepat via Google Partner',
+      'Support appeal jalur partner',
     ],
   },
   {
-    name: 'Custom',
-    tagline: 'Untuk volume besar / multi-akun',
-    price: 'Nego',
-    unit: 'volume besar',
+    name: 'Scale',
+    tagline: 'Best value untuk spending tinggi',
+    price: '3,5%',
+    unit: 'fee topup',
     features: [
-      'Multi-akun Meta & Google',
+      'Topup di atas Rp 15jt / bulan',
+      'Fee paling kompetitif',
+      'Cocok untuk skala besar / multi-akun',
       'Onboarding checklist gratis',
       'Support personal (bukan bot)',
-      'Cocok untuk NGO / yayasan',
-      'Skema fee menyesuaikan volume',
     ],
   },
 ];
@@ -161,7 +161,7 @@ export const SEWA_FAQS: SewaFaq[] = [
 
 export const SEWA_SEO = {
   title: 'Sewa Akun Whitelist Google & Meta Ads — Tentaklik',
-  description: 'Sewa akun iklan whitelist Google Ads & Meta Ads (Facebook & Instagram) di Tentaklik: tanpa limit spending, tanpa PPN, anti random banned, dan saldo pindah otomatis jika disable. Fee topup hanya 4%.',
+  description: 'Sewa akun iklan whitelist Google Ads & Meta Ads (Facebook & Instagram) di Tentaklik: tanpa limit spending, tanpa PPN, anti random banned, dan saldo pindah otomatis jika disable. Fee topup mulai dari 3,5%.',
 } as const;
 
 export const SEWA_KEYWORDS = [
