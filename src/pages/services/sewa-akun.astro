@@ -5,11 +5,13 @@ import PricingSection from '@components/sections/service/PricingSection.astro';
 import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
 import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
 import Check from '@components/icons/Check.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import {
   SEWA_HERO, META_WL, GOOGLE_WL, SEWA_PLANS,
   SEWA_FAQS, SEWA_SEO, SEWA_KEYWORDS,
+  INDUSTRIES, INDUSTRY_HEADING,
   type WhitelistInfo,
 } from '@data/sewa-akun';
 
@@ -74,6 +76,8 @@ const jsonLd = [
       </div>
     </div>
   </section>
+
+  <IndustriesGrid items={INDUSTRIES} heading={INDUSTRY_HEADING} bg="warm" />
 
   <PricingSection plans={SEWA_PLANS} service="Sewa Akun" />
 

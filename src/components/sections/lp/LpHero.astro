@@ -1,0 +1,36 @@
+---
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  titleAccent: string;
+  desc: string;
+  ctaText: string;
+  ctaHref: string;
+}
+const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
+---
+<section style="padding-top:56px;padding-bottom:56px;background:var(--bg-warm);position:relative;overflow:hidden;">
+  <div class="container" style="display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;">
+    <div>
+      <span class="eyebrow">{eyebrow}</span>
+      <h1 style="font-size:50px;margin-top:18px;margin-bottom:18px;">
+        {title} <span style="color:var(--orange-500);">{titleAccent}</span>
+      </h1>
+      <p style="font-size:17px;color:var(--ink-500);max-width:520px;margin-bottom:28px;">{desc}</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href={ctaHref} class="btn btn-primary">{ctaText} <ArrowRight size={14} /></a>
+      </div>
+    </div>
+    <div style="position:relative;display:flex;justify-content:center;align-items:center;min-height:360px;">
+      <div class="kraken-float" style="width:100%;max-width:440px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
+        <picture>
+          <source type="image/avif" srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" sizes="(max-width: 760px) min(440px, 95vw), 440px" />
+          <source type="image/webp" srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w" sizes="(max-width: 760px) min(440px, 95vw), 440px" />
+          <img src="/assets/kraken-hero.png" alt="Tentaklik" width="1200" height="960" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:auto;display:block;" />
+        </picture>
+      </div>
+    </div>
+  </div>
+</section>

@@ -146,7 +146,7 @@ export const TERMS_SECTIONS: TermsSection[] = [
     title: 'Hubungi Kami',
     contentHtml: `<p>Ada pertanyaan tentang Ketentuan ini atau Kebijakan Privasi kami? Hubungi kami:</p>
               <ul>
-                <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285177111104" target="_blank" rel="noopener noreferrer">085177111104</a></li>
+                <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285129992225" target="_blank" rel="noopener noreferrer">085129992225</a></li>
                 <li><strong>Email:</strong> <a href="mailto:admin@tentaklik.com">admin@tentaklik.com</a></li>
                 <li><strong>Alamat:</strong> Semarang, Indonesia</li>
               </ul>`,
