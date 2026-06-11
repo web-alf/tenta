@@ -1,0 +1,51 @@
+---
+import type { LpProblem } from '@data/whitelist-lp';
+
+interface Props {
+  heading: string;
+  sub: string;
+  items: LpProblem[];
+}
+const { heading, sub, items } = Astro.props;
+---
+<section aria-labelledby="lp-problem-heading">
+  <div class="container">
+    <h2 id="lp-problem-heading" class="section-title">{heading}</h2>
+    <p class="section-sub" style="margin-bottom:44px;">{sub}</p>
+    <div class="lp-problem-grid">
+      {items.map((p) => (
+        <article class="lp-problem-card reveal">
+          <span class="lp-problem-icon" aria-hidden="true">{p.icon}</span>
+          <h3 class="lp-problem-title">{p.title}</h3>
+          <p class="lp-problem-desc">{p.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lp-problem-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .lp-problem-card {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .lp-problem-icon { font-size: 28px; line-height: 1; }
+  .lp-problem-title { font-size: 16px; font-weight: 700; color: var(--ink-900); margin: 0; }
+  .lp-problem-desc { font-size: 13.5px; color: var(--ink-500); line-height: 1.55; margin: 0; }
+  @media (max-width: 900px) {
+    .lp-problem-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 520px) {
+    .lp-problem-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -20,6 +20,7 @@ interface Props {
   preloadHeroSrc?: string;
   jsonLd?: Record<string, unknown>[];
   keywords?: string[];
+  bareLayout?: boolean;
   pageType?: 'website' | 'article' | 'profile';
   publishedTime?: string;
   modifiedTime?: string;
@@ -35,6 +36,7 @@ const {
   preloadHeroSrc,
   jsonLd = [],
   keywords,
+  bareLayout = false,
   pageType = 'website',
   publishedTime,
   modifiedTime,
@@ -194,7 +196,7 @@ const cspContent = [
       <slot />
     </main>
     <Footer />
-    <StickyWA />
+    {!bareLayout && <StickyWA />}
 
     <script>
       import { initReveal } from '@lib/reveal';

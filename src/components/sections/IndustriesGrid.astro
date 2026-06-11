@@ -1,0 +1,70 @@
+---
+import type { Industry } from '@data/sewa-akun';
+
+interface Props {
+  items: Industry[];
+  heading: { title: string; sub: string };
+  bg?: 'warm' | 'default';
+}
+const { items, heading, bg = 'default' } = Astro.props;
+const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
+---
+<section style={sectionStyle} aria-labelledby="industri-heading">
+  <div class="container">
+    <h2 id="industri-heading" class="section-title">{heading.title}</h2>
+    <p class="section-sub" style="margin-bottom:44px;">{heading.sub}</p>
+    <div class="industri-grid">
+      {items.map((it) => (
+        <article class="industri-card reveal" style={`--tint:${it.tint}`}>
+          <span class="industri-icon" aria-hidden="true">{it.icon}</span>
+          <h3 class="industri-label">{it.label}</h3>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .industri-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .industri-card {
+    background: linear-gradient(150deg, var(--tint), #ffffff 90%);
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-xl);
+    padding: 28px 24px;
+    min-height: 132px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .industri-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  .industri-icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+  .industri-label {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink-900);
+    margin: 0;
+  }
+  @media (max-width: 760px) {
+    .industri-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+    .industri-card { padding: 22px 18px; min-height: 110px; }
+    .industri-icon { font-size: 28px; }
+    .industri-label { font-size: 15px; }
+  }
+  @media (max-width: 380px) {
+    .industri-grid { grid-template-columns: 1fr; }
+  }
+</style>

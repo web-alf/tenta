@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LpHero from '@components/sections/lp/LpHero.astro';
+import LpProblem from '@components/sections/lp/LpProblem.astro';
+import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
+import { GOOGLE_LP, CTA_HREF } from '@data/whitelist-lp';
+import { INDUSTRIES, INDUSTRY_HEADING } from '@data/sewa-akun';
+import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+const d = GOOGLE_LP;
+const url = `${site.url}/google-whitelist`;
+const jsonLd = [
+  serviceJsonLd({
+    name: d.seo.title,
+    description: d.seo.description,
+    url,
+    serviceType: 'Sewa Akun Google Ads Whitelist',
+  }),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Sewa Akun', url: `${site.url}/services/sewa-akun` },
+    { name: 'Google Whitelist', url },
+  ]),
+];
+---
+<BaseLayout
+  title={d.seo.title}
+  description={d.seo.description}
+  active="layanan"
+  bareLayout
+  jsonLd={jsonLd}
+  keywords={d.keywords}
+>
+  <LpHero
+    eyebrow={d.hero.eyebrow}
+    title={d.hero.title}
+    titleAccent={d.hero.titleAccent}
+    desc={d.hero.desc}
+    ctaText={d.cta.btn}
+    ctaHref={CTA_HREF}
+  />
+  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
+  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
+  <IndustriesGrid items={INDUSTRIES} heading={INDUSTRY_HEADING} bg="warm" />
+  <LpFinalCta title={d.cta.title} desc={d.cta.desc} btn={d.cta.btn} href={CTA_HREF} />
+</BaseLayout>

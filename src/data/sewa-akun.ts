@@ -173,3 +173,21 @@ export const SEWA_KEYWORDS = [
   'sewa akun meta ads',
   'agency ads whitelist',
 ];
+
+// Section "Cocok untuk berbagai industri" — dipakai LP sewa-akun + 2 LP whitelist.
+export interface Industry { label: string; icon: string; tint: string }
+
+export const INDUSTRY_HEADING = {
+  title: 'Cocok untuk berbagai industri',
+  sub: 'Umumnya digunakan oleh advertiser di industri:',
+} as const;
+
+// tint = warna dasar kartu (gradient lembut digenerate di komponen).
+export const INDUSTRIES: Industry[] = [
+  { label: 'Personal Care',   icon: '🧴', tint: '#E8F0FE' },
+  { label: 'Fashion Dewasa',  icon: '👗', tint: '#FCE7F3' },
+  { label: 'Kesehatan',       icon: '🩺', tint: '#E7F6EC' },
+  { label: 'Kecantikan',      icon: '💄', tint: '#F3E8FF' },
+  { label: 'Produk Dewasa',   icon: '📦', tint: '#FFF1E6' },
+  { label: 'NGO / Sosial',    icon: '🤝', tint: '#E6F4F7' },
+];

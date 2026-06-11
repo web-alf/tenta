@@ -1,0 +1,22 @@
+---
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
+interface Props {
+  title: string;
+  desc: string;
+  btn: string;
+  href: string;
+}
+const { title, desc, btn, href } = Astro.props;
+---
+<section style="padding-bottom:24px;scroll-margin-top:90px;">
+  <div class="container">
+    <div class="cta-banner reveal" style="background:var(--orange-500);">
+      <div style="flex:1;position:relative;z-index:1;">
+        <h3>{title}</h3>
+        <p style="margin-top:8px;font-size:15px;opacity:0.95;">{desc}</p>
+      </div>
+      <a href={href} class="btn btn-ghost">{btn} <ArrowRight size={14} /></a>
+    </div>
+  </div>
+</section>
