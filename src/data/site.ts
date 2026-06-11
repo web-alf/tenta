@@ -7,8 +7,8 @@ export const site = {
   wa: PUBLIC_WA_NUMBER,
   email: 'admin@mediapro.work',
   emailKarir: 'karir@tentaklik.com',
-  phone: '085177111104',
-  phoneIntl: '+6285177111104',
+  phone: '085129992225',
+  phoneIntl: '+6285129992225',
   address: 'Semarang, Indonesia',
   foundingDate: '2023-01-01',
 
