@@ -5,7 +5,7 @@ export const site = {
   legalName: 'Tentaklik Digital Agency',
   url: PUBLIC_SITE_URL,
   wa: PUBLIC_WA_NUMBER,
-  email: 'admin@mediapro.work',
+  email: 'tentaklik@mediapro.work',
   emailKarir: 'karir@tentaklik.com',
   phone: '085129992225',
   phoneIntl: '+6285129992225',
