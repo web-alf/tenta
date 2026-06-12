@@ -36,10 +36,11 @@ const links = [
 - Dropdown "Layanan" tetap (Website/Sewa Akun/Konsultasi). Posisi: setelah "Tentang".
 - **Blog**: item baru, `href="https://mediawaktu.com"`, `target="_blank" rel="noopener noreferrer"`, kecil panah ↗ (reuse pola atau `↗` text). BUKAN bagian `active` highlighting.
 - **Kontak**: dipindah keluar `links`, render sebagai `<a href="/kontak" class="btn btn-primary nav-kontak-btn">Kontak</a>` di ujung nav (desktop). Mobile drawer: render sebagai tombol primary di bawah.
-- Hapus item **S&K** dan **Case Study** dari `links` header (S&K → footer; Case Study → tidak lagi di nav utama per urutan baru doc). 
-  - CATATAN: urutan doc TIDAK memuat "Case Study"/"Partner" di header → keluarkan dari nav header. Route & halaman tetap; akses via footer/home section.
+- Hapus item **S&K** dari `links` header (→ footer).
+- **Case Study → rename "Partner"** (KONFIRMASI USER): tetap di header, `{ id: 'case', label: 'Partner', href: '/case-study' }`. Route `/case-study` TETAP (label-only). Konten direframe ke "Partner" (lihat C).
 - Markup desktop + mobile drawer ikut urutan baru. `active` union tetap (tambah `'faq'` bila perlu highlight; Blog/Kontak tak butuh active).
-- Urutan render desktop: Beranda, Tentang, **[Layanan dropdown]**, FAQ, Blog↗, lalu `<a class="btn btn-primary">Kontak</a>`.
+- Urutan render desktop: Beranda, Tentang, **[Layanan dropdown]**, Partner, FAQ, Blog↗, lalu `<a class="btn btn-primary">Kontak</a>`.
+  (Doc urutan inti = Beranda/Tentang/Layanan/FAQ/Blog/Kontak; "Partner" disisip setelah Layanan karena user konfirmasi tetap ada.)
 
 BaseLayout `active` union: tambah `'faq'`. (`'case'`, `'karir'`, `'snk'` tetap ada agar halaman lain tak error.)
 
@@ -48,16 +49,22 @@ BaseLayout `active` union: tambah `'faq'`. (`'case'`, `'karir'`, `'snk'` tetap a
 - Footer & tempat lain: pastikan label "Tentang Kami"→"Tentang" konsisten (Footer kolom). Route `/tentang` tetap.
 - "terms"/"Ketentuan Layanan": footer legal link sudah "Ketentuan Layanan" — biarkan. Tidak ubah route `/terms`.
 
-### C. Home "Case Study" → "Partner" (label saja, route tetap)
-- `CaseStudiesPreview.astro:11`: "Case Study Pilihan" → **"Partner Pilihan"**.
-- `src/pages/case-study/index.astro`: eyebrow "Case Study" (baris 38) → **"Partner"**; H1 & SEO judul boleh tetap "Case Study Tentaklik" (SEO) ATAU relabel "Partner" — **putusan: eyebrow + section label "Partner", H1 halaman index "Partner Pilihan", SEO title tetap** (hindari rusak SEO entity). Route `/case-study` tetap.
-- Footer: jika ada link "Case Study" → label "Partner" (href tetap `/case-study`).
-- Tidak relabel slug/route/breadcrumb URL.
+### C. "Case Study" → "Partner" (rename penuh; route tetap)
+User konfirmasi: rename jadi "Partner", isi disesuaikan. Route `/case-study` TETAP (label-only, hindari rusak SEO/link).
+- **Nav header**: label "Partner" (lihat A).
+- `CaseStudiesPreview.astro:11-12`: "Case Study Pilihan" → **"Partner Pilihan"**; sub "Hasil dari brand yang udah kerja bareng kami." → **"Brand & partner yang sudah tumbuh bareng kami."**
+- `src/pages/case-study/index.astro`:
+  - eyebrow (baris 38) "Case Study" → **"Partner"**.
+  - H1 (40): "Hasil nyata, bukan cherry-picked." → tetap (tagline hasil) ATAU **"Partner yang tumbuh, bukan sekadar cherry-picked."** — putusan: ganti jadi "Partner yang tumbuh, bukan <accent>cherry-picked</accent>."
+  - lede (43): "Kumpulan project yang kami kerjakan…" → **"Brand & partner yang kami dampingi — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya."**
+  - SEO title (30) "Case Study Tentaklik — Hasil Nyata Klien Digital Marketing" → **"Partner Tentaklik — Hasil Nyata Klien Digital Marketing"**; description & breadcrumb name "Case Study" → "Partner". Keywords boleh tetap memuat 'case study' (search term) + tambah 'partner tentaklik'.
+- Footer: link "Case Study" (jika ada) → label **"Partner"** (href `/case-study` tetap).
+- Tidak relabel slug/route/URL.
 
 ### D. Footer — `src/components/layout/Footer.astro`
 - Kolom **"Mengenai" → "Halaman"**, isi samakan menu header:
-  - Tentang (`/tentang`), Layanan (`/services/sewa-akun` atau `/#layanan`), FAQ (`/#faq`), Blog (`https://mediawaktu.com`, tab baru), Ketentuan (`/terms`).
-  - (Gantikan item S&K lama dengan "Ketentuan".)
+  - Tentang (`/tentang`), Partner (`/case-study`), FAQ (`/#faq`), Blog (`https://mediawaktu.com`, tab baru), Ketentuan (`/terms`).
+  - (Gantikan item S&K lama dengan "Ketentuan"; "Case Study" → "Partner".)
 - Kolom **"Layanan"**: tambah Meta Whitelist & Google Whitelist sebagai **sub dari Sewa Akun** (indent/nested):
   ```
   Website Development
@@ -119,7 +126,7 @@ Karena "hanya 2 LP", **decouple benefit** dari `sewa-akun.ts`:
 ## Verifikasi
 - `bun run check` 0 error (prop `center`, `active` +faq, data baru).
 - `bun run build` sukses; rute lama tetap.
-- Header: urutan Beranda/Tentang/Layanan/FAQ/Blog/Kontak; Blog external _blank; Kontak btn-primary; no S&K/Case Study di header.
+- Header: urutan Beranda/Tentang/Layanan/Partner/FAQ/Blog/Kontak; Blog external _blank; Kontak btn-primary; no S&K di header; "Case Study"→"Partner".
 - Footer: kolom "Halaman"; Meta/Google Whitelist nested di bawah Sewa Akun; deskripsi tanpa titik akhir + "sewa akun whitelist".
 - 2 LP: benefit (PPN, free mentorship, expert) ada; "semua tipe campaign" hilang di Meta; industri 6 kategori baru + center; shortform ada (3 field) sebelum CTA; CTA tetap.
 - Terms: email tentaklik@mediapro.work.
