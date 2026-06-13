@@ -27,8 +27,11 @@ const formId = `shortform-${platform}`;
         <label for={`${formId}-ket`}>Keterangan Project Singkat</label>
         <textarea id={`${formId}-ket`} name="keterangan" placeholder="Produk/jasa, target, dan kebutuhan akun..." rows="3" maxlength="500"></textarea>
       </div>
-      <button type="submit" class="btn btn-primary" style="justify-content:center;width:100%;">Kirim <ArrowRight size={14} /></button>
-      <p class="sf-sent" role="status" aria-live="polite" hidden>Terkirim! Tim kami akan menghubungi kamu via WhatsApp.</p>
+      <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
+        <span class="sf-btn-label">Kirim <ArrowRight size={14} /></span>
+        <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> Mengirim…</span>
+      </button>
+      <p class="sf-sent" role="status" aria-live="polite" hidden>Terkirim! Mengarahkan kamu ke WhatsApp…</p>
       <p class="sf-err" role="alert" aria-live="assertive" hidden></p>
     </form>
   </div>
@@ -60,12 +63,35 @@ const formId = `shortform-${platform}`;
   .sf-field textarea { resize: vertical; min-height: 80px; }
   .sf-sent { color: #15803d; font-size: 14px; font-weight: 600; margin: 0; }
   .sf-err { color: #b91c1c; font-size: 14px; margin: 0; }
+
+  /* Tombol kirim: state default vs loading */
+  .sf-submit { position: relative; }
+  .sf-submit .sf-btn-loading { display: none; align-items: center; gap: 8px; }
+  .sf-submit.is-loading .sf-btn-label { display: none; }
+  .sf-submit.is-loading .sf-btn-loading { display: inline-flex; }
+  .sf-submit[disabled] { opacity: 0.85; cursor: progress; }
+  .sf-spinner {
+    width: 15px; height: 15px;
+    border: 2px solid rgba(255,255,255,0.45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: sf-spin 0.6s linear infinite;
+  }
+  @keyframes sf-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .sf-spinner { animation-duration: 1.6s; }
+  }
 </style>
 
 <script>
   // Shortform whitelist → Google Apps Script Sheet (GET fire-and-forget).
   // Ganti SHORTFORM_URL dengan URL /exec setelah deploy Apps Script (lihat docs/apps-script/SETUP.md).
   const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycbyXhHmMTM4t9xLmox8tqULrGfk3XJf28DLRbHDKIPLJF2vEpV9mHZeTE3TVMXxiuZVR/exec';
+  // Nomor WA tujuan (sama dengan StickyWA / kontak). PUBLIC_WA_NUMBER di-inline saat build.
+  const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285129992225';
+  const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
+
   const forms = document.querySelectorAll<HTMLFormElement>('form.shortform');
   const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
   const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
@@ -74,6 +100,17 @@ const formId = `shortform-${platform}`;
 
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
 
+  // Greeting WhatsApp disesuaikan per platform.
+  function waGreeting(platform: string, nama: string, ket: string): string {
+    const layanan = platform === 'google' ? 'Google Ads Whitelist'
+                  : platform === 'meta'   ? 'Meta Ads Whitelist'
+                  : 'Sewa Akun Whitelist';
+    let msg = `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.`;
+    if (ket) msg += `\n\nKebutuhan: ${ket}`;
+    msg += `\n\n(Dikirim via form ${layanan})`;
+    return msg;
+  }
+
   forms.forEach((form) => {
     const sent = form.querySelector<HTMLElement>('.sf-sent');
     const err  = form.querySelector<HTMLElement>('.sf-err');
@@ -81,6 +118,11 @@ const formId = `shortform-${platform}`;
     const platform = form.getAttribute('data-platform') ?? '';
     const showErr = (t: string) => { if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { if (err) err.hidden = true; }, 5000); } };
     let busy = false;
+
+    const setLoading = (on: boolean) => {
+      busy = on;
+      if (btn) { btn.disabled = on; btn.classList.toggle('is-loading', on); }
+    };
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -98,19 +140,26 @@ const formId = `shortform-${platform}`;
       // Belum ada endpoint (URL masih placeholder) → jangan klaim sukses palsu.
       if (!hasEndpoint) { showErr('Form belum aktif. Hubungi kami via WhatsApp untuk sementara.'); return; }
 
-      busy = true;
-      if (btn) btn.disabled = true;
+      setLoading(true);
       const params = new URLSearchParams({
         platform: platform, nama: nama, whatsapp: wa,
         keterangan: ket, source: window.location.href,
       });
+
+      // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
+      const waUrl = WA_NUMBER
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, nama, ket))}`
+        : '';
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
         .catch(() => {})
         .finally(() => {
           form.reset();
           if (sent) sent.hidden = false;
-          busy = false;
-          if (btn) btn.disabled = false;
+          setLoading(false);
+          if (waUrl) {
+            // Beri jeda singkat agar user lihat status "Terkirim", lalu redirect.
+            setTimeout(() => { window.location.href = waUrl; }, 800);
+          }
         });
     });
   });
