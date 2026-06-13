@@ -8,9 +8,9 @@ interface Props {
 const { active = 'beranda' } = Astro.props;
 
 const services = [
-  { label: 'Website Development',          href: '/services/website',     icon: 'code' as const },
-  { label: 'Sewa Akun',                    href: '/services/sewa-akun',   icon: 'shield' as const },
-  { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: 'lightbulb' as const },
+  { label: 'Website Development',          href: '/layanan/website',     icon: 'code' as const },
+  { label: 'Sewa Akun',                    href: '/layanan/sewa-akun',   icon: 'shield' as const },
+  { label: 'Konsultasi Digital Marketing', href: '/layanan/konsultasi',  icon: 'lightbulb' as const },
 ];
 
 // Link sebelum dropdown Layanan
@@ -19,7 +19,7 @@ const linksBefore = [
 ];
 // Link setelah dropdown Layanan
 const linksAfter = [
-  { id: 'case', label: 'Partner', href: '/case-study' },
+  { id: 'case', label: 'Partner', href: '/partner' },
   { id: 'faq',  label: 'FAQ',     href: '/#faq' },
 ];
 const blogHref = 'https://mediawaktu.com';

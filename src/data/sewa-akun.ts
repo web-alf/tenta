@@ -1,6 +1,6 @@
 // src/data/sewa-akun.ts
 // Konten layanan "Sewa Akun" — rental akun iklan whitelist Google & Meta.
-// Single source of truth untuk halaman /services/sewa-akun.
+// Single source of truth untuk halaman /layanan/sewa-akun.
 
 export interface WhitelistInfo {
   key: 'meta' | 'google';

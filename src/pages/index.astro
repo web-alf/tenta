@@ -19,7 +19,7 @@ const serviceItems = services
   .sort((a, b) => a.id.localeCompare(b.id))
   .map(s => ({
     name: s.data.seo.title,
-    url: `${site.url}/services/${s.id}`,
+    url: `${site.url}/layanan/${s.id}`,
     description: s.data.seo.description,
   }));
 
