@@ -28,14 +28,14 @@ interface Props {
 const { data, slug } = Astro.props;
 
 const serviceImages: Record<string, string> = {
-  web:    '/assets/services/webdev.png',
-  google: '/assets/services/google.png',
-  meta:   '/assets/services/meta.png',
-  konsul: '/assets/services/konsul.png',
+  web:    '/assets/layanan/webdev.png',
+  google: '/assets/layanan/google.png',
+  meta:   '/assets/layanan/meta.png',
+  konsul: '/assets/layanan/konsul.png',
 };
 const imgSrc = serviceImages[data.icon];
 
-const url = `${site.url}/services/${slug}`;
+const url = `${site.url}/layanan/${slug}`;
 const serviceKeywordMap: Record<string, string[]> = {
   'website':     ['jasa pembuatan website', 'jasa website semarang', 'web developer indonesia', 'jasa landing page', 'jasa company profile', 'jasa e-commerce'],
   'google-ads':  ['jasa google ads', 'google ads specialist', 'jasa iklan google', 'jasa search ads', 'performance max indonesia', 'jasa youtube ads'],

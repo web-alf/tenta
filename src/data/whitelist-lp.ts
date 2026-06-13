@@ -1,6 +1,6 @@
 // src/data/whitelist-lp.ts
 // Konten 2 landing page standalone: /meta-whitelist & /google-whitelist.
-// Tanpa harga, tanpa WA — CTA mengarah ke /services/sewa-akun.
+// Tanpa harga, tanpa WA — CTA mengarah ke /layanan/sewa-akun.
 import type { Industry } from '@data/sewa-akun';
 
 export interface LpProblem { icon: string; title: string; desc: string }
@@ -37,7 +37,7 @@ export const INDUSTRY_LP_HEADING = {
   sub: 'Umumnya digunakan oleh advertiser di industri:',
 } as const;
 
-const CTA_HREF = '/services/sewa-akun';
+const CTA_HREF = '/layanan/sewa-akun';
 
 export const META_LP: LpData = {
   platform: 'meta',

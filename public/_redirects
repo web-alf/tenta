@@ -1,0 +1,8 @@
+# Redirect URL lama (Inggris) → baru (Indonesia), 301 permanen.
+# Cloudflare Pages membaca file ini. Aturan eksak didahulukan sebelum splat.
+/services      /layanan           301
+/case-study    /partner           301
+/terms         /ketentuan         301
+/terms/        /ketentuan         301
+/services/*    /layanan/:splat    301
+/case-study/*  /partner/:splat    301

@@ -15,12 +15,12 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const url = `${site.url}/case-study/${entry.id}`;
+const url = `${site.url}/partner/${entry.id}`;
 const publishedIso = entry.data.publishDate.toISOString();
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Beranda',    url: site.url },
-    { name: 'Partner',    url: `${site.url}/case-study` },
+    { name: 'Partner',    url: `${site.url}/partner` },
     { name: entry.data.brand, url },
   ]),
   articleJsonLd({
@@ -48,7 +48,7 @@ const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Partner Tentak
 >
   <section style="padding-top:56px;padding-bottom:24px;background:var(--bg-warm);">
     <div class="container" style="max-width:820px;">
-      <a href="/case-study" style="font-size:14px;color:var(--orange-600);">← Semua Partner</a>
+      <a href="/partner" style="font-size:14px;color:var(--orange-600);">← Semua Partner</a>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;margin-bottom:18px;">
         {entry.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
       </div>

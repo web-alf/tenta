@@ -37,10 +37,10 @@ export default defineConfig({
         if (url === 'https://tentaklik.com/' || url === 'https://tentaklik.com') {
           item.priority = 1.0;
           item.changefreq = EnumChangefreq.DAILY;
-        } else if (url.includes('/services/')) {
+        } else if (url.includes('/layanan/')) {
           item.priority = 0.9;
           item.changefreq = EnumChangefreq.WEEKLY;
-        } else if (url.includes('/case-study')) {
+        } else if (url.includes('/partner')) {
           item.priority = 0.8;
           item.changefreq = EnumChangefreq.MONTHLY;
         } else if (url.endsWith('/kontak') || url.endsWith('/kontak/')) {

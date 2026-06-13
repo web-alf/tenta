@@ -158,19 +158,19 @@ export function localBusinessJsonLd() {
       itemListElement: [
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: 'Jasa Pembuatan Website', url: `${site.url}/services/website` },
+          itemOffered: { '@type': 'Service', name: 'Jasa Pembuatan Website', url: `${site.url}/layanan/website` },
         },
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: 'Jasa Google Ads', url: `${site.url}/services/google-ads` },
+          itemOffered: { '@type': 'Service', name: 'Jasa Google Ads', url: `${site.url}/layanan/google-ads` },
         },
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: 'Jasa Meta Ads (Facebook & Instagram)', url: `${site.url}/services/meta-ads` },
+          itemOffered: { '@type': 'Service', name: 'Jasa Meta Ads (Facebook & Instagram)', url: `${site.url}/layanan/meta-ads` },
         },
         {
           '@type': 'Offer',
-          itemOffered: { '@type': 'Service', name: 'Konsultasi Digital Marketing', url: `${site.url}/services/konsultasi` },
+          itemOffered: { '@type': 'Service', name: 'Konsultasi Digital Marketing', url: `${site.url}/layanan/konsultasi` },
         },
       ],
     },
