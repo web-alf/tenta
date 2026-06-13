@@ -66,7 +66,7 @@ const blogHref = 'https://mediawaktu.com';
 
       <a href={blogHref} target="_blank" rel="noopener noreferrer" class="nav-blog-link">Blog <span aria-hidden="true">↗</span></a>
 
-      <a href="/kontak" class={`btn btn-primary nav-kontak-btn ${active === 'kontak' ? 'active' : ''}`}>Kontak</a>
+      <a href="/kontak" class="btn btn-primary nav-kontak-btn">Kontak</a>
     </nav>
 
     <!-- Burger (mobile only) -->
@@ -119,7 +119,7 @@ const blogHref = 'https://mediawaktu.com';
 
       <a href={blogHref} target="_blank" rel="noopener noreferrer">Blog ↗</a>
 
-      <a href="/kontak" class={`btn btn-primary mobile-kontak-btn ${active === 'kontak' ? 'active' : ''}`} style="justify-content:center;margin-top:8px;">Kontak</a>
+      <a href="/kontak" class="btn btn-primary mobile-kontak-btn" style="justify-content:center;margin-top:8px;">Kontak</a>
     </nav>
 
   </div>
@@ -340,9 +340,14 @@ const blogHref = 'https://mediawaktu.com';
   }
   .mobile-sub-item:hover { background: var(--orange-50); color: var(--orange-700); }
 
-  .nav-blog-link { display: inline-flex; align-items: center; gap: 3px; }
+  /* Sejajarkan semua item nav (teks, Blog, tombol) di satu garis vertikal */
+  .nav-desktop { align-items: center; }
+  .nav-blog-link { display: inline-flex; align-items: center; gap: 3px; padding: 6px 0; }
   .nav-kontak-btn { padding: 9px 18px; font-size: 14px; }
   .nav-kontak-btn:hover { color: white; }
+  /* Tombol Kontak tetap solid oranye walau di halaman /kontak (tak ikut style .active nav teks) */
+  .nav-kontak-btn.active, .nav-kontak-btn.active::after { color: white; background: var(--orange-500); }
+  .nav-kontak-btn.active::after { display: none; }
 </style>
 
 <script>
