@@ -44,6 +44,7 @@ export const site = {
 
   description: 'Agensi digital marketing Semarang untuk jasa pembuatan website, Google Ads, Meta Ads (Facebook & Instagram), dan konsultasi digital marketing untuk UMKM dan brand di Indonesia.',
   shortDescription: 'Agensi untuk website, Google Ads, Meta Ads, dan konsultasi digital marketing.',
+  footerTagline: 'Agensi digital marketing Semarang untuk jasa pembuatan website, sewa akun whitelist Google Ads & Meta Ads, dan konsultasi digital marketing untuk UMKM dan brand di Indonesia',
 
   defaultOgImage: '/assets/kraken-hero.png',
   logoUrl: '/logo-full.png',

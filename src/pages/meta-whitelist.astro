@@ -6,8 +6,8 @@ import LpBenefits from '@components/sections/lp/LpBenefits.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
-import { META_LP, CTA_HREF } from '@data/whitelist-lp';
-import { INDUSTRIES, INDUSTRY_HEADING } from '@data/sewa-akun';
+import LpShortForm from '@components/sections/lp/LpShortForm.astro';
+import { META_LP, CTA_HREF, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
 import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 
@@ -46,6 +46,7 @@ const jsonLd = [
   <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
   <LpBenefits heading={d.benefitHeading} items={d.benefits} />
   <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <IndustriesGrid items={INDUSTRIES} heading={INDUSTRY_HEADING} bg="warm" />
+  <IndustriesGrid items={INDUSTRIES_LP} heading={INDUSTRY_LP_HEADING} bg="warm" center />
+  <LpShortForm platform="meta" />
   <LpFinalCta title={d.cta.title} desc={d.cta.desc} btn={d.cta.btn} href={CTA_HREF} />
 </BaseLayout>

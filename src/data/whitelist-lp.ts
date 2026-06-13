@@ -1,7 +1,7 @@
 // src/data/whitelist-lp.ts
 // Konten 2 landing page standalone: /meta-whitelist & /google-whitelist.
 // Tanpa harga, tanpa WA — CTA mengarah ke /services/sewa-akun.
-import { META_WL, GOOGLE_WL } from '@data/sewa-akun';
+import type { Industry } from '@data/sewa-akun';
 
 export interface LpProblem { icon: string; title: string; desc: string }
 export interface LpPhoto { src: string; alt: string }
@@ -22,6 +22,21 @@ export interface LpData {
   keywords: string[];
 }
 
+// Kategori industri khusus 2 LP whitelist (beda dari sewa-akun).
+export const INDUSTRIES_LP: Industry[] = [
+  { label: 'NGO / Yayasan',        icon: '🤝', tint: '#E6F4F7' },
+  { label: 'UMKM',                 icon: '🏪', tint: '#FFF1E6' },
+  { label: 'Kesehatan',            icon: '🩺', tint: '#E7F6EC' },
+  { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
+  { label: 'Produk Kecantikan',   icon: '💄', tint: '#F3E8FF' },
+  { label: 'Konsultan Pendidikan', icon: '🎓', tint: '#E8F0FE' },
+];
+
+export const INDUSTRY_LP_HEADING = {
+  title: 'Cocok untuk berbagai industri',
+  sub: 'Umumnya digunakan oleh advertiser di industri:',
+} as const;
+
 const CTA_HREF = '/services/sewa-akun';
 
 export const META_LP: LpData = {
@@ -41,7 +56,15 @@ export const META_LP: LpData = {
     { icon: '🤷', title: 'Eskalasi tak jelas', desc: 'Saat akun bermasalah, advertiser jalan sendirian tanpa jalur appeal.' },
   ],
   benefitHeading: 'Yang kamu dapat dengan akun Meta Whitelist',
-  benefits: META_WL.benefits,
+  benefits: [
+    'Akun stabil, minim risiko random restrict',
+    'Tidak ada limit spending harian — bebas scale',
+    'Tidak dikenakan PPN',
+    'Support appeal melalui jalur langsung ke tim Meta',
+    'Saldo otomatis pindah ke akun pengganti jika terjadi disable (syarat & ketentuan berlaku)',
+    'Free mentorship Google Ads & Meta Ads',
+    'Support teknis langsung ke tim expert Meta & Google',
+  ],
   photoHeading: 'Terhubung langsung dengan Meta',
   photoSub: 'Tim Tentaklik aktif di event & program resmi Meta.',
   photos: [
@@ -77,7 +100,15 @@ export const GOOGLE_LP: LpData = {
     { icon: '🤷', title: 'Support minim', desc: 'Tidak ada pendampingan teknis yang paham kebijakan Google Ads.' },
   ],
   benefitHeading: 'Yang kamu dapat dengan akun Google Whitelist',
-  benefits: GOOGLE_WL.benefits,
+  benefits: [
+    'Risiko suspend lebih rendah dibanding akun Google Ads personal biasa',
+    'Tidak ada batas maksimal spending harian — cocok untuk skala besar',
+    'Tidak dikenakan PPN',
+    'Proses appeal lebih cepat karena terhubung langsung ke Google Partner',
+    'Saldo otomatis pindah ke akun pengganti jika terjadi disable (syarat & ketentuan berlaku)',
+    'Free mentorship Google Ads & Meta Ads',
+    'Support teknis langsung ke tim expert Meta & Google',
+  ],
   photoHeading: 'Terhubung langsung dengan Google',
   photoSub: 'Tim Tentaklik aktif di event & program resmi Google Partner.',
   photos: [
