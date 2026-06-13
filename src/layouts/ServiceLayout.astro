@@ -28,10 +28,10 @@ interface Props {
 const { data, slug } = Astro.props;
 
 const serviceImages: Record<string, string> = {
-  web:    '/assets/layanan/webdev.png',
-  google: '/assets/layanan/google.png',
-  meta:   '/assets/layanan/meta.png',
-  konsul: '/assets/layanan/konsul.png',
+  web:    '/assets/services/webdev.png',
+  google: '/assets/services/google.png',
+  meta:   '/assets/services/meta.png',
+  konsul: '/assets/services/konsul.png',
 };
 const imgSrc = serviceImages[data.icon];
 
