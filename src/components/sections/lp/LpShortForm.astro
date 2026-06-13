@@ -65,7 +65,7 @@ const formId = `shortform-${platform}`;
 <script>
   // Shortform whitelist → Google Apps Script Sheet (GET fire-and-forget).
   // Ganti SHORTFORM_URL dengan URL /exec setelah deploy Apps Script (lihat docs/apps-script/SETUP.md).
-  const SHORTFORM_URL = 'PASTE_APPS_SCRIPT_EXEC_URL';
+  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycbyXhHmMTM4t9xLmox8tqULrGfk3XJf28DLRbHDKIPLJF2vEpV9mHZeTE3TVMXxiuZVR/exec';
   const forms = document.querySelectorAll<HTMLFormElement>('form.shortform');
   const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
   const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
