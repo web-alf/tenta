@@ -14,7 +14,7 @@ const url = `${site.url}/case-study`;
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Beranda', url: site.url },
-    { name: 'Case Study', url },
+    { name: 'Partner', url },
   ]),
   itemListJsonLd(
     allCases.map(c => ({
@@ -22,25 +22,25 @@ const jsonLd = [
       url: `${site.url}/case-study/${c.id}`,
       description: c.data.desc,
     })),
-    'Case Study Tentaklik',
+    'Partner Tentaklik',
   ),
 ];
 ---
 <BaseLayout
-  title="Case Study Tentaklik — Hasil Nyata Klien Digital Marketing"
-  description="Kumpulan case study Tentaklik: hasil nyata Google Ads, Meta Ads, dan website klien — angka sebenarnya, periode jelas, dan strategi di baliknya."
+  title="Partner Tentaklik — Hasil Nyata Klien Digital Marketing"
+  description="Partner & brand yang tumbuh bareng Tentaklik: hasil nyata Google Ads, Meta Ads, dan website — angka sebenarnya, periode jelas, dan strategi di baliknya."
   active="case"
   jsonLd={jsonLd}
-  keywords={['case study tentaklik', 'portofolio digital marketing', 'hasil google ads', 'hasil meta ads', 'case study website']}
+  keywords={['partner tentaklik', 'case study tentaklik', 'portofolio digital marketing', 'hasil google ads', 'hasil meta ads']}
 >
   <section style="padding-top:56px;padding-bottom:32px;background:var(--bg-warm);">
     <div class="container" style="text-align:center;position:relative;">
-      <span class="eyebrow">Case Study</span>
+      <span class="eyebrow">Partner</span>
       <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
-        Hasil nyata, bukan <span style="color:var(--orange-500);">cherry-picked</span>.
+        Partner yang tumbuh, bukan sekadar <span style="color:var(--orange-500);">cherry-picked</span>.
       </h1>
       <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
-        Kumpulan project yang kami kerjakan — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya.
+        Brand &amp; partner yang kami dampingi — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya.
       </p>
     </div>
   </section>

@@ -5,15 +5,16 @@ interface Props {
   items: Industry[];
   heading: { title: string; sub: string };
   bg?: 'warm' | 'default';
+  center?: boolean;
 }
-const { items, heading, bg = 'default' } = Astro.props;
+const { items, heading, bg = 'default', center = false } = Astro.props;
 const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
 ---
 <section style={sectionStyle} aria-labelledby="industri-heading">
   <div class="container">
     <h2 id="industri-heading" class="section-title">{heading.title}</h2>
     <p class="section-sub" style="margin-bottom:44px;">{heading.sub}</p>
-    <div class="industri-grid">
+    <div class={`industri-grid ${center ? 'industri-center' : ''}`}>
       {items.map((it) => (
         <article class="industri-card reveal" style={`--tint:${it.tint}`}>
           <span class="industri-icon" aria-hidden="true">{it.icon}</span>
@@ -57,6 +58,10 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
     font-weight: 700;
     color: var(--ink-900);
     margin: 0;
+  }
+  .industri-center .industri-card {
+    align-items: center;
+    text-align: center;
   }
   @media (max-width: 760px) {
     .industri-grid { grid-template-columns: 1fr 1fr; gap: 12px; }

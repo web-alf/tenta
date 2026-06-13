@@ -13,13 +13,16 @@ const services = [
   { label: 'Konsultasi Digital Marketing', href: '/services/konsultasi',  icon: 'lightbulb' as const },
 ];
 
-const links = [
-  { id: 'beranda', label: 'Beranda',      href: '/' },
-  { id: 'case',    label: 'Case Study',   href: '/case-study' },
-  { id: 'tentang', label: 'Tentang Kami', href: '/tentang' },
-  { id: 'snk',     label: 'S&K',          href: '/terms' },
-  { id: 'kontak',  label: 'Kontak',       href: '/kontak' },
+// Link sebelum dropdown Layanan
+const linksBefore = [
+  { id: 'tentang', label: 'Tentang', href: '/tentang' },
 ];
+// Link setelah dropdown Layanan
+const linksAfter = [
+  { id: 'case', label: 'Partner', href: '/case-study' },
+  { id: 'faq',  label: 'FAQ',     href: '/#faq' },
+];
+const blogHref = 'https://mediawaktu.com';
 ---
 <header class="header" id="site-header">
   <div class="container nav">
@@ -30,6 +33,10 @@ const links = [
     <!-- Desktop nav — hidden on mobile via CSS -->
     <nav class="nav-links nav-desktop" aria-label="Navigasi utama">
       <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+
+      {linksBefore.map(l => (
+        <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
+      ))}
 
       <!-- Layanan dropdown -->
       <div class="nav-dropdown-wrap" id="layanan-wrap">
@@ -53,9 +60,13 @@ const links = [
         </div>
       </div>
 
-      {links.filter(l => l.id !== 'beranda').map(l => (
+      {linksAfter.map(l => (
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
       ))}
+
+      <a href={blogHref} target="_blank" rel="noopener noreferrer" class="nav-blog-link">Blog <span aria-hidden="true">↗</span></a>
+
+      <a href="/kontak" class={`btn btn-primary nav-kontak-btn ${active === 'kontak' ? 'active' : ''}`}>Kontak</a>
     </nav>
 
     <!-- Burger (mobile only) -->
@@ -83,11 +94,15 @@ const links = [
     <nav class="mobile-drawer-links" aria-label="Navigasi mobile">
       <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
 
+      {linksBefore.map(l => (
+        <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
+      ))}
+
       <!-- Layanan accordion -->
       <div class="mobile-layanan">
         <button class="mobile-layanan-trigger" type="button" aria-expanded="false">
           Layanan
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="mobile-layanan-sub" hidden>
           {services.map(s => (
@@ -98,9 +113,13 @@ const links = [
         </div>
       </div>
 
-      {links.filter(l => l.id !== 'beranda').map(l => (
+      {linksAfter.map(l => (
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
       ))}
+
+      <a href={blogHref} target="_blank" rel="noopener noreferrer">Blog ↗</a>
+
+      <a href="/kontak" class={`btn btn-primary mobile-kontak-btn ${active === 'kontak' ? 'active' : ''}`} style="justify-content:center;margin-top:8px;">Kontak</a>
     </nav>
 
   </div>
@@ -320,6 +339,10 @@ const links = [
     transition: background 0.15s, color 0.15s;
   }
   .mobile-sub-item:hover { background: var(--orange-50); color: var(--orange-700); }
+
+  .nav-blog-link { display: inline-flex; align-items: center; gap: 3px; }
+  .nav-kontak-btn { padding: 9px 18px; font-size: 14px; }
+  .nav-kontak-btn:hover { color: white; }
 </style>
 
 <script>

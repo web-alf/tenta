@@ -11,7 +11,7 @@ import { site, waLink } from '@data/site';
   <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
     <div>
       <div style="margin-bottom:14px;"><TentaklikLogo size={24} variant="white" /></div>
-      <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.description}</p>
+      <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.footerTagline}</p>
       <div style="display:flex;gap:12px;margin-top:18px;">
         <a href={site.social.instagram} aria-label="Instagram" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Instagram size={16} /></a>
         <a href={site.social.tiktok} aria-label="TikTok" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><TikTok size={16} /></a>
@@ -21,17 +21,24 @@ import { site, waLink } from '@data/site';
       <h4>Layanan</h4>
       <ul>
         <li><a href="/services/website">Website Development</a></li>
-        <li><a href="/services/sewa-akun">Sewa Akun</a></li>
+        <li>
+          <a href="/services/sewa-akun">Sewa Akun</a>
+          <ul class="footer-subnav">
+            <li><a href="/meta-whitelist">Meta Whitelist</a></li>
+            <li><a href="/google-whitelist">Google Whitelist</a></li>
+          </ul>
+        </li>
         <li><a href="/services/konsultasi">Konsultasi Digital Marketing</a></li>
       </ul>
     </div>
     <div>
-      <h4>Mengenai</h4>
+      <h4>Halaman</h4>
       <ul>
-        <li><a href="/tentang">Tentang Kami</a></li>
-        <li><a href="/case-study">Case Study</a></li>
+        <li><a href="/tentang">Tentang</a></li>
+        <li><a href="/case-study">Partner</a></li>
         <li><a href="/#faq">FAQ</a></li>
-        <li><a href="/terms">S&K</a></li>
+        <li><a href="https://mediawaktu.com" target="_blank" rel="noopener noreferrer">Blog ↗</a></li>
+        <li><a href="/terms">Ketentuan</a></li>
       </ul>
     </div>
     <div>
@@ -64,6 +71,8 @@ import { site, waLink } from '@data/site';
 </footer>
 
 <style>
+  .footer-subnav { list-style: none; padding: 6px 0 0 14px; margin: 6px 0 0; display: flex; flex-direction: column; gap: 8px; border-left: 1px solid rgba(255,255,255,0.12); }
+  .footer-subnav li::before { content: "› "; color: var(--ink-300); }
   .footer-legal-link {
     color: var(--ink-300);
     transition: color 0.15s;
