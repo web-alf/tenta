@@ -28,8 +28,8 @@ const formId = `shortform-${platform}`;
         <textarea id={`${formId}-ket`} name="keterangan" placeholder="Produk/jasa, target, dan kebutuhan akun..." rows="3" maxlength="500"></textarea>
       </div>
       <button type="submit" class="btn btn-primary" style="justify-content:center;width:100%;">Kirim <ArrowRight size={14} /></button>
-      <p class="sf-sent" hidden>Terkirim! Tim kami akan menghubungi kamu via WhatsApp.</p>
-      <p class="sf-err" hidden></p>
+      <p class="sf-sent" role="status" aria-live="polite" hidden>Terkirim! Tim kami akan menghubungi kamu via WhatsApp.</p>
+      <p class="sf-err" role="alert" aria-live="assertive" hidden></p>
     </form>
   </div>
 </section>
@@ -72,14 +72,21 @@ const formId = `shortform-${platform}`;
   const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
   const clip = (v: string, n: number) => v.replace(CTRL_RE, ' ').slice(0, n).trim();
 
+  const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
+
   forms.forEach((form) => {
     const sent = form.querySelector<HTMLElement>('.sf-sent');
     const err  = form.querySelector<HTMLElement>('.sf-err');
+    const btn  = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const platform = form.getAttribute('data-platform') ?? '';
-    const showErr = (t: string) => { if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { err.hidden = true; }, 5000); } };
+    const showErr = (t: string) => { if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { if (err) err.hidden = true; }, 5000); } };
+    let busy = false;
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (busy) return; // anti double-submit
+      if (sent) sent.hidden = true; // reset banner state
+
       const fd = new FormData(form);
       if (String(fd.get('website') ?? '').length > 0) return; // honeypot
       const nama = clip(String(fd.get('nama') ?? ''), 100);
@@ -88,15 +95,23 @@ const formId = `shortform-${platform}`;
       if (!NAME_RE.test(nama)) { showErr('Nama tidak valid (2–100 karakter).'); return; }
       if (!PHONE_RE.test(wa))  { showErr('Nomor WhatsApp tidak valid.'); return; }
 
-      if (SHORTFORM_URL && SHORTFORM_URL.indexOf('http') === 0) {
-        const params = new URLSearchParams({
-          platform: platform, nama: nama, whatsapp: wa,
-          keterangan: ket, source: window.location.href,
+      // Belum ada endpoint (URL masih placeholder) → jangan klaim sukses palsu.
+      if (!hasEndpoint) { showErr('Form belum aktif. Hubungi kami via WhatsApp untuk sementara.'); return; }
+
+      busy = true;
+      if (btn) btn.disabled = true;
+      const params = new URLSearchParams({
+        platform: platform, nama: nama, whatsapp: wa,
+        keterangan: ket, source: window.location.href,
+      });
+      fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
+        .catch(() => {})
+        .finally(() => {
+          form.reset();
+          if (sent) sent.hidden = false;
+          busy = false;
+          if (btn) btn.disabled = false;
         });
-        fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' }).catch(() => {});
-      }
-      form.reset();
-      if (sent) sent.hidden = false;
     });
   });
 </script>

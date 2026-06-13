@@ -20,7 +20,7 @@ const publishedIso = entry.data.publishDate.toISOString();
 const jsonLd = [
   breadcrumbJsonLd([
     { name: 'Beranda',    url: site.url },
-    { name: 'Case Study', url: `${site.url}/case-study` },
+    { name: 'Partner',    url: `${site.url}/case-study` },
     { name: entry.data.brand, url },
   ]),
   articleJsonLd({
@@ -33,7 +33,7 @@ const jsonLd = [
     keywords: [...entry.data.tags, entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
   }),
 ];
-const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Case Study Tentaklik`;
+const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Partner Tentaklik`;
 ---
 <BaseLayout
   title={metaTitle}
@@ -48,7 +48,7 @@ const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Case Study Ten
 >
   <section style="padding-top:56px;padding-bottom:24px;background:var(--bg-warm);">
     <div class="container" style="max-width:820px;">
-      <a href="/case-study" style="font-size:14px;color:var(--orange-600);">← Semua Case Study</a>
+      <a href="/case-study" style="font-size:14px;color:var(--orange-600);">← Semua Partner</a>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;margin-bottom:18px;">
         {entry.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
       </div>
