@@ -1,28 +1,44 @@
 ---
 import TentaklikLogo from '../brand/TentaklikLogo.astro';
 import ServiceIcon from '../icons/ServiceIcon.astro';
+import { getLang, useT, stripLocale } from '@i18n/utils';
 
 interface Props {
   active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'snk' | 'faq' | 'kontak';
 }
 const { active = 'beranda' } = Astro.props;
 
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+// Localize internal path untuk bahasa aktif (EN → prefix /en).
+const L = (path: string) => (lang === 'en' ? `/en${path === '/' ? '' : path}` : path) || '/';
+// Path netral (tanpa /en) untuk language switcher.
+const basePath = stripLocale(Astro.url.pathname);
+
 const services = [
-  { label: 'Website Development',          href: '/layanan/website',     icon: 'code' as const },
-  { label: 'Sewa Akun',                    href: '/layanan/sewa-akun',   icon: 'shield' as const },
-  { label: 'Konsultasi Digital Marketing', href: '/layanan/konsultasi',  icon: 'lightbulb' as const },
+  { label: t('svc.website'),    href: L('/layanan/website'),    icon: 'code' as const },
+  { label: t('svc.sewaAkun'),   href: L('/layanan/sewa-akun'),  icon: 'shield' as const },
+  { label: t('svc.konsultasi'), href: L('/layanan/konsultasi'), icon: 'lightbulb' as const },
 ];
 
 // Link sebelum dropdown Layanan
 const linksBefore = [
-  { id: 'tentang', label: 'Tentang', href: '/tentang' },
+  { id: 'tentang', label: t('nav.tentang'), href: L('/tentang') },
 ];
 // Link setelah dropdown Layanan
 const linksAfter = [
-  { id: 'case', label: 'Partner', href: '/partner' },
-  { id: 'faq',  label: 'FAQ',     href: '/#faq' },
+  { id: 'case', label: t('nav.partner'), href: L('/partner') },
+  { id: 'faq',  label: t('nav.faq'),     href: L('/#faq') },
 ];
 const blogHref = 'https://mediawaktu.com';
+const homeHref = L('/');
+const kontakHref = L('/kontak');
+
+// Language switcher: link ke path yang sama di bahasa lain.
+const langOptions = [
+  { code: 'id', label: t('nav.lang.id'), href: basePath === '/' ? '/' : basePath },
+  { code: 'en', label: t('nav.lang.en'), href: basePath === '/' ? '/en' : `/en${basePath}` },
+] as const;
 ---
 <header class="header" id="site-header">
   <div class="container nav">
@@ -32,7 +48,7 @@ const blogHref = 'https://mediawaktu.com';
 
     <!-- Desktop nav — hidden on mobile via CSS -->
     <nav class="nav-links nav-desktop" aria-label="Navigasi utama">
-      <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+      <a href={homeHref} class={active === 'beranda' ? 'active' : ''}>{t('nav.beranda')}</a>
 
       {linksBefore.map(l => (
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
@@ -47,7 +63,7 @@ const blogHref = 'https://mediawaktu.com';
           aria-controls="layanan-menu"
           type="button"
         >
-          Layanan
+          {t('nav.layanan')}
           <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="nav-dropdown" id="layanan-menu" role="menu">
@@ -64,9 +80,33 @@ const blogHref = 'https://mediawaktu.com';
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
       ))}
 
-      <a href={blogHref} target="_blank" rel="noopener noreferrer" class="nav-blog-link">Blog <span aria-hidden="true">↗</span></a>
+      <a href={blogHref} target="_blank" rel="noopener noreferrer" class="nav-blog-link">{t('nav.blog')} <span aria-hidden="true">↗</span></a>
 
-      <a href="/kontak" class="btn btn-primary nav-kontak-btn">Kontak</a>
+      <!-- Language switcher -->
+      <div class="nav-dropdown-wrap nav-lang-wrap" id="lang-wrap">
+        <button
+          class="nav-dropdown-trigger nav-lang-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="lang-menu"
+          aria-label={t('nav.lang')}
+          type="button"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span class="nav-lang-code">{lang.toUpperCase()}</span>
+          <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown nav-lang-menu" id="lang-menu" role="menu">
+          {langOptions.map(o => (
+            <a href={o.href} class={`nav-dropdown-item ${o.code === lang ? 'active' : ''}`} role="menuitem" hreflang={o.code}>
+              <span class="nav-lang-badge" aria-hidden="true">{o.code.toUpperCase()}</span>
+              {o.label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <a href={kontakHref} class="btn btn-primary nav-kontak-btn">{t('nav.kontak')}</a>
     </nav>
 
     <!-- Burger (mobile only) -->
@@ -92,7 +132,7 @@ const blogHref = 'https://mediawaktu.com';
     </button>
 
     <nav class="mobile-drawer-links" aria-label="Navigasi mobile">
-      <a href="/" class={active === 'beranda' ? 'active' : ''}>Beranda</a>
+      <a href={homeHref} class={active === 'beranda' ? 'active' : ''}>{t('nav.beranda')}</a>
 
       {linksBefore.map(l => (
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
@@ -101,7 +141,7 @@ const blogHref = 'https://mediawaktu.com';
       <!-- Layanan accordion -->
       <div class="mobile-layanan">
         <button class="mobile-layanan-trigger" type="button" aria-expanded="false">
-          Layanan
+          {t('nav.layanan')}
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="mobile-layanan-sub" hidden>
@@ -117,9 +157,18 @@ const blogHref = 'https://mediawaktu.com';
         <a href={l.href} class={active === l.id ? 'active' : ''}>{l.label}</a>
       ))}
 
-      <a href={blogHref} target="_blank" rel="noopener noreferrer">Blog ↗</a>
+      <a href={blogHref} target="_blank" rel="noopener noreferrer">{t('nav.blog')} ↗</a>
 
-      <a href="/kontak" class="btn btn-primary mobile-kontak-btn" style="justify-content:center;margin-top:8px;">Kontak</a>
+      <!-- Language switcher (mobile) -->
+      <div class="mobile-lang" role="group" aria-label={t('nav.lang')}>
+        {langOptions.map(o => (
+          <a href={o.href} class={`mobile-lang-item ${o.code === lang ? 'active' : ''}`} hreflang={o.code}>
+            <span class="nav-lang-badge" aria-hidden="true">{o.code.toUpperCase()}</span> {o.label}
+          </a>
+        ))}
+      </div>
+
+      <a href={kontakHref} class="btn btn-primary mobile-kontak-btn" style="justify-content:center;margin-top:8px;">{t('nav.kontak')}</a>
     </nav>
 
   </div>
@@ -345,6 +394,31 @@ const blogHref = 'https://mediawaktu.com';
   .nav-blog-link { display: inline-flex; align-items: center; gap: 3px; padding: 6px 0; }
   .nav-kontak-btn { padding: 9px 18px; font-size: 14px; }
   .nav-kontak-btn:hover { color: white; }
+
+  /* Language switcher (desktop) */
+  .nav-lang-trigger { gap: 5px; }
+  .nav-lang-code { font-weight: 600; letter-spacing: 0.02em; }
+  .nav-lang-menu { min-width: 168px; left: auto; right: 0; transform: none; }
+  .nav-lang-menu::before { left: auto; right: 18px; transform: rotate(45deg); }
+  .nav-lang-badge {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 26px; height: 20px; padding: 0 6px;
+    border-radius: 6px; background: var(--orange-100); color: var(--orange-700);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.03em;
+  }
+  .nav-dropdown-item.active { background: var(--orange-50); color: var(--orange-700); }
+  .nav-dropdown-item.active .nav-lang-badge { background: var(--orange-500); color: #fff; }
+
+  /* Language switcher (mobile) */
+  .mobile-lang { display: flex; gap: 8px; margin: 8px 0 2px; }
+  .mobile-lang-item {
+    flex: 1; display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 14px; border-radius: 10px;
+    font-size: 14.5px; font-weight: 600; color: var(--ink-700);
+    border: 1px solid var(--ink-100);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .mobile-lang-item.active { background: var(--orange-50); color: var(--orange-700); border-color: var(--orange-200); }
   /* Tombol Kontak tetap solid oranye walau di halaman /kontak (tak ikut style .active nav teks) */
   .nav-kontak-btn.active, .nav-kontak-btn.active::after { color: white; background: var(--orange-500); }
   .nav-kontak-btn.active::after { display: none; }
@@ -360,39 +434,32 @@ const blogHref = 'https://mediawaktu.com';
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  /* ── Desktop dropdown ── */
-  const dropTrigger = document.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
-  const dropMenu    = document.getElementById('layanan-menu');
-  const dropWrap    = dropTrigger?.closest('.nav-dropdown-wrap');
-
-  let _closeTimer: ReturnType<typeof setTimeout> | null = null;
-
-  function openDrop() {
-    if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
-    dropMenu?.classList.add('open');
-    dropTrigger?.setAttribute('aria-expanded', 'true');
+  /* ── Desktop dropdowns (Layanan + Bahasa) ── */
+  function wireDropdown(menuId: string) {
+    const menu = document.getElementById(menuId);
+    const wrap = menu?.closest('.nav-dropdown-wrap');
+    const trigger = wrap?.querySelector<HTMLButtonElement>('.nav-dropdown-trigger');
+    if (!menu || !wrap || !trigger) return;
+    let closeTimer: ReturnType<typeof setTimeout> | null = null;
+    const open = () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      menu.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    };
+    const close = (immediate = false) => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      const doClose = () => { menu.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); };
+      if (immediate) doClose();
+      else closeTimer = setTimeout(() => { closeTimer = null; doClose(); }, 200);
+    };
+    wrap.addEventListener('mouseenter', open);
+    wrap.addEventListener('mouseleave', () => close(false));
+    trigger.addEventListener('click', () => menu.classList.contains('open') ? close(true) : open());
+    document.addEventListener('click', e => { if (!wrap.contains(e.target as Node)) close(true); });
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => close(true)));
   }
-  function closeDrop(immediate = false) {
-    if (_closeTimer) { clearTimeout(_closeTimer); _closeTimer = null; }
-    if (immediate) {
-      dropMenu?.classList.remove('open');
-      dropTrigger?.setAttribute('aria-expanded', 'false');
-    } else {
-      _closeTimer = setTimeout(() => {
-        _closeTimer = null;
-        dropMenu?.classList.remove('open');
-        dropTrigger?.setAttribute('aria-expanded', 'false');
-      }, 200);
-    }
-  }
-
-  if (dropTrigger && dropMenu && dropWrap) {
-    dropWrap.addEventListener('mouseenter', openDrop);
-    dropWrap.addEventListener('mouseleave', () => closeDrop(false));
-    dropTrigger.addEventListener('click', () => dropMenu.classList.contains('open') ? closeDrop(true) : openDrop());
-    document.addEventListener('click', e => { if (!dropWrap.contains(e.target as Node)) closeDrop(true); });
-    dropMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeDrop(true)));
-  }
+  wireDropdown('layanan-menu');
+  wireDropdown('lang-menu');
 
   /* ── Mobile drawer ── */
   const burger  = document.getElementById('nav-burger');

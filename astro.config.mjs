@@ -11,6 +11,15 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
 
+  // i18n: ID default di root (/), EN di /en/. Halaman EN yang belum ada
+  // jatuh ke konten ID via fallback rewrite (URL tetap /en/...).
+  i18n: {
+    defaultLocale: 'id',
+    locales: ['id', 'en'],
+    routing: { prefixDefaultLocale: false, redirectToDefaultLocale: false, fallbackType: 'rewrite' },
+    fallback: { en: 'id' },
+  },
+
   build: {
     inlineStylesheets: 'always',
   },
@@ -29,7 +38,7 @@ export default defineConfig({
       lastmod: new Date(),
       i18n: {
         defaultLocale: 'id',
-        locales: { id: 'id-ID' },
+        locales: { id: 'id-ID', en: 'en-US' },
       },
       filter: (page) => !page.includes('/404'),
       serialize(item) {

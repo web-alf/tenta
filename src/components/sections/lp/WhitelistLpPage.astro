@@ -1,0 +1,66 @@
+---
+// Halaman LP whitelist (Meta/Google) — dipakai oleh route ID & EN.
+// Tipis: pilih data per (platform, lang), render section yang sama.
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LpHero from '@components/sections/lp/LpHero.astro';
+import LpProblem from '@components/sections/lp/LpProblem.astro';
+import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
+import LpShortForm from '@components/sections/lp/LpShortForm.astro';
+import { META_LP, GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
+import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import { getLang } from '@i18n/utils';
+
+interface Props { platform: 'meta' | 'google' }
+const { platform } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+
+const d = (platform === 'google' ? GOOGLE_LP : META_LP)[lang];
+const CTA_HREF = lang === 'en' ? '/en/layanan/sewa-akun' : '/layanan/sewa-akun';
+const slug = platform === 'google' ? 'google-whitelist' : 'meta-whitelist';
+const path = lang === 'en' ? `/en/${slug}` : `/${slug}`;
+const url = `${site.url}${path}`;
+const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitelist';
+const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
+const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
+
+const jsonLd = [
+  serviceJsonLd({
+    name: d.seo.title,
+    description: d.seo.description,
+    url,
+    serviceType: platform === 'google' ? 'Google Ads Whitelist Account Rental' : 'Meta Ads Whitelist Account Rental',
+  }),
+  breadcrumbJsonLd([
+    { name: crumbHome, url: lang === 'en' ? `${site.url}/en` : site.url },
+    { name: crumbSewa, url: `${site.url}${lang === 'en' ? '/en' : ''}/layanan/sewa-akun` },
+    { name: crumbWhitelist, url },
+  ]),
+];
+---
+<BaseLayout
+  title={d.seo.title}
+  description={d.seo.description}
+  active="layanan"
+  bareLayout
+  jsonLd={jsonLd}
+  keywords={d.keywords}
+>
+  <LpHero
+    eyebrow={d.hero.eyebrow}
+    title={d.hero.title}
+    titleAccent={d.hero.titleAccent}
+    desc={d.hero.desc}
+    ctaText={d.cta.btn}
+    ctaHref={CTA_HREF}
+  />
+  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
+  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
+  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
+  <LpShortForm platform={platform} />
+  <LpFinalCta title={d.cta.title} desc={d.cta.desc} btn={d.cta.btn} href={CTA_HREF} />
+</BaseLayout>
