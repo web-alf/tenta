@@ -4,17 +4,22 @@ import ArrowRight from '@components/icons/ArrowRight.astro';
 import { getCollection } from 'astro:content';
 import { breadcrumbJsonLd, itemListJsonLd } from '@lib/seo';
 import { site } from '@data/site';
+import { getLang, useT } from '@i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const tr = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 
 const allCases = (await getCollection('caseStudies')).sort((a, b) =>
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
-const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
+const filters = [tr('partner.filter.all'), 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
 
 const url = `${site.url}/partner`;
 const jsonLd = [
   breadcrumbJsonLd([
-    { name: 'Beranda', url: site.url },
-    { name: 'Partner', url },
+    { name: tr('crumb.beranda'), url: site.url },
+    { name: tr('nav.partner'), url },
   ]),
   itemListJsonLd(
     allCases.map(c => ({
@@ -25,22 +30,29 @@ const jsonLd = [
     'Partner Tentaklik',
   ),
 ];
+
+const seoTitle = lang === 'en'
+  ? 'Partners — Real Results | Tentaklik Digital Marketing'
+  : 'Partner Tentaklik — Hasil Nyata Klien Digital Marketing';
+const seoDesc = lang === 'en'
+  ? 'Brands & partners that grew with Tentaklik — real numbers, clear periods, and the strategy behind them.'
+  : 'Partner & brand yang tumbuh bareng Tentaklik: hasil nyata Google Ads, Meta Ads, dan website — angka sebenarnya, periode jelas, dan strategi di baliknya.';
 ---
 <BaseLayout
-  title="Partner Tentaklik — Hasil Nyata Klien Digital Marketing"
-  description="Partner & brand yang tumbuh bareng Tentaklik: hasil nyata Google Ads, Meta Ads, dan website — angka sebenarnya, periode jelas, dan strategi di baliknya."
+  title={seoTitle}
+  description={seoDesc}
   active="case"
   jsonLd={jsonLd}
   keywords={['partner tentaklik', 'case study tentaklik', 'portofolio digital marketing', 'hasil google ads', 'hasil meta ads']}
 >
   <section style="padding-top:56px;padding-bottom:32px;background:var(--bg-warm);">
     <div class="container" style="text-align:center;position:relative;">
-      <span class="eyebrow">Partner</span>
+      <span class="eyebrow">{tr('partner.eyebrow')}</span>
       <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
-        Partner yang tumbuh, bukan sekadar <span style="color:var(--orange-500);">cherry-picked</span>.
+        {tr('partner.title1')} <span style="color:var(--orange-500);">{tr('partner.titleAccent')}</span>.
       </h1>
       <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
-        Brand &amp; partner yang kami dampingi — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya.
+        {tr('partner.lede')}
       </p>
     </div>
   </section>
@@ -93,10 +105,10 @@ const jsonLd = [
     <div class="container">
       <div class="cta-banner reveal">
         <div style="flex:1;">
-          <h3>Mau jadi case study selanjutnya?</h3>
-          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Konsultasi gratis untuk lihat strategi yang cocok buat bisnis Anda.</p>
+          <h3>{tr('partner.cta.title')}</h3>
+          <p style="margin-top:8px;opacity:0.95;font-size:15px;">{tr('partner.cta.desc')}</p>
         </div>
-        <a href="/kontak" class="btn btn-ghost">Mulai Sekarang <ArrowRight size={14} /></a>
+        <a href={L('/kontak')} class="btn btn-ghost">{tr('partner.cta.btn')} <ArrowRight size={14} /></a>
       </div>
     </div>
   </section>
@@ -143,14 +155,15 @@ const jsonLd = [
   const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
   const cards = document.querySelectorAll<HTMLElement>('.case-card');
 
+  const allLabel = btns[0]?.dataset.filter ?? 'Semua';
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filter ?? 'Semua';
+      const filter = btn.dataset.filter ?? allLabel;
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       cards.forEach(card => {
         const tags = (card.dataset.tags ?? '').split(',');
-        const visible = filter === 'Semua' || tags.includes(filter);
+        const visible = filter === allLabel || tags.includes(filter);
         if (visible) card.removeAttribute('hidden');
         else card.setAttribute('hidden', '');
       });

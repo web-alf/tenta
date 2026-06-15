@@ -6,6 +6,7 @@ import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
 import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
 import Check from '@components/icons/Check.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import { getLang, useT } from '@i18n/utils';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import {
@@ -14,6 +15,10 @@ import {
   INDUSTRIES, INDUSTRY_HEADING,
   type WhitelistInfo,
 } from '@data/sewa-akun';
+
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 
 const url = `${site.url}/layanan/sewa-akun`;
 const wlBlocks: WhitelistInfo[] = [META_WL, GOOGLE_WL];
@@ -58,8 +63,8 @@ const jsonLd = [
   <!-- Layanan whitelist: Meta + Google -->
   <section aria-labelledby="wl-heading">
     <div class="container">
-      <h2 id="wl-heading" class="section-title">Layanan yang Tersedia</h2>
-      <p class="section-sub" style="margin-bottom:48px;">Dua jalur akun premium — pilih sesuai platform iklan Anda.</p>
+      <h2 id="wl-heading" class="section-title">{t('sewa.avail.title')}</h2>
+      <p class="section-sub" style="margin-bottom:48px;">{t('sewa.avail.sub')}</p>
       <div class="wl-grid">
         {wlBlocks.map((wl) => (
           <article class="wl-card reveal">

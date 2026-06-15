@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 ---
 <BaseLayout
-  title="404 — Halaman tidak ditemukan"
-  description="Halaman yang kamu cari tidak ada. Yuk balik ke beranda."
+  title={t('404.seoTitle')}
+  description={t('404.seoDesc')}
   noindex={true}
 >
   <section class="notfound">
@@ -58,25 +62,25 @@ import ArrowRight from '@components/icons/ArrowRight.astro';
         <span class="notfound-code-fg">404</span>
       </div>
 
-      <h1 class="notfound-title">Oops! Halaman ini menyelam terlalu dalam.</h1>
-      <p class="notfound-sub">URL yang kamu cari nggak ketemu. Mungkin sudah dipindah, atau memang gak pernah ada. Tapi tenang, Kraken siap antar kamu balik!</p>
+      <h1 class="notfound-title">{t('404.title')}</h1>
+      <p class="notfound-sub">{t('404.desc')}</p>
 
       <div class="notfound-actions">
-        <a href="/" class="btn btn-primary btn-lg">
-          Balik ke Beranda <ArrowRight size={16} />
+        <a href={L('/')} class="btn btn-primary btn-lg">
+          {t('404.home')} <ArrowRight size={16} />
         </a>
-        <a href="/layanan" class="btn btn-ghost">
-          Lihat Layanan
+        <a href={L('/layanan')} class="btn btn-ghost">
+          {t('404.services')}
         </a>
       </div>
 
       <!-- Fun suggestions -->
       <div class="notfound-suggestions">
-        <p class="notfound-suggestions-label">Atau mungkin kamu mau ke sini?</p>
+        <p class="notfound-suggestions-label">{t('404.suggest')}</p>
         <div class="notfound-links">
-          <a href="/tentang" class="notfound-link">Tentang Kami</a>
-          <a href="/portofolio" class="notfound-link">Portofolio</a>
-          <a href="/kontak" class="notfound-link">Kontak</a>
+          <a href={L('/tentang')} class="notfound-link">{t('nav.tentang')}</a>
+          <a href={L('/portofolio')} class="notfound-link">{t('nav.partner')}</a>
+          <a href={L('/kontak')} class="notfound-link">{t('nav.kontak')}</a>
         </div>
       </div>
     </div>
