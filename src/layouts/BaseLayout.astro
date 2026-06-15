@@ -53,7 +53,7 @@ const {
   modifiedTime,
 } = Astro.props;
 
-const fullTitle = title.includes('Tentaklik') ? title : `${title} — Tentaklik`;
+const fullTitle = title.toLowerCase().includes('tentaklik') ? title : `${title} — Tentaklik`;
 const url = new URL(Astro.url.pathname, site.url).toString();
 const canonicalUrl = canonical ?? url;
 const ogImage = image.startsWith('http') ? image : new URL(image, site.url).toString();
