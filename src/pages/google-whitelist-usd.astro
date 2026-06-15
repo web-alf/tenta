@@ -1,0 +1,71 @@
+---
+// LP Google Whitelist — English, USD pricing for international market.
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LpHero from '@components/sections/lp/LpHero.astro';
+import LpProblem from '@components/sections/lp/LpProblem.astro';
+import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
+import LpPromoBanner from '@components/sections/lp/LpPromoBanner.astro';
+import LpShortForm from '@components/sections/lp/LpShortForm.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import { GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
+import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+const d = GOOGLE_LP.en;
+const url = `${site.url}/google-whitelist-usd`;
+const jsonLd = [
+  serviceJsonLd({ name: d.seo.title, description: d.seo.description, url, serviceType: 'Google Ads Whitelist Account Rental' }),
+  breadcrumbJsonLd([
+    { name: 'Home', url: site.url },
+    { name: 'Account Rental', url: `${site.url}/layanan/sewa-akun` },
+    { name: 'Google Whitelist (USD)', url },
+  ]),
+];
+
+// USD pricing tiers (same % fee, topup range converted from IDR).
+const usdPlans = [
+  {
+    name: 'Starter', tagline: 'Default for all new accounts',
+    price: '5%', unit: 'top-up fee',
+    features: ['Top-up $20–$300 / month', 'For Meta & Google Whitelist', 'No VAT', 'No daily spending limit', 'Balance auto-moves if disabled*'],
+  },
+  {
+    name: 'Growth', tagline: 'Request via CS — lower fee',
+    price: '4.5%', unit: 'top-up fee', featured: true,
+    features: ['Top-up $300–$900 / month', 'Activated via Tentaklik CS', 'No VAT', 'No daily spending cap', 'Partner appeal support'],
+  },
+  {
+    name: 'Scale', tagline: 'Best value for high spenders',
+    price: '3.5%', unit: 'top-up fee',
+    features: ['Top-up above $900 / month', 'Most competitive fee', 'Multi-account ready', 'Free onboarding checklist', 'Personal support (not a bot)'],
+  },
+];
+---
+<BaseLayout
+  title="Google Ads Whitelist Account Rental (USD) — Tentaklik"
+  description="Rent a Google Ads whitelist account for international advertisers. USD pricing, no VAT, no spending cap."
+  active="layanan"
+  bareLayout
+  jsonLd={jsonLd}
+  keywords={['google ads whitelist usd', 'rent google ads account', 'google ads whitelist international']}
+>
+  <LpHero
+    eyebrow={d.hero.eyebrow}
+    title={d.hero.title}
+    titleAccent={d.hero.titleAccent}
+    desc={d.hero.desc}
+    ctaText="See Pricing"
+    ctaHref="#pricing"
+  />
+  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
+  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
+  <PricingSection plans={usdPlans} service="Google Ads Whitelist (USD)" />
+  <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center />
+  <LpTestimonials />
+  <LpPromoBanner heading="Request a Whitelist Account" sub="Fill in a few details to secure your account" originalPrice="$12" promoPrice="$3 / account" />
+  <LpShortForm platform="google" />
+</BaseLayout>
