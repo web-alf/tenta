@@ -1,12 +1,15 @@
 ---
+import { getLang, useT } from '@i18n/utils';
 interface Step { title: string; desc: string; }
 interface Props { steps: Step[]; }
 const { steps } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 ---
 <section>
   <div class="container">
-    <h2 class="section-title">Proses Kerja</h2>
-    <p class="section-sub" style="margin-bottom:40px;">Step-by-step yang udah teruji.</p>
+    <h2 class="section-title">{t('svc.process.title')}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{t('svc.process.sub')}</p>
     <div style={`display:grid;grid-template-columns:repeat(${steps.length}, 1fr);gap:16px;`}>
       {steps.map((s, i) => (
         <div class="process-step reveal">

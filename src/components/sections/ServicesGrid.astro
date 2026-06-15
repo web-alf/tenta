@@ -1,17 +1,21 @@
 ---
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 import ArrowRight from '../icons/ArrowRight.astro';
 
 const services = [
-  { title: 'Website Development',           desc: 'Landing page, company profile, dan website yang fokus pada konversi.', slug: 'website',     icon: 'web' },
-  { title: 'Sewa Akun',                     desc: 'Akun iklan whitelist Google & Meta — limit tanpa batas, tanpa PPN, anti random banned.', slug: 'sewa-akun', icon: 'shield' },
-  { title: 'Konsultasi Digital Marketing',  desc: 'Audit funnel, strategi channel, dan rekomendasi prioritas yang actionable.', slug: 'konsultasi', icon: 'konsul' },
+  { title: 'Website Development',           desc: t('svcgrid.website.desc'), slug: 'website',     icon: 'web' },
+  { title: 'Sewa Akun',                     desc: t('svcgrid.sewaAkun.desc'), slug: 'sewa-akun', icon: 'shield' },
+  { title: 'Konsultasi Digital Marketing',  desc: t('svcgrid.konsultasi.desc'), slug: 'konsultasi', icon: 'konsul' },
 ] as const;
 ---
 <section id="layanan">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;position:relative;">
-      <h2 class="section-title">Layanan Utama</h2>
-      <p class="section-sub">Solusi inti untuk bantu bisnis lo tampil lebih profesional dan hasilkan leads.</p>
+      <h2 class="section-title">{t('svcgrid.title')}</h2>
+      <p class="section-sub">{t('svcgrid.sub')}</p>
       <span class="spark" style="top:-10px;left:15%;font-size:18px;" aria-hidden="true">✦</span>
       <span class="spark" style="top:20px;right:12%;font-size:14px;" aria-hidden="true">✦</span>
     </div>
@@ -47,8 +51,8 @@ const services = [
           </div>
           <h3 style="font-size:19px;">{s.title}</h3>
           <p style="font-size:14px;color:var(--ink-500);flex:1;">{s.desc}</p>
-          <a href={`/layanan/${s.slug}`} class="btn btn-primary" style="padding:10px 16px;font-size:14px;justify-content:center;">
-            Lihat Service <ArrowRight size={14} />
+          <a href={L(`/layanan/${s.slug}`)} class="btn btn-primary" style="padding:10px 16px;font-size:14px;justify-content:center;">
+            {t('svcgrid.cta')} <ArrowRight size={14} />
           </a>
         </div>
       ))}

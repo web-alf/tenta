@@ -1,12 +1,15 @@
 ---
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 import { getCollection } from 'astro:content';
 const faqs = await getCollection('faqs');
 const sorted = faqs.sort((a, b) => Number(a.id) - Number(b.id));
 ---
 <section id="faq">
   <div class="container" style="max-width:820px;">
-    <h2 class="section-title">FAQ</h2>
-    <p class="section-sub" style="margin-bottom:32px;">Pertanyaan yang sering kami terima.</p>
+    <h2 class="section-title">{t('faq.title')}</h2>
+    <p class="section-sub" style="margin-bottom:32px;">{t('faq.sub')}</p>
     <div style="display:flex;flex-direction:column;gap:12px;">
       {sorted.map((f, i) => (
         <details class="faq-item" open={i === 0}>

@@ -1,5 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const tr = useT(lang);
 
 const allCases = await getCollection('caseStudies');
 const cases = allCases
@@ -8,8 +11,8 @@ const cases = allCases
 ---
 <section style="background:var(--bg-warm);">
   <div class="container">
-    <h2 class="section-title">Partner Pilihan</h2>
-    <p class="section-sub" style="margin-bottom:40px;">Brand &amp; partner yang sudah tumbuh bareng kami.</p>
+    <h2 class="section-title">{tr('cs.title')}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{tr('cs.sub')}</p>
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
       {cases.map(c => (
         <div class="card reveal cs-card" style="display:flex;flex-direction:column;gap:14px;padding:0;overflow:hidden;">

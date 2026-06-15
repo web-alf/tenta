@@ -1,7 +1,10 @@
 ---
 import ArrowRight from '../../icons/ArrowRight.astro';
+import { getLang, useT } from '@i18n/utils';
 interface Props { eyebrow: string; title: string; titleAccent: string; desc: string; ctaText?: string; }
-const { eyebrow, title, titleAccent, desc, ctaText = 'Konsultasi Gratis' } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const { eyebrow, title, titleAccent, desc, ctaText = t('svc.hero.cta') } = Astro.props;
 ---
 <section style="padding-top:56px;padding-bottom:56px;background:var(--bg-warm);position:relative;overflow:hidden;">
   <div class="container" style="display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;">

@@ -1,37 +1,50 @@
 ---
 import ArrowRight from '@components/icons/ArrowRight.astro';
+import { getLang, useT } from '@i18n/utils';
 
 interface Props {
   platform: 'meta' | 'google';
   heading?: string;
   sub?: string;
 }
-const { platform, heading = 'Ajukan Akun Whitelist', sub = 'Isi data singkat, tim kami hubungi kamu.' } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const { platform, heading = t('form.heading'), sub = t('form.sub') } = Astro.props;
 const formId = `shortform-${platform}`;
 ---
 <section aria-labelledby="shortform-heading">
   <div class="container" style="max-width:620px;">
     <h2 id="shortform-heading" class="section-title">{heading}</h2>
     <p class="section-sub" style="margin-bottom:32px;">{sub}</p>
-    <form id={formId} class="shortform" data-platform={platform} novalidate>
+    <form
+      id={formId}
+      class="shortform"
+      data-platform={platform}
+      data-lang={lang}
+      data-msg-sent={t('form.sent')}
+      data-err-nama={t('form.err.nama')}
+      data-err-wa={t('form.err.wa')}
+      data-err-inactive={t('form.err.inactive')}
+      novalidate
+    >
       <input type="text" name="website" tabindex="-1" autocomplete="off" class="sf-hp" aria-hidden="true" />
       <div class="sf-field">
-        <label for={`${formId}-nama`}>Nama Lengkap</label>
-        <input id={`${formId}-nama`} type="text" name="nama" placeholder="Nama Anda" required maxlength="100" />
+        <label for={`${formId}-nama`}>{t('form.nama')}</label>
+        <input id={`${formId}-nama`} type="text" name="nama" placeholder={t('form.nama.ph')} required maxlength="100" />
       </div>
       <div class="sf-field">
-        <label for={`${formId}-wa`}>Nomor WhatsApp</label>
-        <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder="0812-xxxx-xxxx" required maxlength="20" />
+        <label for={`${formId}-wa`}>{t('form.wa')}</label>
+        <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder={t('form.wa.ph')} required maxlength="20" />
       </div>
       <div class="sf-field">
-        <label for={`${formId}-ket`}>Keterangan Project Singkat</label>
-        <textarea id={`${formId}-ket`} name="keterangan" placeholder="Produk/jasa, target, dan kebutuhan akun..." rows="3" maxlength="500"></textarea>
+        <label for={`${formId}-ket`}>{t('form.ket')}</label>
+        <textarea id={`${formId}-ket`} name="keterangan" placeholder={t('form.ket.ph')} rows="3" maxlength="500"></textarea>
       </div>
       <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
-        <span class="sf-btn-label">Kirim <ArrowRight size={14} /></span>
-        <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> Mengirim…</span>
+        <span class="sf-btn-label">{t('form.kirim')} <ArrowRight size={14} /></span>
+        <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> {t('form.mengirim')}</span>
       </button>
-      <p class="sf-sent" role="status" aria-live="polite" hidden>Terkirim! Mengarahkan kamu ke WhatsApp…</p>
+      <p class="sf-sent" role="status" aria-live="polite" hidden>{t('form.sent')}</p>
       <p class="sf-err" role="alert" aria-live="assertive" hidden></p>
     </form>
   </div>
@@ -101,11 +114,17 @@ const formId = `shortform-${platform}`;
 
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
 
-  // Greeting WhatsApp disesuaikan per platform.
-  function waGreeting(platform: string, nama: string, ket: string): string {
+  // Greeting WhatsApp disesuaikan per platform + bahasa.
+  function waGreeting(platform: string, lang: string, nama: string, ket: string): string {
     const layanan = platform === 'google' ? 'Google Ads Whitelist'
                   : platform === 'meta'   ? 'Meta Ads Whitelist'
-                  : 'Sewa Akun Whitelist';
+                  : 'Whitelist';
+    if (lang === 'en') {
+      let m = `Hello Tentaklik! I'm ${nama}, I'd like to request a ${layanan} account.`;
+      if (ket) m += `\n\nNeeds: ${ket}`;
+      m += `\n\n(Sent via the ${layanan} form)`;
+      return m;
+    }
     let msg = `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.`;
     if (ket) msg += `\n\nKebutuhan: ${ket}`;
     msg += `\n\n(Dikirim via form ${layanan})`;
@@ -117,6 +136,12 @@ const formId = `shortform-${platform}`;
     const err  = form.querySelector<HTMLElement>('.sf-err');
     const btn  = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const platform = form.getAttribute('data-platform') ?? '';
+    const lang = form.getAttribute('data-lang') ?? 'id';
+    const MSG = {
+      nama: form.getAttribute('data-err-nama') ?? 'Nama tidak valid (2–100 karakter).',
+      wa: form.getAttribute('data-err-wa') ?? 'Nomor WhatsApp tidak valid.',
+      inactive: form.getAttribute('data-err-inactive') ?? 'Form belum aktif.',
+    };
     const showErr = (t: string) => { if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { if (err) err.hidden = true; }, 5000); } };
     let busy = false;
 
@@ -135,11 +160,11 @@ const formId = `shortform-${platform}`;
       const nama = clip(String(fd.get('nama') ?? ''), 100);
       const wa   = clip(String(fd.get('whatsapp') ?? ''), 20);
       const ket  = clip(String(fd.get('keterangan') ?? ''), 500);
-      if (!NAME_RE.test(nama)) { showErr('Nama tidak valid (2–100 karakter).'); return; }
-      if (!PHONE_RE.test(wa))  { showErr('Nomor WhatsApp tidak valid.'); return; }
+      if (!NAME_RE.test(nama)) { showErr(MSG.nama); return; }
+      if (!PHONE_RE.test(wa))  { showErr(MSG.wa); return; }
 
       // Belum ada endpoint (URL masih placeholder) → jangan klaim sukses palsu.
-      if (!hasEndpoint) { showErr('Form belum aktif. Hubungi kami via WhatsApp untuk sementara.'); return; }
+      if (!hasEndpoint) { showErr(MSG.inactive); return; }
 
       setLoading(true);
       const params = new URLSearchParams({
@@ -149,7 +174,7 @@ const formId = `shortform-${platform}`;
 
       // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
       const waUrl = WA_NUMBER
-        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, nama, ket))}`
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, ket))}`
         : '';
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
         .catch(() => {})

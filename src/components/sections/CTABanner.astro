@@ -1,14 +1,18 @@
 ---
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 import ArrowRight from '../icons/ArrowRight.astro';
 ---
 <section style="padding-top:0;">
   <div class="container">
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;">
-        <h3>Butuh strategi yang cocok buat bisnis Anda?</h3>
-        <p style="margin-top:8px;opacity:0.95;font-size:15px;">Diskusi gratis untuk menemukan kombinasi website, ads, dan funnel yang paling efektif.</p>
+        <h3>{t('ctab.title')}</h3>
+        <p style="margin-top:8px;opacity:0.95;font-size:15px;">{t('ctab.desc')}</p>
       </div>
-      <a href="/kontak" class="btn btn-ghost">Jadwalkan Konsultasi <ArrowRight size={14} /></a>
+      <a href={L('/kontak')} class="btn btn-ghost">{t('ctab.btn')} <ArrowRight size={14} /></a>
     </div>
   </div>
 </section>

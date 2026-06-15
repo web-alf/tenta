@@ -1,15 +1,19 @@
 ---
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+
 const steps = [
-  { n: '01', title: 'Audit',     icon: '🔍', desc: 'Kami pelajari bisnis, target market, dan kondisi channel saat ini.' },
-  { n: '02', title: 'Strategi',  icon: '📋', desc: 'Susun arah kerja yang jelas, prioritas channel, dan KPI utama.' },
-  { n: '03', title: 'Eksekusi',  icon: '🚀', desc: 'Website, ads, creative, dan tracking dijalankan secara rapi.' },
-  { n: '04', title: 'Optimasi',  icon: '📊', desc: 'Evaluasi data, tingkatkan performa, dan scale yang sudah terbukti.' },
+  { n: '01', icon: '🔍', title: t('proc.1.t'), desc: t('proc.1.d') },
+  { n: '02', icon: '📋', title: t('proc.2.t'), desc: t('proc.2.d') },
+  { n: '03', icon: '🚀', title: t('proc.3.t'), desc: t('proc.3.d') },
+  { n: '04', icon: '📊', title: t('proc.4.t'), desc: t('proc.4.d') },
 ];
 ---
 <section style="background:var(--bg-warm);">
   <div class="container">
-    <h2 class="section-title">Cara Kami Bekerja</h2>
-    <p class="section-sub" style="margin-bottom:40px;">Pendekatan terstruktur, bukan sekadar bikin asal jalan.</p>
+    <h2 class="section-title">{t('proc.title')}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{t('proc.sub')}</p>
     <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;">
       {steps.map(s => (
         <div class="process-step reveal">

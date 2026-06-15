@@ -1,0 +1,255 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+import WhatsApp from '@components/icons/WhatsApp.astro';
+import Email from '@components/icons/Email.astro';
+import Pin from '@components/icons/Pin.astro';
+import { site, waLink } from '@data/site';
+import { contactPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
+
+const url = `${site.url}/kontak`;
+const jsonLd = [
+  contactPageJsonLd({ url }),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Kontak', url },
+  ]),
+];
+---
+<BaseLayout
+  title="Kontak Tentaklik — Konsultasi Digital Marketing Gratis"
+  description="Hubungi Tentaklik untuk konsultasi gratis jasa pembuatan website, Google Ads, Meta Ads & digital marketing di Semarang. Isi form atau WhatsApp — kami balas dalam 1×24 jam kerja."
+  active="kontak"
+  jsonLd={jsonLd}
+  keywords={['kontak tentaklik', 'konsultasi digital marketing gratis', 'whatsapp tentaklik', 'agensi digital marketing semarang kontak']}
+>
+  <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
+    <div class="container" style="text-align:center;">
+      <span class="eyebrow">Hubungi Kami</span>
+      <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
+        Yuk ngobrol soal <span style="color:var(--orange-500);">bisnis Anda</span>.
+      </h1>
+      <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
+        Isi form di bawah atau langsung WhatsApp kami. Kami balas dalam 1×24 jam kerja.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:32px;">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1.3fr;gap:40px;max-width:1080px;margin:0 auto;">
+
+      <!-- Left: contact info -->
+      <div>
+        <h3 style="font-size:22px;margin-bottom:18px;">Channel Lain</h3>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <a href={waLink('Halo Tentaklik, saya ingin konsultasi')} target="_blank" rel="noopener noreferrer"
+            class="contact-row">
+            <div class="contact-icon"><WhatsApp size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">WhatsApp</div>
+              <div style="font-size:15px;font-weight:600;">{site.phone}</div>
+            </div>
+          </a>
+          <a href={`mailto:${site.email}`} class="contact-row">
+            <div class="contact-icon"><Email size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">Email</div>
+              <div style="font-size:15px;font-weight:600;">{site.email}</div>
+            </div>
+          </a>
+          <div class="contact-row">
+            <div class="contact-icon"><Pin size={18} /></div>
+            <div>
+              <div style="font-size:12px;color:var(--ink-500);">Lokasi</div>
+              <div style="font-size:15px;font-weight:600;">{site.address}</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding:20px;background:var(--orange-50);border-radius:16px;border:1px solid var(--orange-200);">
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Jam Operasional</div>
+          <div style="font-size:13px;color:var(--ink-500);">Senin–Kamis · 08:00–16:00 WIB</div>
+          <div style="font-size:13px;color:var(--ink-500);">Jumat · 08:00–17:00 WIB</div>
+          <div style="font-size:13px;color:var(--ink-500);">Sabtu · 08:00–15:00 WIB</div>
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <form id="kontak-form" class="card reveal" style="padding:32px;display:flex;flex-direction:column;gap:16px;" autocomplete="on">
+        <div id="form-sent" style="display:none;padding:14px;background:#DCFCE7;color:#15803D;border-radius:10px;font-size:14px;font-weight:600;">
+          ✓ Pesan terkirim! Kami akan balas secepatnya.
+        </div>
+        <div id="form-error" style="display:none;padding:14px;background:#FEE2E2;color:#B91C1C;border-radius:10px;font-size:14px;font-weight:600;" role="alert" aria-live="polite"></div>
+
+        <!-- Honeypot field — hidden from humans, bots fill it -->
+        <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
+          <label for="kontak-website">Website (jangan diisi)</label>
+          <input id="kontak-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="kontak-name">Nama Lengkap *</label>
+            <input id="kontak-name" name="name" required type="text" autocomplete="name" placeholder="Nama Anda" maxlength="100" pattern="[\p{L}\p{M}\s.\-']{2,100}"/>
+          </div>
+          <div class="form-field">
+            <label for="kontak-email">Email *</label>
+            <input id="kontak-email" name="email" required type="email" autocomplete="email" placeholder="email@domain.com" maxlength="254"/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="kontak-phone">Nomor WhatsApp</label>
+          <input id="kontak-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx" maxlength="20" pattern="[0-9+\-\s()]{6,20}"/>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="form-field">
+            <label for="kontak-service">Layanan yang Diminati</label>
+            <select id="kontak-service" name="service">
+              <option value="Website Development">Website Development</option>
+              <option value="Google Ads">Google Ads</option>
+              <option value="Meta Ads">Meta Ads</option>
+              <option value="Konsultasi Digital Marketing">Konsultasi Digital Marketing</option>
+              <option value="Mix / Belum Tahu">Mix / Belum Tahu</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="kontak-budget">Estimasi Budget</label>
+            <select id="kontak-budget" name="budget">
+              <option value="Belum pasti" selected>Belum pasti</option>
+              <option value="< Rp 5jt">&lt; Rp 5jt</option>
+              <option value="Rp 5-10jt">Rp 5-10jt</option>
+              <option value="Rp 10-25jt">Rp 10-25jt</option>
+              <option value="Rp 25-50jt">Rp 25-50jt</option>
+              <option value="> Rp 50jt">&gt; Rp 50jt</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="kontak-message">Cerita Singkat tentang Project *</label>
+          <textarea id="kontak-message" name="message" required placeholder="Ceritakan kondisi bisnis, tujuan, dan apa yang sedang dicari..." maxlength="2000" minlength="10"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;padding:14px 28px;">
+          Kirim Pesan <ArrowRight size={14} />
+        </button>
+        <p style="font-size:12px;color:var(--ink-500);">Dengan submit, Anda setuju kami menghubungi Anda untuk follow-up. Data tidak akan dibagikan ke pihak ketiga.</p>
+      </form>
+    </div>
+  </section>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div style="flex:1;">
+          <h3>Lebih cepat lewat WhatsApp?</h3>
+          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Klik tombol di samping untuk langsung chat dengan tim kami.</p>
+        </div>
+        <a href={waLink('Halo Tentaklik')} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          Chat WhatsApp <ArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .contact-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: 12px;
+    transition: border-color 0.15s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+  .contact-row:hover { border-color: var(--orange-300); }
+  .contact-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--orange-100);
+    color: var(--orange-600);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+</style>
+
+<script>
+  const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285129992225';
+  const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwzhGx4t90EGczVo7eFgoIdVzU60qfCs-E5gtRgtTRmIqofJ0SruEduX_77Ka9O68Fo/exec';
+  const form = document.getElementById('kontak-form') as HTMLFormElement | null;
+  const sentMsg = document.getElementById('form-sent');
+  const errMsg = document.getElementById('form-error');
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+  const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
+  const MIN_MS_BEFORE_SUBMIT = 1500;
+  const MIN_MS_BETWEEN_SUBMITS = 4000;
+  const formLoadedAt = Date.now();
+  let lastSubmitAt = 0;
+
+  const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
+  function clip(v: string, n: number): string {
+    return v.replace(CTRL_RE, ' ').slice(0, n).trim();
+  }
+  function showErr(text: string) {
+    if (!errMsg) return;
+    errMsg.textContent = text;
+    errMsg.style.display = 'block';
+    setTimeout(() => { if (errMsg) errMsg.style.display = 'none'; }, 5000);
+  }
+
+  if (form && WA_NUMBER) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+
+      if (String(fd.get('website') ?? '').length > 0) return;
+      const now = Date.now();
+      if (now - formLoadedAt < MIN_MS_BEFORE_SUBMIT) { showErr('Tunggu sebentar sebelum mengirim.'); return; }
+      if (now - lastSubmitAt < MIN_MS_BETWEEN_SUBMITS) { showErr('Terlalu cepat — coba lagi sebentar.'); return; }
+
+      const name    = clip(String(fd.get('name')    ?? ''), 100);
+      const email   = clip(String(fd.get('email')   ?? ''), 254);
+      const phone   = clip(String(fd.get('phone')   ?? ''),  20);
+      const service = clip(String(fd.get('service') ?? ''), 100);
+      const budget  = clip(String(fd.get('budget')  ?? ''), 100);
+      const message = clip(String(fd.get('message') ?? ''), 2000);
+
+      if (!NAME_RE.test(name))   { showErr('Nama tidak valid (2–100 karakter huruf).'); return; }
+      if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
+      if (phone && !PHONE_RE.test(phone)) { showErr('Nomor WhatsApp tidak valid.'); return; }
+      if (message.length < 10)   { showErr('Pesan minimal 10 karakter.'); return; }
+
+      lastSubmitAt = now;
+
+      // Save to Google Spreadsheet via GET (fire-and-forget)
+      // GET dipakai karena POST ke Apps Script drop body saat 302 redirect
+      if (SHEET_URL) {
+        var params = new URLSearchParams({
+          nama: name, email: email, whatsapp: phone,
+          layanan: service, budget: budget,
+          pesan: message, source: window.location.href,
+        });
+        fetch(SHEET_URL + '?' + params.toString(), { mode: 'no-cors' }).catch(function(){});
+      }
+
+      const msg =
+        `Halo Tentaklik, saya tertarik diskusi:\n\n` +
+        `Nama: ${name}\n` +
+        `Email: ${email}\n` +
+        `WhatsApp: ${phone}\n` +
+        `Layanan: ${service}\n` +
+        `Budget: ${budget}\n\n` +
+        `Tentang project:\n${message}`;
+      window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
+      if (sentMsg) { sentMsg.style.display = 'flex'; setTimeout(() => { sentMsg.style.display = 'none'; }, 5000); }
+      form.reset();
+    });
+  }
+</script>
+
