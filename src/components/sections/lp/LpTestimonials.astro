@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+
+const allTesti = await getCollection('testimonials');
+const items = allTesti.slice(0, 3);
+---
+<section style="background:var(--bg-warm);">
+  <div class="container" style="max-width:820px;">
+    <div class="lp-testi-grid">
+      {items.map((t) => (
+        <div class="lp-testi-card reveal">
+          <div class="lp-testi-stars" aria-label={`${t.data.stars} bintang`}>
+            {'★'.repeat(t.data.stars)}
+          </div>
+          <p class="lp-testi-text">"{t.data.text}"</p>
+          <div class="lp-testi-author">
+            <span class="lp-testi-avatar">{t.data.initials}</span>
+            <div>
+              <strong>{t.data.name}</strong>
+              <span class="lp-testi-role">{t.data.role}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .lp-testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .lp-testi-card {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-xl);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .lp-testi-stars { color: #FFB800; font-size: 16px; letter-spacing: 2px; }
+  .lp-testi-text { font-size: 14.5px; color: var(--ink-700); line-height: 1.6; margin: 0; font-style: italic; }
+  .lp-testi-author { display: flex; align-items: center; gap: 10px; margin-top: auto; }
+  .lp-testi-avatar {
+    width: 36px; height: 36px; border-radius: 999px;
+    background: var(--orange-200); color: var(--orange-800);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 14px; flex-shrink: 0;
+  }
+  .lp-testi-author strong { display: block; font-size: 14px; color: var(--ink-900); }
+  .lp-testi-role { font-size: 12px; color: var(--ink-500); }
+  @media (max-width: 760px) {
+    .lp-testi-grid { grid-template-columns: 1fr; }
+  }
+</style>

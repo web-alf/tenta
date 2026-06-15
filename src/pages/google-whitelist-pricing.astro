@@ -1,0 +1,45 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import LpHero from '@components/sections/lp/LpHero.astro';
+import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import { GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
+import { SEWA_PLANS } from '@data/sewa-akun';
+import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site, waLink } from '@data/site';
+import { getLang } from '@i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const d = GOOGLE_LP[lang];
+const url = `${site.url}/google-whitelist-pricing`;
+const jsonLd = [
+  serviceJsonLd({ name: d.seo.title, description: d.seo.description, url, serviceType: 'Google Ads Whitelist' }),
+  breadcrumbJsonLd([
+    { name: lang === 'en' ? 'Home' : 'Beranda', url: site.url },
+    { name: lang === 'en' ? 'Account Rental' : 'Sewa Akun', url: `${site.url}/layanan/sewa-akun` },
+    { name: 'Google Whitelist Pricing', url },
+  ]),
+];
+---
+<BaseLayout
+  title={`${d.seo.title} — Pricing`}
+  description={d.seo.description}
+  active="layanan"
+  jsonLd={jsonLd}
+  keywords={d.keywords}
+>
+  <LpHero
+    eyebrow={d.hero.eyebrow}
+    title={d.hero.title}
+    titleAccent={d.hero.titleAccent}
+    desc={d.hero.desc}
+    ctaText={lang === 'en' ? 'See Pricing' : 'Lihat Harga'}
+    ctaHref="#pricing"
+  />
+  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  <PricingSection plans={SEWA_PLANS} service="Google Ads Whitelist" />
+  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
+  <ServiceCTA />
+</BaseLayout>
