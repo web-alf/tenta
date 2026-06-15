@@ -8,6 +8,7 @@ import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
 import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
+import { getLang, useT } from '@i18n/utils';
 
 interface Props {
   data: {
@@ -26,6 +27,8 @@ interface Props {
 }
 
 const { data, slug } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 
 const serviceImages: Record<string, string> = {
   web:    '/assets/services/webdev.png',
@@ -80,7 +83,7 @@ const jsonLd = [
       </picture>
     </div>
   </ServiceHero>
-  <FeaturesGrid title="Apa yang Kami Bawa" sub="Hal-hal kecil yang bikin hasil beda." items={data.features} />
+  <FeaturesGrid title={t('svc.features.title')} sub={t('svc.features.sub')} items={data.features} />
   <PricingSection plans={data.plans} service={data.eyebrow} />
   <ServiceProcess steps={data.process} />
   <ServiceFAQ items={data.faqs} />

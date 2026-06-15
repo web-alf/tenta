@@ -1,4 +1,5 @@
 ---
+import { getLang, useT } from '@i18n/utils';
 import { waLink } from '@data/site';
 
 interface Plan {
@@ -16,11 +17,13 @@ interface Props {
 }
 
 const { plans, service } = Astro.props;
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 ---
 <section id="pricing" style="background:var(--bg-warm);scroll-margin-top:90px;">
   <div class="container">
-    <h2 class="section-title">Pilih Paket yang Sesuai</h2>
-    <p class="section-sub" style="margin-bottom:48px;">Transparan, no hidden fee. Bisa custom sesuai kebutuhan.</p>
+    <h2 class="section-title">{t('svc.pricing.title')}</h2>
+    <p class="section-sub" style="margin-bottom:48px;">{t('svc.pricing.sub')}</p>
     <div class="pricing-grid">
       {plans.map((p: Plan) => (
         <div class={`pricing-card reveal ${p.featured ? 'featured' : ''}`}>
@@ -38,8 +41,8 @@ const { plans, service } = Astro.props;
             rel="noopener noreferrer"
             class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`}
             style="justify-content:center;margin-top:auto;"
-           
-          >Beli Paket</a>
+
+          >{t('svc.pricing.btn')}</a>
         </div>
       ))}
     </div>
