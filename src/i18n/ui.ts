@@ -1,10 +1,10 @@
 // src/i18n/ui.ts
-// Kamus string UI non-konten (nav, tombol, label form, heading generik).
-// Konten halaman panjang (hero/benefit/FAQ) ada di src/data/* keyed per bahasa.
+// Kamus string UI non-konten (nav, tombol, heading section, label form, page chrome).
+// Konten panjang (hero/benefit/FAQ/legal) ada di src/data/* & content collections keyed per bahasa.
 
 export const UI = {
   id: {
-    // Navigasi
+    // ── Navigasi ──
     'nav.beranda': 'Beranda',
     'nav.tentang': 'Tentang',
     'nav.layanan': 'Layanan',
@@ -15,11 +15,13 @@ export const UI = {
     'nav.lang': 'Bahasa',
     'nav.lang.id': 'Indonesia',
     'nav.lang.en': 'English',
-    // Layanan dropdown
+    'nav.openMenu': 'Buka menu',
+    'nav.closeMenu': 'Tutup menu',
+    // ── Layanan dropdown ──
     'svc.website': 'Website Development',
     'svc.sewaAkun': 'Sewa Akun',
     'svc.konsultasi': 'Konsultasi Digital Marketing',
-    // Form shortform
+    // ── Shortform LP ──
     'form.nama': 'Nama Lengkap',
     'form.nama.ph': 'Nama Anda',
     'form.wa': 'Nomor WhatsApp',
@@ -34,9 +36,107 @@ export const UI = {
     'form.err.inactive': 'Form belum aktif. Hubungi kami via WhatsApp untuk sementara.',
     'form.heading': 'Ajukan Akun Whitelist',
     'form.sub': 'Isi data singkat, tim kami hubungi kamu.',
+    // ── Footer ──
+    'footer.layanan': 'Layanan',
+    'footer.halaman': 'Halaman',
+    'footer.kontak': 'Kontak',
+    'footer.tentang': 'Tentang',
+    'footer.partner': 'Partner',
+    'footer.faq': 'FAQ',
+    'footer.ketentuan': 'Ketentuan',
+    'footer.metaWhitelist': 'Meta Whitelist',
+    'footer.googleWhitelist': 'Google Whitelist',
+    'footer.officialPartner': 'Official Partner',
+    'footer.terms': 'Ketentuan Layanan',
+    'footer.disclaimer': 'Disclaimer',
+    // ── Home: Hero ──
+    'hero.badge': 'Google & Meta Trusted Partner',
+    'hero.title1': 'Buat Bisnis Kamu',
+    'hero.titleAccent': '10X Lebih Maju',
+    'hero.title2': 'Bersama TENTA',
+    'hero.desc': 'Dunia bisnis bergerak cepat ke digital. Kami bantu kamu beradaptasi dengan strategi marketing terukur — dari website, iklan, sampai funnel yang menghasilkan.',
+    'hero.cta': 'Konsultasi Sekarang',
+    'hero.proof': '1.720+ klien puas',
+    'hero.f1.t': 'Strategi Terukur', 'hero.f1.d': 'Berbasis data, bukan tebakan',
+    'hero.f2.t': 'Whitelist Premium', 'hero.f2.d': 'Akun stabil anti banned',
+    'hero.f3.t': 'Reporting Transparan', 'hero.f3.d': 'Angka jujur tiap minggu',
+    'hero.f4.t': 'Dedicated Support', 'hero.f4.d': 'Tim responsif, bukan bot',
+    // ── Home: ServicesGrid ──
+    'svcgrid.title': 'Layanan Utama',
+    'svcgrid.sub': 'Solusi inti untuk bantu bisnis kamu tampil lebih profesional dan hasilkan leads.',
+    'svcgrid.website.desc': 'Landing page, company profile, dan website yang fokus pada konversi.',
+    'svcgrid.sewaAkun.desc': 'Akun iklan whitelist Google & Meta — limit tanpa batas, tanpa PPN, anti random banned.',
+    'svcgrid.konsultasi.desc': 'Audit funnel, strategi channel, dan rekomendasi prioritas yang actionable.',
+    'svcgrid.cta': 'Lihat Layanan',
+    // ── Home: CTABanner ──
+    'ctab.title': 'Butuh strategi yang cocok buat bisnis Anda?',
+    'ctab.desc': 'Diskusi gratis untuk menemukan kombinasi website, ads, dan funnel yang paling efektif.',
+    'ctab.btn': 'Jadwalkan Konsultasi',
+    // ── Home: Process ──
+    'proc.title': 'Cara Kami Bekerja',
+    'proc.sub': 'Pendekatan terstruktur, bukan sekadar bikin asal jalan.',
+    'proc.1.t': 'Audit', 'proc.1.d': 'Pahami bisnis, kompetitor, dan posisi kamu sekarang.',
+    'proc.2.t': 'Strategi', 'proc.2.d': 'Susun rencana channel, budget, dan target yang realistis.',
+    'proc.3.t': 'Eksekusi', 'proc.3.d': 'Bangun aset, jalankan campaign, pantau performa.',
+    'proc.4.t': 'Optimasi', 'proc.4.d': 'Iterasi mingguan — scale yang menang, cut yang loss.',
+    // ── Home: Testimonials / CaseStudies / FAQ ──
+    'testi.title': 'Apa Kata Klien',
+    'testi.sub': 'Hasil nyata dari kerjasama bareng tim Tentaklik.',
+    'cs.title': 'Partner Pilihan',
+    'cs.sub': 'Brand & partner yang sudah tumbuh bareng kami.',
+    'faq.title': 'FAQ',
+    'faq.sub': 'Pertanyaan yang sering kami terima.',
+    // ── Home: FinalCTA ──
+    'fcta.title': 'Siap mempercepat pertumbuhan bisnis Anda?',
+    'fcta.desc': 'Konsultasi gratis untuk mengidentifikasi peluang utama dan langkah berikutnya.',
+    'fcta.btn': 'Chat Kami Sekarang',
+    // ── Service components ──
+    'svc.features.title': 'Apa yang Kami Bawa',
+    'svc.features.sub': 'Hal-hal kecil yang bikin hasil beda.',
+    'svc.pricing.title': 'Pilih Paket yang Sesuai',
+    'svc.pricing.sub': 'Transparan, no hidden fee. Bisa custom sesuai kebutuhan.',
+    'svc.pricing.btn': 'Beli Paket',
+    'svc.process.title': 'Proses Kerja',
+    'svc.process.sub': 'Step-by-step yang udah teruji.',
+    'svc.faq.title': 'Pertanyaan Umum',
+    'svc.faq.sub': 'Hal yang sering ditanyakan tentang layanan ini.',
+    'svc.cta.title': 'Siap mulai project Anda?',
+    'svc.cta.desc': 'Konsultasi gratis 30 menit untuk memetakan kebutuhan dan estimasi.',
+    'svc.cta.btn': 'Chat Kami Sekarang',
+    'svc.hero.cta': 'Konsultasi Gratis',
+    // ── Sewa Akun page chrome ──
+    'sewa.avail.title': 'Layanan yang Tersedia',
+    'sewa.avail.sub': 'Dua jalur akun premium — pilih sesuai platform iklan Anda.',
+    // ── Legal pages chrome (terms/disclaimer) ──
+    'legal.toc': 'Daftar Isi',
+    'legal.updated': 'Terakhir diperbarui:',
+    'crumb.beranda': 'Beranda',
+    'crumb.ketentuan': 'Ketentuan Layanan',
+    'crumb.disclaimer': 'Disclaimer',
+    // ── Partner page ──
+    'partner.eyebrow': 'Partner',
+    'partner.title1': 'Partner yang tumbuh, bukan sekadar',
+    'partner.titleAccent': 'cherry-picked',
+    'partner.lede': 'Brand & partner yang kami dampingi — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya.',
+    'partner.filter.all': 'Semua',
+    'partner.cta.title': 'Mau jadi partner selanjutnya?',
+    'partner.cta.desc': 'Konsultasi gratis untuk lihat strategi yang cocok untuk bisnis Anda.',
+    'partner.cta.btn': 'Mulai Sekarang',
+    'partner.back': '← Semua Partner',
+    'partner.detail.cta.title': 'Mau hasil serupa untuk bisnis Anda?',
+    'partner.detail.cta.desc': 'Konsultasi gratis untuk evaluasi peluang dan langkah berikutnya.',
+    'partner.detail.cta.btn': 'Konsultasi Gratis',
+    // ── 404 ──
+    '404.title': 'Oops! Halaman ini menyelam terlalu dalam.',
+    '404.desc': 'URL yang kamu cari nggak ketemu. Mungkin sudah pindah atau salah ketik.',
+    '404.home': 'Balik ke Beranda',
+    '404.services': 'Lihat Layanan',
+    '404.suggest': 'Atau mungkin kamu mau ke sini?',
+    '404.seoTitle': '404 — Halaman tidak ditemukan',
+    '404.seoDesc': 'Halaman yang kamu cari tidak ada. Yuk balik ke beranda.',
   },
   en: {
-    // Navigation
+    // ── Navigation ──
     'nav.beranda': 'Home',
     'nav.tentang': 'About',
     'nav.layanan': 'Services',
@@ -47,11 +147,13 @@ export const UI = {
     'nav.lang': 'Language',
     'nav.lang.id': 'Indonesia',
     'nav.lang.en': 'English',
-    // Services dropdown
+    'nav.openMenu': 'Open menu',
+    'nav.closeMenu': 'Close menu',
+    // ── Services dropdown ──
     'svc.website': 'Website Development',
     'svc.sewaAkun': 'Account Rental',
     'svc.konsultasi': 'Digital Marketing Consulting',
-    // Shortform
+    // ── Shortform LP ──
     'form.nama': 'Full Name',
     'form.nama.ph': 'Your name',
     'form.wa': 'WhatsApp Number',
@@ -66,6 +168,104 @@ export const UI = {
     'form.err.inactive': 'Form not active yet. Please contact us via WhatsApp for now.',
     'form.heading': 'Request a Whitelist Account',
     'form.sub': 'Fill in a few details and our team will reach out.',
+    // ── Footer ──
+    'footer.layanan': 'Services',
+    'footer.halaman': 'Pages',
+    'footer.kontak': 'Contact',
+    'footer.tentang': 'About',
+    'footer.partner': 'Partners',
+    'footer.faq': 'FAQ',
+    'footer.ketentuan': 'Terms',
+    'footer.metaWhitelist': 'Meta Whitelist',
+    'footer.googleWhitelist': 'Google Whitelist',
+    'footer.officialPartner': 'Official Partner',
+    'footer.terms': 'Terms of Service',
+    'footer.disclaimer': 'Disclaimer',
+    // ── Home: Hero ──
+    'hero.badge': 'Google & Meta Trusted Partner',
+    'hero.title1': 'Grow Your Business',
+    'hero.titleAccent': '10X Faster',
+    'hero.title2': 'with TENTA',
+    'hero.desc': 'Business is moving fast to digital. We help you adapt with measurable marketing strategy — from websites and ads to funnels that convert.',
+    'hero.cta': 'Get a Consultation',
+    'hero.proof': '1,720+ happy clients',
+    'hero.f1.t': 'Measured Strategy', 'hero.f1.d': 'Data-driven, not guesswork',
+    'hero.f2.t': 'Premium Whitelist', 'hero.f2.d': 'Stable, ban-resistant accounts',
+    'hero.f3.t': 'Transparent Reporting', 'hero.f3.d': 'Honest numbers every week',
+    'hero.f4.t': 'Dedicated Support', 'hero.f4.d': 'A responsive team, not a bot',
+    // ── Home: ServicesGrid ──
+    'svcgrid.title': 'Core Services',
+    'svcgrid.sub': 'Core solutions to make your business look more professional and generate leads.',
+    'svcgrid.website.desc': 'Landing pages, company profiles, and conversion-focused websites.',
+    'svcgrid.sewaAkun.desc': 'Google & Meta whitelist ad accounts — no spending limit, no VAT, anti random ban.',
+    'svcgrid.konsultasi.desc': 'Funnel audit, channel strategy, and actionable priority recommendations.',
+    'svcgrid.cta': 'View Service',
+    // ── Home: CTABanner ──
+    'ctab.title': 'Need a strategy that fits your business?',
+    'ctab.desc': 'A free discussion to find the most effective mix of website, ads, and funnel.',
+    'ctab.btn': 'Schedule a Consultation',
+    // ── Home: Process ──
+    'proc.title': 'How We Work',
+    'proc.sub': 'A structured approach, not just winging it.',
+    'proc.1.t': 'Audit', 'proc.1.d': 'Understand your business, competitors, and current position.',
+    'proc.2.t': 'Strategy', 'proc.2.d': 'Build a realistic plan for channels, budget, and targets.',
+    'proc.3.t': 'Execution', 'proc.3.d': 'Build assets, launch campaigns, monitor performance.',
+    'proc.4.t': 'Optimization', 'proc.4.d': 'Weekly iteration — scale winners, cut losers.',
+    // ── Home: Testimonials / CaseStudies / FAQ ──
+    'testi.title': 'What Clients Say',
+    'testi.sub': 'Real results from working with the Tentaklik team.',
+    'cs.title': 'Featured Partners',
+    'cs.sub': 'Brands & partners that have grown with us.',
+    'faq.title': 'FAQ',
+    'faq.sub': 'Questions we often get.',
+    // ── Home: FinalCTA ──
+    'fcta.title': 'Ready to accelerate your business growth?',
+    'fcta.desc': 'A free consultation to identify key opportunities and next steps.',
+    'fcta.btn': 'Chat With Us Now',
+    // ── Service components ──
+    'svc.features.title': 'What We Bring',
+    'svc.features.sub': 'The small things that make the results different.',
+    'svc.pricing.title': 'Choose the Right Plan',
+    'svc.pricing.sub': 'Transparent, no hidden fees. Customizable to your needs.',
+    'svc.pricing.btn': 'Buy Plan',
+    'svc.process.title': 'Work Process',
+    'svc.process.sub': 'A proven step-by-step.',
+    'svc.faq.title': 'Frequently Asked Questions',
+    'svc.faq.sub': 'Common questions about this service.',
+    'svc.cta.title': 'Ready to start your project?',
+    'svc.cta.desc': 'A free 30-minute consultation to map out your needs and estimate.',
+    'svc.cta.btn': 'Chat With Us Now',
+    'svc.hero.cta': 'Free Consultation',
+    // ── Account Rental page chrome ──
+    'sewa.avail.title': 'Available Services',
+    'sewa.avail.sub': 'Two premium account paths — pick the one for your ad platform.',
+    // ── Legal pages chrome ──
+    'legal.toc': 'Table of Contents',
+    'legal.updated': 'Last updated:',
+    'crumb.beranda': 'Home',
+    'crumb.ketentuan': 'Terms of Service',
+    'crumb.disclaimer': 'Disclaimer',
+    // ── Partner page ──
+    'partner.eyebrow': 'Partners',
+    'partner.title1': 'Partners who grow, not just',
+    'partner.titleAccent': 'cherry-picked',
+    'partner.lede': 'Brands & partners we’ve supported — real numbers, clear periods, and the strategy behind them.',
+    'partner.filter.all': 'All',
+    'partner.cta.title': 'Want to be the next partner?',
+    'partner.cta.desc': 'A free consultation to see the strategy that fits your business.',
+    'partner.cta.btn': 'Start Now',
+    'partner.back': '← All Partners',
+    'partner.detail.cta.title': 'Want similar results for your business?',
+    'partner.detail.cta.desc': 'A free consultation to evaluate the opportunity and next steps.',
+    'partner.detail.cta.btn': 'Free Consultation',
+    // ── 404 ──
+    '404.title': 'Oops! This page dove too deep.',
+    '404.desc': 'The URL you’re looking for wasn’t found. It may have moved or been mistyped.',
+    '404.home': 'Back to Home',
+    '404.services': 'View Services',
+    '404.suggest': 'Or maybe you’d like to go here?',
+    '404.seoTitle': '404 — Page not found',
+    '404.seoDesc': 'The page you’re looking for doesn’t exist. Let’s head back home.',
   },
 } as const;
 
