@@ -1,14 +1,18 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 ---
 <section id="final-cta" style="padding-bottom:24px;scroll-margin-top:90px;">
   <div class="container">
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;position:relative;z-index:1;">
-        <h3>Siap mempercepat pertumbuhan bisnis Anda?</h3>
-        <p style="margin-top:8px;font-size:15px;opacity:0.95;">Konsultasi gratis untuk mengidentifikasi peluang utama dan langkah berikutnya.</p>
+        <h3>{t('fcta.title')}</h3>
+        <p style="margin-top:8px;font-size:15px;opacity:0.95;">{t('fcta.desc')}</p>
       </div>
-      <a href="/kontak" class="btn btn-ghost">Chat Kami Sekarang <ArrowRight size={14} /></a>
+      <a href={L('/kontak')} class="btn btn-ghost">{t('fcta.btn')} <ArrowRight size={14} /></a>
     </div>
   </div>
 </section>

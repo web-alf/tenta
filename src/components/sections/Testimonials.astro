@@ -1,4 +1,7 @@
 ---
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const tr = useT(lang);
 import Star from '../icons/Star.astro';
 import { getCollection } from 'astro:content';
 
@@ -6,8 +9,8 @@ const testis = await getCollection('testimonials');
 ---
 <section>
   <div class="container">
-    <h2 class="section-title">Apa Kata Klien</h2>
-    <p class="section-sub" style="margin-bottom:40px;">Hasil nyata dari kerjasama bareng tim Tentaklik.</p>
+    <h2 class="section-title">{tr('testi.title')}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{tr('testi.sub')}</p>
     <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
       {testis.map(t => (
         <div class="testi-card reveal">

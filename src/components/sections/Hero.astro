@@ -1,12 +1,16 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
 import Star from '../icons/Star.astro';
+import { getLang, useT } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
+const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 
 const features = [
-  { icon: 'target',  title: 'Strategi Terukur',     sub: 'Setiap rupiah punya tujuan dan KPI yang jelas.' },
-  { icon: 'shield',  title: 'Whitelist Premium',    sub: 'Akun aman, jangkauan luas, performa stabil.' },
-  { icon: 'chart',   title: 'Reporting Transparan', sub: 'Dashboard real-time tanpa angka yang ditutupi.' },
-  { icon: 'headset', title: 'Dedicated Support',    sub: 'Tim yang responsif dan paham bisnismu.' },
+  { icon: 'target',  title: t('hero.f1.t'), sub: t('hero.f1.d') },
+  { icon: 'shield',  title: t('hero.f2.t'), sub: t('hero.f2.d') },
+  { icon: 'chart',   title: t('hero.f3.t'), sub: t('hero.f3.d') },
+  { icon: 'headset', title: t('hero.f4.t'), sub: t('hero.f4.d') },
 ];
 ---
 <section class="hero-wrap" style="padding-top:40px;padding-bottom:48px;position:relative;overflow:hidden;">
@@ -20,20 +24,18 @@ const features = [
         <span style="width:22px;height:22px;border-radius:6px;background:var(--orange-500);display:inline-flex;align-items:center;justify-content:center;">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" fill="white"/><path d="M9 12l2 2 4-4" stroke="var(--orange-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </span>
-        Google &amp; Meta Trusted Partner
+        {t('hero.badge')}
       </div>
       <h1 class="hero-title" style="font-size:44px;line-height:1.15;margin-top:22px;margin-bottom:20px;letter-spacing:-0.015em;">
-        Buat Bisnis Kamu 10X Lebih<br/>
-        Maju Bersama <span style="color:var(--orange-500);">TENTA</span>
+        {t('hero.title1')} <span style="color:var(--orange-500);">{t('hero.titleAccent')}</span><br/>
+        {t('hero.title2')}
       </h1>
       <p style="font-size:16px;color:var(--ink-500);max-width:540px;margin-bottom:32px;line-height:1.65;">
-        Perkembangan zaman bikin banyak bisnis jadi gak efektif lagi kalo dilakukan dengan cara konvensional.
-        <br/><br/>
-        Bisnis kamu bakal jauh lebih cepet tumbuh kalo mampu beradaptasi dan manfaatin media digital, jangan nunggu bangkrut dulu baru sadar. <strong style="color:var(--ink-900);">Perbaiki Sekarang Juga!</strong>
+        {t('hero.desc')}
       </p>
       <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:36px;align-items:center;">
         <a href="#final-cta" class="btn btn-wa" style="padding-inline:22px;">
-          Konsultasi Sekarang
+          {t('hero.cta')}
           <ArrowRight size={14} />
         </a>
         <div style="display:flex;align-items:center;gap:12px;">
@@ -42,7 +44,7 @@ const features = [
           </div>
           <div style="display:flex;flex-direction:column;">
             <div style="font-size:15px;font-weight:700;color:var(--ink-900);line-height:1.1;">4.9 / 5</div>
-            <div style="font-size:12.5px;color:var(--ink-500);margin-top:2px;">1.720+ klien puas</div>
+            <div style="font-size:12.5px;color:var(--ink-500);margin-top:2px;">{t('hero.proof')}</div>
           </div>
         </div>
       </div>
