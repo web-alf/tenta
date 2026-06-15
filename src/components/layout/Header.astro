@@ -235,12 +235,25 @@ const langOptions = [
     border-radius: var(--radius-lg);
     box-shadow: 0 12px 32px rgba(31,26,23,0.10), 0 2px 8px rgba(31,26,23,0.06);
     padding: 8px;
-    display: none;
+    display: flex;
     flex-direction: column;
     gap: 2px;
     z-index: 200;
+    /* Animasi buka/tutup: opacity + translate (individual transform,
+       tak bentrok dgn transform: translateX(-50%) untuk centering). */
+    opacity: 0;
+    visibility: hidden;
+    translate: 0 -6px;
+    transition: opacity 0.18s ease, translate 0.18s ease, visibility 0.18s;
   }
-  .nav-dropdown.open { display: flex; }
+  .nav-dropdown.open {
+    opacity: 1;
+    visibility: visible;
+    translate: 0 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav-dropdown { transition: none; translate: 0 0; }
+  }
   .nav-dropdown::before {
     content: "";
     position: absolute;
