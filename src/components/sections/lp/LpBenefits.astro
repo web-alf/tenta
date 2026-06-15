@@ -6,13 +6,14 @@ interface Props {
   items: string[];
 }
 const { heading, items } = Astro.props;
+function bold(s: string) { return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>'); }
 ---
 <section style="background:var(--bg-warm);" aria-labelledby="lp-benefit-heading">
   <div class="container" style="max-width:880px;">
     <h2 id="lp-benefit-heading" class="section-title">{heading}</h2>
     <ul class="lp-benefits" style="margin-top:36px;">
       {items.map((b) => (
-        <li><span class="lp-benefit-check" aria-hidden="true"><Check size={13} /></span>{b}</li>
+        <li><span class="lp-benefit-check" aria-hidden="true"><Check size={13} /></span><span set:html={bold(b)} /></li>
       ))}
     </ul>
   </div>

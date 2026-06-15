@@ -1,0 +1,61 @@
+---
+interface Props {
+  heading?: string;
+  sub?: string;
+  originalPrice?: string;
+  promoPrice?: string;
+}
+const {
+  heading = 'Ajukan Akun Whitelist',
+  sub = 'Isi data singkat, amankan akun Anda',
+  originalPrice = 'Rp200.000',
+  promoPrice = 'Rp50.000 / akun',
+} = Astro.props;
+---
+<div class="lp-promo-banner">
+  <h3 class="lp-promo-heading">{heading}</h3>
+  <p class="lp-promo-sub">{sub}</p>
+  <div class="lp-promo-price">
+    <span class="lp-promo-original">Biaya normal <s>{originalPrice}</s></span>
+    <span class="lp-promo-current">Promo akses <strong>{promoPrice}</strong></span>
+  </div>
+</div>
+
+<style>
+  .lp-promo-banner {
+    text-align: center;
+    padding: 28px 24px 20px;
+    max-width: 520px;
+    margin: 0 auto 8px;
+  }
+  .lp-promo-heading {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--ink-900);
+    margin: 0 0 6px;
+  }
+  .lp-promo-sub {
+    font-size: 14.5px;
+    color: var(--ink-500);
+    margin: 0 0 16px;
+  }
+  .lp-promo-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .lp-promo-original {
+    font-size: 14px;
+    color: var(--ink-400);
+  }
+  .lp-promo-original s {
+    text-decoration: line-through;
+    color: var(--ink-400);
+  }
+  .lp-promo-current {
+    font-size: 18px;
+    color: var(--orange-600);
+    font-weight: 700;
+  }
+</style>

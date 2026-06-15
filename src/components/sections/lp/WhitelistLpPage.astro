@@ -7,7 +7,8 @@ import LpProblem from '@components/sections/lp/LpProblem.astro';
 import LpBenefits from '@components/sections/lp/LpBenefits.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
-import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
+import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
+import LpPromoBanner from '@components/sections/lp/LpPromoBanner.astro';
 import LpShortForm from '@components/sections/lp/LpShortForm.astro';
 import { META_LP, GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
 import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
@@ -19,13 +20,15 @@ const { platform } = Astro.props;
 const lang = getLang(Astro.currentLocale);
 
 const d = (platform === 'google' ? GOOGLE_LP : META_LP)[lang];
-const CTA_HREF = lang === 'en' ? '/en/layanan/sewa-akun' : '/layanan/sewa-akun';
 const slug = platform === 'google' ? 'google-whitelist' : 'meta-whitelist';
 const path = lang === 'en' ? `/en/${slug}` : `/${slug}`;
 const url = `${site.url}${path}`;
 const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitelist';
 const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
 const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
+
+// Meta LP: header dihilangkan (bareHeader). Google LP: header tetap.
+const hideHeader = platform === 'meta';
 
 const jsonLd = [
   serviceJsonLd({
@@ -46,6 +49,7 @@ const jsonLd = [
   description={d.seo.description}
   active="layanan"
   bareLayout
+  bareHeader={hideHeader}
   jsonLd={jsonLd}
   keywords={d.keywords}
 >
@@ -55,12 +59,13 @@ const jsonLd = [
     titleAccent={d.hero.titleAccent}
     desc={d.hero.desc}
     ctaText={d.cta.btn}
-    ctaHref={CTA_HREF}
+    ctaHref={`#shortform-${platform}`}
   />
   <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
   <LpBenefits heading={d.benefitHeading} items={d.benefits} />
   <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
   <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
+  <LpTestimonials />
+  <LpPromoBanner />
   <LpShortForm platform={platform} />
-  <LpFinalCta title={d.cta.title} desc={d.cta.desc} btn={d.cta.btn} href={CTA_HREF} />
 </BaseLayout>

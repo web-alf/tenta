@@ -34,8 +34,9 @@ export const site = {
   ],
 
   social: {
-    instagram: 'https://www.instagram.com/tentaklikaja?igsh=eW1oa25pdHdtZ3Q0',
-    tiktok: 'https://www.tiktok.com/@digimarcore?_r=1&_t=ZS-95xdD3xnLTo',
+    youtube: 'https://www.youtube.com/@tentaklikaja',
+    instagram: 'https://www.instagram.com/tentaklikaja?igsh=cW5yMTZmZWtoaGw2',
+    tiktok: 'https://www.tiktok.com/@tentaklikaja',
     facebook: 'https://facebook.com/tentaklik',
     linkedin: 'https://linkedin.com/company/tentaklik',
     twitter: 'https://twitter.com/tentaklik',
@@ -44,7 +45,7 @@ export const site = {
 
   description: 'Agensi digital marketing Semarang untuk jasa pembuatan website, Google Ads, Meta Ads (Facebook & Instagram), dan konsultasi digital marketing untuk UMKM dan brand di Indonesia.',
   shortDescription: 'Agensi untuk website, Google Ads, Meta Ads, dan konsultasi digital marketing.',
-  footerTagline: 'Agensi digital marketing Semarang untuk jasa pembuatan website, sewa akun whitelist Google Ads & Meta Ads, dan konsultasi digital marketing untuk UMKM dan brand di Indonesia',
+  footerTagline: 'Penyedia solusi digital marketing terintegrasi yang menghadirkan akses akun whitelist Google Ads & Meta Ads premium, optimasi website, dan konsultasi bisnis untuk mendukung pertumbuhan eksponensial brand di pasar lintas negara',
 
   defaultOgImage: '/assets/kraken-hero.png',
   logoUrl: '/logo-full.png',

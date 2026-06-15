@@ -1,6 +1,7 @@
 ---
 import { getLang, useT } from '@i18n/utils';
 import TentaklikLogo from '../brand/TentaklikLogo.astro';
+import YouTube from '../icons/YouTube.astro';
 import Instagram from '../icons/Instagram.astro';
 import TikTok from '../icons/TikTok.astro';
 import WhatsApp from '../icons/WhatsApp.astro';
@@ -18,8 +19,9 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
       <div style="margin-bottom:14px;"><TentaklikLogo size={24} variant="white" /></div>
       <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.footerTagline}</p>
       <div style="display:flex;gap:12px;margin-top:18px;">
-        <a href={site.social.instagram} aria-label="Instagram" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Instagram size={16} /></a>
-        <a href={site.social.tiktok} aria-label="TikTok" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><TikTok size={16} /></a>
+        <a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><YouTube size={16} /></a>
+        <a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Instagram size={16} /></a>
+        <a href={site.social.tiktok} aria-label="TikTok" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><TikTok size={16} /></a>
       </div>
     </div>
     <div>
@@ -39,11 +41,11 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
     <div>
       <h4>{t('footer.halaman')}</h4>
       <ul>
+        <li><a href={L("/")}>{t('nav.beranda')}</a></li>
         <li><a href={L("/tentang")}>{t('footer.tentang')}</a></li>
         <li><a href={L("/partner")}>{t('footer.partner')}</a></li>
         <li><a href={L("/#faq")}>{t('footer.faq')}</a></li>
         <li><a href="https://mediawaktu.com" target="_blank" rel="noopener noreferrer">{t('nav.blog')} ↗</a></li>
-        <li><a href={L("/ketentuan")}>{t('footer.ketentuan')}</a></li>
       </ul>
     </div>
     <div>
