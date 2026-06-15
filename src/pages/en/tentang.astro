@@ -1,0 +1,222 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+import { aboutPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+const galeriImages = [
+  '/assets/galeri/1.jpg', '/assets/galeri/2.jpg', '/assets/galeri/3.jpg',
+  '/assets/galeri/4.jpg', '/assets/galeri/5.jpg', '/assets/galeri/6.jpg',
+  '/assets/galeri/7.jpg', '/assets/galeri/8.jpg',
+  '/assets/galeri/9.jpeg', '/assets/galeri/10.jpeg',
+];
+
+const values = [
+  { icon: '🎯', title: 'Hasil > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
+  { icon: '🔍', title: 'Transparan',         desc: 'Akun ads milik klien, data terbuka, fee jelas dari awal.' },
+  { icon: '🤝', title: 'Long-term Partner',  desc: 'Bukan vendor sekali pakai — kami investasi di growth Anda.' },
+];
+
+const team = [
+  { name: 'Endah W.',     role: 'Founder',            initials: 'EW' },
+  { name: 'Hanuf',        role: 'Lead Performance',   initials: 'HN' },
+  { name: 'Ibnu Fateeh',  role: 'Web Engineering',    initials: 'IF' },
+  { name: 'Dephi Jhons',  role: 'Creative Director',  initials: 'DJ' },
+];
+
+const url = `${site.url}/tentang`;
+const jsonLd = [
+  aboutPageJsonLd({ url }),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Tentang Kami', url },
+  ]),
+];
+---
+<BaseLayout
+  title="Tentang Tentaklik — Agensi Digital Marketing Semarang"
+  description="Tentaklik adalah agensi digital marketing Semarang yang fokus pada hasil nyata — jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi untuk UMKM dan brand di Indonesia."
+  active="tentang"
+  jsonLd={jsonLd}
+  keywords={['tentang tentaklik', 'agensi digital marketing semarang', 'tim tentaklik', 'profil agensi', 'digital agency semarang']}
+>
+  <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
+    <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">
+      <div>
+        <span class="eyebrow">Tentang Tentaklik</span>
+        <h1 style="font-size:48px;margin-top:18px;margin-bottom:18px;">
+          Kraken kecil yang serius soal <span style="color:var(--orange-500);">growth bisnis</span>.
+        </h1>
+        <p style="font-size:17px;color:var(--ink-500);max-width:540px;">
+          Tentaklik berdiri dari frustrasi: terlalu banyak agensi yang janji muluk, tapi hasilnya cuma laporan cantik. Kami pilih jalan beda — fokus angka yang berarti, eksekusi rapi, dan partnership jangka panjang.
+        </p>
+      </div>
+      <div style="display:flex;justify-content:center;">
+        <div class="tentang-kraken-wrap">
+          <picture>
+            <source
+              type="image/avif"
+              srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w, /assets/kraken-hero.avif 1200w"
+              sizes="(max-width: 760px) min(480px, 92vw), 560px"
+            />
+            <source
+              type="image/webp"
+              srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w, /assets/kraken-hero.webp 1200w"
+              sizes="(max-width: 760px) min(480px, 92vw), 560px"
+            />
+            <img
+              src="/assets/kraken-hero.png"
+              alt="Tentaklik kraken"
+              width="1200"
+              height="960"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="tentang-kraken"
+            />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Nilai yang Kami Pegang</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Tiga hal yang nggak bisa ditawar.</p>
+      <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+        {values.map(v => (
+          <div class="card reveal">
+            <div style="width:50px;height:50px;border-radius:14px;background:var(--orange-100);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;" aria-hidden="true">{v.icon}</div>
+            <h3 style="font-size:18px;margin-bottom:8px;">{v.title}</h3>
+            <p style="font-size:14px;color:var(--ink-500);">{v.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--bg-warm);">
+    <div class="container">
+      <h2 class="section-title">Tim Inti</h2>
+      <p class="section-sub" style="margin-bottom:40px;">Orang-orang yang turun langsung di project kamu.</p>
+      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+        {team.map(t => (
+          <div class="card reveal" style="text-align:center;">
+            <div class="avatar" style="width:90px;height:90px;font-size:28px;margin:0 auto 14px;">{t.initials}</div>
+            <h3 style="font-size:16px;">{t.name}</h3>
+            <p style="font-size:13px;color:var(--ink-500);margin-top:4px;">{t.role}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Galeri section -->
+  <section>
+    <div class="container">
+      <h2 class="section-title">Galeri</h2>
+      <p class="section-sub" style="margin-bottom:36px;">Sekilas aktivitas dan suasana tim Tentaklik.</p>
+      <div class="galeri-grid">
+        {galeriImages.map((src, i) => (
+          <div class={`galeri-item reveal ${i === 0 || i === 7 ? 'galeri-wide' : ''}`}>
+            <img src={src} alt={`Tentaklik galeri ${i + 1}`} loading="lazy" decoding="async" />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <style>
+    /* Galeri */
+    .galeri-grid {
+      display: grid;
+      /* Desktop: 4 cols, image 1 & 8 wide for balanced 3-row layout */
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 220px;
+      gap: 14px;
+    }
+    /* Wide images span 2 columns */
+    .galeri-wide { grid-column: span 2; }
+
+    .galeri-item {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: var(--ink-50);
+    }
+    .galeri-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease;
+    }
+    .galeri-item::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 60%, rgba(14,27,42,0.18));
+      transition: opacity 0.3s ease;
+      border-radius: inherit;
+      opacity: 0;
+    }
+    .galeri-item:hover img { transform: scale(1.06); }
+    .galeri-item:hover::after { opacity: 1; }
+
+    @media (max-width: 1100px) {
+      .galeri-grid {
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 200px;
+      }
+      .galeri-wide { grid-column: span 2; }
+    }
+    @media (max-width: 760px) {
+      .galeri-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 180px;
+        gap: 10px;
+      }
+      .galeri-wide { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .galeri-grid {
+        grid-auto-rows: 150px;
+        gap: 8px;
+      }
+    }
+
+    .tentang-kraken-wrap {
+      width: 100%;
+      max-width: 560px;
+      animation: krakenFloat 4.5s ease-in-out infinite;
+      will-change: transform;
+    }
+    .tentang-kraken-wrap :global(picture) { display: block; width: 100%; }
+    :global(.tentang-kraken) {
+      width: 100%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 20px 40px rgba(255, 107, 26, 0.18));
+    }
+    @keyframes krakenFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25%       { transform: translateY(-14px) rotate(0.8deg); }
+      75%       { transform: translateY(-6px) rotate(-0.5deg); }
+    }
+    @media (prefers-reduced-motion: reduce) { .tentang-kraken-wrap { animation: none; } }
+    @media (max-width: 760px) { .tentang-kraken-wrap { max-width: min(480px, 92vw); } }
+  </style>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner reveal" style="background:var(--orange-500);">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>Mau ngobrol soal bisnis Anda?</h3>
+          <p style="margin-top:8px;font-size:15px;opacity:0.95;">Konsultasi gratis 30 menit, tanpa hard-selling.</p>
+        </div>
+        <a href="/kontak" class="btn btn-ghost">Konsultasi Gratis <ArrowRight size={14} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

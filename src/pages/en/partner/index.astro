@@ -1,0 +1,159 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+import { getCollection } from 'astro:content';
+import { breadcrumbJsonLd, itemListJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+const allCases = (await getCollection('caseStudies')).sort((a, b) =>
+  b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+const filters = ['Semua', 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
+
+const url = `${site.url}/partner`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Partner', url },
+  ]),
+  itemListJsonLd(
+    allCases.map(c => ({
+      name: `${c.data.brand} — ${c.data.metric}`,
+      url: `${site.url}/partner/${c.id}`,
+      description: c.data.desc,
+    })),
+    'Partner Tentaklik',
+  ),
+];
+---
+<BaseLayout
+  title="Partner Tentaklik — Hasil Nyata Klien Digital Marketing"
+  description="Partner & brand yang tumbuh bareng Tentaklik: hasil nyata Google Ads, Meta Ads, dan website — angka sebenarnya, periode jelas, dan strategi di baliknya."
+  active="case"
+  jsonLd={jsonLd}
+  keywords={['partner tentaklik', 'case study tentaklik', 'portofolio digital marketing', 'hasil google ads', 'hasil meta ads']}
+>
+  <section style="padding-top:56px;padding-bottom:32px;background:var(--bg-warm);">
+    <div class="container" style="text-align:center;position:relative;">
+      <span class="eyebrow">Partner</span>
+      <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
+        Partner yang tumbuh, bukan sekadar <span style="color:var(--orange-500);">cherry-picked</span>.
+      </h1>
+      <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
+        Brand &amp; partner yang kami dampingi — angka yang sebenarnya, periode yang jelas, dan strategi di baliknya.
+      </p>
+    </div>
+  </section>
+
+  <section style="padding-top:32px;">
+    <div class="container">
+      <div style="display:flex;justify-content:center;gap:8px;margin-bottom:32px;flex-wrap:wrap;">
+        {filters.map((f, i) => (
+          <button class={`filter-btn${i === 0 ? ' active' : ''}`} data-filter={f}>{f}</button>
+        ))}
+      </div>
+
+      <div id="cases-grid" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
+        {allCases.map(c => (
+          <div class="card reveal case-card cs-card" data-tags={c.data.tags.join(',')} style="padding:0;overflow:hidden;">
+            <!-- Cover -->
+            <div class="cs-cover">
+              {c.data.cover ? (
+                <picture>
+                  <source type="image/avif" srcset={c.data.cover.replace('.png', '.avif')} />
+                  <source type="image/webp" srcset={c.data.cover.replace('.png', '.webp')} />
+                  <img src={c.data.cover} alt={c.data.brand} loading="lazy" decoding="async" width="800" height="450" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                </picture>
+              ) : (
+                <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;">
+                  <span style="font-family:'Inter Variable', 'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+                </div>
+              )}
+            </div>
+            <!-- Content -->
+            <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">{c.data.industry ?? ''}</span>
+                <span style="font-size:11px;color:var(--ink-500);">{c.data.period ?? ''}</span>
+              </div>
+              <h3 style="font-size:19px;margin:0;">{c.data.brand}</h3>
+              <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
+              <p style="font-size:13.5px;color:var(--ink-500);flex:1;margin:0;">{c.data.desc}</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;">
+                {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <div style="flex:1;">
+          <h3>Mau jadi case study selanjutnya?</h3>
+          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Konsultasi gratis untuk lihat strategi yang cocok buat bisnis Anda.</p>
+        </div>
+        <a href="/kontak" class="btn btn-ghost">Mulai Sekarang <ArrowRight size={14} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1.5px solid var(--ink-100);
+    background: white;
+    color: var(--ink-700);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn:hover { border-color: var(--orange-300); }
+  .filter-btn.active { border-color: var(--orange-500); background: var(--orange-500); color: white; }
+  .case-card { display: flex; flex-direction: column; gap: 14px; }
+  .case-card[hidden] { display: none !important; }
+  .cs-cover {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--orange-50);
+  }
+  .cs-cover :global(picture) { display: block; width: 100%; height: 100%; }
+  .cs-cover :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+  }
+  .cs-card { display: flex; flex-direction: column; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+  .cs-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+  .cs-card:hover .cs-cover :global(img) { transform: scale(1.04); }
+</style>
+
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.case-card');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter ?? 'Semua';
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      cards.forEach(card => {
+        const tags = (card.dataset.tags ?? '').split(',');
+        const visible = filter === 'Semua' || tags.includes(filter);
+        if (visible) card.removeAttribute('hidden');
+        else card.setAttribute('hidden', '');
+      });
+    });
+  });
+</script>

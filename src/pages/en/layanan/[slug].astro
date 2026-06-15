@@ -1,0 +1,15 @@
+---
+import ServiceLayout from '@layouts/ServiceLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map(s => ({
+    params: { slug: s.id },
+    props: { service: s },
+  }));
+}
+
+const { service } = Astro.props;
+---
+<ServiceLayout data={service.data} slug={service.id} />

@@ -1,0 +1,268 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { DISCLAIMER_SECTIONS, DISCLAIMER_HERO } from '@data/disclaimer-sections';
+import { breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+
+const url = `${site.url}/disclaimer`;
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Disclaimer', url },
+  ]),
+];
+
+const lastUpdatedFmt = new Date(DISCLAIMER_HERO.lastUpdated).toLocaleDateString('id-ID', {
+  day: 'numeric', month: 'long', year: 'numeric',
+});
+---
+<BaseLayout
+  title="Disclaimer — Tentaklik"
+  description="Disclaimer Tentaklik: penjelasan tentang konten website, hasil iklan, kepemilikan akun klien, layanan platform pihak ketiga, dan syarat kerja sama."
+  jsonLd={jsonLd}
+  noindex={false}
+>
+  <section class="subpage-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="breadcrumb">
+        <a href="/">Beranda</a>
+        <span class="sep">›</span>
+        <span class="current">Disclaimer</span>
+      </nav>
+      <h1 set:html={DISCLAIMER_HERO.title} />
+      <p class="lede">{DISCLAIMER_HERO.lede}</p>
+      <div class="meta">
+        <span class="meta-dot" aria-hidden="true"></span>
+        Terakhir diperbarui: <strong>{lastUpdatedFmt}</strong>
+      </div>
+    </div>
+  </section>
+
+  <section class="subpage-body">
+    <div class="container">
+      <div class="subpage-grid">
+        <aside class="toc">
+          <h5>Daftar Isi</h5>
+          <ol>
+            {DISCLAIMER_SECTIONS.map(s => (
+              <li><a href={`#${s.id}`}>{s.title}</a></li>
+            ))}
+          </ol>
+        </aside>
+
+        <div class="prose">
+          {DISCLAIMER_SECTIONS.map(s => (
+            <section id={s.id}>
+              <h2><span class="num">{s.num}</span>{s.title}</h2>
+              <Fragment set:html={s.contentHtml} />
+            </section>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import '@lib/toc-highlight';
+  </script>
+</BaseLayout>
+
+<style>
+  .subpage-hero {
+    padding: clamp(64px, 8vw, 96px) 0 clamp(40px, 5vw, 56px);
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 60% 40% at 80% 0%, rgba(255, 122, 26, 0.10), transparent 60%),
+      radial-gradient(ellipse 70% 50% at 0% 100%, rgba(255, 122, 26, 0.05), transparent 60%),
+      var(--bg);
+    border-bottom: 1px solid var(--ink-100);
+  }
+  .crumbs {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-500);
+    margin-bottom: 22px;
+  }
+  .crumbs a { color: var(--ink-500); transition: color 0.2s ease; }
+  .crumbs a:hover { color: var(--orange-600); }
+  .crumbs .sep { opacity: 0.5; }
+  .crumbs .current { color: var(--ink-900); font-weight: 500; }
+
+  .subpage-hero h1 {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--ink-900);
+    margin: 0 0 18px;
+    max-width: 22ch;
+  }
+  .subpage-hero h1 :global(.accent) {
+    color: var(--orange-500);
+  }
+  .lede {
+    max-width: 60ch;
+    color: var(--ink-500);
+    font-size: clamp(15px, 1.1vw, 17px);
+    line-height: 1.65;
+  }
+  .meta {
+    margin-top: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: var(--orange-50);
+    border: 1px solid var(--orange-200);
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--ink-700);
+  }
+  .meta-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--orange-500);
+  }
+  .meta strong { color: var(--ink-900); font-weight: 600; }
+
+  .subpage-body {
+    padding: clamp(48px, 6vw, 80px) 0 clamp(72px, 9vw, 110px);
+    background: var(--bg);
+  }
+  .subpage-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: flex-start;
+  }
+  @media (max-width: 900px) { .subpage-grid { grid-template-columns: 1fr; } }
+
+  .toc {
+    position: sticky;
+    top: 100px;
+    font-size: 13.5px;
+  }
+  @media (max-width: 900px) {
+    .toc {
+      position: static;
+      padding: 16px 18px;
+      background: var(--bg-warm);
+      border-radius: 12px;
+      border: 1px solid var(--ink-100);
+    }
+  }
+  .toc h5 {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-500);
+    margin: 0 0 14px;
+  }
+  .toc ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    counter-reset: toc;
+  }
+  .toc ol li { counter-increment: toc; }
+  .toc ol a {
+    display: block;
+    padding: 8px 12px 8px 38px;
+    color: var(--ink-500);
+    border-radius: 8px;
+    position: relative;
+    transition: background 0.2s ease, color 0.2s ease;
+    line-height: 1.4;
+    font-size: 13.5px;
+  }
+  .toc ol a::before {
+    content: counter(toc, decimal-leading-zero);
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ink-500);
+    letter-spacing: 0.04em;
+  }
+  .toc ol a:hover { background: var(--bg-warm); color: var(--ink-900); }
+  .toc ol a.is-active {
+    background: var(--orange-50);
+    color: var(--orange-600);
+  }
+  .toc ol a.is-active::before { color: var(--orange-600); }
+
+  .prose { max-width: 72ch; }
+  .prose :global(section) { padding: 0 0 48px; scroll-margin-top: 100px; }
+  .prose :global(section + section) {
+    border-top: 1px solid var(--ink-100);
+    padding-top: 48px;
+  }
+  .prose :global(h2) {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: clamp(22px, 2.4vw, 28px);
+    letter-spacing: -0.02em;
+    color: var(--ink-900);
+    margin: 0 0 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+  }
+  .prose :global(h2 .num) {
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--orange-500);
+    letter-spacing: 0.16em;
+    flex-shrink: 0;
+  }
+  .prose :global(p),
+  .prose :global(li) {
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--ink-700);
+  }
+  .prose :global(p) { margin: 0 0 16px; }
+  .prose :global(ul) { margin: 0 0 18px; padding-left: 22px; }
+  .prose :global(ul li) { margin-bottom: 8px; }
+  .prose :global(ul li::marker) { color: var(--orange-500); }
+  .prose :global(strong) { color: var(--ink-900); font-weight: 700; }
+  .prose :global(em) { font-style: italic; }
+  .prose :global(a) {
+    color: var(--orange-600);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .prose :global(a:hover) { border-bottom-color: var(--orange-600); }
+
+  .prose :global(.callout) {
+    margin: 20px 0;
+    padding: 18px 22px;
+    border: 1px solid var(--ink-100);
+    border-left-width: 3px;
+    border-radius: 12px;
+    font-size: 14.5px;
+    line-height: 1.7;
+  }
+  .prose :global(.callout strong) { color: var(--ink-900); }
+  .prose :global(.callout-good) {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.02));
+    border-left-color: #22C55E;
+    color: var(--ink-700);
+  }
+  .prose :global(.callout-warn) {
+    background: linear-gradient(135deg, rgba(255, 122, 26, 0.10), rgba(255, 122, 26, 0.03));
+    border-left-color: var(--orange-500);
+    color: var(--ink-700);
+  }
+</style>

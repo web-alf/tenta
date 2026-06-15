@@ -1,0 +1,372 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+---
+<BaseLayout
+  title="404 — Halaman tidak ditemukan"
+  description="Halaman yang kamu cari tidak ada. Yuk balik ke beranda."
+  noindex={true}
+>
+  <section class="notfound">
+    <!-- Animated bubbles background -->
+    <div class="notfound-bubbles" aria-hidden="true">
+      <span class="bubble bubble-1"></span>
+      <span class="bubble bubble-2"></span>
+      <span class="bubble bubble-3"></span>
+      <span class="bubble bubble-4"></span>
+      <span class="bubble bubble-5"></span>
+      <span class="bubble bubble-6"></span>
+      <span class="bubble bubble-7"></span>
+    </div>
+
+    <!-- Wavy top decoration -->
+    <div class="notfound-waves" aria-hidden="true">
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <path d="M0,64 C360,120 720,0 1080,64 C1260,96 1380,80 1440,64 L1440,0 L0,0 Z" fill="var(--orange-50)" opacity="0.5"/>
+        <path d="M0,48 C240,96 480,16 720,48 C960,80 1200,32 1440,48 L1440,0 L0,0 Z" fill="var(--orange-50)" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <div class="container notfound-container">
+      <!-- Kraken mascot — same image as hero -->
+      <div class="notfound-mascot kraken-float">
+        <picture>
+          <source
+            type="image/avif"
+            srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w"
+            sizes="280px"
+          />
+          <source
+            type="image/webp"
+            srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w"
+            sizes="280px"
+          />
+          <img
+            src="/assets/kraken-hero.png"
+            alt="Tentaklik kraken mascot"
+            width="560"
+            height="448"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+      </div>
+
+      <!-- 404 text with layered effect -->
+      <div class="notfound-code" aria-hidden="true">
+        <span class="notfound-code-bg">404</span>
+        <span class="notfound-code-fg">404</span>
+      </div>
+
+      <h1 class="notfound-title">Oops! Halaman ini menyelam terlalu dalam.</h1>
+      <p class="notfound-sub">URL yang kamu cari nggak ketemu. Mungkin sudah dipindah, atau memang gak pernah ada. Tapi tenang, Kraken siap antar kamu balik!</p>
+
+      <div class="notfound-actions">
+        <a href="/" class="btn btn-primary btn-lg">
+          Balik ke Beranda <ArrowRight size={16} />
+        </a>
+        <a href="/layanan" class="btn btn-ghost">
+          Lihat Layanan
+        </a>
+      </div>
+
+      <!-- Fun suggestions -->
+      <div class="notfound-suggestions">
+        <p class="notfound-suggestions-label">Atau mungkin kamu mau ke sini?</p>
+        <div class="notfound-links">
+          <a href="/tentang" class="notfound-link">Tentang Kami</a>
+          <a href="/portofolio" class="notfound-link">Portofolio</a>
+          <a href="/kontak" class="notfound-link">Kontak</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Wavy bottom decoration -->
+    <div class="notfound-waves-bottom" aria-hidden="true">
+      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+        <path d="M0,40 C360,100 720,0 1080,40 C1260,70 1380,60 1440,40 L1440,100 L0,100 Z" fill="var(--orange-50)" opacity="0.4"/>
+      </svg>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .notfound {
+    position: relative;
+    padding: 60px 0 80px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--orange-50) 40%, var(--cream-bg) 100%);
+  }
+
+  .notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 680px;
+  }
+
+  /* Kraken mascot — matches hero style */
+  .notfound-mascot {
+    width: 280px;
+    filter: drop-shadow(0 20px 40px rgba(255, 107, 26, 0.18));
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .notfound-mascot:hover {
+    transform: scale(1.06) rotate(-3deg);
+  }
+  .notfound-mascot picture { display: block; width: 100%; }
+  .notfound-mascot img { width: 100%; height: auto; display: block; }
+
+  /* 404 code with layered effect */
+  .notfound-code {
+    position: relative;
+    height: 100px;
+    margin-bottom: 28px;
+    user-select: none;
+  }
+  .notfound-code-bg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 120px;
+    line-height: 1;
+    color: var(--orange-100);
+    letter-spacing: -0.04em;
+  }
+  .notfound-code-fg {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 120px;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.04em;
+  }
+
+  /* Title & subtitle */
+  .notfound-title {
+    font-size: 28px;
+    color: var(--ink-900);
+    margin-bottom: 12px;
+    line-height: 1.25;
+  }
+  .notfound-sub {
+    font-size: 16px;
+    color: var(--ink-500);
+    line-height: 1.65;
+    max-width: 520px;
+    margin-bottom: 32px;
+  }
+
+  /* Action buttons */
+  .notfound-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 48px;
+  }
+  .btn-lg {
+    padding: 16px 28px;
+    font-size: 16px;
+  }
+
+  /* Quick links */
+  .notfound-suggestions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .notfound-suggestions-label {
+    font-size: 13px;
+    color: var(--ink-400);
+    font-weight: 500;
+  }
+  .notfound-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .notfound-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 16px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-700);
+    transition: all 0.2s ease;
+  }
+  .notfound-link:hover {
+    border-color: var(--orange-300);
+    color: var(--orange-600);
+    background: var(--orange-50);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 107, 26, 0.12);
+  }
+
+  /* Animated bubbles */
+  .notfound-bubbles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 148, 71, 0.2), rgba(255, 107, 26, 0.08));
+    animation: bubbleFloat linear infinite;
+  }
+  .bubble-1 { width: 20px; height: 20px; left: 8%; bottom: -20px; animation-duration: 7s; animation-delay: 0s; }
+  .bubble-2 { width: 14px; height: 14px; left: 22%; bottom: -14px; animation-duration: 9s; animation-delay: 1.5s; }
+  .bubble-3 { width: 24px; height: 24px; left: 42%; bottom: -24px; animation-duration: 8s; animation-delay: 3s; }
+  .bubble-4 { width: 10px; height: 10px; left: 58%; bottom: -10px; animation-duration: 10s; animation-delay: 0.8s; }
+  .bubble-5 { width: 18px; height: 18px; left: 72%; bottom: -18px; animation-duration: 7.5s; animation-delay: 2.2s; }
+  .bubble-6 { width: 12px; height: 12px; left: 88%; bottom: -12px; animation-duration: 8.5s; animation-delay: 4s; }
+  .bubble-7 { width: 16px; height: 16px; left: 35%; bottom: -16px; animation-duration: 11s; animation-delay: 5.5s; }
+
+  @keyframes bubbleFloat {
+    0% {
+      transform: translateY(0) scale(0.4);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(-10vh) scale(0.8);
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-100vh) scale(1);
+      opacity: 0;
+    }
+  }
+
+  /* Wave decorations */
+  .notfound-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    line-height: 0;
+  }
+  .notfound-waves svg {
+    width: 100%;
+    height: 100px;
+  }
+  .notfound-waves-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    line-height: 0;
+  }
+  .notfound-waves-bottom svg {
+    width: 100%;
+    height: 80px;
+  }
+
+  /* Responsive */
+  @media (max-width: 760px) {
+    .notfound {
+      padding: 40px 0 60px;
+    }
+    .notfound-mascot {
+      width: 220px;
+    }
+    .notfound-code { height: 76px; margin-bottom: 22px; }
+    .notfound-code-bg,
+    .notfound-code-fg {
+      font-size: 88px;
+    }
+    .notfound-title {
+      font-size: 22px;
+    }
+    .notfound-sub {
+      font-size: 15px;
+    }
+    .btn-lg {
+      padding: 14px 24px;
+      font-size: 15px;
+      width: 100%;
+    }
+    .notfound-actions {
+      flex-direction: column;
+      width: 100%;
+      max-width: 320px;
+    }
+    .notfound-actions .btn-ghost {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .notfound-mascot {
+      width: 180px;
+    }
+    .notfound-code { height: 60px; margin-bottom: 18px; }
+    .notfound-code-bg,
+    .notfound-code-fg {
+      font-size: 72px;
+    }
+    .notfound-title {
+      font-size: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bubble { animation: none; opacity: 0.15; }
+    .notfound-mascot { transition: none; }
+    .notfound-mascot:hover { transform: none; }
+  }
+</style>
+
+<script>
+  const mascot = document.querySelector('.notfound-mascot');
+  if (mascot) {
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes wiggleShake {
+        0%, 100% { transform: rotate(0deg) scale(1); }
+        15% { transform: rotate(-8deg) scale(1.05); }
+        30% { transform: rotate(6deg) scale(1.05); }
+        45% { transform: rotate(-5deg) scale(1.03); }
+        60% { transform: rotate(3deg) scale(1.02); }
+        75% { transform: rotate(-2deg) scale(1.01); }
+      }
+      .notfound-mascot.wiggle {
+        animation: wiggleShake 0.6s ease-in-out !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    mascot.addEventListener('click', () => {
+      mascot.classList.add('wiggle');
+      setTimeout(() => mascot.classList.remove('wiggle'), 600);
+    });
+  }
+</script>

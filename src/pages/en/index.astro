@@ -1,0 +1,59 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Hero from '@components/sections/Hero.astro';
+import ServicesGrid from '@components/sections/ServicesGrid.astro';
+import CTABanner from '@components/sections/CTABanner.astro';
+import Process from '@components/sections/Process.astro';
+import Testimonials from '@components/sections/Testimonials.astro';
+import CaseStudiesPreview from '@components/sections/CaseStudiesPreview.astro';
+import FAQ from '@components/sections/FAQ.astro';
+import FinalCTA from '@components/sections/FinalCTA.astro';
+import { faqJsonLd, itemListJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import { getCollection } from 'astro:content';
+
+const faqs = await getCollection('faqs');
+const services = await getCollection('services');
+
+const serviceItems = services
+  .sort((a, b) => a.id.localeCompare(b.id))
+  .map(s => ({
+    name: s.data.seo.title,
+    url: `${site.url}/layanan/${s.id}`,
+    description: s.data.seo.description,
+  }));
+
+const jsonLd = [
+  faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a }))),
+  itemListJsonLd(serviceItems, 'Layanan Digital Marketing Tentaklik'),
+];
+
+---
+<BaseLayout
+  title="Tentaklik — Agensi Digital Marketing Semarang | Website, Google Ads, Meta Ads"
+  description="Tentaklik adalah agensi digital marketing Semarang yang bantu bisnis tumbuh 10x lewat jasa pembuatan website, Google Ads, Meta Ads, dan konsultasi digital marketing untuk UMKM dan brand di Indonesia."
+  active="beranda"
+  preloadHeroSrc="/assets/kraken-hero-560.avif"
+  jsonLd={jsonLd}
+  keywords={[
+    'jasa digital marketing semarang',
+    'agensi digital marketing semarang',
+    'jasa pembuatan website semarang',
+    'jasa google ads',
+    'jasa meta ads',
+    'jasa facebook ads',
+    'jasa instagram ads',
+    'konsultan digital marketing',
+    'agensi iklan online indonesia',
+    'tentaklik',
+  ]}
+>
+  <Hero />
+  <ServicesGrid />
+  <CTABanner />
+  <Process />
+  <Testimonials />
+  <CaseStudiesPreview />
+  <FAQ />
+  <FinalCTA />
+</BaseLayout>

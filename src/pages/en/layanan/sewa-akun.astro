@@ -1,0 +1,118 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import ServiceHero from '@components/sections/service/ServiceHero.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import ServiceFAQ from '@components/sections/service/ServiceFAQ.astro';
+import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import Check from '@components/icons/Check.astro';
+import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import {
+  SEWA_HERO, META_WL, GOOGLE_WL, SEWA_PLANS,
+  SEWA_FAQS, SEWA_SEO, SEWA_KEYWORDS,
+  INDUSTRIES, INDUSTRY_HEADING,
+  type WhitelistInfo,
+} from '@data/sewa-akun';
+
+const url = `${site.url}/layanan/sewa-akun`;
+const wlBlocks: WhitelistInfo[] = [META_WL, GOOGLE_WL];
+
+const jsonLd = [
+  serviceJsonLd({
+    name: SEWA_SEO.title,
+    description: SEWA_SEO.description,
+    url,
+    serviceType: 'Sewa Akun Ads Whitelist',
+  }),
+  faqJsonLd(SEWA_FAQS),
+  breadcrumbJsonLd([
+    { name: 'Beranda', url: site.url },
+    { name: 'Layanan', url: `${site.url}/#layanan` },
+    { name: 'Sewa Akun', url },
+  ]),
+];
+---
+<BaseLayout
+  title={SEWA_SEO.title}
+  description={SEWA_SEO.description}
+  active="layanan"
+  jsonLd={jsonLd}
+  keywords={SEWA_KEYWORDS}
+>
+  <ServiceHero
+    eyebrow={SEWA_HERO.eyebrow}
+    title={SEWA_HERO.title}
+    titleAccent={SEWA_HERO.titleAccent}
+    desc={SEWA_HERO.desc}
+  >
+    <div slot="illustration" class="kraken-float" style="width:100%;max-width:480px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
+      <picture>
+        <source type="image/avif" srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" sizes="(max-width: 760px) min(480px, 95vw), 480px" />
+        <source type="image/webp" srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w" sizes="(max-width: 760px) min(480px, 95vw), 480px" />
+        <img src="/assets/kraken-hero.png" alt="Tentaklik Sewa Akun Whitelist" width="1200" height="960" loading="eager" fetchpriority="high" decoding="async" style="width:100%;height:auto;display:block;" />
+      </picture>
+    </div>
+  </ServiceHero>
+
+  <!-- Layanan whitelist: Meta + Google -->
+  <section aria-labelledby="wl-heading">
+    <div class="container">
+      <h2 id="wl-heading" class="section-title">Layanan yang Tersedia</h2>
+      <p class="section-sub" style="margin-bottom:48px;">Dua jalur akun premium — pilih sesuai platform iklan Anda.</p>
+      <div class="wl-grid">
+        {wlBlocks.map((wl) => (
+          <article class="wl-card reveal">
+            <h3 class="wl-title">{wl.title}</h3>
+            <p class="wl-desc">{wl.desc}</p>
+            <h4 class="wl-sub">Keunggulan</h4>
+            <ul class="wl-benefits">
+              {wl.benefits.map((b) => (
+                <li><span class="wl-check" aria-hidden="true"><Check size={12} /></span>{b}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <IndustriesGrid items={INDUSTRIES} heading={INDUSTRY_HEADING} bg="warm" />
+
+  <PricingSection plans={SEWA_PLANS} service="Sewa Akun" />
+
+  <ServiceFAQ items={SEWA_FAQS} />
+  <ServiceCTA />
+</BaseLayout>
+
+<style>
+  /* Whitelist cards */
+  .wl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .wl-card {
+    background: white;
+    border: 1px solid var(--ink-100);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+  }
+  .wl-title { font-size: 22px; margin-bottom: 8px; }
+  .wl-desc { font-size: 14.5px; color: var(--ink-500); margin-bottom: 22px; line-height: 1.6; }
+  .wl-sub {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--orange-700); margin-bottom: 12px;
+  }
+  .wl-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .wl-benefits li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; color: var(--ink-700); line-height: 1.5; }
+  .wl-check {
+    width: 18px; height: 18px; border-radius: 999px;
+    background: var(--orange-100); color: var(--orange-700);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 1px;
+  }
+
+  @media (max-width: 900px) {
+    .wl-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 560px) {
+    .wl-card { padding: 22px; }
+  }
+</style>

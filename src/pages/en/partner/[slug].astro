@@ -1,0 +1,90 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+import { breadcrumbJsonLd, articleJsonLd } from '@lib/seo';
+import { site } from '@data/site';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
+export async function getStaticPaths() {
+  const cases = await getCollection('caseStudies');
+  return cases.map(c => ({
+    params: { slug: c.id },
+    props: { entry: c },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const url = `${site.url}/partner/${entry.id}`;
+const publishedIso = entry.data.publishDate.toISOString();
+const jsonLd = [
+  breadcrumbJsonLd([
+    { name: 'Beranda',    url: site.url },
+    { name: 'Partner',    url: `${site.url}/partner` },
+    { name: entry.data.brand, url },
+  ]),
+  articleJsonLd({
+    title: `${entry.data.brand} — ${entry.data.metric}`,
+    description: entry.data.desc,
+    url,
+    image: entry.data.cover,
+    datePublished: entry.data.publishDate,
+    section: entry.data.industry ?? 'Case Study',
+    keywords: [...entry.data.tags, entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
+  }),
+];
+const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Partner Tentaklik`;
+---
+<BaseLayout
+  title={metaTitle}
+  description={entry.data.desc}
+  active="case"
+  jsonLd={jsonLd}
+  image={entry.data.cover ?? site.defaultOgImage}
+  pageType="article"
+  publishedTime={publishedIso}
+  modifiedTime={publishedIso}
+  keywords={[...entry.data.tags, entry.data.brand.toLowerCase(), 'case study', 'tentaklik']}
+>
+  <section style="padding-top:56px;padding-bottom:24px;background:var(--bg-warm);">
+    <div class="container" style="max-width:820px;">
+      <a href="/partner" style="font-size:14px;color:var(--orange-600);">← Semua Partner</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;margin-bottom:18px;">
+        {entry.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+      </div>
+      <h1 style="font-size:42px;margin-bottom:14px;">{entry.data.brand}</h1>
+      <div style="font-size:32px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">{entry.data.metric}</div>
+      <p style="font-size:17px;color:var(--ink-500);">{entry.data.desc}</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="max-width:820px;">
+      <article class="prose">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <section style="padding-bottom:24px;">
+    <div class="container">
+      <div class="cta-banner cta-banner-light reveal">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>Mau hasil serupa untuk bisnis Anda?</h3>
+          <p style="margin-top:8px;font-size:15px;color:var(--ink-700);">Konsultasi gratis untuk evaluasi peluang spesifik di industri Anda.</p>
+        </div>
+        <a href="/kontak" class="btn btn-primary">Konsultasi Gratis <ArrowRight size={14} /></a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose { font-size: 16px; line-height: 1.7; color: var(--ink-700); }
+  .prose h2 { font-size: 26px; margin-top: 36px; margin-bottom: 12px; color: var(--ink-900); }
+  .prose h3 { font-size: 20px; margin-top: 28px; margin-bottom: 10px; color: var(--ink-900); }
+  .prose p { margin-bottom: 16px; }
+  .prose ul, .prose ol { padding-left: 24px; margin-bottom: 18px; }
+  .prose li { margin-bottom: 6px; }
+  .prose strong { color: var(--ink-900); }
+</style>
