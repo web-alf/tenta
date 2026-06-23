@@ -18,7 +18,6 @@ import {
 
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
-const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 
 const url = `${site.url}/layanan/sewa-akun`;
 const wlBlocks: WhitelistInfo[] = [META_WL, GOOGLE_WL];

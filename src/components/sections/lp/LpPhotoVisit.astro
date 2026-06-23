@@ -13,41 +13,331 @@ const { heading, sub, photos } = Astro.props;
     <h2 id="lp-photo-heading" class="section-title">{heading}</h2>
     <p class="section-sub" style="margin-bottom:36px;">{sub}</p>
     <div class="lp-photo-grid">
-      {photos.map((p) => (
-        <figure class={`lp-photo-item reveal ${p.portrait ? 'lp-photo-portrait' : ''}`}>
+      {photos.map((p, index) => (
+        <figure class={`lp-photo-item reveal ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
           <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
         </figure>
       ))}
     </div>
+
+    <div class="lp-photo-progress-wrapper">
+      <div class="lp-photo-progress-track">
+        <div class="lp-photo-progress-bar"></div>
+      </div>
+    </div>
   </div>
 </section>
 
-<style>
-  .lp-photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    max-width: 980px;
-    margin: 0 auto;
-    align-items: start;
+<script>
+  function initPhotoSlider() {
+    const grid = document.querySelector('.lp-photo-grid') as HTMLElement;
+    const progressBar = document.querySelector('.lp-photo-progress-bar') as HTMLElement;
+    if (!grid) return;
+
+    // Only apply carousel behavior on mobile (screen < 768px)
+    if (window.innerWidth >= 768) return;
+
+    const originalItems = Array.from(grid.querySelectorAll('.lp-photo-item')) as HTMLElement[];
+    if (originalItems.length === 0) return;
+
+    const originalCount = originalItems.length;
+
+    let autoSlideInterval: any = null;
+    let isDragging = false;
+    let isAutoScrolling = false;
+    let startX = 0;
+    let scrollLeftStart = 0;
+
+    // Helper to calculate exact centered scrollLeft position for a specific element
+    const getCenteredScrollLeft = (element: HTMLElement) => {
+      return element.offsetLeft - (grid.clientWidth - element.offsetWidth) / 2;
+    };
+
+    // 1. DOM Reordering Loop: triggers once scrolling settles (idle)
+    const handleScrollEnd = () => {
+      if (window.innerWidth >= 768 || isDragging || isAutoScrolling) return;
+
+      // Find the item closest to the container center
+      const currentScroll = grid.scrollLeft;
+      const clientWidth = grid.clientWidth;
+      const gridCenter = currentScroll + clientWidth / 2;
+      let closestItem: HTMLElement | null = null;
+      let minDistance = Infinity;
+      let activeIndex = -1;
+
+      const children = grid.children;
+      for (let i = 0; i < children.length; i++) {
+        const item = children[i] as HTMLElement;
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(gridCenter - itemCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestItem = item;
+          activeIndex = i;
+        }
+      }
+
+      if (!closestItem) return;
+
+      // We want the active card to always end up at index 1 of the container.
+      if (activeIndex > 1) {
+        const countToMove = activeIndex - 1;
+        // Temporarily disable scroll snapping to prevent browser layout conflicts
+        grid.style.scrollSnapType = 'none';
+        
+        for (let i = 0; i < countToMove; i++) {
+          grid.appendChild(grid.firstElementChild!);
+        }
+
+        // Relocate positions pixel-perfectly
+        const activeCard = grid.children[1] as HTMLElement;
+        grid.scrollLeft = getCenteredScrollLeft(activeCard);
+
+        // Restore scroll snap in the next frame
+        requestAnimationFrame(() => {
+          grid.style.scrollSnapType = 'x mandatory';
+        });
+      }
+      else if (activeIndex < 1) {
+        const countToMove = 1 - activeIndex;
+        // Temporarily disable scroll snapping to prevent browser layout conflicts
+        grid.style.scrollSnapType = 'none';
+        
+        for (let i = 0; i < countToMove; i++) {
+          grid.insertBefore(grid.lastElementChild!, grid.firstElementChild);
+        }
+
+        // Relocate positions pixel-perfectly
+        const activeCard = grid.children[1] as HTMLElement;
+        grid.scrollLeft = getCenteredScrollLeft(activeCard);
+
+        // Restore scroll snap in the next frame
+        requestAnimationFrame(() => {
+          grid.style.scrollSnapType = 'x mandatory';
+        });
+      }
+    };
+
+    // Debounce scroll events to detect scroll idle state
+    let scrollTimeout: any = null;
+    grid.addEventListener('scroll', () => {
+      if (isAutoScrolling) return; // Skip DOM reordering while smooth auto-sliding
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(handleScrollEnd, 100);
+    });
+
+    // 2. Controller to update visual active classes and the progress bar
+    const updateActiveStates = () => {
+      if (window.innerWidth >= 768) {
+        const items = Array.from(grid.children) as HTMLElement[];
+        items.forEach((item) => item.classList.remove('active'));
+        return;
+      }
+
+      const currentScroll = grid.scrollLeft;
+      const clientWidth = grid.clientWidth;
+      const gridCenter = currentScroll + clientWidth / 2;
+      let closestItem: HTMLElement | null = null;
+      let minDistance = Infinity;
+
+      const children = grid.children;
+      for (let i = 0; i < children.length; i++) {
+        const item = children[i] as HTMLElement;
+        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+        const distance = Math.abs(gridCenter - itemCenter);
+        if (distance < minDistance) {
+          minDistance = distance;
+          closestItem = item;
+        }
+      }
+
+      for (let i = 0; i < children.length; i++) {
+        const item = children[i] as HTMLElement;
+        if (item === closestItem) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      }
+
+      // Update progress bar using data-index of the active card
+      if (progressBar && closestItem) {
+        const originalIndex = parseInt((closestItem as HTMLElement).dataset.index || '0', 10);
+        const scrollPercent = originalIndex / (originalCount - 1);
+        const translatePx = scrollPercent * 56; // 80px track - 24px bar = 56px travel distance
+        progressBar.style.transform = `translateX(${translatePx}px)`;
+      }
+    };
+
+    grid.addEventListener('scroll', updateActiveStates, { passive: true });
+
+    // 3. Auto-slide timing mechanism
+    const handleNext = () => {
+      if (window.innerWidth >= 768 || isDragging || isAutoScrolling) return;
+      
+      const activeCard = grid.children[1] as HTMLElement;
+      const nextCard = grid.children[2] as HTMLElement;
+      
+      if (activeCard && nextCard) {
+        isAutoScrolling = true;
+        
+        // Scroll smoothly directly to the next centered element
+        grid.scrollTo({
+          left: getCenteredScrollLeft(nextCard),
+          behavior: 'smooth'
+        });
+
+        // Wait until browser completes smooth scrolling before reordering DOM
+        setTimeout(() => {
+          isAutoScrolling = false;
+          handleScrollEnd();
+          updateActiveStates();
+        }, 550);
+      }
+    };
+
+    const startAutoSlide = () => {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(handleNext, 3500);
+    };
+
+    const stopAutoSlide = () => {
+      if (autoSlideInterval) {
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = null;
+      }
+    };
+
+    // 4. Mouse Drag-to-Scroll support (for desktop testing simulator)
+    grid.addEventListener('mousedown', (e) => {
+      if (window.innerWidth >= 768) return;
+      isDragging = true;
+      grid.classList.add('grabbing');
+      startX = e.pageX - grid.offsetLeft;
+      scrollLeftStart = grid.scrollLeft;
+      stopAutoSlide();
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      grid.classList.remove('grabbing');
+      startAutoSlide();
+    });
+
+    grid.addEventListener('mouseleave', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      grid.classList.remove('grabbing');
+      startAutoSlide();
+    });
+
+    grid.addEventListener('mousemove', (e) => {
+      if (!isDragging || window.innerWidth >= 768) return;
+      e.preventDefault();
+      const x = e.pageX - grid.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      grid.scrollLeft = scrollLeftStart - walk;
+    });
+
+    // 5. Touch events to pause/resume auto-slide and manage dragging state on mobile devices
+    grid.addEventListener('touchstart', () => {
+      isDragging = true;
+      stopAutoSlide();
+    }, { passive: true });
+
+    grid.addEventListener('touchend', () => {
+      isDragging = false;
+      startAutoSlide();
+      handleScrollEnd(); // Reset and align immediately after touch ends
+    }, { passive: true });
+
+    grid.addEventListener('touchcancel', () => {
+      isDragging = false;
+      startAutoSlide();
+    }, { passive: true });
+
+    // 6. Resize handling
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) return;
+      const activeCard = grid.children[1] as HTMLElement;
+      if (activeCard) {
+        grid.scrollLeft = getCenteredScrollLeft(activeCard);
+      }
+    }, { passive: true });
+
+    // 7. Initial State Setup: run after a minor delay to ensure render tree is completed
+    setTimeout(() => {
+      grid.insertBefore(grid.lastElementChild!, grid.firstElementChild);
+      
+      const activeCard = grid.children[1] as HTMLElement;
+      if (activeCard) {
+        grid.scrollLeft = getCenteredScrollLeft(activeCard);
+      }
+      
+      updateActiveStates();
+      startAutoSlide();
+    }, 50);
   }
+
+  // Bind to page load
+  initPhotoSlider();
+</script>
+
+<style>
+  /* Mobile-first: Carousel Snap Layout */
+  .lp-photo-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* scroll-behavior: smooth is removed here to prevent conflicts with instant scroll adjustments.
+       We trigger smooth scrolling explicitly in JS when executing programmatic auto-slides. */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Edge-to-edge breakout: negative margins cancel container padding */
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 16px 20px;
+    gap: 16px;
+    align-items: center;
+  }
+  .lp-photo-grid::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Disable snap during mouse dragging for smooth movement */
+  .lp-photo-grid.grabbing {
+    scroll-snap-type: none !important;
+    cursor: grabbing;
+    user-select: none;
+  }
+
   .lp-photo-item {
     margin: 0;
+    flex: 0 0 88%; /* Photos take 88% width, leaving 12% peek space */
+    scroll-snap-align: center;
     border-radius: 16px;
     overflow: hidden;
     background: var(--ink-50);
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 4 / 3; /* Uniform size for all mobile photos */
     border: 1.5px solid transparent;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.5;
+    transform: scale(0.93);
   }
-  .lp-photo-item:hover {
-    transform: translateY(-6px);
+  
+  .lp-photo-item.active {
+    opacity: 1;
+    transform: scale(1);
     box-shadow: var(--shadow-xl);
     border-color: var(--orange-300);
   }
-  :global(.lp-photo-portrait) {
-    aspect-ratio: 3 / 4 !important;
-  }
+
   .lp-photo-item img {
     width: 100%;
     height: 100%;
@@ -55,13 +345,65 @@ const { heading, sub, photos } = Astro.props;
     display: block;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .lp-photo-item:hover img { transform: scale(1.06); }
+  .lp-photo-item.active img {
+    transform: scale(1.03);
+  }
 
+  /* Progress Bar styling */
+  .lp-photo-progress-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+  }
+  .lp-photo-progress-track {
+    width: 80px;
+    height: 3px;
+    background: var(--ink-100);
+    position: relative;
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .lp-photo-progress-bar {
+    width: 24px;
+    height: 100%;
+    background: var(--orange-500);
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 99px;
+    transform: translateX(0);
+    transition: transform 0.2s ease;
+  }
+
+  /* Desktop layout (>= 768px) */
   @media (min-width: 768px) {
     .lp-photo-grid {
+      display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(2, 1fr);
       align-items: stretch;
+      padding: 0;
+      margin-left: 0;
+      margin-right: 0;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    .lp-photo-item {
+      flex: none;
+      scroll-snap-align: none;
+      opacity: 1;
+      transform: none;
+      aspect-ratio: auto;
+    }
+    .lp-photo-item:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--orange-300);
+    }
+    .lp-photo-item:hover img {
+      transform: scale(1.06);
     }
     .lp-photo-item:nth-child(1) { grid-column: 1; grid-row: 1; }
     .lp-photo-item:nth-child(2) { grid-column: 2; grid-row: 1; }
@@ -72,6 +414,9 @@ const { heading, sub, photos } = Astro.props;
       grid-row: 1 / 3 !important;
       aspect-ratio: auto !important;
       height: 100% !important;
+    }
+    .lp-photo-progress-wrapper {
+      display: none;
     }
   }
 </style>
