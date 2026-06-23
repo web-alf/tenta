@@ -4,8 +4,6 @@ import Star from '../icons/Star.astro';
 import { getLang, useT } from '@i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
-const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
-
 const features = [
   { icon: 'target',  title: t('hero.f1.t'), sub: t('hero.f1.d') },
   { icon: 'shield',  title: t('hero.f2.t'), sub: t('hero.f2.d') },
