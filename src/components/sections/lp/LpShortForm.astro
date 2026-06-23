@@ -62,12 +62,17 @@ const formId = `shortform-${platform}`;
 <style>
   .shortform {
     background: white;
-    border: 1px solid var(--ink-100);
+    border: 1.5px solid var(--orange-100);
     border-radius: var(--radius-xl);
     padding: 28px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .shortform:hover {
+    border-color: var(--orange-300);
+    box-shadow: var(--shadow-md);
   }
   .sf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .sf-field { display: flex; flex-direction: column; gap: 6px; }

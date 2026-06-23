@@ -49,7 +49,6 @@ const usdPlans = [
   description="Rent a Meta Ads whitelist account for international advertisers. USD pricing, no VAT, no spending limit."
   active="layanan"
   bareLayout
-  bareHeader
   jsonLd={jsonLd}
   keywords={['meta ads whitelist usd', 'rent meta ads account', 'facebook ads whitelist international']}
 >
@@ -67,6 +66,6 @@ const usdPlans = [
   <PricingSection plans={usdPlans} service="Meta Ads Whitelist (USD)" />
   <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center />
   <LpTestimonials />
-  <LpPromoBanner heading="Request a Whitelist Account" sub="Fill in a few details to secure your account" originalPrice="$12" promoPrice="$3 / account" />
+  <LpPromoBanner originalPrice="$12" promoPrice="$3 / account" />
   <LpShortForm platform="meta" />
 </BaseLayout>

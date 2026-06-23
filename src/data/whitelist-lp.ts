@@ -6,7 +6,7 @@ import type { Industry } from '@data/sewa-akun';
 import type { Lang } from '@i18n/utils';
 
 export interface LpProblem { icon: string; title: string; desc: string }
-export interface LpPhoto { src: string; alt: string }
+export interface LpPhoto { src: string; alt: string; portrait?: boolean }
 
 export interface LpData {
   platform: 'meta' | 'google';
@@ -64,7 +64,7 @@ export const META_LP: Record<Lang, LpData> = {
       eyebrow: 'Meta Ads Whitelist',
       title: 'Akun Meta Ads Whitelist',
       titleAccent: 'Siap Scale Tanpa Drama Banned',
-      desc: 'Akses jalur akun agensi tingkat tinggi yang dipercaya oleh sistem Meta. Bebas blokir massal, tanpa batasan spending, serta didukung prioritas eskalasi tercepat.',
+      desc: 'Bebas blokir massal, tanpa batasan spending, serta didukung prioritas eskalasi tercepat.',
     },
     problemHeading: 'Saat scale, masalah Meta Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
@@ -86,8 +86,11 @@ export const META_LP: Record<Lang, LpData> = {
     photoHeading: 'Terhubung langsung dengan Meta',
     photoSub: 'Tim Tentaklik aktif di event & program resmi Meta.',
     photos: [
-      { src: '/assets/galeri/9.jpeg',  alt: 'Tim Tentaklik di event Meta' },
-      { src: '/assets/galeri/10.jpeg', alt: 'Kunjungan ke kantor Meta / Facebook' },
+      { src: '/assets/galeri-meta/meta1.avif', alt: 'Tim Tentaklik di event Meta' },
+      { src: '/assets/galeri-meta/meta2.avif', alt: 'Kunjungan ke kantor Meta' },
+      { src: '/assets/galeri-meta/meta6.jpeg', alt: 'Kunjungan tim ke Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta4.avif', alt: 'Event resmi Partner Meta' },
+      { src: '/assets/galeri-meta/meta5.avif', alt: 'Tim Tentaklik', portrait: true },
     ],
     cta: {
       title: 'Siap pakai akun Meta Whitelist?',
@@ -106,7 +109,7 @@ export const META_LP: Record<Lang, LpData> = {
       eyebrow: 'Meta Ads Whitelist',
       title: 'Meta Ads Whitelist Account',
       titleAccent: 'Ready to Scale Without Banned Drama',
-      desc: 'Access top-tier agency account lines trusted by Meta\'s system. Free from mass blocks, no spending limits, and backed by the fastest escalation priority.',
+      desc: 'Free from mass blocks, no spending limits, and backed by the fastest escalation priority.',
     },
     problemHeading: 'As you scale, Meta Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
@@ -128,8 +131,11 @@ export const META_LP: Record<Lang, LpData> = {
     photoHeading: 'Directly connected with Meta',
     photoSub: 'The Tentaklik team is active in Meta\'s official events & programs.',
     photos: [
-      { src: '/assets/galeri/9.jpeg',  alt: 'Tentaklik team at a Meta event' },
-      { src: '/assets/galeri/10.jpeg', alt: 'Visit to the Meta / Facebook office' },
+      { src: '/assets/galeri-meta/meta1.avif', alt: 'Tentaklik team at a Meta event' },
+      { src: '/assets/galeri-meta/meta2.avif', alt: 'Visit to the Meta office' },
+      { src: '/assets/galeri-meta/meta6.jpeg', alt: 'Team visit to Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta4.avif', alt: 'Official Meta Partner event' },
+      { src: '/assets/galeri-meta/meta5.avif', alt: 'Tentaklik Team', portrait: true },
     ],
     cta: {
       title: 'Ready to use a Meta Whitelist account?',

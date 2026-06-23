@@ -27,7 +27,7 @@ const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitel
 const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
 const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
 
-// Meta LP: header dihilangkan (bareHeader). Google LP: header tetap.
+// Header remains visible for brand navigation (except for meta-whitelist).
 const hideHeader = platform === 'meta';
 
 const jsonLd = [

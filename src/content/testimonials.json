@@ -5,7 +5,8 @@
     "text": "Leads masuk jauh lebih rapi setelah website dan Google Ads dibenahi. Timnya enak diajak diskusi.",
     "name": "Rina",
     "role": "Marketing Manager",
-    "initials": "R"
+    "initials": "R",
+    "avatar": "/assets/testimonials/avatar_rina.png"
   },
   {
     "id": "2",
@@ -13,7 +14,8 @@
     "text": "Meta Ads jadi makin stabil dan closing rate naik. Reporting-nya juga jelas tiap minggu.",
     "name": "Fajar",
     "role": "Owner Brand",
-    "initials": "F"
+    "initials": "F",
+    "avatar": "/assets/testimonials/avatar_fajar.png"
   },
   {
     "id": "3",
@@ -21,6 +23,25 @@
     "text": "Sesi konsultasinya ngebantu banget buat nentuin prioritas channel marketing kami.",
     "name": "Dimas",
     "role": "Founder",
-    "initials": "D"
+    "initials": "D",
+    "avatar": "/assets/testimonials/avatar_dimas.png"
+  },
+  {
+    "id": "4",
+    "stars": 5,
+    "text": "ROAS naik dari 2.5x ke 4.2x sejak pakai akun Meta Whitelist dari Tentaklik. Pengajuannya cepat dan dibantu setup sampai ngiklan.",
+    "name": "Andi",
+    "role": "E-commerce Owner",
+    "initials": "A",
+    "avatar": "/assets/testimonials/avatar_andi.png"
+  },
+  {
+    "id": "5",
+    "stars": 5,
+    "text": "Puas banget dengan support appeal-nya. Kemarin sempat ada kendala teknis di BM, langsung dieskalasi ke tim Meta dan kelar hari itu juga.",
+    "name": "Siti",
+    "role": "Marketing Lead",
+    "initials": "S",
+    "avatar": "/assets/testimonials/avatar_siti.png"
   }
 ]

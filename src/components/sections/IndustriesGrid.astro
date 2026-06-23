@@ -34,8 +34,8 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
     margin: 0 auto;
   }
   .industri-card {
-    background: linear-gradient(150deg, var(--tint), #ffffff 90%);
-    border: 1px solid var(--ink-100);
+    background: white;
+    border: 1.5px solid var(--orange-100);
     border-radius: var(--radius-xl);
     padding: 28px 24px;
     min-height: 132px;
@@ -43,11 +43,12 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
     flex-direction: column;
     justify-content: center;
     gap: 12px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
   .industri-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: var(--orange-400);
   }
   .industri-icon {
     font-size: 32px;
