@@ -268,6 +268,7 @@ section { padding: 80px 0; }
   padding: 64px 0 24px;
   margin-top: 80px;
 }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; }
 .footer h4 { color: white; font-size: 15px; margin-bottom: 16px; font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
 .footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--ink-300); }
 .footer ul a:hover { color: var(--orange-300); }
@@ -619,7 +620,7 @@ section { padding: 80px 0; }
   section > .container[style*="1fr 1.3fr"] { grid-template-columns: 1fr !important; gap: 28px !important; }
 
   /* Footer 4-col → 2-col */
-  .footer .container { grid-template-columns: repeat(2, 1fr) !important; gap: 32px !important; }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
 
   /* Section padding */
   section { padding: 64px 0; }
@@ -716,7 +717,7 @@ section { padding: 80px 0; }
 
   /* Footer */
   .footer { padding: 48px 0 20px; margin-top: 56px; }
-  .footer .container { grid-template-columns: 1fr !important; gap: 28px !important; text-align: left; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; text-align: left; }
   .footer h4 { margin-bottom: 12px; }
 
   /* Form fields side-by-side → stack */
@@ -1017,7 +1018,7 @@ picture { display: block; }
   .process-step { padding: 20px; }
 
   /* Footer — 2 col */
-  .footer .container { grid-template-columns: 1fr 1fr !important; gap: 32px 24px !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
 
   /* Form kontak — side by side tetap */
   .card[style*="padding:32px"] { padding: 28px !important; }
@@ -1103,7 +1104,7 @@ picture { display: block; }
   .job-card-head h3 { font-size: 17px !important; }
 
   /* Footer — 4-col → 2-col */
-  .footer .container { grid-template-columns: 1fr 1fr !important; gap: 24px 16px !important; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 24px 16px; }
   .footer { padding: 44px 0 20px; margin-top: 40px; }
 
   /* Sticky WA */
@@ -1138,7 +1139,7 @@ picture { display: block; }
   .service-card, .testi-card, .pricing-card { padding: 18px; }
 
   /* Footer single col */
-  .footer .container { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .footer-grid { grid-template-columns: 1fr; gap: 24px; }
   .partner-row { justify-content: center !important; }
 
   /* CTA banner mascot */

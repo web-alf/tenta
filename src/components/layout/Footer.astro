@@ -14,7 +14,7 @@ const t = useT(lang);
 const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 ---
 <footer class="footer">
-  <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+  <div class="container footer-grid">
     <div>
       <div style="margin-bottom:14px;"><TentaklikLogo size={24} variant="white" /></div>
       <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.footerTagline}</p>

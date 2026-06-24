@@ -36,7 +36,9 @@ const t = useT(lang);
             {p.features.map((f: string) => <li>{f}</li>)}
           </ul>
           <a
-            href={waLink(`Halo Tentaklik! Saya tertarik dengan paket ${p.name} (${p.price}${p.unit}) untuk layanan ${service}. Bisa minta info lebih lanjut?`)}
+            href={waLink(lang === 'en'
+              ? `Hi Tentaklik! I'm interested in the ${p.name} plan (${p.price} ${p.unit}) for ${service}. Could you share more details?`
+              : `Halo Tentaklik! Saya tertarik dengan paket ${p.name} (${p.price}${p.unit}) untuk layanan ${service}. Bisa minta info lebih lanjut?`)}
             target="_blank"
             rel="noopener noreferrer"
             class={`btn ${p.featured ? 'btn-primary' : 'btn-ghost'}`}

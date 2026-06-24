@@ -56,11 +56,12 @@ const { heading, sub, photos } = Astro.props;
     };
 
     const scrollToCard = (idx: number) => {
-      items[idx]?.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'center'
-      });
+      const item = items[idx];
+      if (!item) return;
+      const gridRect = grid.getBoundingClientRect();
+      const itemRect = item.getBoundingClientRect();
+      const offset = itemRect.left - gridRect.left + grid.scrollLeft - (gridRect.width - itemRect.width) / 2;
+      grid.scrollTo({ left: offset, behavior: 'smooth' });
     };
 
     const updateActiveStates = () => {
@@ -113,7 +114,11 @@ const { heading, sub, photos } = Astro.props;
     updateActiveStates();
   }
 
-  // Run on initial mount
+  document.querySelectorAll<HTMLImageElement>('.lp-photo-item img').forEach(img => {
+    if (img.complete) img.classList.add('loaded');
+    else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
+  });
+
   initPhotoSlider();
 </script>
 
@@ -144,7 +149,7 @@ const { heading, sub, photos } = Astro.props;
     scroll-snap-align: center;
     border-radius: 16px;
     overflow: hidden;
-    background: var(--ink-50);
+    background: rgba(0,0,0,0.03);
     aspect-ratio: 4 / 3; /* Uniform size for all mobile photos */
     border: 1.5px solid transparent;
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -169,7 +174,11 @@ const { heading, sub, photos } = Astro.props;
     object-fit: cover;
     object-position: center 20%;
     display: block;
-    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    transition: opacity 0.6s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lp-photo-item img.loaded {
+    opacity: 1;
   }
   .lp-photo-item.active img {
     transform: scale(1.03);

@@ -14,12 +14,59 @@ import { getLang } from '@i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
 const d = META_LP[lang];
-const url = `${site.url}/meta-whitelist-pricing`;
+const path = lang === 'en' ? '/en/meta-whitelist-pricing' : '/meta-whitelist-pricing';
+const url = `${site.url}${path}`;
+
+const englishPlans: typeof SEWA_PLANS = [
+  {
+    name: 'Starter',
+    tagline: 'Default for all new accounts',
+    price: '5%',
+    unit: 'top-up fee',
+    features: [
+      'Top-up IDR 300k – IDR 5m / month',
+      'Valid for Meta & Google Whitelist',
+      'No VAT',
+      'No daily spending limit',
+      'Balance auto-moves if disabled*',
+    ],
+  },
+  {
+    name: 'Growth',
+    tagline: 'Request via CS — save more on fees',
+    price: '4.5%',
+    unit: 'top-up fee',
+    featured: true,
+    features: [
+      'Top-up IDR 5m – IDR 15m / month',
+      'Activated via Tentaklik CS',
+      'No VAT',
+      'No daily spending cap',
+      'Partner-level appeal support',
+    ],
+  },
+  {
+    name: 'Scale',
+    tagline: 'Best value for high spenders',
+    price: '3.5%',
+    unit: 'top-up fee',
+    features: [
+      'Top-up above IDR 15m / month',
+      'Most competitive fee',
+      'Perfect for large scale / multi-account',
+      'Free onboarding checklist',
+      'Personal support (not a bot)',
+    ],
+  },
+];
+
+const plans = lang === 'en' ? englishPlans : SEWA_PLANS;
+
 const jsonLd = [
   serviceJsonLd({ name: d.seo.title, description: d.seo.description, url, serviceType: 'Meta Ads Whitelist' }),
   breadcrumbJsonLd([
-    { name: lang === 'en' ? 'Home' : 'Beranda', url: site.url },
-    { name: lang === 'en' ? 'Account Rental' : 'Sewa Akun', url: `${site.url}/layanan/sewa-akun` },
+    { name: lang === 'en' ? 'Home' : 'Beranda', url: lang === 'en' ? `${site.url}/en` : site.url },
+    { name: lang === 'en' ? 'Account Rental' : 'Sewa Akun', url: `${site.url}${lang === 'en' ? '/en' : ''}/layanan/sewa-akun` },
     { name: 'Meta Whitelist Pricing', url },
   ]),
 ];
@@ -32,6 +79,7 @@ const jsonLd = [
   keywords={d.keywords}
   bareHeader={true}
   bareLayout={true}
+  preloadHeroSrc="/assets/kraken-hero.png"
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -43,7 +91,7 @@ const jsonLd = [
   />
   <LpBenefits heading={d.benefitHeading} items={d.benefits} />
   <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <PricingSection plans={SEWA_PLANS} service="Meta Ads Whitelist" />
+  <PricingSection plans={plans} service="Meta Ads Whitelist" />
   <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
   <ServiceCTA hideDesc={true} />
 </BaseLayout>
