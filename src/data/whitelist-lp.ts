@@ -76,7 +76,7 @@ export const INDUSTRY_LP_HEADING: Record<Lang, { title: string; sub: string }> =
 
 const CTA_HREF = '/layanan/sewa-akun';
 
-export const META_LP: Record<Lang, LpData> = {
+export const META_LP: Record<Lang, MetaLpData> = {
   id: {
     platform: 'meta',
     hero: {
@@ -191,7 +191,7 @@ export const META_LP: Record<Lang, LpData> = {
   },
 };
 
-export const GOOGLE_LP: Record<Lang, LpData> = {
+export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
   id: {
     platform: 'google',
     hero: {
