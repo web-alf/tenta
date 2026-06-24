@@ -4,10 +4,12 @@ import { getCollection } from 'astro:content';
 interface Props {
   title?: string;
   sub?: string;
+  lang?: 'en' | 'id';
+  items?: any[];
 }
-const { title, sub: propSub } = Astro.props;
+const { title, sub: propSub, lang: propLang, items: propItems } = Astro.props;
 
-const lang = Astro.currentLocale || 'id';
+const lang = propLang || Astro.currentLocale || 'id';
 const isEn = lang === 'en';
 
 const headingText = title || (isEn ? 'What Our Clients Say' : 'Kata Mereka yang Sudah Scale-Up');
@@ -15,8 +17,11 @@ const subText = propSub || (isEn
   ? 'Success stories from advertisers who scaled their ads drama-free.' 
   : 'Kisah sukses dari para advertiser yang berhasil scale-up tanpa drama banned.');
 
-const allTesti = await getCollection('testimonials');
-const items = allTesti.slice(0, 5);
+let items = propItems;
+if (!items) {
+  const allTesti = await getCollection('testimonials');
+  items = allTesti.slice(0, 5);
+}
 ---
 <section style="background:var(--bg-warm); padding: 80px 0;">
   <div class="container" style="max-width:980px;">

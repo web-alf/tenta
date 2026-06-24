@@ -1,34 +1,36 @@
 ---
 interface Props {
   platform: 'meta' | 'google';
+  lang?: 'en' | 'id';
 }
 
-const { platform } = Astro.props;
+const { platform, lang = Astro.currentLocale === 'en' ? 'en' : 'id' } = Astro.props;
+const isEn = lang === 'en';
 
 const comparisons = [
   {
     leftIcon: 'user',
-    leftText: 'Cocok untuk penggunaan umum',
+    leftText: isEn ? 'Suitable for general use' : 'Cocok untuk penggunaan umum',
     rightIcon: 'users',
-    rightText: 'Cocok untuk bisnis yang aktif beriklan'
+    rightText: isEn ? 'Fit for active advertisers' : 'Cocok untuk bisnis yang aktif beriklan'
   },
   {
     leftIcon: 'settings',
-    leftText: 'Dikelola secara mandiri',
+    leftText: isEn ? 'Self-managed' : 'Dikelola secara mandiri',
     rightIcon: 'headset',
-    rightText: 'Mendapat dukungan dan pendampingan'
+    rightText: isEn ? 'Gets support and guidance' : 'Mendapat dukungan dan pendampingan'
   },
   {
     leftIcon: 'chat',
-    leftText: 'Support terbatas',
+    leftText: isEn ? 'Limited support' : 'Support terbatas',
     rightIcon: 'chat-orange',
-    rightText: 'Dukungan yang lebih responsif'
+    rightText: isEn ? 'Highly responsive support' : 'Dukungan yang lebih responsif'
   },
   {
     leftIcon: 'clipboard',
-    leftText: 'Cocok untuk kebutuhan dasar',
+    leftText: isEn ? 'Fit for basic needs' : 'Cocok untuk kebutuhan dasar',
     rightIcon: 'chart',
-    rightText: 'Lebih siap mendukung kebutuhan bisnis yang berkembang'
+    rightText: isEn ? 'Ready to scale up with your business' : 'Lebih siap mendukung kebutuhan bisnis yang berkembang'
   }
 ];
 ---
@@ -37,9 +39,9 @@ const comparisons = [
     
     <div class="comp-header reveal">
       <h2 class="comp-title">
-        Apa Bedanya <span class="text-orange">{platform === 'meta' ? 'Dengan Akun Biasa?' : 'Dengan Akun Biasa?'}</span>
+        {isEn ? 'What is the Difference' : 'Apa Bedanya'} <span class="text-orange">{platform === 'meta' ? (isEn ? 'From Regular Accounts?' : 'Dengan Akun Biasa?') : (isEn ? 'From Regular Accounts?' : 'Dengan Akun Biasa?')}</span>
       </h2>
-      <p class="comp-sub">Pilih solusi yang paling sesuai untuk kebutuhan bisnis Anda.</p>
+      <p class="comp-sub">{isEn ? 'Choose the solution that best fits your business needs.' : 'Pilih solusi yang paling sesuai untuk kebutuhan bisnis Anda.'}</p>
     </div>
 
     <!-- Dots Decor left -->
@@ -69,7 +71,7 @@ const comparisons = [
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
           </div>
-          <h3>Akun Biasa</h3>
+          <h3>{isEn ? 'Regular Account' : 'Akun Biasa'}</h3>
         </div>
         
         <div class="comp-col comp-col-right header-col right-header-bg">

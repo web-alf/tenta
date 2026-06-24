@@ -6,10 +6,12 @@ interface Props {
   platform: 'meta' | 'google';
   heading?: string;
   sub?: string;
+  lang?: 'en' | 'id';
 }
-const lang = getLang(Astro.currentLocale);
+const { platform, lang: propLang } = Astro.props;
+const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
-const { platform, heading = t('form.heading'), sub = t('form.sub') } = Astro.props;
+const { heading = t('form.heading'), sub = t('form.sub') } = Astro.props;
 const formId = `shortform-${platform}`;
 ---
 <section aria-labelledby="shortform-heading">

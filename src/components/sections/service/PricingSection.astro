@@ -14,10 +14,11 @@ interface Plan {
 interface Props {
   plans: Plan[];
   service: string;
+  lang?: 'en' | 'id';
 }
 
-const { plans, service } = Astro.props;
-const lang = getLang(Astro.currentLocale);
+const { plans, service, lang: propLang } = Astro.props;
+const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
 ---
 <section id="pricing" style="background:var(--bg-warm);scroll-margin-top:90px;">
