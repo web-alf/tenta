@@ -5,6 +5,8 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
 import LpProblem from '@components/sections/lp/LpProblem.astro';
 import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
@@ -61,10 +63,30 @@ const jsonLd = [
     ctaText={d.cta.btn}
     ctaHref={`#shortform-${platform}`}
   />
-  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  {d.platform === 'meta' ? (
+    <>
+      <LpWhyPlatform 
+        platform={d.platform} 
+        heading={d.whyHeading} 
+        sub={d.whySub} 
+        items={d.whyItems} 
+      />
+      <LpComparison platform={d.platform} />
+    </>
+  ) : (
+    <>
+      <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
+      <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+    </>
+  )}
+  <IndustriesGrid 
+    items={INDUSTRIES_LP[lang]} 
+    heading={INDUSTRY_LP_HEADING[lang]} 
+    bg="warm" 
+    center 
+    variant={platform === 'meta' ? 'premium' : 'default'}
+  />
   <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
   <LpTestimonials />
   <LpPromoBanner />
   <LpShortForm platform={platform} />

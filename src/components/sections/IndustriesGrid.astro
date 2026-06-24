@@ -6,18 +6,91 @@ interface Props {
   heading: { title: string; sub: string };
   bg?: 'warm' | 'default';
   center?: boolean;
+  variant?: 'default' | 'premium';
 }
-const { items, heading, bg = 'default', center = false } = Astro.props;
-const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
+const { items, heading, bg = 'default', center = false, variant = 'default' } = Astro.props;
+
+let sectionClass = 'industri-section';
+if (bg === 'warm') sectionClass += ' bg-warm';
+if (variant === 'premium') sectionClass += ' premium-variant';
 ---
-<section style={sectionStyle} aria-labelledby="industri-heading">
-  <div class="container">
-    <h2 id="industri-heading" class="section-title">{heading.title}</h2>
-    <p class="section-sub" style="margin-bottom:44px;">{heading.sub}</p>
+<section class={sectionClass} aria-labelledby="industri-heading">
+  {variant === 'premium' && (
+    <div class="premium-decor-bg">
+      <svg class="decor-left" width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M-50 200 C100 200, 200 100, 200 -50" stroke="#ffedd5" stroke-width="1.5" stroke-dasharray="6 6" />
+        <circle cx="50" cy="50" r="100" fill="url(#grad1)" opacity="0.3" />
+        <defs>
+          <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#ffedd5" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+      </svg>
+      <svg class="decor-right" width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M450 200 C300 200, 200 300, 200 450" stroke="#ffedd5" stroke-width="1.5" stroke-dasharray="6 6" />
+        <circle cx="350" cy="350" r="100" fill="url(#grad2)" opacity="0.4" />
+        <circle cx="280" cy="180" r="4" fill="#f97316" opacity="0.6" />
+        <defs>
+          <radialGradient id="grad2" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+            <stop offset="0%" stop-color="#ffedd5" />
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+          </radialGradient>
+        </defs>
+      </svg>
+      <!-- Dots top left -->
+      <svg class="dots-tl" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="2" cy="2" r="1.5" fill="#f97316" opacity="0.8"/>
+        <circle cx="12" cy="2" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="22" cy="2" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="2" cy="12" r="1.5" fill="#f97316" opacity="0.8"/>
+        <circle cx="12" cy="12" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="22" cy="12" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="2" cy="22" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="12" cy="22" r="1.5" fill="#f97316" opacity="0.3"/>
+      </svg>
+      <!-- Dots bottom right -->
+      <svg class="dots-br" width="40" height="40" viewBox="0 0 40 40" fill="none">
+        <circle cx="38" cy="38" r="1.5" fill="#f97316" opacity="0.8"/>
+        <circle cx="28" cy="38" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="18" cy="38" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="38" cy="28" r="1.5" fill="#f97316" opacity="0.8"/>
+        <circle cx="28" cy="28" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="18" cy="28" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="38" cy="18" r="1.5" fill="#f97316" opacity="0.3"/>
+        <circle cx="28" cy="18" r="1.5" fill="#f97316" opacity="0.3"/>
+      </svg>
+    </div>
+  )}
+
+  <div class="container relative-z">
+    <h2 id="industri-heading" class="section-title" set:html={heading.title}></h2>
+    <p class="section-sub" set:html={heading.sub}></p>
+    
+    {variant === 'premium' && (
+      <div class="title-accent">
+        <span class="dash"></span>
+        <span class="dot"></span>
+        <span class="dash"></span>
+      </div>
+    )}
+
     <div class={`industri-grid ${center ? 'industri-center' : ''}`}>
       {items.map((it) => (
-        <article class="industri-card reveal" style={`--tint:${it.tint}`}>
-          <span class="industri-icon" aria-hidden="true">{it.icon}</span>
+        <article class={`industri-card reveal ${variant === 'premium' ? 'card-premium' : ''}`} style={`--tint:${it.tint}`}>
+          {variant === 'premium' ? (
+            <div class="icon-orbit-wrapper">
+              <div class="orbit-dot dot-1"></div>
+              <div class="orbit-dot dot-2"></div>
+              <div class="orbit-dot dot-3"></div>
+              <div class="orbit-dot dot-4"></div>
+              <div class="icon-inner">
+                <span class="industri-icon" aria-hidden="true">{it.icon}</span>
+              </div>
+            </div>
+          ) : (
+            <span class="industri-icon" aria-hidden="true">{it.icon}</span>
+          )}
           <h3 class="industri-label">{it.label}</h3>
         </article>
       ))}
@@ -26,6 +99,100 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
 </section>
 
 <style>
+  .industri-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .bg-warm {
+    background: var(--bg-warm);
+  }
+  
+  .section-title {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-sub {
+    text-align: center;
+    margin-bottom: 44px;
+    color: var(--ink-600);
+  }
+
+  .relative-z {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Premium Variant Background */
+  .premium-variant {
+    background: #f8fafc; /* matching the design's very light cool grey */
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+  .premium-variant .section-title {
+    font-size: 42px;
+    font-weight: 800;
+    color: var(--ink-900);
+  }
+  .premium-variant .section-sub {
+    margin-bottom: 24px; /* closer to accent */
+    font-size: 16.5px;
+  }
+
+  .premium-decor-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .decor-left {
+    position: absolute;
+    top: -50px;
+    left: -50px;
+    width: 400px;
+    height: 400px;
+  }
+  .decor-right {
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 400px;
+    height: 400px;
+  }
+  .dots-tl {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+  }
+  .dots-br {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+  }
+
+  /* Title Accent */
+  .title-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+  .title-accent .dash {
+    width: 24px;
+    height: 3px;
+    background: var(--orange-400);
+    border-radius: 4px;
+  }
+  .title-accent .dot {
+    width: 4px;
+    height: 4px;
+    background: var(--orange-400);
+    border-radius: 50%;
+  }
+
+  /* Grid & Cards */
   .industri-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -33,6 +200,7 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
     max-width: 980px;
     margin: 0 auto;
   }
+  
   .industri-card {
     background: white;
     border: 1.5px solid var(--orange-100);
@@ -50,26 +218,100 @@ const sectionStyle = bg === 'warm' ? 'background:var(--bg-warm);' : '';
     box-shadow: var(--shadow-lg);
     border-color: var(--orange-400);
   }
+
+  /* Premium Card Styles */
+  .card-premium {
+    border: 1.5px solid var(--orange-100);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    padding: 36px 24px;
+    align-items: center;
+    gap: 20px;
+  }
+  .card-premium:hover {
+    box-shadow: 0 15px 40px rgba(249, 115, 22, 0.08);
+    border-color: var(--orange-400);
+  }
+
+  .icon-orbit-wrapper {
+    position: relative;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    border: 1px dashed var(--orange-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .orbit-dot {
+    position: absolute;
+    width: 4.5px;
+    height: 4.5px;
+    background: var(--orange-400);
+    border-radius: 50%;
+  }
+  .dot-1 { top: -2.25px; left: 50%; transform: translateX(-50%); }
+  .dot-2 { bottom: -2.25px; left: 50%; transform: translateX(-50%); }
+  .dot-3 { left: -2.25px; top: 50%; transform: translateY(-50%); }
+  .dot-4 { right: -2.25px; top: 50%; transform: translateY(-50%); }
+
+  .icon-inner {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--orange-50);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .industri-icon {
     font-size: 32px;
     line-height: 1;
   }
+  .card-premium .industri-icon {
+    font-size: 28px;
+    transform: translateY(2px); /* visual centering for emojis */
+  }
+
   .industri-label {
     font-size: 17px;
     font-weight: 700;
     color: var(--ink-900);
     margin: 0;
   }
+  .card-premium .industri-label {
+    font-size: 16px;
+    font-weight: 800;
+  }
+
   .industri-center .industri-card {
     align-items: center;
     text-align: center;
   }
+
+  @media (max-width: 1024px) {
+    .premium-variant .section-title {
+      font-size: 36px;
+    }
+  }
+
   @media (max-width: 760px) {
     .industri-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
     .industri-card { padding: 22px 18px; min-height: 110px; }
     .industri-icon { font-size: 28px; }
     .industri-label { font-size: 15px; }
+    
+    .card-premium { padding: 24px 16px; gap: 16px; }
+    .icon-orbit-wrapper { width: 64px; height: 64px; }
+    .icon-inner { width: 44px; height: 44px; }
+    .card-premium .industri-icon { font-size: 24px; }
+    .card-premium .industri-label { font-size: 14px; }
+    
+    .premium-variant .section-title { font-size: 28px; }
+    .premium-decor-bg { opacity: 0.5; }
   }
+  
   @media (max-width: 380px) {
     .industri-grid { grid-template-columns: 1fr; }
   }

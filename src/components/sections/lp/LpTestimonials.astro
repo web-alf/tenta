@@ -281,6 +281,11 @@ const items = allTesti.slice(0, 5);
     :global(.lp-testi-card) {
       flex: 0 0 calc((100% - 32px) / 3);
     }
+    /* Sembunyikan 2 dot terakhir di desktop karena card ditampilkan 3 sekaligus (total 5 card, max scroll index 2) */
+    :global(.lp-testi-dot:nth-last-child(1)),
+    :global(.lp-testi-dot:nth-last-child(2)) {
+      display: none;
+    }
   }
 
   @media (max-width: 680px) {

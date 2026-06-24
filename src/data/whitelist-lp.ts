@@ -5,17 +5,13 @@
 import type { Industry } from '@data/sewa-akun';
 import type { Lang } from '@i18n/utils';
 
+export interface WhyItem { iconId: 'stable' | 'comfortable' | 'scale' | 'tax' | 'priority' | 'expert' | 'protection'; title: string; desc: string }
 export interface LpProblem { icon: string; title: string; desc: string }
 export interface LpPhoto { src: string; alt: string; portrait?: boolean }
 
-export interface LpData {
+export interface BaseLpData {
   platform: 'meta' | 'google';
   hero: { eyebrow: string; title: string; titleAccent: string; desc: string };
-  problemHeading: string;
-  problemSub: string;
-  problems: LpProblem[];
-  benefitHeading: string;
-  benefits: string[];
   photoHeading: string;
   photoSub: string;
   photos: LpPhoto[];
@@ -23,6 +19,29 @@ export interface LpData {
   seo: { title: string; description: string };
   keywords: string[];
 }
+
+export interface MetaLpData extends BaseLpData {
+  platform: 'meta';
+  problemHeading: string;
+  problemSub: string;
+  problems: LpProblem[];
+  benefitHeading: string;
+  benefits: string[];
+  whyHeading: string;
+  whySub: string;
+  whyItems: WhyItem[];
+}
+
+export interface GoogleLpData extends BaseLpData {
+  platform: 'google';
+  problemHeading: string;
+  problemSub: string;
+  problems: LpProblem[];
+  benefitHeading: string;
+  benefits: string[];
+}
+
+export type LpData = MetaLpData | GoogleLpData;
 
 // Kategori industri khusus 2 LP whitelist (beda dari sewa-akun). Bilingual.
 export const INDUSTRIES_LP: Record<Lang, Industry[]> = {
@@ -46,11 +65,11 @@ export const INDUSTRIES_LP: Record<Lang, Industry[]> = {
 
 export const INDUSTRY_LP_HEADING: Record<Lang, { title: string; sub: string }> = {
   id: {
-    title: 'Cocok untuk berbagai industri',
+    title: 'Cocok untuk <span style="color: var(--orange-500)">berbagai industri</span>',
     sub: 'Umumnya digunakan oleh advertiser di industri:',
   },
   en: {
-    title: 'Fit for various industries',
+    title: 'Fit for <span style="color: var(--orange-500)">various industries</span>',
     sub: 'Commonly used by advertisers in industries:',
   },
 };
@@ -62,10 +81,21 @@ export const META_LP: Record<Lang, LpData> = {
     platform: 'meta',
     hero: {
       eyebrow: 'Meta Ads Whitelist',
-      title: 'Akun Meta Ads Whitelist',
-      titleAccent: 'Siap Scale Tanpa Drama Banned',
-      desc: 'Bebas blokir massal, tanpa batasan spending, serta didukung prioritas eskalasi tercepat.',
+      title: 'Jangan Biarkan',
+      titleAccent: 'Kendala Akun Menghambat Pertumbuhan Bisnis Anda',
+      desc: 'Meta Whitelist membantu bisnis yang aktif beriklan menjalankan campaign dengan lebih nyaman dan fokus pada pertumbuhan',
     },
+    whyHeading: 'Mengapa Memilih Meta Whitelist?',
+    whySub: 'Solusi terbaik untuk scale-up iklan Anda dengan aman, nyaman, dan bebas hambatan.',
+    whyItems: [
+      { iconId: 'stable', title: 'Akun Stabil', desc: 'Akun stabil, Minim risiko pembatasan acak' },
+      { iconId: 'comfortable', title: 'Lebih Nyaman', desc: 'Lebih nyaman untuk beriklan' },
+      { iconId: 'scale', title: 'Bebas Scale', desc: 'Bebas scale limit spending harian' },
+      { iconId: 'tax', title: 'Tanpa PPN', desc: 'Tidak dikenakan PPN' },
+      { iconId: 'priority', title: 'Jalur Prioritas', desc: 'Support appeal langsung melalui jalur Meta' },
+      { iconId: 'expert', title: 'Support Expert', desc: 'Support teknis langsung ke tim expert Meta' },
+      { iconId: 'protection', title: 'Proteksi Saldo', desc: 'Saldo otomatis pindah ke akun pengganti jika terjadi disable (s&k berlaku)' },
+    ],
     problemHeading: 'Saat scale, masalah Meta Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
@@ -83,7 +113,7 @@ export const META_LP: Record<Lang, LpData> = {
       'Saldo otomatis pindah ke **akun pengganti** jika terjadi disable (syarat & ketentuan berlaku)',
       'Support teknis langsung ke **tim expert Meta**',
     ],
-    photoHeading: 'Terhubung langsung dengan Meta',
+    photoHeading: 'Terhubung langsung <span style="color: var(--orange-500)">dengan Meta</span>',
     photoSub: 'Tim Tentaklik aktif di event & program resmi Meta.',
     photos: [
       { src: '/assets/galeri-meta/meta1.avif', alt: 'Tim Tentaklik di event Meta' },
@@ -111,6 +141,17 @@ export const META_LP: Record<Lang, LpData> = {
       titleAccent: 'Ready to Scale Without Banned Drama',
       desc: 'Free from mass blocks, no spending limits, and backed by the fastest escalation priority.',
     },
+    whyHeading: 'Why Choose Meta Whitelist?',
+    whySub: 'The ultimate solution to scale your ads safely, comfortably, and without obstacles.',
+    whyItems: [
+      { iconId: 'stable', title: 'Stable Accounts', desc: 'Stable accounts, minimal risk of random restrictions' },
+      { iconId: 'comfortable', title: 'More Comfortable', desc: 'More comfortable for advertising' },
+      { iconId: 'scale', title: 'Scale Freely', desc: 'Scale freely with no daily spending limits' },
+      { iconId: 'tax', title: 'No VAT', desc: 'No VAT charged' },
+      { iconId: 'priority', title: 'Priority Route', desc: 'Direct appeal support through Meta channels' },
+      { iconId: 'expert', title: 'Expert Support', desc: 'Direct technical support from Meta expert team' },
+      { iconId: 'protection', title: 'Balance Protection', desc: 'Balance auto-moves to replacement account if disabled (T&C apply)' },
+    ],
     problemHeading: 'As you scale, Meta Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
@@ -128,7 +169,7 @@ export const META_LP: Record<Lang, LpData> = {
       'Balance auto-moves to a **replacement account** if disabled (terms & conditions apply)',
       'Direct technical support from the **Meta expert team**',
     ],
-    photoHeading: 'Directly connected with Meta',
+    photoHeading: 'Directly connected <span style="color: var(--orange-500)">with Meta</span>',
     photoSub: 'The Tentaklik team is active in Meta\'s official events & programs.',
     photos: [
       { src: '/assets/galeri-meta/meta1.avif', alt: 'Tentaklik team at a Meta event' },

@@ -10,12 +10,19 @@ const { heading, sub, photos } = Astro.props;
 ---
 <section aria-labelledby="lp-photo-heading">
   <div class="container">
-    <h2 id="lp-photo-heading" class="section-title">{heading}</h2>
-    <p class="section-sub" style="margin-bottom:36px;">{sub}</p>
+    <h2 id="lp-photo-heading" class="section-title" set:html={heading}></h2>
+    <p class="section-sub" style="margin-bottom:36px;" set:html={sub}></p>
     <div class="lp-photo-grid reveal">
       {photos.map((p, index) => (
         <figure class={`lp-photo-item ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
-          <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+          <img 
+            src={p.src} 
+            alt={p.alt} 
+            width="800" 
+            height="600" 
+            loading="lazy" 
+            decoding="async" 
+          />
         </figure>
       ))}
     </div>
