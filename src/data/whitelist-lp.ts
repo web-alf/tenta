@@ -88,7 +88,7 @@ export const META_LP: Record<Lang, LpData> = {
     photos: [
       { src: '/assets/galeri-meta/meta1.avif', alt: 'Tim Tentaklik di event Meta' },
       { src: '/assets/galeri-meta/meta2.avif', alt: 'Kunjungan ke kantor Meta' },
-      { src: '/assets/galeri-meta/meta6.jpeg', alt: 'Kunjungan tim ke Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta6.avif', alt: 'Kunjungan tim ke Facebook Singapore' },
       { src: '/assets/galeri-meta/meta4.avif', alt: 'Event resmi Partner Meta' },
       { src: '/assets/galeri-meta/meta5.avif', alt: 'Tim Tentaklik', portrait: true },
     ],
@@ -133,7 +133,7 @@ export const META_LP: Record<Lang, LpData> = {
     photos: [
       { src: '/assets/galeri-meta/meta1.avif', alt: 'Tentaklik team at a Meta event' },
       { src: '/assets/galeri-meta/meta2.avif', alt: 'Visit to the Meta office' },
-      { src: '/assets/galeri-meta/meta6.jpeg', alt: 'Team visit to Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta6.avif', alt: 'Team visit to Facebook Singapore' },
       { src: '/assets/galeri-meta/meta4.avif', alt: 'Official Meta Partner event' },
       { src: '/assets/galeri-meta/meta5.avif', alt: 'Tentaklik Team', portrait: true },
     ],

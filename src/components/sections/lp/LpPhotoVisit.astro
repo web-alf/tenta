@@ -12,9 +12,9 @@ const { heading, sub, photos } = Astro.props;
   <div class="container">
     <h2 id="lp-photo-heading" class="section-title">{heading}</h2>
     <p class="section-sub" style="margin-bottom:36px;">{sub}</p>
-    <div class="lp-photo-grid">
+    <div class="lp-photo-grid reveal">
       {photos.map((p, index) => (
-        <figure class={`lp-photo-item reveal ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
+        <figure class={`lp-photo-item ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
           <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
         </figure>
       ))}
@@ -395,7 +395,7 @@ const { heading, sub, photos } = Astro.props;
       scroll-snap-align: none;
       opacity: 1;
       transform: none;
-      aspect-ratio: auto;
+      aspect-ratio: 4 / 3;
     }
     .lp-photo-item:hover {
       transform: translateY(-6px);
