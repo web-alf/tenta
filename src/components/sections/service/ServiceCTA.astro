@@ -1,6 +1,12 @@
 ---
 import ArrowRight from '../../icons/ArrowRight.astro';
 import { getLang, useT } from '@i18n/utils';
+
+interface Props {
+  hideDesc?: boolean;
+}
+
+const { hideDesc = false } = Astro.props;
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
 const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
@@ -10,7 +16,7 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;position:relative;z-index:1;">
         <h3>{t('svc.cta.title')}</h3>
-        <p style="margin-top:8px;font-size:15px;opacity:0.95;">{t('svc.cta.desc')}</p>
+        {!hideDesc && <p style="margin-top:8px;font-size:15px;opacity:0.95;">{t('svc.cta.desc')}</p>}
       </div>
       <a href={L("/kontak")} class="btn btn-ghost">{t('svc.cta.btn')} <ArrowRight size={14} /></a>
     </div>

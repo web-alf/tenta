@@ -2,6 +2,7 @@
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
 import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import PricingSection from '@components/sections/service/PricingSection.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
@@ -29,6 +30,8 @@ const jsonLd = [
   active="layanan"
   jsonLd={jsonLd}
   keywords={d.keywords}
+  bareHeader={true}
+  bareLayout={true}
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -39,7 +42,8 @@ const jsonLd = [
     ctaHref="#pricing"
   />
   <LpBenefits heading={d.benefitHeading} items={d.benefits} />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
   <PricingSection plans={SEWA_PLANS} service="Meta Ads Whitelist" />
   <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
-  <ServiceCTA />
+  <ServiceCTA hideDesc={true} />
 </BaseLayout>
