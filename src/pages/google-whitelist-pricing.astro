@@ -1,27 +1,84 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
-import PricingSection from '@components/sections/service/PricingSection.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
+import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
-import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
 import { GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
 import { SEWA_PLANS } from '@data/sewa-akun';
 import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
-import { getLang } from '@i18n/utils';
+import { getLang, useT } from '@i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 const d = GOOGLE_LP[lang];
-const url = `${site.url}/google-whitelist-pricing`;
+const path = lang === 'en' ? '/en/google-whitelist-pricing' : '/google-whitelist-pricing';
+const url = `${site.url}${path}`;
+
+const englishPlans: typeof SEWA_PLANS = [
+  {
+    name: 'Starter',
+    tagline: 'Default for all new accounts',
+    price: '5%',
+    unit: 'top-up fee',
+    features: [
+      'Top-up IDR 300k – IDR 5m / month',
+      'Valid for Meta & Google Whitelist',
+      'No VAT',
+      'No daily spending limit',
+      'Balance auto-moves if disabled*',
+    ],
+  },
+  {
+    name: 'Growth',
+    tagline: 'Request via CS — save more on fees',
+    price: '4.5%',
+    unit: 'top-up fee',
+    featured: true,
+    features: [
+      'Top-up IDR 5m – IDR 15m / month',
+      'Activated via Tentaklik CS',
+      'No VAT',
+      'No daily spending cap',
+      'Partner-level appeal support',
+    ],
+  },
+  {
+    name: 'Scale',
+    tagline: 'Best value for high spenders',
+    price: '3.5%',
+    unit: 'top-up fee',
+    features: [
+      'Top-up above IDR 15m / month',
+      'Most competitive fee',
+      'Perfect for large scale / multi-account',
+      'Free onboarding checklist',
+      'Personal support (not a bot)',
+    ],
+  },
+];
+
+const plans = lang === 'en' ? englishPlans : SEWA_PLANS;
+
 const jsonLd = [
   serviceJsonLd({ name: d.seo.title, description: d.seo.description, url, serviceType: 'Google Ads Whitelist' }),
   breadcrumbJsonLd([
-    { name: lang === 'en' ? 'Home' : 'Beranda', url: site.url },
-    { name: lang === 'en' ? 'Account Rental' : 'Sewa Akun', url: `${site.url}/layanan/sewa-akun` },
+    { name: lang === 'en' ? 'Home' : 'Beranda', url: lang === 'en' ? `${site.url}/en` : site.url },
+    { name: lang === 'en' ? 'Account Rental' : 'Sewa Akun', url: `${site.url}${lang === 'en' ? '/en' : ''}/layanan/sewa-akun` },
     { name: 'Google Whitelist Pricing', url },
   ]),
 ];
+
+const waText = lang === 'en' 
+  ? "Hi Tentaklik! I'm interested in the Google Whitelist Account Rental service. Could you share more details?"
+  : "Halo Tentaklik! Saya tertarik dengan layanan Sewa Akun Google Whitelist. Bisa minta info lebih lanjut?";
+const waUrl = `https://wa.me/6285129992225?text=${encodeURIComponent(waText)}`;
 ---
 <BaseLayout
   title={`${d.seo.title} — Pricing`}
@@ -29,6 +86,9 @@ const jsonLd = [
   active="layanan"
   jsonLd={jsonLd}
   keywords={d.keywords}
+  bareHeader={true}
+  bareLayout={true}
+  preloadHeroSrc="true"
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -38,8 +98,45 @@ const jsonLd = [
     ctaText={lang === 'en' ? 'See Pricing' : 'Lihat Harga'}
     ctaHref="#pricing"
   />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-  <PricingSection plans={SEWA_PLANS} service="Google Ads Whitelist" />
-  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
-  <ServiceCTA />
+  
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  
+  <LpComparison platform={d.platform} />
+  
+  <PricingSection plans={plans} service="Google Ads Whitelist" />
+  
+  <IndustriesGrid 
+    items={INDUSTRIES_LP[lang]} 
+    heading={INDUSTRY_LP_HEADING[lang]} 
+    bg="warm" 
+    center 
+    variant="premium"
+  />
+  
+  <LpPhotoVisit 
+    heading={d.photoHeading} 
+    sub={d.photoSub} 
+    photos={d.photos} 
+    variant="grid" 
+  />
+  
+  <LpTestimonials />
+
+  <section id="final-cta" style="padding-bottom:24px;scroll-margin-top:90px;">
+    <div class="container">
+      <div class="cta-banner reveal" style="background:var(--orange-500);">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>{t('svc.cta.title')}</h3>
+        </div>
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          {t('svc.cta.btn')} <ArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

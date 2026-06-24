@@ -1,18 +1,22 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
-import PricingSection from '@components/sections/service/PricingSection.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
-import ServiceCTA from '@components/sections/service/ServiceCTA.astro';
+import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
+import PricingSection from '@components/sections/service/PricingSection.astro';
+import ArrowRight from '@components/icons/ArrowRight.astro';
+
 import { META_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
 import { SEWA_PLANS } from '@data/sewa-akun';
 import { serviceJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
-import { getLang } from '@i18n/utils';
+import { getLang, useT } from '@i18n/utils';
 
 const lang = getLang(Astro.currentLocale);
+const t = useT(lang);
 const d = META_LP[lang];
 const path = lang === 'en' ? '/en/meta-whitelist-pricing' : '/meta-whitelist-pricing';
 const url = `${site.url}${path}`;
@@ -70,6 +74,11 @@ const jsonLd = [
     { name: 'Meta Whitelist Pricing', url },
   ]),
 ];
+
+const waText = lang === 'en' 
+  ? "Hi Tentaklik! I'm interested in the Meta Whitelist Account Rental service. Could you share more details?"
+  : "Halo Tentaklik! Saya tertarik dengan layanan Sewa Akun Meta Whitelist. Bisa minta info lebih lanjut?";
+const waUrl = `https://wa.me/6285129992225?text=${encodeURIComponent(waText)}`;
 ---
 <BaseLayout
   title={`${d.seo.title} — Pricing`}
@@ -79,7 +88,7 @@ const jsonLd = [
   keywords={d.keywords}
   bareHeader={true}
   bareLayout={true}
-  preloadHeroSrc="/assets/kraken-hero.png"
+  preloadHeroSrc="true"
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -89,9 +98,45 @@ const jsonLd = [
     ctaText={lang === 'en' ? 'See Pricing' : 'Lihat Harga'}
     ctaHref="#pricing"
   />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
+  
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  
+  <LpComparison platform={d.platform} />
+  
+  <LpPhotoVisit 
+    heading={d.photoHeading} 
+    sub={d.photoSub} 
+    photos={d.photos} 
+    variant="meta" 
+  />
+
   <PricingSection plans={plans} service="Meta Ads Whitelist" />
-  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
-  <ServiceCTA hideDesc={true} />
+
+  <IndustriesGrid 
+    items={INDUSTRIES_LP[lang]} 
+    heading={INDUSTRY_LP_HEADING[lang]} 
+    bg="warm" 
+    center 
+    variant="premium"
+  />
+
+  <LpTestimonials />
+
+  <section id="final-cta" style="padding-bottom:24px;scroll-margin-top:90px;">
+    <div class="container">
+      <div class="cta-banner reveal" style="background:var(--orange-500);">
+        <div style="flex:1;position:relative;z-index:1;">
+          <h3>{t('svc.cta.title')}</h3>
+        </div>
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          {t('svc.cta.btn')} <ArrowRight size={14} />
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
