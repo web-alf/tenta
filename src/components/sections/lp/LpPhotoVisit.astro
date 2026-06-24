@@ -21,8 +21,14 @@ const { heading, sub, photos } = Astro.props;
     </div>
 
     <div class="lp-photo-progress-wrapper">
-      <div class="lp-photo-progress-track">
-        <div class="lp-photo-progress-bar"></div>
+      <div class="lp-photo-dots">
+        {photos.map((_, index) => (
+          <button
+            class={`lp-photo-dot ${index === 0 ? 'active' : ''}`}
+            data-index={index}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
     </div>
   </div>
@@ -31,255 +37,83 @@ const { heading, sub, photos } = Astro.props;
 <script>
   function initPhotoSlider() {
     const grid = document.querySelector('.lp-photo-grid') as HTMLElement;
-    const progressBar = document.querySelector('.lp-photo-progress-bar') as HTMLElement;
+    const dots = Array.from(document.querySelectorAll('.lp-photo-dot')) as HTMLElement[];
     if (!grid) return;
-
-    // Only apply carousel behavior on mobile (screen < 768px)
     if (window.innerWidth >= 768) return;
 
-    const originalItems = Array.from(grid.querySelectorAll('.lp-photo-item')) as HTMLElement[];
-    if (originalItems.length === 0) return;
+    const items = Array.from(grid.querySelectorAll('.lp-photo-item')) as HTMLElement[];
+    if (items.length === 0) return;
 
-    const originalCount = originalItems.length;
+    let autoInterval: any;
+    let hasInteracted = false;
 
-    let autoSlideInterval: any = null;
-    let isDragging = false;
-    let isAutoScrolling = false;
-    let startX = 0;
-    let scrollLeftStart = 0;
-
-    // Helper to calculate exact centered scrollLeft position for a specific element
-    const getCenteredScrollLeft = (element: HTMLElement) => {
-      return element.offsetLeft - (grid.clientWidth - element.offsetWidth) / 2;
+    const stopAutoPlay = () => {
+      if (autoInterval) {
+        clearInterval(autoInterval);
+        autoInterval = null;
+      }
+      hasInteracted = true;
     };
 
-    // 1. DOM Reordering Loop: triggers once scrolling settles (idle)
-    const handleScrollEnd = () => {
-      if (window.innerWidth >= 768 || isDragging || isAutoScrolling) return;
-
-      // Find the item closest to the container center
-      const currentScroll = grid.scrollLeft;
-      const clientWidth = grid.clientWidth;
-      const gridCenter = currentScroll + clientWidth / 2;
-      let closestItem: HTMLElement | null = null;
-      let minDistance = Infinity;
-      let activeIndex = -1;
-
-      const children = grid.children;
-      for (let i = 0; i < children.length; i++) {
-        const item = children[i] as HTMLElement;
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(gridCenter - itemCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestItem = item;
-          activeIndex = i;
-        }
-      }
-
-      if (!closestItem) return;
-
-      // We want the active card to always end up at index 1 of the container.
-      if (activeIndex > 1) {
-        const countToMove = activeIndex - 1;
-        // Temporarily disable scroll snapping to prevent browser layout conflicts
-        grid.style.scrollSnapType = 'none';
-        
-        for (let i = 0; i < countToMove; i++) {
-          grid.appendChild(grid.firstElementChild!);
-        }
-
-        // Relocate positions pixel-perfectly
-        const activeCard = grid.children[1] as HTMLElement;
-        grid.scrollLeft = getCenteredScrollLeft(activeCard);
-
-        // Restore scroll snap in the next frame
-        requestAnimationFrame(() => {
-          grid.style.scrollSnapType = 'x proximity';
-        });
-      }
-      else if (activeIndex < 1) {
-        const countToMove = 1 - activeIndex;
-        // Temporarily disable scroll snapping to prevent browser layout conflicts
-        grid.style.scrollSnapType = 'none';
-        
-        for (let i = 0; i < countToMove; i++) {
-          grid.insertBefore(grid.lastElementChild!, grid.firstElementChild);
-        }
-
-        // Relocate positions pixel-perfectly
-        const activeCard = grid.children[1] as HTMLElement;
-        grid.scrollLeft = getCenteredScrollLeft(activeCard);
-
-        // Restore scroll snap in the next frame
-        requestAnimationFrame(() => {
-          grid.style.scrollSnapType = 'x proximity';
-        });
-      }
+    const scrollToCard = (idx: number) => {
+      items[idx]?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
     };
 
-    // Debounce scroll events to detect scroll idle state
-    let scrollTimeout: any = null;
-    grid.addEventListener('scroll', () => {
-      if (isAutoScrolling) return; // Skip DOM reordering while smooth auto-sliding
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(handleScrollEnd, 250);
-    });
-
-    // 2. Controller to update visual active classes and the progress bar
     const updateActiveStates = () => {
-      if (window.innerWidth >= 768) {
-        const items = Array.from(grid.children) as HTMLElement[];
-        items.forEach((item) => item.classList.remove('active'));
-        return;
-      }
+      if (window.innerWidth >= 768) return;
+      
+      const gridRect = grid.getBoundingClientRect();
+      const gridCenter = gridRect.left + gridRect.width / 2;
+      let closestIdx = 0;
+      let closestDist = Infinity;
 
-      const currentScroll = grid.scrollLeft;
-      const clientWidth = grid.clientWidth;
-      const gridCenter = currentScroll + clientWidth / 2;
-      let closestItem: HTMLElement | null = null;
-      let minDistance = Infinity;
-
-      const children = grid.children;
-      for (let i = 0; i < children.length; i++) {
-        const item = children[i] as HTMLElement;
-        const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-        const distance = Math.abs(gridCenter - itemCenter);
-        if (distance < minDistance) {
-          minDistance = distance;
-          closestItem = item;
+      items.forEach((item, i) => {
+        const rect = item.getBoundingClientRect();
+        const itemCenter = rect.left + rect.width / 2;
+        const dist = Math.abs(itemCenter - gridCenter);
+        if (dist < closestDist) {
+          closestDist = dist;
+          closestIdx = i;
         }
-      }
+      });
 
-      for (let i = 0; i < children.length; i++) {
-        const item = children[i] as HTMLElement;
-        if (item === closestItem) {
-          item.classList.add('active');
-        } else {
-          item.classList.remove('active');
-        }
-      }
+      items.forEach((item, i) => item.classList.toggle('active', i === closestIdx));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === closestIdx));
+    };
 
-      // Update progress bar using data-index of the active card
-      if (progressBar && closestItem) {
-        const originalIndex = parseInt((closestItem as HTMLElement).dataset.index || '0', 10);
-        const scrollPercent = originalIndex / (originalCount - 1);
-        const translatePx = scrollPercent * 56; // 80px track - 24px bar = 56px travel distance
-        progressBar.style.transform = `translateX(${translatePx}px)`;
-      }
+    const handleNext = () => {
+      if (hasInteracted) return;
+      const activeIdx = items.findIndex(item => item.classList.contains('active'));
+      const nextIdx = (activeIdx + 1) % items.length;
+      scrollToCard(nextIdx);
     };
 
     grid.addEventListener('scroll', updateActiveStates, { passive: true });
+    grid.addEventListener('touchstart', stopAutoPlay, { passive: true });
 
-    // 3. Auto-slide timing mechanism
-    const handleNext = () => {
-      if (window.innerWidth >= 768 || isDragging || isAutoScrolling) return;
-      
-      const activeCard = grid.children[1] as HTMLElement;
-      const nextCard = grid.children[2] as HTMLElement;
-      
-      if (activeCard && nextCard) {
-        isAutoScrolling = true;
-        
-        // Scroll smoothly directly to the next centered element
-        grid.scrollTo({
-          left: getCenteredScrollLeft(nextCard),
-          behavior: 'smooth'
-        });
-
-        // Wait until browser completes smooth scrolling before reordering DOM
-        setTimeout(() => {
-          isAutoScrolling = false;
-          handleScrollEnd();
-          updateActiveStates();
-        }, 550);
-      }
-    };
-
-    const startAutoSlide = () => {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
-      autoSlideInterval = setInterval(handleNext, 3500);
-    };
-
-    const stopAutoSlide = () => {
-      if (autoSlideInterval) {
-        clearInterval(autoSlideInterval);
-        autoSlideInterval = null;
-      }
-    };
-
-    // 4. Mouse Drag-to-Scroll support (for desktop testing simulator)
-    grid.addEventListener('mousedown', (e) => {
-      if (window.innerWidth >= 768) return;
-      isDragging = true;
-      grid.classList.add('grabbing');
-      startX = e.pageX - grid.offsetLeft;
-      scrollLeftStart = grid.scrollLeft;
-      stopAutoSlide();
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        stopAutoPlay();
+        scrollToCard(i);
+      });
     });
 
-    window.addEventListener('mouseup', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      grid.classList.remove('grabbing');
-      startAutoSlide();
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        stopAutoPlay();
+        scrollToCard(i);
+      });
     });
 
-    grid.addEventListener('mouseleave', () => {
-      if (!isDragging) return;
-      isDragging = false;
-      grid.classList.remove('grabbing');
-      startAutoSlide();
-    });
-
-    grid.addEventListener('mousemove', (e) => {
-      if (!isDragging || window.innerWidth >= 768) return;
-      e.preventDefault();
-      const x = e.pageX - grid.offsetLeft;
-      const walk = (x - startX) * 1.5;
-      grid.scrollLeft = scrollLeftStart - walk;
-    });
-
-    // 5. Touch events to pause/resume auto-slide and manage dragging state on mobile devices
-    grid.addEventListener('touchstart', () => {
-      isDragging = true;
-      stopAutoSlide();
-    }, { passive: true });
-
-    grid.addEventListener('touchend', () => {
-      isDragging = false;
-      startAutoSlide();
-    }, { passive: true });
-
-    grid.addEventListener('touchcancel', () => {
-      isDragging = false;
-      startAutoSlide();
-    }, { passive: true });
-
-    // 6. Resize handling
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768) return;
-      const activeCard = grid.children[1] as HTMLElement;
-      if (activeCard) {
-        grid.scrollLeft = getCenteredScrollLeft(activeCard);
-      }
-    }, { passive: true });
-
-    // 7. Initial State Setup: run after a minor delay to ensure render tree is completed
-    setTimeout(() => {
-      grid.insertBefore(grid.lastElementChild!, grid.firstElementChild);
-      
-      const activeCard = grid.children[1] as HTMLElement;
-      if (activeCard) {
-        grid.scrollLeft = getCenteredScrollLeft(activeCard);
-      }
-      
-      updateActiveStates();
-      startAutoSlide();
-    }, 50);
+    autoInterval = setInterval(handleNext, 4000);
+    updateActiveStates();
   }
 
-  // Bind to page load
+  // Run on initial mount
   initPhotoSlider();
 </script>
 
@@ -289,31 +123,24 @@ const { heading, sub, photos } = Astro.props;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    /* Edge-to-edge breakout: negative margins cancel container padding */
     margin-left: -20px;
     margin-right: -20px;
-    padding: 16px 20px;
-    gap: 16px;
+    padding: 16px 9%;
+    gap: 12px;
     align-items: center;
   }
   .lp-photo-grid::-webkit-scrollbar {
     display: none;
   }
-  
-  /* Disable snap during mouse dragging for smooth movement */
-  .lp-photo-grid.grabbing {
-    scroll-snap-type: none !important;
-    cursor: grabbing;
-    user-select: none;
-  }
 
   .lp-photo-item {
     margin: 0;
-    flex: 0 0 88%; /* Photos take 88% width, leaving 12% peek space */
+    flex: 0 0 82%;
     scroll-snap-align: center;
     border-radius: 16px;
     overflow: hidden;
@@ -326,6 +153,7 @@ const { heading, sub, photos } = Astro.props;
                 border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0.5;
     transform: scale(0.93);
+    cursor: pointer;
   }
   
   .lp-photo-item.active {
@@ -339,6 +167,7 @@ const { heading, sub, photos } = Astro.props;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 20%;
     display: block;
     transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -346,30 +175,31 @@ const { heading, sub, photos } = Astro.props;
     transform: scale(1.03);
   }
 
-  /* Progress Bar styling */
+  /* Progress Bar / Dots styling */
   .lp-photo-progress-wrapper {
     display: flex;
     justify-content: center;
     margin-top: 24px;
   }
-  .lp-photo-progress-track {
-    width: 80px;
-    height: 3px;
-    background: var(--ink-100);
-    position: relative;
-    border-radius: 99px;
-    overflow: hidden;
+  .lp-photo-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
   }
-  .lp-photo-progress-bar {
-    width: 24px;
-    height: 100%;
+  .lp-photo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-200);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lp-photo-dot.active {
     background: var(--orange-500);
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 99px;
-    transform: translateX(0);
-    transition: transform 0.2s ease;
+    width: 20px;
+    border-radius: 4px;
   }
 
   /* Desktop layout (>= 768px) */
