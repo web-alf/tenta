@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 // Note: We use the generated 3D image here.
 import meta3d from '@/assets/images/meta-whitelist-3d.png';
+import google3d from '@/assets/images/google-whitelist-3d.png';
 
 interface WhyItem {
   iconId: 'stable' | 'comfortable' | 'scale' | 'tax' | 'priority' | 'expert' | 'protection';
@@ -24,6 +25,9 @@ const { platform, heading, sub, items } = Astro.props;
 const leftItems = items.slice(0, 6).filter((_, i) => i % 2 === 0);
 const rightItems = items.slice(0, 6).filter((_, i) => i % 2 !== 0);
 const bottomItem = items[6];
+
+const centerImage = platform === 'meta' ? meta3d : google3d;
+const imageAlt = platform === 'meta' ? 'Meta Whitelist 3D Illustration' : 'Google Whitelist 3D Illustration';
 ---
 <section class="lp-why-section" id={`why-${platform}`} aria-labelledby="lp-why-heading">
   <div class="container">
@@ -69,8 +73,8 @@ const bottomItem = items[6];
       <!-- Center Image Column -->
       <div class="center-img-col reveal">
         <Image 
-          src={meta3d} 
-          alt="Meta Whitelist 3D Illustration" 
+          src={centerImage} 
+          alt={imageAlt} 
           class="centerpiece-img"
           loading="eager"
           fetchpriority="high"
@@ -201,6 +205,9 @@ const bottomItem = items[6];
     height: auto;
     filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08));
     animation: float 6s ease-in-out infinite;
+    mix-blend-mode: multiply;
+    -webkit-mask-image: radial-gradient(circle at center, black 50%, transparent 75%);
+    mask-image: radial-gradient(circle at center, black 50%, transparent 75%);
   }
 
   @keyframes float {

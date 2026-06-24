@@ -1,135 +1,206 @@
 ---
 import type { LpPhoto } from '@data/whitelist-lp';
+import { Image } from 'astro:assets';
 
 interface Props {
   heading: string;
   sub: string;
   photos: LpPhoto[];
+  variant?: 'meta' | 'grid';
 }
-const { heading, sub, photos } = Astro.props;
+const { heading, sub, photos, variant = 'meta' } = Astro.props;
+
+const images = import.meta.glob<{ default: ImageMetadata }>('/public/assets/galeri/*.{jpeg,jpg,png,gif}');
 ---
 <section aria-labelledby="lp-photo-heading">
   <div class="container">
     <h2 id="lp-photo-heading" class="section-title" set:html={heading}></h2>
     <p class="section-sub" style="margin-bottom:36px;" set:html={sub}></p>
-    <div class="lp-photo-grid reveal">
-      {photos.map((p, index) => (
-        <figure class={`lp-photo-item ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
-          <img 
-            src={p.src} 
-            alt={p.alt} 
-            width="800" 
-            height="600" 
-            loading="lazy" 
-            decoding="async" 
-          />
-        </figure>
-      ))}
-    </div>
+    
+    {variant === 'meta' ? (
+      <>
+        <div class="lp-photo-grid reveal">
+          {photos.map((p, index) => {
+            const imgPath = `/public${p.src}`;
+            const imgPromise = images[imgPath];
+            return (
+              <figure class={`lp-photo-item ${p.portrait ? 'lp-photo-portrait' : ''}`} data-index={index}>
+                {imgPromise ? (
+                  <Image 
+                    src={imgPromise()} 
+                    alt={p.alt} 
+                    widths={[400, 800]}
+                    sizes="(max-width: 768px) 85vw, 400px"
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                ) : (
+                  <img 
+                    src={p.src} 
+                    alt={p.alt} 
+                    width="800" 
+                    height="600" 
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                )}
+              </figure>
+            );
+          })}
+        </div>
 
-    <div class="lp-photo-progress-wrapper">
-      <div class="lp-photo-dots">
-        {photos.map((_, index) => (
-          <button
-            class={`lp-photo-dot ${index === 0 ? 'active' : ''}`}
-            data-index={index}
-            aria-label={`Go to slide ${index + 1}`}
-          />
-        ))}
+        <div class="lp-photo-progress-wrapper">
+          <div class="lp-photo-dots">
+            {photos.map((_, index) => (
+              <button
+                class={`lp-photo-dot ${index === 0 ? 'active' : ''}`}
+                data-index={index}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </>
+    ) : (
+      <div class="galeri-grid">
+        {photos.map((p, i) => {
+          const imgPath = `/public${p.src}`;
+          const imgPromise = images[imgPath];
+          let isWide = false;
+          if (photos.length === 1) {
+            isWide = true;
+          } else if (photos.length === 2) {
+            isWide = true;
+          } else if (photos.length === 3) {
+            isWide = i === 0;
+          } else if (photos.length === 5) {
+            isWide = [0, 3, 4].includes(i);
+          } else if (photos.length === 6) {
+            isWide = i === 0 || i === 5;
+          } else if (photos.length === 7) {
+            isWide = [0, 3, 4, 5, 6].includes(i);
+          } else if (photos.length === 8) {
+            isWide = [0, 5, 6, 7].includes(i);
+          } else if (photos.length === 9) {
+            isWide = i === 0 || i === 7 || i === 8;
+          } else {
+            isWide = i === 0 || i === 7;
+          }
+          
+          return (
+            <div class={`galeri-item reveal ${isWide ? 'galeri-wide' : ''}`}>
+              {imgPromise ? (
+                <Image 
+                  src={imgPromise()} 
+                  alt={p.alt} 
+                  widths={[400, 800, 1200]}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1100px) 50vw, 400px"
+                  loading="lazy" 
+                  decoding="async" 
+                />
+              ) : (
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+              )}
+            </div>
+          );
+        })}
       </div>
-    </div>
+    )}
   </div>
 </section>
 
-<script>
-  function initPhotoSlider() {
-    const grid = document.querySelector('.lp-photo-grid') as HTMLElement;
-    const dots = Array.from(document.querySelectorAll('.lp-photo-dot')) as HTMLElement[];
-    if (!grid) return;
-    if (window.innerWidth >= 768) return;
-
-    const items = Array.from(grid.querySelectorAll('.lp-photo-item')) as HTMLElement[];
-    if (items.length === 0) return;
-
-    let autoInterval: any;
-    let hasInteracted = false;
-
-    const stopAutoPlay = () => {
-      if (autoInterval) {
-        clearInterval(autoInterval);
-        autoInterval = null;
-      }
-      hasInteracted = true;
-    };
-
-    const scrollToCard = (idx: number) => {
-      const item = items[idx];
-      if (!item) return;
-      const gridRect = grid.getBoundingClientRect();
-      const itemRect = item.getBoundingClientRect();
-      const offset = itemRect.left - gridRect.left + grid.scrollLeft - (gridRect.width - itemRect.width) / 2;
-      grid.scrollTo({ left: offset, behavior: 'smooth' });
-    };
-
-    const updateActiveStates = () => {
+{variant === 'meta' && (
+  <script>
+    function initPhotoSlider() {
+      const grid = document.querySelector('.lp-photo-grid') as HTMLElement;
+      const dots = Array.from(document.querySelectorAll('.lp-photo-dot')) as HTMLElement[];
+      if (!grid) return;
       if (window.innerWidth >= 768) return;
-      
-      const gridRect = grid.getBoundingClientRect();
-      const gridCenter = gridRect.left + gridRect.width / 2;
-      let closestIdx = 0;
-      let closestDist = Infinity;
+
+      const items = Array.from(grid.querySelectorAll('.lp-photo-item')) as HTMLElement[];
+      if (items.length === 0) return;
+
+      let autoInterval: any;
+      let hasInteracted = false;
+
+      const stopAutoPlay = () => {
+        if (autoInterval) {
+          clearInterval(autoInterval);
+          autoInterval = null;
+        }
+        hasInteracted = true;
+      };
+
+      const scrollToCard = (idx: number) => {
+        const item = items[idx];
+        if (!item) return;
+        const gridRect = grid.getBoundingClientRect();
+        const itemRect = item.getBoundingClientRect();
+        const offset = itemRect.left - gridRect.left + grid.scrollLeft - (gridRect.width - itemRect.width) / 2;
+        grid.scrollTo({ left: offset, behavior: 'smooth' });
+      };
+
+      const updateActiveStates = () => {
+        if (window.innerWidth >= 768) return;
+        
+        const gridRect = grid.getBoundingClientRect();
+        const gridCenter = gridRect.left + gridRect.width / 2;
+        let closestIdx = 0;
+        let closestDist = Infinity;
+
+        items.forEach((item, i) => {
+          const rect = item.getBoundingClientRect();
+          const itemCenter = rect.left + rect.width / 2;
+          const dist = Math.abs(itemCenter - gridCenter);
+          if (dist < closestDist) {
+            closestDist = dist;
+            closestIdx = i;
+          }
+        });
+
+        items.forEach((item, i) => item.classList.toggle('active', i === closestIdx));
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === closestIdx));
+      };
+
+      const handleNext = () => {
+        if (hasInteracted) return;
+        const activeIdx = items.findIndex(item => item.classList.contains('active'));
+        const nextIdx = (activeIdx + 1) % items.length;
+        scrollToCard(nextIdx);
+      };
+
+      grid.addEventListener('scroll', updateActiveStates, { passive: true });
+      grid.addEventListener('touchstart', stopAutoPlay, { passive: true });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          stopAutoPlay();
+          scrollToCard(i);
+        });
+      });
 
       items.forEach((item, i) => {
-        const rect = item.getBoundingClientRect();
-        const itemCenter = rect.left + rect.width / 2;
-        const dist = Math.abs(itemCenter - gridCenter);
-        if (dist < closestDist) {
-          closestDist = dist;
-          closestIdx = i;
-        }
+        item.addEventListener('click', () => {
+          stopAutoPlay();
+          scrollToCard(i);
+        });
       });
 
-      items.forEach((item, i) => item.classList.toggle('active', i === closestIdx));
-      dots.forEach((dot, i) => dot.classList.toggle('active', i === closestIdx));
-    };
+      autoInterval = setInterval(handleNext, 4000);
+      updateActiveStates();
+    }
 
-    const handleNext = () => {
-      if (hasInteracted) return;
-      const activeIdx = items.findIndex(item => item.classList.contains('active'));
-      const nextIdx = (activeIdx + 1) % items.length;
-      scrollToCard(nextIdx);
-    };
-
-    grid.addEventListener('scroll', updateActiveStates, { passive: true });
-    grid.addEventListener('touchstart', stopAutoPlay, { passive: true });
-
-    dots.forEach((dot, i) => {
-      dot.addEventListener('click', () => {
-        stopAutoPlay();
-        scrollToCard(i);
-      });
+    document.querySelectorAll<HTMLImageElement>('.lp-photo-item img').forEach(img => {
+      if (img.complete) img.classList.add('loaded');
+      else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
     });
 
-    items.forEach((item, i) => {
-      item.addEventListener('click', () => {
-        stopAutoPlay();
-        scrollToCard(i);
-      });
-    });
-
-    autoInterval = setInterval(handleNext, 4000);
-    updateActiveStates();
-  }
-
-  document.querySelectorAll<HTMLImageElement>('.lp-photo-item img').forEach(img => {
-    if (img.complete) img.classList.add('loaded');
-    else img.addEventListener('load', () => img.classList.add('loaded'), { once: true });
-  });
-
-  initPhotoSlider();
-</script>
+    initPhotoSlider();
+  </script>
+)}
 
 <style>
+  /* --- META VARIANT STYLES --- */
   /* Mobile-first: Carousel Snap Layout */
   .lp-photo-grid {
     display: flex;
@@ -260,6 +331,62 @@ const { heading, sub, photos } = Astro.props;
     }
     .lp-photo-progress-wrapper {
       display: none;
+    }
+  }
+
+  /* --- GRID VARIANT STYLES (From tentang.astro) --- */
+  .galeri-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 220px;
+    gap: 14px;
+  }
+  .galeri-wide { grid-column: span 2; }
+
+  .galeri-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    background: var(--ink-50);
+  }
+  .galeri-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+  }
+  .galeri-item::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(14,27,42,0.18));
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+    opacity: 0;
+  }
+  .galeri-item:hover img { transform: scale(1.06); }
+  .galeri-item:hover::after { opacity: 1; }
+
+  @media (max-width: 1100px) {
+    .galeri-grid {
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: 200px;
+    }
+    .galeri-wide { grid-column: span 2; }
+  }
+  @media (max-width: 760px) {
+    .galeri-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-auto-rows: 180px;
+      gap: 10px;
+    }
+    .galeri-wide { grid-column: span 2; }
+  }
+  @media (max-width: 480px) {
+    .galeri-grid {
+      grid-auto-rows: 150px;
+      gap: 8px;
     }
   }
 </style>

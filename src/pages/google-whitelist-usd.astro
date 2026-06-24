@@ -2,8 +2,8 @@
 // LP Google Whitelist — English, USD pricing for international market.
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpProblem from '@components/sections/lp/LpProblem.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
@@ -43,14 +43,70 @@ const usdPlans = [
     features: ['Top-up above $900 / month', 'Most competitive fee', 'Multi-account ready', 'Free onboarding checklist', 'Personal support (not a bot)'],
   },
 ];
+
+// Custom English Testimonials for Google LP
+const englishTestimonials = [
+  {
+    data: {
+      stars: 5,
+      text: "Leads come in much neater after the website and Google Ads were fixed. The team is great to discuss with.",
+      name: "Rina",
+      role: "Marketing Manager",
+      initials: "R",
+      avatar: "/assets/testimonials/avatar_rina.png"
+    }
+  },
+  {
+    data: {
+      stars: 5,
+      text: "Google Ads has become more stable and the closing rate increased. The reporting is also clear every week.",
+      name: "Fajar",
+      role: "Owner Brand",
+      initials: "F",
+      avatar: "/assets/testimonials/avatar_fajar.png"
+    }
+  },
+  {
+    data: {
+      stars: 5,
+      text: "The consultation session really helped us determine the priorities of our marketing channels.",
+      name: "Dimas",
+      role: "Founder",
+      initials: "D",
+      avatar: "/assets/testimonials/avatar_dimas.png"
+    }
+  },
+  {
+    data: {
+      stars: 5,
+      text: "ROAS increased significantly since using a Google Whitelist account from Tentaklik. The application was fast and they helped setup everything.",
+      name: "Andi",
+      role: "E-commerce Owner",
+      initials: "A",
+      avatar: "/assets/testimonials/avatar_andi.png"
+    }
+  },
+  {
+    data: {
+      stars: 5,
+      text: "Very satisfied with the appeal support. When our account faced a policy issue, it was immediately escalated to the Google team and resolved.",
+      name: "Siti",
+      role: "Marketing Lead",
+      initials: "S",
+      avatar: "/assets/testimonials/avatar_siti.png"
+    }
+  }
+];
 ---
 <BaseLayout
   title="Google Ads Whitelist Account Rental (USD) — Tentaklik"
   description="Rent a Google Ads whitelist account for international advertisers. USD pricing, no VAT, no spending cap."
   active="layanan"
-  bareLayout
+  bareLayout={true}
+  bareHeader={true}
+  preloadHeroSrc="/assets/kraken-hero.png"
   jsonLd={jsonLd}
-  keywords={['google ads whitelist usd', 'rent google ads account', 'google ads whitelist international']}
+  keywords={['google ads whitelist usd', 'rent google ads account', 'google ads whitelist international', 'google agency account', 'google invoice account', 'no daily spending cap google account']}
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -60,12 +116,17 @@ const usdPlans = [
     ctaText="See Pricing"
     ctaHref="#pricing"
   />
-  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <PricingSection plans={usdPlans} service="Google Ads Whitelist (USD)" />
-  <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center />
-  <LpTestimonials />
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  <LpComparison platform={d.platform} lang="en" />
+  <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center variant="premium" />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} variant="grid" />
+  <PricingSection plans={usdPlans} service="Google Ads Whitelist (USD)" lang="en" />
+  <LpTestimonials title="What Our Clients Say" sub="Success stories from advertisers who scaled their ads drama-free." items={englishTestimonials} />
   <LpPromoBanner originalPrice="$12" promoPrice="$3 / account" />
-  <LpShortForm platform="google" />
+  <LpShortForm platform="google" lang="en" />
 </BaseLayout>

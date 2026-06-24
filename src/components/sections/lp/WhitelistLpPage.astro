@@ -3,8 +3,6 @@
 // Tipis: pilih data per (platform, lang), render section yang sama.
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpProblem from '@components/sections/lp/LpProblem.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
 import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
 import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
@@ -29,8 +27,8 @@ const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitel
 const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
 const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
 
-// Header remains visible for brand navigation (except for meta-whitelist).
-const hideHeader = platform === 'meta';
+// Header is hidden for all whitelist landing pages to maintain focus on the LP content.
+const hideHeader = true;
 
 const jsonLd = [
   serviceJsonLd({
@@ -54,6 +52,7 @@ const jsonLd = [
   bareHeader={hideHeader}
   jsonLd={jsonLd}
   keywords={d.keywords}
+  preloadHeroSrc="true"
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -63,30 +62,26 @@ const jsonLd = [
     ctaText={d.cta.btn}
     ctaHref={`#shortform-${platform}`}
   />
-  {d.platform === 'meta' ? (
-    <>
-      <LpWhyPlatform 
-        platform={d.platform} 
-        heading={d.whyHeading} 
-        sub={d.whySub} 
-        items={d.whyItems} 
-      />
-      <LpComparison platform={d.platform} />
-    </>
-  ) : (
-    <>
-      <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
-      <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-    </>
-  )}
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  <LpComparison platform={d.platform} />
   <IndustriesGrid 
     items={INDUSTRIES_LP[lang]} 
     heading={INDUSTRY_LP_HEADING[lang]} 
     bg="warm" 
     center 
-    variant={platform === 'meta' ? 'premium' : 'default'}
+    variant="premium"
   />
-  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
+  <LpPhotoVisit 
+    heading={d.photoHeading} 
+    sub={d.photoSub} 
+    photos={d.photos} 
+    variant={platform === 'google' ? 'grid' : 'meta'} 
+  />
   <LpTestimonials />
   <LpPromoBanner />
   <LpShortForm platform={platform} />

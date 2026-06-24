@@ -39,6 +39,9 @@ export interface GoogleLpData extends BaseLpData {
   problems: LpProblem[];
   benefitHeading: string;
   benefits: string[];
+  whyHeading: string;
+  whySub: string;
+  whyItems: WhyItem[];
 }
 
 export type LpData = MetaLpData | GoogleLpData;
@@ -196,10 +199,21 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     platform: 'google',
     hero: {
       eyebrow: 'Google Ads Whitelist',
-      title: 'Akun Google Ads Whitelist:',
-      titleAccent: 'Stabil untuk Scale-Up Besar',
-      desc: 'Maksimalkan kampanye Anda dengan jaminan akun bebas hambatan dan eskalasi kendala yang lebih cepat.',
+      title: 'Jangan Biarkan',
+      titleAccent: 'Kendala Akun Menghambat Performa Google Ads Anda',
+      desc: 'Google Whitelist membantu bisnis menjalankan aktivitas periklanan dengan lebih nyaman dan efisien.',
     },
+    whyHeading: 'Mengapa Memilih Google Whitelist?',
+    whySub: 'Solusi terbaik untuk scale-up iklan Anda dengan aman, nyaman, dan bebas hambatan.',
+    whyItems: [
+      { iconId: 'stable', title: 'Risiko Suspend Rendah', desc: 'Risiko Suspend lebih rendah dibanding akun Google Ads Personal biasa' },
+      { iconId: 'comfortable', title: 'Lebih Nyaman', desc: 'Lebih nyaman untuk beriklan' },
+      { iconId: 'scale', title: 'Bebas Scale', desc: 'Bebas scale limit spending harian' },
+      { iconId: 'tax', title: 'Tanpa PPN', desc: 'Tidak dikenakan PPN' },
+      { iconId: 'priority', title: 'Jalur Prioritas', desc: 'Support appeal langsung melalui jalur Google Partner' },
+      { iconId: 'expert', title: 'Support Expert', desc: 'Support teknis langsung ke tim expert Google' },
+      { iconId: 'protection', title: 'Proteksi Saldo', desc: 'Saldo otomatis pindah ke akun pengganti jika terjadi disable (s&k berlaku)' },
+    ],
     problemHeading: 'Saat scale, masalah Google Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
@@ -220,9 +234,11 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     photoHeading: 'Terhubung langsung dengan Google',
     photoSub: 'Tim Tentaklik aktif di event & program resmi Google Partner.',
     photos: [
-      { src: '/assets/galeri/1.jpg', alt: 'Tim Tentaklik di kantor Google' },
-      { src: '/assets/galeri/5.jpg', alt: 'Event Akselerasi Bisnis dengan Google Ads' },
-      { src: '/assets/galeri/8.jpg', alt: 'Kunjungan tim ke Google' },
+      { src: '/assets/galeri/2.jpg', alt: 'Galeri Google 2' },
+      { src: '/assets/galeri/3.jpg', alt: 'Galeri Google 3' },
+      { src: '/assets/galeri/4.jpg', alt: 'Galeri Google 4' },
+      { src: '/assets/galeri/6.jpg', alt: 'Galeri Google 6' },
+      { src: '/assets/galeri/8.jpg', alt: 'Galeri Google 8' },
     ],
     cta: {
       title: 'Siap pakai akun Google Whitelist?',
@@ -239,10 +255,21 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     platform: 'google',
     hero: {
       eyebrow: 'Google Ads Whitelist',
-      title: 'Google Ads Whitelist Account:',
-      titleAccent: 'Stable for Large-Scale Growth',
-      desc: 'Maximize your campaigns with a guaranteed obstacle-free account and faster issue escalation.',
+      title: "Don't Let",
+      titleAccent: 'Account Issues Hinder Your Google Ads Performance',
+      desc: 'Google Whitelist helps businesses run advertising activities more comfortably and efficiently.',
     },
+    whyHeading: 'Why Choose Google Whitelist?',
+    whySub: 'The ultimate solution to scale your ads safely, comfortably, and without obstacles.',
+    whyItems: [
+      { iconId: 'stable', title: 'Lower Suspension Risk', desc: 'Lower suspension risk compared to a regular personal Google Ads account' },
+      { iconId: 'comfortable', title: 'More Comfortable', desc: 'More comfortable for advertising' },
+      { iconId: 'scale', title: 'Scale Freely', desc: 'Scale freely with no daily spending limits' },
+      { iconId: 'tax', title: 'No VAT', desc: 'No VAT charged' },
+      { iconId: 'priority', title: 'Priority Route', desc: 'Direct appeal support through Google Partner' },
+      { iconId: 'expert', title: 'Expert Support', desc: 'Direct technical support from the Google expert team' },
+      { iconId: 'protection', title: 'Balance Protection', desc: 'Balance auto-moves to replacement account if disabled (T&C apply)' },
+    ],
     problemHeading: 'As you scale, Google Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
@@ -263,9 +290,11 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     photoHeading: 'Directly connected with Google',
     photoSub: 'The Tentaklik team is active in Google Partner\'s official events & programs.',
     photos: [
-      { src: '/assets/galeri/1.jpg', alt: 'Tentaklik team at the Google office' },
-      { src: '/assets/galeri/5.jpg', alt: 'Business Acceleration with Google Ads event' },
-      { src: '/assets/galeri/8.jpg', alt: 'Team visit to Google' },
+      { src: '/assets/galeri/2.jpg', alt: 'Google Gallery 2' },
+      { src: '/assets/galeri/3.jpg', alt: 'Google Gallery 3' },
+      { src: '/assets/galeri/4.jpg', alt: 'Google Gallery 4' },
+      { src: '/assets/galeri/6.jpg', alt: 'Google Gallery 6' },
+      { src: '/assets/galeri/8.jpg', alt: 'Google Gallery 8' },
     ],
     cta: {
       title: 'Ready to use a Google Whitelist account?',
