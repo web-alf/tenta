@@ -95,7 +95,7 @@ const { heading, sub, photos } = Astro.props;
 
         // Restore scroll snap in the next frame
         requestAnimationFrame(() => {
-          grid.style.scrollSnapType = 'x mandatory';
+          grid.style.scrollSnapType = 'x proximity';
         });
       }
       else if (activeIndex < 1) {
@@ -113,7 +113,7 @@ const { heading, sub, photos } = Astro.props;
 
         // Restore scroll snap in the next frame
         requestAnimationFrame(() => {
-          grid.style.scrollSnapType = 'x mandatory';
+          grid.style.scrollSnapType = 'x proximity';
         });
       }
     };
@@ -123,7 +123,7 @@ const { heading, sub, photos } = Astro.props;
     grid.addEventListener('scroll', () => {
       if (isAutoScrolling) return; // Skip DOM reordering while smooth auto-sliding
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(handleScrollEnd, 100);
+      scrollTimeout = setTimeout(handleScrollEnd, 250);
     });
 
     // 2. Controller to update visual active classes and the progress bar
@@ -249,7 +249,6 @@ const { heading, sub, photos } = Astro.props;
     grid.addEventListener('touchend', () => {
       isDragging = false;
       startAutoSlide();
-      handleScrollEnd(); // Reset and align immediately after touch ends
     }, { passive: true });
 
     grid.addEventListener('touchcancel', () => {
@@ -290,9 +289,7 @@ const { heading, sub, photos } = Astro.props;
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    /* scroll-behavior: smooth is removed here to prevent conflicts with instant scroll adjustments.
-       We trigger smooth scrolling explicitly in JS when executing programmatic auto-slides. */
+    scroll-snap-type: x proximity;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;

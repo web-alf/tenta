@@ -1,13 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
 
+interface Props {
+  title?: string;
+  sub?: string;
+}
+const { title, sub: propSub } = Astro.props;
+
 const lang = Astro.currentLocale || 'id';
 const isEn = lang === 'en';
 
-const heading = isEn ? 'What Our Clients Say' : 'Kata Mereka yang Sudah Scale-Up';
-const sub = isEn 
+const headingText = title || (isEn ? 'What Our Clients Say' : 'Kata Mereka yang Sudah Scale-Up');
+const subText = propSub || (isEn 
   ? 'Success stories from advertisers who scaled their ads drama-free.' 
-  : 'Kisah sukses dari para advertiser yang berhasil scale-up tanpa drama banned.';
+  : 'Kisah sukses dari para advertiser yang berhasil scale-up tanpa drama banned.');
 
 const allTesti = await getCollection('testimonials');
 const items = allTesti.slice(0, 5);
@@ -17,8 +23,8 @@ const items = allTesti.slice(0, 5);
     
     <div class="lp-testi-header">
       <div class="lp-testi-title-area">
-        <h2 class="lp-testi-title">{heading}</h2>
-        <p class="lp-testi-sub">{sub}</p>
+        <h2 class="lp-testi-title">{headingText}</h2>
+        <p class="lp-testi-sub">{subText}</p>
       </div>
       <div class="lp-testi-nav">
         <button class="lp-testi-btn prev" aria-label="Slide sebelumnya">
