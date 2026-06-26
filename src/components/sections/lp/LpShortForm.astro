@@ -7,11 +7,12 @@ interface Props {
   heading?: string;
   sub?: string;
   lang?: 'en' | 'id';
+  hasPricing?: boolean;
 }
 const { platform, lang: propLang } = Astro.props;
 const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
-const { heading = t('form.heading'), sub = t('form.sub') } = Astro.props;
+const { heading = t('form.heading'), sub = t('form.sub'), hasPricing = false } = Astro.props;
 const formId = `shortform-${platform}`;
 ---
 <section aria-labelledby="shortform-heading">
@@ -23,6 +24,7 @@ const formId = `shortform-${platform}`;
       class="shortform"
       data-platform={platform}
       data-lang={lang}
+      data-has-pricing={hasPricing ? 'true' : 'false'}
       data-msg-sent={t('form.sent')}
       data-err-nama={t('form.err.nama')}
       data-err-wa={t('form.err.wa')}
@@ -39,17 +41,31 @@ const formId = `shortform-${platform}`;
         <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder={t('form.wa.ph')} required maxlength="20" />
       </div>
       <div class="sf-field">
-        <label for={`${formId}-kat`}>{t('form.kategori')}</label>
-        <select id={`${formId}-kat`} name="kategori" required>
-          <option value="" disabled selected>{t('form.kategori.ph')}</option>
-          <option value="UMKM">{t('form.kategori.umkm')}</option>
-          <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
-          <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
-          <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
-          <option value="Fashion">{t('form.kategori.fashion')}</option>
-          <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
-          <option value="Lainnya">{t('form.kategori.lainnya')}</option>
-        </select>
+        {hasPricing ? (
+          <>
+            <label for={`${formId}-paket`}>{t('form.paket')}</label>
+            <select id={`${formId}-paket`} name="kategori" required>
+              <option value="" disabled selected>{t('form.paket.ph')}</option>
+              <option value={t('form.paket.starter')}>{t('form.paket.starter')}</option>
+              <option value={t('form.paket.growth')}>{t('form.paket.growth')}</option>
+              <option value={t('form.paket.scale')}>{t('form.paket.scale')}</option>
+            </select>
+          </>
+        ) : (
+          <>
+            <label for={`${formId}-kat`}>{t('form.kategori')}</label>
+            <select id={`${formId}-kat`} name="kategori" required>
+              <option value="" disabled selected>{t('form.kategori.ph')}</option>
+              <option value="UMKM">{t('form.kategori.umkm')}</option>
+              <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
+              <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
+              <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
+              <option value="Fashion">{t('form.kategori.fashion')}</option>
+              <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
+              <option value="Lainnya">{t('form.kategori.lainnya')}</option>
+            </select>
+          </>
+        )}
       </div>
       <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
         <span class="sf-btn-label">{t('form.kirim')} <ArrowRight size={14} /></span>
@@ -131,18 +147,18 @@ const formId = `shortform-${platform}`;
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
 
   // Greeting WhatsApp disesuaikan per platform + bahasa.
-  function waGreeting(platform: string, lang: string, nama: string, kategori: string): string {
+  function waGreeting(platform: string, lang: string, nama: string, kategori: string, hasPricing: boolean): string {
     const layanan = platform === 'google' ? 'Google Ads Whitelist'
                   : platform === 'meta'   ? 'Meta Ads Whitelist'
                   : 'Whitelist';
     if (lang === 'en') {
       let m = `Hello Tentaklik! I'm ${nama}, I'd like to request a ${layanan} account.`;
-      if (kategori) m += `\nBusiness category: ${kategori}`;
+      if (kategori) m += hasPricing ? `\nSelected plan: ${kategori}` : `\nBusiness category: ${kategori}`;
       m += `\n\n(Sent via the ${layanan} form)`;
       return m;
     }
     let msg = `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.`;
-    if (kategori) msg += `\nKategori bisnis: ${kategori}`;
+    if (kategori) msg += hasPricing ? `\nPilihan paket: ${kategori}` : `\nKategori bisnis: ${kategori}`;
     msg += `\n\n(Dikirim via form ${layanan})`;
     return msg;
   }
@@ -188,9 +204,10 @@ const formId = `shortform-${platform}`;
         kategori: kat, source: window.location.href,
       });
 
+      const hasPricing = form.getAttribute('data-has-pricing') === 'true';
       // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
       const waUrl = WA_NUMBER
-        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, kat))}`
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, kat, hasPricing))}`
         : '';
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
         .catch(() => {})
