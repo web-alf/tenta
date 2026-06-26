@@ -201,7 +201,7 @@ const formId = `shortform-${platform}`;
       setLoading(true);
       const params = new URLSearchParams({
         platform: platform, nama: nama, whatsapp: wa,
-        kategori: kat, source: window.location.href,
+        kategori: kat, source: window.location.href.split('#')[0],
       });
 
       const hasPricing = form.getAttribute('data-has-pricing') === 'true';

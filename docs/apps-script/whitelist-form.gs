@@ -86,13 +86,16 @@ function doGet(e) {
     var platform = String(p.platform || '').toLowerCase();
     var source = String(p.source || '').toLowerCase();
     
+    // Bersihkan URL dari query parameter atau hash agar pengecekan lebih presisi
+    var cleanSource = source.split('?')[0].split('#')[0];
+    
     var sheetName = 'Lainnya';
-    if (source.indexOf('meta-whitelist-pricing') !== -1) sheetName = 'Meta Whitelist Pricing';
-    else if (source.indexOf('meta-whitelist-usd') !== -1) sheetName = 'Meta Whitelist USD';
-    else if (source.indexOf('meta-whitelist') !== -1) sheetName = 'Meta Whitelist';
-    else if (source.indexOf('google-whitelist-pricing') !== -1) sheetName = 'Google Whitelist Pricing';
-    else if (source.indexOf('google-whitelist-usd') !== -1) sheetName = 'Google Whitelist USD';
-    else if (source.indexOf('google-whitelist') !== -1) sheetName = 'Google Whitelist';
+    if (cleanSource.indexOf('meta-whitelist-pricing') !== -1) sheetName = 'Meta Whitelist Pricing';
+    else if (cleanSource.indexOf('meta-whitelist-usd') !== -1) sheetName = 'Meta Whitelist USD';
+    else if (cleanSource.indexOf('meta-whitelist') !== -1) sheetName = 'Meta Whitelist';
+    else if (cleanSource.indexOf('google-whitelist-pricing') !== -1) sheetName = 'Google Whitelist Pricing';
+    else if (cleanSource.indexOf('google-whitelist-usd') !== -1) sheetName = 'Google Whitelist USD';
+    else if (cleanSource.indexOf('google-whitelist') !== -1) sheetName = 'Google Whitelist';
     else if (platform === 'meta') sheetName = 'Meta Whitelist';
     else if (platform === 'google') sheetName = 'Google Whitelist';
 
