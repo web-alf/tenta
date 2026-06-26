@@ -2,46 +2,46 @@
   {
     "id": "1",
     "stars": 5,
-    "text": "Leads masuk jauh lebih rapi setelah website dan Google Ads dibenahi. Timnya enak diajak diskusi.",
-    "name": "Rina",
-    "role": "Marketing Manager",
-    "initials": "R",
-    "avatar": "/assets/testimonials/avatar_rina.png"
-  },
-  {
-    "id": "2",
-    "stars": 5,
-    "text": "Meta Ads jadi makin stabil dan closing rate naik. Reporting-nya juga jelas tiap minggu.",
+    "text": "Sejak menggunakan Meta Whitelist, akun iklan kami jauh lebih stabil. Spending harian berjalan lancar tanpa kendala seperti sebelumnya.",
     "name": "Fajar",
-    "role": "Owner Brand",
+    "role": "Owner Brand Fashion",
     "initials": "F",
     "avatar": "/assets/testimonials/avatar_fajar.png"
   },
   {
-    "id": "3",
+    "id": "2",
     "stars": 5,
-    "text": "Sesi konsultasinya ngebantu banget buat nentuin prioritas channel marketing kami.",
-    "name": "Dimas",
-    "role": "Founder",
-    "initials": "D",
-    "avatar": "/assets/testimonials/avatar_dimas.png"
+    "text": "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.",
+    "name": "Rizka",
+    "role": "Konsultan Pendidikan",
+    "initials": "R",
+    "avatar": "/assets/testimonials/avatar_rina.png"
   },
   {
-    "id": "4",
+    "id": "3",
     "stars": 5,
-    "text": "ROAS naik dari 2.5x ke 4.2x sejak pakai akun Meta Whitelist dari Tentaklik. Pengajuannya cepat dan dibantu setup sampai ngiklan.",
+    "text": "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.",
     "name": "Andi",
     "role": "E-commerce Owner",
     "initials": "A",
     "avatar": "/assets/testimonials/avatar_andi.png"
   },
   {
-    "id": "5",
+    "id": "4",
     "stars": 5,
-    "text": "Puas banget dengan support appeal-nya. Kemarin sempat ada kendala teknis di BM, langsung dieskalasi ke tim Meta dan kelar hari itu juga.",
-    "name": "Siti",
-    "role": "Marketing Lead",
+    "text": "Awalnya sering mengalami pembatasan akun. Setelah menggunakan layanan Meta Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.",
+    "name": "Sarah",
+    "role": "Owner Skincare Brand",
     "initials": "S",
     "avatar": "/assets/testimonials/avatar_siti.png"
+  },
+  {
+    "id": "5",
+    "stars": 5,
+    "text": "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.",
+    "name": "Kevin",
+    "role": "Owner",
+    "initials": "K",
+    "avatar": "/assets/testimonials/avatar_dimas.png"
   }
 ]

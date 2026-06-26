@@ -56,6 +56,7 @@ export const UI = {
     'footer.officialPartner': 'Official Partner',
     'footer.terms': 'Ketentuan Layanan',
     'footer.disclaimer': 'Disclaimer',
+    'footer.tagline': 'Penyedia solusi digital marketing terintegrasi yang menghadirkan akses akun whitelist Google Ads & Meta Ads premium, optimasi website, dan konsultasi bisnis untuk mendukung pertumbuhan eksponensial brand di pasar lintas negara',
     // ── Home: Hero ──
     'hero.badge': 'Google & Meta Trusted Partner',
     'hero.title1': 'Buat Bisnis Kamu',
@@ -100,9 +101,9 @@ export const UI = {
     // ── Service components ──
     'svc.features.title': 'Apa yang Kami Bawa',
     'svc.features.sub': 'Hal-hal kecil yang bikin hasil beda.',
-    'svc.pricing.title': 'Pilih Paket yang Sesuai',
-    'svc.pricing.sub': 'Transparan, no hidden fee. Bisa custom sesuai kebutuhan.',
-    'svc.pricing.btn': 'Beli Paket',
+    'svc.pricing.title': 'Investasi Terbaik untuk Performa Iklan yang Lebih Stabil',
+    'svc.pricing.sub': 'Pilih paket yang mendukung pertumbuhan bisnis Anda tanpa hambatan',
+    'svc.pricing.btn': 'Ajukan Sekarang',
     'svc.process.title': 'Proses Kerja',
     'svc.process.sub': 'Step-by-step yang udah teruji.',
     'svc.faq.title': 'Pertanyaan Umum',
@@ -195,6 +196,7 @@ export const UI = {
     'footer.officialPartner': 'Official Partner',
     'footer.terms': 'Terms of Service',
     'footer.disclaimer': 'Disclaimer',
+    'footer.tagline': 'An integrated digital marketing solution provider bringing premium Google Ads & Meta Ads whitelist account access, website optimization, and business consulting to support exponential brand growth across global markets.',
     // ── Home: Hero ──
     'hero.badge': 'Google & Meta Trusted Partner',
     'hero.title1': 'Grow Your Business',
@@ -239,9 +241,9 @@ export const UI = {
     // ── Service components ──
     'svc.features.title': 'What We Bring',
     'svc.features.sub': 'The small things that make the results different.',
-    'svc.pricing.title': 'Choose the Right Plan',
-    'svc.pricing.sub': 'Transparent, no hidden fees. Customizable to your needs.',
-    'svc.pricing.btn': 'Buy Plan',
+    'svc.pricing.title': 'Best Investment for More Stable Ad Performance',
+    'svc.pricing.sub': 'Choose a plan that supports your business growth without hurdles.',
+    'svc.pricing.btn': 'Choose Now',
     'svc.process.title': 'Work Process',
     'svc.process.sub': 'A proven step-by-step.',
     'svc.faq.title': 'Frequently Asked Questions',

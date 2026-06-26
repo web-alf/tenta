@@ -28,77 +28,26 @@ const jsonLd = [
 // USD pricing tiers (same % fee, topup range converted from IDR).
 const usdPlans = [
   {
-    name: 'Starter', tagline: 'Default for all new accounts',
+    name: 'Starter', tagline: 'Minimum spending $20',
     price: '5%', unit: 'top-up fee',
-    features: ['Top-up $20–$300 / month', 'For Meta & Google Whitelist', 'No VAT', 'No daily spending limit', 'Balance auto-moves if disabled*'],
+    features: ['$20 - $300 per top-up', 'Official Meta Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Standard)'],
   },
   {
-    name: 'Growth', tagline: 'Request via CS — lower fee',
+    name: 'Growth', tagline: 'Minimum spending $20',
     price: '4.5%', unit: 'top-up fee', featured: true,
-    features: ['Top-up $300–$900 / month', 'Activated via Tentaklik CS', 'No VAT', 'No daily spending cap', 'Partner appeal support'],
+    features: ['$300 - $900 per top-up', 'Official Meta Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Priority)'],
   },
   {
-    name: 'Scale', tagline: 'Best value for high spenders',
+    name: 'Scale', tagline: 'Minimum spending $20',
     price: '3.5%', unit: 'top-up fee',
-    features: ['Top-up above $900 / month', 'Most competitive fee', 'Multi-account ready', 'Free onboarding checklist', 'Personal support (not a bot)'],
+    features: ['Above $900 per top-up', 'Official Meta Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (VIP)'],
   },
 ];
 
-// Custom English Testimonials for this LP
-const englishTestimonials = [
-  {
-    data: {
-      stars: 5,
-      text: "Leads come in much neater after the website and Google Ads were fixed. The team is great to discuss with.",
-      name: "Rina",
-      role: "Marketing Manager",
-      initials: "R",
-      avatar: "/assets/testimonials/avatar_rina.png"
-    }
-  },
-  {
-    data: {
-      stars: 5,
-      text: "Meta Ads has become more stable and the closing rate increased. The reporting is also clear every week.",
-      name: "Fajar",
-      role: "Owner Brand",
-      initials: "F",
-      avatar: "/assets/testimonials/avatar_fajar.png"
-    }
-  },
-  {
-    data: {
-      stars: 5,
-      text: "The consultation session really helped us determine the priorities of our marketing channels.",
-      name: "Dimas",
-      role: "Founder",
-      initials: "D",
-      avatar: "/assets/testimonials/avatar_dimas.png"
-    }
-  },
-  {
-    data: {
-      stars: 5,
-      text: "ROAS increased from 2.5x to 4.2x since using a Meta Whitelist account from Tentaklik. The application was fast and they helped setup everything until the ads were running.",
-      name: "Andi",
-      role: "E-commerce Owner",
-      initials: "A",
-      avatar: "/assets/testimonials/avatar_andi.png"
-    }
-  },
-  {
-    data: {
-      stars: 5,
-      text: "Very satisfied with the appeal support. Yesterday there was a technical issue in BM, it was immediately escalated to the Meta team and resolved the very same day.",
-      name: "Siti",
-      role: "Marketing Lead",
-      initials: "S",
-      avatar: "/assets/testimonials/avatar_siti.png"
-    }
-  }
-];
+// Testimonials are now fetched dynamically from data/whitelist-lp.ts
 ---
 <BaseLayout
+  lang="en"
   title="Meta Ads Whitelist Account Rental (USD) — Tentaklik"
   description="Rent a Meta Ads whitelist account for international advertisers. USD pricing, no VAT, no spending limit."
   active="layanan"
@@ -126,7 +75,7 @@ const englishTestimonials = [
   <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center variant="premium" />
   <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
   <PricingSection plans={usdPlans} service="Meta Ads Whitelist (USD)" lang="en" />
-  <LpTestimonials title="What Our Clients Say" sub="Success stories from advertisers who scaled their ads drama-free." items={englishTestimonials} />
+  <LpTestimonials title="What Our Clients Say" sub="Success stories from advertisers who scaled their ads drama-free." items={d.testimonials.map(t => ({ data: t }))} />
   <LpPromoBanner originalPrice="$12" promoPrice="$3 / account" />
   <LpShortForm platform="meta" lang="en" />
 </BaseLayout>

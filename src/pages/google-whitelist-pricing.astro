@@ -7,6 +7,7 @@ import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
 import PricingSection from '@components/sections/service/PricingSection.astro';
+import LpShortForm from '@components/sections/lp/LpShortForm.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 
 import { GOOGLE_LP, INDUSTRIES_LP, INDUSTRY_LP_HEADING } from '@data/whitelist-lp';
@@ -23,44 +24,19 @@ const url = `${site.url}${path}`;
 
 const englishPlans: typeof SEWA_PLANS = [
   {
-    name: 'Starter',
-    tagline: 'Default for all new accounts',
-    price: '5%',
-    unit: 'top-up fee',
-    features: [
-      'Top-up IDR 300k – IDR 5m / month',
-      'Valid for Meta & Google Whitelist',
-      'No VAT',
-      'No daily spending limit',
-      'Balance auto-moves if disabled*',
-    ],
+    name: 'Starter', tagline: 'Minimum spending $20',
+    price: '5%', unit: 'top-up fee',
+    features: ['$20 - $300 per top-up', 'Official Google Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Standard)'],
   },
   {
-    name: 'Growth',
-    tagline: 'Request via CS — save more on fees',
-    price: '4.5%',
-    unit: 'top-up fee',
-    featured: true,
-    features: [
-      'Top-up IDR 5m – IDR 15m / month',
-      'Activated via Tentaklik CS',
-      'No VAT',
-      'No daily spending cap',
-      'Partner-level appeal support',
-    ],
+    name: 'Growth', tagline: 'Minimum spending $20',
+    price: '4.5%', unit: 'top-up fee', featured: true,
+    features: ['$300 - $900 per top-up', 'Official Google Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Priority)'],
   },
   {
-    name: 'Scale',
-    tagline: 'Best value for high spenders',
-    price: '3.5%',
-    unit: 'top-up fee',
-    features: [
-      'Top-up above IDR 15m / month',
-      'Most competitive fee',
-      'Perfect for large scale / multi-account',
-      'Free onboarding checklist',
-      'Personal support (not a bot)',
-    ],
+    name: 'Scale', tagline: 'Minimum spending $20',
+    price: '3.5%', unit: 'top-up fee',
+    features: ['Above $900 per top-up', 'Official Google Whitelist', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (VIP)'],
   },
 ];
 
@@ -127,16 +103,5 @@ const waUrl = `https://wa.me/6285129992225?text=${encodeURIComponent(waText)}`;
   
   <LpTestimonials />
 
-  <section id="final-cta" style="padding-bottom:24px;scroll-margin-top:90px;">
-    <div class="container">
-      <div class="cta-banner reveal" style="background:var(--orange-500);">
-        <div style="flex:1;position:relative;z-index:1;">
-          <h3>{t('svc.cta.title')}</h3>
-        </div>
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-          {t('svc.cta.btn')} <ArrowRight size={14} />
-        </a>
-      </div>
-    </div>
-  </section>
+  <LpShortForm platform="google" />
 </BaseLayout>

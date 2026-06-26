@@ -12,7 +12,8 @@ import { getLang, stripLocale } from '@i18n/utils';
 const gaId = PUBLIC_GA_ID;
 const gscVerification = site.verification.google;
 
-const lang = getLang(Astro.currentLocale);
+const propLang = Astro.props.lang as 'en' | 'id' | undefined;
+const lang = propLang || getLang(Astro.currentLocale);
 const basePath = stripLocale(Astro.url.pathname);
 const hrefId = getAbsoluteLocaleUrl('id', basePath);
 const hrefEn = getAbsoluteLocaleUrl('en', basePath);
@@ -20,6 +21,7 @@ const ogLocale = lang === 'en' ? 'en_US' : 'id_ID';
 const ogLocaleAlt = lang === 'en' ? 'id_ID' : 'en_US';
 
 interface Props {
+  lang?: 'en' | 'id';
   title: string;
   description?: string;
   image?: string;
@@ -206,7 +208,7 @@ const cspContent = [
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
     {!bareLayout && <StickyWA />}
 
     <script>

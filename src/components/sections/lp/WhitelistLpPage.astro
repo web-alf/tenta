@@ -82,7 +82,7 @@ const jsonLd = [
     photos={d.photos} 
     variant={platform === 'google' ? 'grid' : 'meta'} 
   />
-  <LpTestimonials />
+  <LpTestimonials items={d.testimonials.map(t => ({ data: t }))} />
   <LpPromoBanner />
   <LpShortForm platform={platform} />
 </BaseLayout>

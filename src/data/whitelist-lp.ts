@@ -8,6 +8,7 @@ import type { Lang } from '@i18n/utils';
 export interface WhyItem { iconId: 'stable' | 'comfortable' | 'scale' | 'tax' | 'priority' | 'expert' | 'protection'; title: string; desc: string }
 export interface LpProblem { icon: string; title: string; desc: string }
 export interface LpPhoto { src: string; alt: string; portrait?: boolean }
+export interface LpTestimonial { stars: number; text: string; name: string; role: string; initials: string; avatar: string; }
 
 export interface BaseLpData {
   platform: 'meta' | 'google';
@@ -15,6 +16,7 @@ export interface BaseLpData {
   photoHeading: string;
   photoSub: string;
   photos: LpPhoto[];
+  testimonials: LpTestimonial[];
   cta: { title: string; desc: string; btn: string };
   seo: { title: string; description: string };
   keywords: string[];
@@ -49,20 +51,20 @@ export type LpData = MetaLpData | GoogleLpData;
 // Kategori industri khusus 2 LP whitelist (beda dari sewa-akun). Bilingual.
 export const INDUSTRIES_LP: Record<Lang, Industry[]> = {
   id: [
-    { label: 'NGO / Yayasan',        icon: '🤝', tint: '#E6F4F7' },
     { label: 'UMKM',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Kesehatan',            icon: '🩺', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
     { label: 'Produk Kecantikan',    icon: '💄', tint: '#F3E8FF' },
+    { label: 'Kesehatan',            icon: '🩺', tint: '#E7F6EC' },
     { label: 'Konsultan Pendidikan', icon: '🎓', tint: '#E8F0FE' },
+    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
+    { label: 'NGO / Yayasan',        icon: '🤝', tint: '#E6F4F7' },
   ],
   en: [
-    { label: 'NGO / Foundation',     icon: '🤝', tint: '#E6F4F7' },
     { label: 'SMEs',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Healthcare',           icon: '🩺', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
     { label: 'Beauty Products',      icon: '💄', tint: '#F3E8FF' },
+    { label: 'Healthcare',           icon: '🩺', tint: '#E7F6EC' },
     { label: 'Education Consultant', icon: '🎓', tint: '#E8F0FE' },
+    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
+    { label: 'NGO / Foundation',     icon: '🤝', tint: '#E6F4F7' },
   ],
 };
 
@@ -125,6 +127,13 @@ export const META_LP: Record<Lang, MetaLpData> = {
       { src: '/assets/galeri-meta/meta4.avif', alt: 'Event resmi Partner Meta' },
       { src: '/assets/galeri-meta/meta5.avif', alt: 'Tim Tentaklik', portrait: true },
     ],
+    testimonials: [
+      { stars: 5, text: "Sejak menggunakan Meta Whitelist, akun iklan kami jauh lebih stabil. Spending harian berjalan lancar tanpa kendala seperti sebelumnya.", name: "Fajar", role: "Owner Brand Fashion", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "Awalnya sering mengalami pembatasan akun. Setelah menggunakan layanan Meta Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+    ],
     cta: {
       title: 'Siap pakai akun Meta Whitelist?',
       desc: 'Lihat detail layanan, alur pendaftaran, dan struktur harga di halaman Sewa Akun.',
@@ -181,6 +190,13 @@ export const META_LP: Record<Lang, MetaLpData> = {
       { src: '/assets/galeri-meta/meta4.avif', alt: 'Official Meta Partner event' },
       { src: '/assets/galeri-meta/meta5.avif', alt: 'Tentaklik Team', portrait: true },
     ],
+    testimonials: [
+      { stars: 5, text: "Since using Meta Whitelist, our ad accounts have been much more stable. Daily spending runs smoothly without the previous obstacles.", name: "Fajar", role: "Fashion Brand Owner", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "We used to frequently experience account restrictions. After using the Meta Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+    ],
     cta: {
       title: 'Ready to use a Meta Whitelist account?',
       desc: 'See service details, the registration flow, and pricing on the Account Rental page.',
@@ -236,9 +252,14 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     photos: [
       { src: '/assets/galeri/2.jpg', alt: 'Galeri Google 2' },
       { src: '/assets/galeri/3.jpg', alt: 'Galeri Google 3' },
-      { src: '/assets/galeri/4.jpg', alt: 'Galeri Google 4' },
       { src: '/assets/galeri/6.jpg', alt: 'Galeri Google 6' },
-      { src: '/assets/galeri/8.jpg', alt: 'Galeri Google 8' },
+    ],
+    testimonials: [
+      { stars: 5, text: "Sejak menggunakan Google Whitelist, akun iklan kami jauh lebih stabil. Spending harian berjalan lancar tanpa kendala seperti sebelumnya.", name: "Fajar", role: "Owner Brand Fashion", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "Awalnya sering mengalami suspend akun. Setelah menggunakan layanan Google Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Siap pakai akun Google Whitelist?',
@@ -292,9 +313,14 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     photos: [
       { src: '/assets/galeri/2.jpg', alt: 'Google Gallery 2' },
       { src: '/assets/galeri/3.jpg', alt: 'Google Gallery 3' },
-      { src: '/assets/galeri/4.jpg', alt: 'Google Gallery 4' },
       { src: '/assets/galeri/6.jpg', alt: 'Google Gallery 6' },
-      { src: '/assets/galeri/8.jpg', alt: 'Google Gallery 8' },
+    ],
+    testimonials: [
+      { stars: 5, text: "Since using Google Whitelist, our ad accounts have been much more stable. Daily spending runs smoothly without the previous obstacles.", name: "Fajar", role: "Fashion Brand Owner", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "We used to frequently experience account suspensions. After using the Google Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Ready to use a Google Whitelist account?',
