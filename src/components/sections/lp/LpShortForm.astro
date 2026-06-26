@@ -41,32 +41,29 @@ const formId = `shortform-${platform}`;
         <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder={t('form.wa.ph')} required maxlength="20" />
       </div>
       <div class="sf-field">
-        {hasPricing ? (
-          <>
-            <label for={`${formId}-paket`}>{t('form.paket')}</label>
-            <select id={`${formId}-paket`} name="kategori" required>
-              <option value="" disabled selected>{t('form.paket.ph')}</option>
-              <option value={t('form.paket.starter')}>{t('form.paket.starter')}</option>
-              <option value={t('form.paket.growth')}>{t('form.paket.growth')}</option>
-              <option value={t('form.paket.scale')}>{t('form.paket.scale')}</option>
-            </select>
-          </>
-        ) : (
-          <>
-            <label for={`${formId}-kat`}>{t('form.kategori')}</label>
-            <select id={`${formId}-kat`} name="kategori" required>
-              <option value="" disabled selected>{t('form.kategori.ph')}</option>
-              <option value="UMKM">{t('form.kategori.umkm')}</option>
-              <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
-              <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
-              <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
-              <option value="Fashion">{t('form.kategori.fashion')}</option>
-              <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
-              <option value="Lainnya">{t('form.kategori.lainnya')}</option>
-            </select>
-          </>
-        )}
+        <label for={`${formId}-kat`}>{t('form.kategori')}</label>
+        <select id={`${formId}-kat`} name="kategori" required>
+          <option value="" disabled selected>{t('form.kategori.ph')}</option>
+          <option value="UMKM">{t('form.kategori.umkm')}</option>
+          <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
+          <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
+          <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
+          <option value="Fashion">{t('form.kategori.fashion')}</option>
+          <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
+          <option value="Lainnya">{t('form.kategori.lainnya')}</option>
+        </select>
       </div>
+      {hasPricing && (
+        <div class="sf-field">
+          <label for={`${formId}-paket`}>{t('form.paket')}</label>
+          <select id={`${formId}-paket`} name="paket" required>
+            <option value="" disabled selected>{t('form.paket.ph')}</option>
+            <option value={t('form.paket.starter')}>{t('form.paket.starter')}</option>
+            <option value={t('form.paket.growth')}>{t('form.paket.growth')}</option>
+            <option value={t('form.paket.scale')}>{t('form.paket.scale')}</option>
+          </select>
+        </div>
+      )}
       <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
         <span class="sf-btn-label">{t('form.kirim')} <ArrowRight size={14} /></span>
         <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> {t('form.mengirim')}</span>
@@ -95,15 +92,25 @@ const formId = `shortform-${platform}`;
   .sf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .sf-field { display: flex; flex-direction: column; gap: 6px; }
   .sf-field label { font-size: 13px; font-weight: 600; color: var(--ink-700); }
-  .sf-field input, .sf-field textarea {
+  .sf-field input, .sf-field textarea, .sf-field select {
     font: inherit; padding: 12px 14px;
     border-radius: var(--radius-md);
     border: 1.5px solid var(--ink-100); background: white;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
   }
-  .sf-field input:focus, .sf-field textarea:focus {
+  .sf-field input:focus, .sf-field textarea:focus, .sf-field select:focus {
     outline: none; border-color: var(--orange-500);
     box-shadow: 0 0 0 3px rgba(255,107,26,0.15);
+  }
+  .sf-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23334155'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
   }
   .sf-field textarea { resize: vertical; min-height: 80px; }
   .sf-sent { color: #15803d; font-size: 14px; font-weight: 600; margin: 0; }
@@ -147,18 +154,20 @@ const formId = `shortform-${platform}`;
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
 
   // Greeting WhatsApp disesuaikan per platform + bahasa.
-  function waGreeting(platform: string, lang: string, nama: string, kategori: string, hasPricing: boolean): string {
+  function waGreeting(platform: string, lang: string, nama: string, kategori: string, paket: string, hasPricing: boolean): string {
     const layanan = platform === 'google' ? 'Google Ads Whitelist'
                   : platform === 'meta'   ? 'Meta Ads Whitelist'
                   : 'Whitelist';
     if (lang === 'en') {
       let m = `Hello Tentaklik! I'm ${nama}, I'd like to request a ${layanan} account.`;
-      if (kategori) m += hasPricing ? `\nSelected plan: ${kategori}` : `\nBusiness category: ${kategori}`;
+      if (kategori) m += `\nBusiness category: ${kategori}`;
+      if (hasPricing && paket) m += `\nSelected plan: ${paket}`;
       m += `\n\n(Sent via the ${layanan} form)`;
       return m;
     }
     let msg = `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.`;
-    if (kategori) msg += hasPricing ? `\nPilihan paket: ${kategori}` : `\nKategori bisnis: ${kategori}`;
+    if (kategori) msg += `\nKategori bisnis: ${kategori}`;
+    if (hasPricing && paket) msg += `\nPilihan paket: ${paket}`;
     msg += `\n\n(Dikirim via form ${layanan})`;
     return msg;
   }
@@ -192,6 +201,7 @@ const formId = `shortform-${platform}`;
       const nama = clip(String(fd.get('nama') ?? ''), 100);
       const wa   = clip(String(fd.get('whatsapp') ?? ''), 20);
       const kat  = clip(String(fd.get('kategori') ?? ''), 100);
+      const pkt  = clip(String(fd.get('paket') ?? ''), 100);
       if (!NAME_RE.test(nama)) { showErr(MSG.nama); return; }
       if (!PHONE_RE.test(wa))  { showErr(MSG.wa); return; }
 
@@ -199,15 +209,16 @@ const formId = `shortform-${platform}`;
       if (!hasEndpoint) { showErr(MSG.inactive); return; }
 
       setLoading(true);
+      const hasPricing = form.getAttribute('data-has-pricing') === 'true';
+
       const params = new URLSearchParams({
         platform: platform, nama: nama, whatsapp: wa,
-        kategori: kat, source: window.location.href.split('#')[0],
+        kategori: kat, paket: pkt, source: window.location.href.split('#')[0],
       });
 
-      const hasPricing = form.getAttribute('data-has-pricing') === 'true';
       // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
       const waUrl = WA_NUMBER
-        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, kat, hasPricing))}`
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, kat, pkt, hasPricing))}`
         : '';
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
         .catch(() => {})

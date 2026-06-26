@@ -204,7 +204,7 @@ const cspContent = [
     <Fragment set:html={allLd.map(ld => `<script type="application/ld+json">${safeJsonLd(ld)}</script>`).join('\n')} />
   </head>
   <body>
-    {!bareHeader && <Header active={active} />}
+    {!bareHeader && <Header active={active} lang={lang} />}
     <main>
       <slot />
     </main>

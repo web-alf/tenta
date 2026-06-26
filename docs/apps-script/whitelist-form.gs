@@ -10,7 +10,7 @@
  * Lihat SETUP.md.
  */
 
-var HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsA', 'Kategori Bisnis', 'Platform', 'URL Asal'];
+var HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsApp', 'Kategori Bisnis', 'Pilihan Paket', 'Platform', 'URL Asal'];
 var SHEETS = [
   'Meta Whitelist',
   'Meta Whitelist Pricing',
@@ -37,9 +37,10 @@ function ensureSheet(ss, name) {
     sheet.setColumnWidth(1, 160);
     sheet.setColumnWidth(2, 180);
     sheet.setColumnWidth(3, 150);
-    sheet.setColumnWidth(4, 260);
-    sheet.setColumnWidth(5, 120);
-    sheet.setColumnWidth(6, 300);
+    sheet.setColumnWidth(4, 200);
+    sheet.setColumnWidth(5, 200);
+    sheet.setColumnWidth(6, 120);
+    sheet.setColumnWidth(7, 300);
   }
   return sheet;
 }
@@ -107,6 +108,7 @@ function doGet(e) {
       clip(p.nama, 100),
       clip(p.whatsapp, 20),
       clip(p.kategori || p.keterangan, 500),
+      clip(p.paket, 500),
       platform,
       clip(p.source, 300)
     ]);

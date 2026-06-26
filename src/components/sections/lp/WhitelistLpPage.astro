@@ -27,8 +27,8 @@ const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitel
 const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
 const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
 
-// Header is hidden for all whitelist landing pages to maintain focus on the LP content.
-const hideHeader = true;
+// Header is visible only for Google Whitelist, hidden for Meta
+const hideHeader = platform !== 'google';
 
 const jsonLd = [
   serviceJsonLd({
