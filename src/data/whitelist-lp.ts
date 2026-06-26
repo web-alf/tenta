@@ -132,7 +132,7 @@ export const META_LP: Record<Lang, MetaLpData> = {
       { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
       { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
       { stars: 5, text: "Awalnya sering mengalami pembatasan akun. Setelah menggunakan layanan Meta Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
-      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner kesehatan", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Siap pakai akun Meta Whitelist?',
@@ -195,7 +195,7 @@ export const META_LP: Record<Lang, MetaLpData> = {
       { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
       { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
       { stars: 5, text: "We used to frequently experience account restrictions. After using the Meta Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
-      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Healthcare Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Ready to use a Meta Whitelist account?',
@@ -259,7 +259,7 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
       { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
       { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
       { stars: 5, text: "Awalnya sering mengalami suspend akun. Setelah menggunakan layanan Google Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
-      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner kesehatan", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Siap pakai akun Google Whitelist?',
@@ -320,7 +320,7 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
       { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
       { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
       { stars: 5, text: "We used to frequently experience account suspensions. After using the Google Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
-      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Healthcare Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Ready to use a Google Whitelist account?',
