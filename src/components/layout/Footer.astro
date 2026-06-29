@@ -68,8 +68,8 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
       </a>
     </div>
   </div>
-  <div class="container" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-300);flex-wrap:wrap;gap:12px;">
-    <span>© 2026 tentaklik. All rights reserved.</span>
+  <div class="container footer-legal" style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:13px;color:var(--ink-300);">
+    <span>© {new Date().getFullYear()} Tentaklik. {t('footer.rights')} {t('footer.managedBy')} <strong style="color:var(--ink-100);font-weight:600;">{site.legalEntity}</strong>.</span>
     <div style="display:flex;gap:18px;flex-wrap:wrap;">
       <a href={L("/ketentuan")} class="footer-legal-link">{t('footer.terms')}</a>
       <a href={L("/disclaimer")} class="footer-legal-link">{t('footer.disclaimer')}</a>

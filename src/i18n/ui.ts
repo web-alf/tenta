@@ -56,6 +56,8 @@ export const UI = {
     'footer.officialPartner': 'Official Partner',
     'footer.terms': 'Ketentuan Layanan',
     'footer.disclaimer': 'Disclaimer',
+    'footer.rights': 'Hak cipta dilindungi.',
+    'footer.managedBy': 'Dikelola oleh',
     // ── Home: Hero ──
     'hero.badge': 'Google & Meta Trusted Partner',
     'hero.title1': 'Buat Bisnis Kamu',
@@ -195,6 +197,8 @@ export const UI = {
     'footer.officialPartner': 'Official Partner',
     'footer.terms': 'Terms of Service',
     'footer.disclaimer': 'Disclaimer',
+    'footer.rights': 'All rights reserved.',
+    'footer.managedBy': 'Managed by',
     // ── Home: Hero ──
     'hero.badge': 'Google & Meta Trusted Partner',
     'hero.title1': 'Grow Your Business',

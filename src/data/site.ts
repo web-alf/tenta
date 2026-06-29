@@ -3,6 +3,9 @@ import { PUBLIC_SITE_URL, PUBLIC_WA_NUMBER } from 'astro:env/client';
 export const site = {
   name: 'Tentaklik',
   legalName: 'Tentaklik Digital Agency',
+  // Entitas hukum (badan usaha) yang mengelola & memiliki brand Tentaklik.
+  // Ditampilkan di footer + dipakai structured data agar konsisten dengan verifikasi Google.
+  legalEntity: 'PT Media Pro Indonesia',
   url: PUBLIC_SITE_URL,
   wa: PUBLIC_WA_NUMBER,
   email: 'tentaklik@mediapro.work',
