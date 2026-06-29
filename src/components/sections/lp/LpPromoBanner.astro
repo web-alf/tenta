@@ -1,61 +1,126 @@
 ---
 interface Props {
-  heading?: string;
-  sub?: string;
   originalPrice?: string;
   promoPrice?: string;
 }
 const {
-  heading = 'Ajukan Akun Whitelist',
-  sub = 'Isi data singkat, amankan akun Anda',
   originalPrice = 'Rp200.000',
   promoPrice = 'Rp50.000 / akun',
 } = Astro.props;
+
+// Determine if USD
+const isUsd = originalPrice.startsWith('$');
+const badgeText = isUsd ? '⚡ LIMITED OFFER' : '⚡ PROMO TERBATAS';
+const noteText = isUsd 
+  ? '*Special promo price for today\'s submissions' 
+  : '*Harga promo khusus pengajuan minggu ini';
 ---
-<div class="lp-promo-banner">
-  <h3 class="lp-promo-heading">{heading}</h3>
-  <p class="lp-promo-sub">{sub}</p>
-  <div class="lp-promo-price">
-    <span class="lp-promo-original">Biaya normal <s>{originalPrice}</s></span>
-    <span class="lp-promo-current">Promo akses <strong>{promoPrice}</strong></span>
+<div class="lp-promo-container">
+  <div class="lp-promo-badge">
+    {badgeText}
   </div>
+  <div class="lp-promo-pricing">
+    <div class="lp-promo-item normal">
+      <span class="lp-label">{isUsd ? 'Regular price' : 'Biaya normal'}</span>
+      <span class="lp-price"><s>{originalPrice}</s></span>
+    </div>
+    <div class="lp-promo-divider"></div>
+    <div class="lp-promo-item promo">
+      <span class="lp-label">{isUsd ? 'Promo access' : 'Promo akses'}</span>
+      <span class="lp-price">{promoPrice}</span>
+    </div>
+  </div>
+  <p class="lp-promo-note">{noteText}</p>
 </div>
 
 <style>
-  .lp-promo-banner {
+  .lp-promo-container {
+    background: linear-gradient(135deg, var(--orange-50) 0%, #FFFDFB 100%);
+    border: 1.5px solid var(--orange-100);
+    border-radius: var(--radius-xl);
+    padding: 24px 20px 18px 20px;
+    max-width: 480px;
+    margin: 40px auto 20px auto;
     text-align: center;
-    padding: 28px 24px 20px;
-    max-width: 520px;
-    margin: 0 auto 8px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(253, 110, 33, 0.04);
+    box-sizing: border-box;
   }
-  .lp-promo-heading {
-    font-size: 22px;
+  .lp-promo-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--orange-500);
+    color: white;
+    font-size: 10px;
     font-weight: 800;
-    color: var(--ink-900);
-    margin: 0 0 6px;
+    letter-spacing: 1px;
+    padding: 4px 12px;
+    border-radius: 99px;
+    box-shadow: 0 2px 8px rgba(253, 110, 33, 0.2);
+    white-space: nowrap;
   }
-  .lp-promo-sub {
-    font-size: 14.5px;
-    color: var(--ink-500);
-    margin: 0 0 16px;
+  .lp-promo-pricing {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin-top: 8px;
   }
-  .lp-promo-price {
+  .lp-promo-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
+    flex: 1;
   }
-  .lp-promo-original {
-    font-size: 14px;
+  .lp-promo-item .lp-label {
+    font-size: 11px;
     color: var(--ink-400);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    font-weight: 600;
   }
-  .lp-promo-original s {
+  .lp-promo-item.normal .lp-price {
+    font-size: 16px;
+    color: var(--ink-400);
+    font-weight: 500;
+  }
+  .lp-promo-item.normal .lp-price s {
     text-decoration: line-through;
     color: var(--ink-400);
   }
-  .lp-promo-current {
-    font-size: 18px;
+  .lp-promo-item.promo .lp-price {
+    font-size: 20px;
     color: var(--orange-600);
-    font-weight: 700;
+    font-weight: 800;
+  }
+  .lp-promo-divider {
+    width: 1.5px;
+    height: 36px;
+    background: var(--orange-200);
+    align-self: center;
+    opacity: 0.7;
+  }
+  .lp-promo-note {
+    font-size: 11px;
+    color: var(--ink-400);
+    margin: 12px 0 0 0;
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  @media (max-width: 480px) {
+    .lp-promo-container {
+      margin: 32px 16px 16px 16px;
+      padding: 20px 16px 14px 16px;
+    }
+    .lp-promo-pricing {
+      gap: 16px;
+    }
+    .lp-promo-item.promo .lp-price {
+      font-size: 18px;
+    }
   }
 </style>

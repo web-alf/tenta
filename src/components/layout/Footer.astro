@@ -9,15 +9,19 @@ import Email from '../icons/Email.astro';
 import Pin from '../icons/Pin.astro';
 import { site, waLink } from '@data/site';
 
-const lang = getLang(Astro.currentLocale);
+interface Props {
+  lang?: 'en' | 'id';
+}
+const { lang: propLang } = Astro.props;
+const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
 const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 ---
 <footer class="footer">
-  <div class="container" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+  <div class="container footer-grid">
     <div>
       <div style="margin-bottom:14px;"><TentaklikLogo size={24} variant="white" /></div>
-      <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{site.footerTagline}</p>
+      <p style="font-size:14px;color:var(--ink-300);max-width:280px;line-height:1.6;">{t('footer.tagline')}</p>
       <div style="display:flex;gap:12px;margin-top:18px;">
         <a href={site.social.youtube} aria-label="YouTube" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><YouTube size={16} /></a>
         <a href={site.social.instagram} aria-label="Instagram" target="_blank" rel="noopener noreferrer" style="width:36px;height:36px;border-radius:999px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;"><Instagram size={16} /></a>

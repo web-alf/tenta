@@ -10,8 +10,15 @@
  * Lihat SETUP.md.
  */
 
-var HEADERS = ['Timestamp', 'Nama', 'WhatsApp', 'Keterangan', 'Source URL'];
-var SHEETS = { meta: 'Meta Whitelist', google: 'Google Whitelist' };
+var HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsApp', 'Kategori Bisnis', 'Pilihan Paket', 'Platform', 'URL Asal'];
+var SHEETS = [
+  'Meta Whitelist',
+  'Meta Whitelist Pricing',
+  'Meta Whitelist USD',
+  'Google Whitelist',
+  'Google Whitelist Pricing',
+  'Google Whitelist USD'
+];
 var BRAND_ORANGE = '#FF6B1A';
 
 /**
@@ -30,22 +37,22 @@ function ensureSheet(ss, name) {
     sheet.setColumnWidth(1, 160);
     sheet.setColumnWidth(2, 180);
     sheet.setColumnWidth(3, 150);
-    sheet.setColumnWidth(4, 360);
-    sheet.setColumnWidth(5, 240);
+    sheet.setColumnWidth(4, 200);
+    sheet.setColumnWidth(5, 200);
+    sheet.setColumnWidth(6, 120);
+    sheet.setColumnWidth(7, 300);
   }
   return sheet;
 }
 
 /**
- * Setup sekali-jalan: buat kedua tab (Meta & Google) + header rapi.
- * Jalankan manual dari editor Apps Script (pilih fungsi doSetup → Run),
- * atau via menu "Tentaklik" di spreadsheet (lihat onOpen).
- * Juga merapikan tab default "Sheet1" yang kosong bila ada.
+ * Setup sekali-jalan: buat tab untuk semua variasi halaman + header rapi.
  */
 function doSetup() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  ensureSheet(ss, SHEETS.meta);
-  ensureSheet(ss, SHEETS.google);
+  for (var i = 0; i < SHEETS.length; i++) {
+    ensureSheet(ss, SHEETS[i]);
+  }
 
   // Hapus tab default "Sheet1"/"Sheet" yang kosong & tak terpakai (bila ada > 1 sheet).
   var leftovers = ['Sheet1', 'Sheet'];
@@ -57,9 +64,9 @@ function doSetup() {
   }
 
   SpreadsheetApp.getActiveSpreadsheet().toast(
-    'Tab "Meta Whitelist" & "Google Whitelist" siap.', 'Setup selesai', 5
+    'Semua tab Whitelist siap.', 'Setup selesai', 5
   );
-  return 'OK: ' + SHEETS.meta + ' + ' + SHEETS.google + ' siap.';
+  return 'OK: Semua tab siap.';
 }
 
 /** Tambah menu "Tentaklik > Jalankan Setup" di spreadsheet untuk kemudahan. */
@@ -78,9 +85,20 @@ function doGet(e) {
   try {
     var p = (e && e.parameter) ? e.parameter : {};
     var platform = String(p.platform || '').toLowerCase();
-    var sheetName = platform === 'google' ? SHEETS.google
-                  : platform === 'meta'   ? SHEETS.meta
-                  : 'Lainnya';
+    var source = String(p.source || '').toLowerCase();
+    
+    // Bersihkan URL dari query parameter atau hash agar pengecekan lebih presisi
+    var cleanSource = source.split('?')[0].split('#')[0];
+    
+    var sheetName = 'Lainnya';
+    if (cleanSource.indexOf('meta-whitelist-pricing') !== -1) sheetName = 'Meta Whitelist Pricing';
+    else if (cleanSource.indexOf('meta-whitelist-usd') !== -1) sheetName = 'Meta Whitelist USD';
+    else if (cleanSource.indexOf('meta-whitelist') !== -1) sheetName = 'Meta Whitelist';
+    else if (cleanSource.indexOf('google-whitelist-pricing') !== -1) sheetName = 'Google Whitelist Pricing';
+    else if (cleanSource.indexOf('google-whitelist-usd') !== -1) sheetName = 'Google Whitelist USD';
+    else if (cleanSource.indexOf('google-whitelist') !== -1) sheetName = 'Google Whitelist';
+    else if (platform === 'meta') sheetName = 'Meta Whitelist';
+    else if (platform === 'google') sheetName = 'Google Whitelist';
 
     var ss = SpreadsheetApp.getActiveSpreadsheet();
     var sheet = ensureSheet(ss, sheetName);
@@ -89,7 +107,9 @@ function doGet(e) {
       new Date(),
       clip(p.nama, 100),
       clip(p.whatsapp, 20),
-      clip(p.keterangan, 500),
+      clip(p.kategori || p.keterangan, 500),
+      clip(p.paket, 500),
+      platform,
       clip(p.source, 300)
     ]);
 

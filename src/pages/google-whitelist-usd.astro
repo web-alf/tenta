@@ -2,8 +2,8 @@
 // LP Google Whitelist — English, USD pricing for international market.
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpProblem from '@components/sections/lp/LpProblem.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
@@ -28,29 +28,33 @@ const jsonLd = [
 // USD pricing tiers (same % fee, topup range converted from IDR).
 const usdPlans = [
   {
-    name: 'Starter', tagline: 'Default for all new accounts',
+    name: 'Starter', tagline: 'Minimum spending $20',
     price: '5%', unit: 'top-up fee',
-    features: ['Top-up $20–$300 / month', 'For Meta & Google Whitelist', 'No VAT', 'No daily spending limit', 'Balance auto-moves if disabled*'],
+    features: ['$20 - $300 per top-up', 'Official Whitelist Account', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Standard)'],
   },
   {
-    name: 'Growth', tagline: 'Request via CS — lower fee',
+    name: 'Growth', tagline: 'Minimum spending $20',
     price: '4.5%', unit: 'top-up fee', featured: true,
-    features: ['Top-up $300–$900 / month', 'Activated via Tentaklik CS', 'No VAT', 'No daily spending cap', 'Partner appeal support'],
+    features: ['$300 - $900 per top-up', 'Official Whitelist Account', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (Priority)'],
   },
   {
-    name: 'Scale', tagline: 'Best value for high spenders',
+    name: 'Scale', tagline: 'Minimum spending $20',
     price: '3.5%', unit: 'top-up fee',
-    features: ['Top-up above $900 / month', 'Most competitive fee', 'Multi-account ready', 'Free onboarding checklist', 'Personal support (not a bot)'],
+    features: ['Above $900 per top-up', 'Official Whitelist Account', 'No VAT fees', 'Partner-level appeal support', 'Auto-balance transfer if disabled (T&C apply)', 'Priority support (VIP)'],
   },
 ];
+
+// Testimonials are now fetched dynamically from data/whitelist-lp.ts
 ---
 <BaseLayout
+  lang="en"
   title="Google Ads Whitelist Account Rental (USD) — Tentaklik"
   description="Rent a Google Ads whitelist account for international advertisers. USD pricing, no VAT, no spending cap."
   active="layanan"
-  bareLayout
+  bareLayout={true}
+  preloadHeroSrc="/assets/kraken-hero.png"
   jsonLd={jsonLd}
-  keywords={['google ads whitelist usd', 'rent google ads account', 'google ads whitelist international']}
+  keywords={['google ads whitelist usd', 'rent google ads account', 'google ads whitelist international', 'google agency account', 'google invoice account', 'no daily spending cap google account']}
 >
   <LpHero
     eyebrow={d.hero.eyebrow}
@@ -60,12 +64,17 @@ const usdPlans = [
     ctaText="See Pricing"
     ctaHref="#pricing"
   />
-  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <PricingSection plans={usdPlans} service="Google Ads Whitelist (USD)" />
-  <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center />
-  <LpTestimonials />
-  <LpPromoBanner heading="Request a Whitelist Account" sub="Fill in a few details to secure your account" originalPrice="$12" promoPrice="$3 / account" />
-  <LpShortForm platform="google" />
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  <LpComparison platform={d.platform} lang="en" />
+  <IndustriesGrid items={INDUSTRIES_LP.en} heading={INDUSTRY_LP_HEADING.en} bg="warm" center variant="premium" />
+  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} variant="grid" />
+  <PricingSection plans={usdPlans} service="Google Ads Whitelist (USD)" lang="en" />
+  <LpTestimonials title="What Our Clients Say" sub="Success stories from advertisers who scaled their ads drama-free." items={d.testimonials.map(t => ({ data: t }))} />
+  <LpPromoBanner originalPrice="$12" promoPrice="$5 / account" />
+  <LpShortForm platform="google" lang="en" hasPricing={true} />
 </BaseLayout>

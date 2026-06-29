@@ -55,6 +55,7 @@ const testimonials = defineCollection({
     name: z.string(),
     role: z.string(),
     initials: z.string(),
+    avatar: z.string().optional(),
   }),
 });
 

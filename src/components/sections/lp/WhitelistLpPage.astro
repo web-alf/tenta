@@ -3,8 +3,8 @@
 // Tipis: pilih data per (platform, lang), render section yang sama.
 import BaseLayout from '@layouts/BaseLayout.astro';
 import LpHero from '@components/sections/lp/LpHero.astro';
-import LpProblem from '@components/sections/lp/LpProblem.astro';
-import LpBenefits from '@components/sections/lp/LpBenefits.astro';
+import LpWhyPlatform from '@components/sections/lp/LpWhyPlatform.astro';
+import LpComparison from '@components/sections/lp/LpComparison.astro';
 import LpPhotoVisit from '@components/sections/lp/LpPhotoVisit.astro';
 import IndustriesGrid from '@components/sections/IndustriesGrid.astro';
 import LpTestimonials from '@components/sections/lp/LpTestimonials.astro';
@@ -27,8 +27,8 @@ const crumbWhitelist = platform === 'google' ? 'Google Whitelist' : 'Meta Whitel
 const crumbSewa = lang === 'en' ? 'Account Rental' : 'Sewa Akun';
 const crumbHome = lang === 'en' ? 'Home' : 'Beranda';
 
-// Meta LP: header dihilangkan (bareHeader). Google LP: header tetap.
-const hideHeader = platform === 'meta';
+// Header is visible only for Google Whitelist, hidden for Meta
+const hideHeader = platform !== 'google';
 
 const jsonLd = [
   serviceJsonLd({
@@ -52,7 +52,32 @@ const jsonLd = [
   bareHeader={hideHeader}
   jsonLd={jsonLd}
   keywords={d.keywords}
+  preloadHeroSrc="true"
 >
+  {platform === 'meta' && (
+    <Fragment slot="head">
+      <!-- Meta Pixel Code -->
+      <script is:inline>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1341980327384883');
+        fbq('track', 'PageView');
+      </script>
+      <!-- End Meta Pixel Code -->
+    </Fragment>
+  )}
+  {platform === 'meta' && (
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1"
+    /></noscript>
+  )}
+
   <LpHero
     eyebrow={d.hero.eyebrow}
     title={d.hero.title}
@@ -61,11 +86,27 @@ const jsonLd = [
     ctaText={d.cta.btn}
     ctaHref={`#shortform-${platform}`}
   />
-  <LpProblem heading={d.problemHeading} sub={d.problemSub} items={d.problems} />
-  <LpBenefits heading={d.benefitHeading} items={d.benefits} />
-  <LpPhotoVisit heading={d.photoHeading} sub={d.photoSub} photos={d.photos} />
-  <IndustriesGrid items={INDUSTRIES_LP[lang]} heading={INDUSTRY_LP_HEADING[lang]} bg="warm" center />
-  <LpTestimonials />
+  <LpWhyPlatform 
+    platform={d.platform} 
+    heading={d.whyHeading} 
+    sub={d.whySub} 
+    items={d.whyItems} 
+  />
+  <LpComparison platform={d.platform} />
+  <IndustriesGrid 
+    items={INDUSTRIES_LP[lang]} 
+    heading={INDUSTRY_LP_HEADING[lang]} 
+    bg="warm" 
+    center 
+    variant="premium"
+  />
+  <LpPhotoVisit 
+    heading={d.photoHeading} 
+    sub={d.photoSub} 
+    photos={d.photos} 
+    variant={platform === 'google' ? 'grid' : 'meta'} 
+  />
+  <LpTestimonials items={d.testimonials.map(t => ({ data: t }))} />
   <LpPromoBanner />
   <LpShortForm platform={platform} />
 </BaseLayout>

@@ -5,67 +5,102 @@
 import type { Industry } from '@data/sewa-akun';
 import type { Lang } from '@i18n/utils';
 
+export interface WhyItem { iconId: 'stable' | 'comfortable' | 'scale' | 'tax' | 'priority' | 'expert' | 'protection'; title: string; desc: string }
 export interface LpProblem { icon: string; title: string; desc: string }
-export interface LpPhoto { src: string; alt: string }
+export interface LpPhoto { src: string; alt: string; portrait?: boolean }
+export interface LpTestimonial { stars: number; text: string; name: string; role: string; initials: string; avatar: string; }
 
-export interface LpData {
+export interface BaseLpData {
   platform: 'meta' | 'google';
   hero: { eyebrow: string; title: string; titleAccent: string; desc: string };
-  problemHeading: string;
-  problemSub: string;
-  problems: LpProblem[];
-  benefitHeading: string;
-  benefits: string[];
   photoHeading: string;
   photoSub: string;
   photos: LpPhoto[];
+  testimonials: LpTestimonial[];
   cta: { title: string; desc: string; btn: string };
   seo: { title: string; description: string };
   keywords: string[];
 }
 
+export interface MetaLpData extends BaseLpData {
+  platform: 'meta';
+  problemHeading: string;
+  problemSub: string;
+  problems: LpProblem[];
+  benefitHeading: string;
+  benefits: string[];
+  whyHeading: string;
+  whySub: string;
+  whyItems: WhyItem[];
+}
+
+export interface GoogleLpData extends BaseLpData {
+  platform: 'google';
+  problemHeading: string;
+  problemSub: string;
+  problems: LpProblem[];
+  benefitHeading: string;
+  benefits: string[];
+  whyHeading: string;
+  whySub: string;
+  whyItems: WhyItem[];
+}
+
+export type LpData = MetaLpData | GoogleLpData;
+
 // Kategori industri khusus 2 LP whitelist (beda dari sewa-akun). Bilingual.
 export const INDUSTRIES_LP: Record<Lang, Industry[]> = {
   id: [
-    { label: 'NGO / Yayasan',        icon: '🤝', tint: '#E6F4F7' },
     { label: 'UMKM',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Kesehatan',            icon: '🩺', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
     { label: 'Produk Kecantikan',    icon: '💄', tint: '#F3E8FF' },
+    { label: 'Kesehatan',            icon: '🩺', tint: '#E7F6EC' },
     { label: 'Konsultan Pendidikan', icon: '🎓', tint: '#E8F0FE' },
+    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
+    { label: 'NGO / Yayasan',        icon: '🤝', tint: '#E6F4F7' },
   ],
   en: [
-    { label: 'NGO / Foundation',     icon: '🤝', tint: '#E6F4F7' },
     { label: 'SMEs',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Healthcare',           icon: '🩺', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
     { label: 'Beauty Products',      icon: '💄', tint: '#F3E8FF' },
+    { label: 'Healthcare',           icon: '🩺', tint: '#E7F6EC' },
     { label: 'Education Consultant', icon: '🎓', tint: '#E8F0FE' },
+    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
+    { label: 'NGO / Foundation',     icon: '🤝', tint: '#E6F4F7' },
   ],
 };
 
 export const INDUSTRY_LP_HEADING: Record<Lang, { title: string; sub: string }> = {
   id: {
-    title: 'Cocok untuk berbagai industri',
+    title: 'Cocok untuk <span style="color: var(--orange-500)">berbagai industri</span>',
     sub: 'Umumnya digunakan oleh advertiser di industri:',
   },
   en: {
-    title: 'Fit for various industries',
+    title: 'Fit for <span style="color: var(--orange-500)">various industries</span>',
     sub: 'Commonly used by advertisers in industries:',
   },
 };
 
 const CTA_HREF = '/layanan/sewa-akun';
 
-export const META_LP: Record<Lang, LpData> = {
+export const META_LP: Record<Lang, MetaLpData> = {
   id: {
     platform: 'meta',
     hero: {
       eyebrow: 'Meta Ads Whitelist',
-      title: 'Akun Meta Ads Whitelist',
-      titleAccent: 'Siap Scale Tanpa Drama Banned',
-      desc: 'Akses jalur akun agensi tingkat tinggi yang dipercaya oleh sistem Meta. Bebas blokir massal, tanpa batasan spending, serta didukung prioritas eskalasi tercepat.',
+      title: 'Jangan Biarkan',
+      titleAccent: 'Kendala Akun Menghambat Pertumbuhan Bisnis Anda',
+      desc: 'Meta Whitelist membantu bisnis yang aktif beriklan menjalankan campaign dengan lebih nyaman dan fokus pada pertumbuhan',
     },
+    whyHeading: 'Mengapa Memilih Meta Whitelist?',
+    whySub: 'Solusi terbaik untuk scale-up iklan Anda dengan aman, nyaman, dan bebas hambatan.',
+    whyItems: [
+      { iconId: 'stable', title: 'Akun Stabil', desc: 'Akun stabil, Minim risiko pembatasan acak' },
+      { iconId: 'comfortable', title: 'Lebih Nyaman', desc: 'Lebih nyaman untuk beriklan' },
+      { iconId: 'scale', title: 'Bebas Scale', desc: 'Bebas scale limit spending harian' },
+      { iconId: 'tax', title: 'Tanpa PPN', desc: 'Tidak dikenakan PPN' },
+      { iconId: 'priority', title: 'Jalur Prioritas', desc: 'Support appeal langsung melalui jalur Meta' },
+      { iconId: 'expert', title: 'Support Expert', desc: 'Support teknis langsung ke tim expert Meta' },
+      { iconId: 'protection', title: 'Proteksi Saldo', desc: 'Saldo otomatis pindah ke akun pengganti jika terjadi disable (s&k berlaku)' },
+    ],
     problemHeading: 'Saat scale, masalah Meta Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
@@ -83,11 +118,21 @@ export const META_LP: Record<Lang, LpData> = {
       'Saldo otomatis pindah ke **akun pengganti** jika terjadi disable (syarat & ketentuan berlaku)',
       'Support teknis langsung ke **tim expert Meta**',
     ],
-    photoHeading: 'Terhubung langsung dengan Meta',
+    photoHeading: 'Terhubung langsung <span style="color: var(--orange-500)">dengan Meta</span>',
     photoSub: 'Tim Tentaklik aktif di event & program resmi Meta.',
     photos: [
-      { src: '/assets/galeri/9.jpeg',  alt: 'Tim Tentaklik di event Meta' },
-      { src: '/assets/galeri/10.jpeg', alt: 'Kunjungan ke kantor Meta / Facebook' },
+      { src: '/assets/galeri-meta/meta1.avif', alt: 'Tim Tentaklik di event Meta' },
+      { src: '/assets/galeri-meta/meta2.avif', alt: 'Kunjungan ke kantor Meta' },
+      { src: '/assets/galeri-meta/meta6.avif', alt: 'Kunjungan tim ke Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta4.avif', alt: 'Event resmi Partner Meta' },
+      { src: '/assets/galeri-meta/meta5.avif', alt: 'Tim Tentaklik', portrait: true },
+    ],
+    testimonials: [
+      { stars: 5, text: "Sejak menggunakan Meta Whitelist, akun iklan kami jauh lebih stabil. Spending harian berjalan lancar tanpa kendala seperti sebelumnya.", name: "Fajar", role: "Owner Brand Fashion", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "Awalnya sering mengalami pembatasan akun. Setelah menggunakan layanan Meta Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner kesehatan", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Siap pakai akun Meta Whitelist?',
@@ -106,8 +151,19 @@ export const META_LP: Record<Lang, LpData> = {
       eyebrow: 'Meta Ads Whitelist',
       title: 'Meta Ads Whitelist Account',
       titleAccent: 'Ready to Scale Without Banned Drama',
-      desc: 'Access top-tier agency account lines trusted by Meta\'s system. Free from mass blocks, no spending limits, and backed by the fastest escalation priority.',
+      desc: 'Free from mass blocks, no spending limits, and backed by the fastest escalation priority.',
     },
+    whyHeading: 'Why Choose Meta Whitelist?',
+    whySub: 'The ultimate solution to scale your ads safely, comfortably, and without obstacles.',
+    whyItems: [
+      { iconId: 'stable', title: 'Stable Accounts', desc: 'Stable accounts, minimal risk of random restrictions' },
+      { iconId: 'comfortable', title: 'More Comfortable', desc: 'More comfortable for advertising' },
+      { iconId: 'scale', title: 'Scale Freely', desc: 'Scale freely with no daily spending limits' },
+      { iconId: 'tax', title: 'No VAT', desc: 'No VAT charged' },
+      { iconId: 'priority', title: 'Priority Route', desc: 'Direct appeal support through Meta channels' },
+      { iconId: 'expert', title: 'Expert Support', desc: 'Direct technical support from Meta expert team' },
+      { iconId: 'protection', title: 'Balance Protection', desc: 'Balance auto-moves to replacement account if disabled (T&C apply)' },
+    ],
     problemHeading: 'As you scale, Meta Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
@@ -125,11 +181,21 @@ export const META_LP: Record<Lang, LpData> = {
       'Balance auto-moves to a **replacement account** if disabled (terms & conditions apply)',
       'Direct technical support from the **Meta expert team**',
     ],
-    photoHeading: 'Directly connected with Meta',
+    photoHeading: 'Directly connected <span style="color: var(--orange-500)">with Meta</span>',
     photoSub: 'The Tentaklik team is active in Meta\'s official events & programs.',
     photos: [
-      { src: '/assets/galeri/9.jpeg',  alt: 'Tentaklik team at a Meta event' },
-      { src: '/assets/galeri/10.jpeg', alt: 'Visit to the Meta / Facebook office' },
+      { src: '/assets/galeri-meta/meta1.avif', alt: 'Tentaklik team at a Meta event' },
+      { src: '/assets/galeri-meta/meta2.avif', alt: 'Visit to the Meta office' },
+      { src: '/assets/galeri-meta/meta6.avif', alt: 'Team visit to Facebook Singapore' },
+      { src: '/assets/galeri-meta/meta4.avif', alt: 'Official Meta Partner event' },
+      { src: '/assets/galeri-meta/meta5.avif', alt: 'Tentaklik Team', portrait: true },
+    ],
+    testimonials: [
+      { stars: 5, text: "Since using Meta Whitelist, our ad accounts have been much more stable. Daily spending runs smoothly without the previous obstacles.", name: "Fajar", role: "Fashion Brand Owner", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "We used to frequently experience account restrictions. After using the Meta Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Healthcare Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Ready to use a Meta Whitelist account?',
@@ -144,15 +210,26 @@ export const META_LP: Record<Lang, LpData> = {
   },
 };
 
-export const GOOGLE_LP: Record<Lang, LpData> = {
+export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
   id: {
     platform: 'google',
     hero: {
       eyebrow: 'Google Ads Whitelist',
-      title: 'Akun Google Ads Whitelist:',
-      titleAccent: 'Stabil untuk Scale-Up Besar',
-      desc: 'Maksimalkan kampanye Anda dengan jaminan akun bebas hambatan dan eskalasi kendala yang lebih cepat.',
+      title: 'Jangan Biarkan',
+      titleAccent: 'Kendala Akun Menghambat Performa Google Ads Anda',
+      desc: 'Google Whitelist membantu bisnis menjalankan aktivitas periklanan dengan lebih nyaman dan efisien.',
     },
+    whyHeading: 'Mengapa Memilih Google Whitelist?',
+    whySub: 'Solusi terbaik untuk scale-up iklan Anda dengan aman, nyaman, dan bebas hambatan.',
+    whyItems: [
+      { iconId: 'stable', title: 'Risiko Suspend Rendah', desc: 'Risiko Suspend lebih rendah dibanding akun Google Ads Personal biasa' },
+      { iconId: 'comfortable', title: 'Lebih Nyaman', desc: 'Lebih nyaman untuk beriklan' },
+      { iconId: 'scale', title: 'Bebas Scale', desc: 'Bebas scale limit spending harian' },
+      { iconId: 'tax', title: 'Tanpa PPN', desc: 'Tidak dikenakan PPN' },
+      { iconId: 'priority', title: 'Jalur Prioritas', desc: 'Support appeal langsung melalui jalur Google Partner' },
+      { iconId: 'expert', title: 'Support Expert', desc: 'Support teknis langsung ke tim expert Google' },
+      { iconId: 'protection', title: 'Proteksi Saldo', desc: 'Saldo otomatis pindah ke akun pengganti jika terjadi disable (s&k berlaku)' },
+    ],
     problemHeading: 'Saat scale, masalah Google Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
@@ -173,9 +250,16 @@ export const GOOGLE_LP: Record<Lang, LpData> = {
     photoHeading: 'Terhubung langsung dengan Google',
     photoSub: 'Tim Tentaklik aktif di event & program resmi Google Partner.',
     photos: [
-      { src: '/assets/galeri/1.jpg', alt: 'Tim Tentaklik di kantor Google' },
-      { src: '/assets/galeri/5.jpg', alt: 'Event Akselerasi Bisnis dengan Google Ads' },
-      { src: '/assets/galeri/8.jpg', alt: 'Kunjungan tim ke Google' },
+      { src: '/assets/galeri/2.jpg', alt: 'Galeri Google 2' },
+      { src: '/assets/galeri/3.jpg', alt: 'Galeri Google 3' },
+      { src: '/assets/galeri/6.jpg', alt: 'Galeri Google 6' },
+    ],
+    testimonials: [
+      { stars: 5, text: "Sejak menggunakan Google Whitelist, akun iklan kami jauh lebih stabil. Spending harian berjalan lancar tanpa kendala seperti sebelumnya.", name: "Fajar", role: "Owner Brand Fashion", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaign jadi lebih mudah di-scale karena akun memiliki trust yang lebih baik. Tim Tentaklik juga sangat membantu selama proses aktivasi.", name: "Rizka", role: "Konsultan Pendidikan", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "Proses whitelist cepat, CS responsif, dan setiap kendala dibantu sampai selesai. Sangat membantu untuk menjaga performa iklan tetap optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "Awalnya sering mengalami suspend akun. Setelah menggunakan layanan Google Whitelist, operasional iklan menjadi jauh lebih konsisten dan spending meningkat tanpa hambatan.", name: "Sarah", role: "Owner Skincare Brand", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "Akun iklan menjadi lebih stabil dan kami bisa meningkatkan budget campaign dengan lebih percaya diri. Proses aktivasi cepat dan tim support selalu siap membantu.", name: "Kevin", role: "Owner kesehatan", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Siap pakai akun Google Whitelist?',
@@ -192,10 +276,21 @@ export const GOOGLE_LP: Record<Lang, LpData> = {
     platform: 'google',
     hero: {
       eyebrow: 'Google Ads Whitelist',
-      title: 'Google Ads Whitelist Account:',
-      titleAccent: 'Stable for Large-Scale Growth',
-      desc: 'Maximize your campaigns with a guaranteed obstacle-free account and faster issue escalation.',
+      title: "Don't Let",
+      titleAccent: 'Account Issues Hinder Your Google Ads Performance',
+      desc: 'Google Whitelist helps businesses run advertising activities more comfortably and efficiently.',
     },
+    whyHeading: 'Why Choose Google Whitelist?',
+    whySub: 'The ultimate solution to scale your ads safely, comfortably, and without obstacles.',
+    whyItems: [
+      { iconId: 'stable', title: 'Lower Suspension Risk', desc: 'Lower suspension risk compared to a regular personal Google Ads account' },
+      { iconId: 'comfortable', title: 'More Comfortable', desc: 'More comfortable for advertising' },
+      { iconId: 'scale', title: 'Scale Freely', desc: 'Scale freely with no daily spending limits' },
+      { iconId: 'tax', title: 'No VAT', desc: 'No VAT charged' },
+      { iconId: 'priority', title: 'Priority Route', desc: 'Direct appeal support through Google Partner' },
+      { iconId: 'expert', title: 'Expert Support', desc: 'Direct technical support from the Google expert team' },
+      { iconId: 'protection', title: 'Balance Protection', desc: 'Balance auto-moves to replacement account if disabled (T&C apply)' },
+    ],
     problemHeading: 'As you scale, Google Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
@@ -216,9 +311,16 @@ export const GOOGLE_LP: Record<Lang, LpData> = {
     photoHeading: 'Directly connected with Google',
     photoSub: 'The Tentaklik team is active in Google Partner\'s official events & programs.',
     photos: [
-      { src: '/assets/galeri/1.jpg', alt: 'Tentaklik team at the Google office' },
-      { src: '/assets/galeri/5.jpg', alt: 'Business Acceleration with Google Ads event' },
-      { src: '/assets/galeri/8.jpg', alt: 'Team visit to Google' },
+      { src: '/assets/galeri/2.jpg', alt: 'Google Gallery 2' },
+      { src: '/assets/galeri/3.jpg', alt: 'Google Gallery 3' },
+      { src: '/assets/galeri/6.jpg', alt: 'Google Gallery 6' },
+    ],
+    testimonials: [
+      { stars: 5, text: "Since using Google Whitelist, our ad accounts have been much more stable. Daily spending runs smoothly without the previous obstacles.", name: "Fajar", role: "Fashion Brand Owner", initials: "F", avatar: "/assets/testimonials/avatar_fajar.png" },
+      { stars: 5, text: "Campaigns are much easier to scale because the account has better trust. The Tentaklik team was also very helpful during the activation process.", name: "Rizka", role: "Education Consultant", initials: "R", avatar: "/assets/testimonials/avatar_rina.png" },
+      { stars: 5, text: "The whitelist process is fast, customer service is responsive, and every issue is assisted until resolved. Very helpful in keeping ad performance optimal.", name: "Andi", role: "E-commerce Owner", initials: "A", avatar: "/assets/testimonials/avatar_andi.png" },
+      { stars: 5, text: "We used to frequently experience account suspensions. After using the Google Whitelist service, ad operations became much more consistent and spending increased without hurdles.", name: "Sarah", role: "Skincare Brand Owner", initials: "S", avatar: "/assets/testimonials/avatar_siti.png" },
+      { stars: 5, text: "The ad account has become more stable and we can increase campaign budgets with more confidence. The activation process is fast and the support team is always ready to help.", name: "Kevin", role: "Healthcare Owner", initials: "K", avatar: "/assets/testimonials/avatar_dimas.png" }
     ],
     cta: {
       title: 'Ready to use a Google Whitelist account?',

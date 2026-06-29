@@ -36,9 +36,15 @@ function bold(s: string) { return s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</stron
     color: var(--ink-700);
     line-height: 1.5;
     background: white;
-    border: 1px solid var(--ink-100);
+    border: 1.5px solid var(--orange-100);
     border-radius: var(--radius-lg);
     padding: 16px 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .lp-benefits li:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+    border-color: var(--orange-300);
   }
   .lp-benefit-check {
     width: 22px; height: 22px; border-radius: 999px;

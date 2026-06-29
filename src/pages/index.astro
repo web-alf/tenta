@@ -4,13 +4,17 @@ import Hero from '@components/sections/Hero.astro';
 import ServicesGrid from '@components/sections/ServicesGrid.astro';
 import CTABanner from '@components/sections/CTABanner.astro';
 import Process from '@components/sections/Process.astro';
-import Testimonials from '@components/sections/Testimonials.astro';
+import Testimonials from '@components/sections/lp/LpTestimonials.astro';
 import CaseStudiesPreview from '@components/sections/CaseStudiesPreview.astro';
 import FAQ from '@components/sections/FAQ.astro';
 import FinalCTA from '@components/sections/FinalCTA.astro';
 import { faqJsonLd, itemListJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import { getCollection } from 'astro:content';
+import { getLang, useT } from '@i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const tr = useT(lang);
 
 const faqs = await getCollection('faqs');
 const services = await getCollection('services');
@@ -52,7 +56,7 @@ const jsonLd = [
   <ServicesGrid />
   <CTABanner />
   <Process />
-  <Testimonials />
+  <Testimonials title={tr('testi.title')} sub={tr('testi.sub')} />
   <CaseStudiesPreview />
   <FAQ />
   <FinalCTA />

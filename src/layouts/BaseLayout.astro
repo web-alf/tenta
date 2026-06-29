@@ -12,7 +12,8 @@ import { getLang, stripLocale } from '@i18n/utils';
 const gaId = PUBLIC_GA_ID;
 const gscVerification = site.verification.google;
 
-const lang = getLang(Astro.currentLocale);
+const propLang = Astro.props.lang as 'en' | 'id' | undefined;
+const lang = propLang || getLang(Astro.currentLocale);
 const basePath = stripLocale(Astro.url.pathname);
 const hrefId = getAbsoluteLocaleUrl('id', basePath);
 const hrefEn = getAbsoluteLocaleUrl('en', basePath);
@@ -20,6 +21,7 @@ const ogLocale = lang === 'en' ? 'en_US' : 'id_ID';
 const ogLocaleAlt = lang === 'en' ? 'id_ID' : 'en_US';
 
 interface Props {
+  lang?: 'en' | 'id';
   title: string;
   description?: string;
   image?: string;
@@ -78,11 +80,11 @@ const cspContent = [
   "base-uri 'self'",
   "object-src 'none'",
   "form-action 'self' https://wa.me",
-  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://cdn-cgi/`,
+  `script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://static.cloudflareinsights.com https://cdn-cgi/ https://connect.facebook.net https://*.facebook.net https://www.facebook.com https://*.facebook.com`,
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self' data:",
-  `img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com https://*.g.doubleclick.net https://*.google.com`,
-  `connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://script.google.com https://script.googleusercontent.com`,
+  `img-src 'self' data: blob: https://www.google-analytics.com https://*.google-analytics.com https://*.g.doubleclick.net https://*.google.com https://www.facebook.com https://*.facebook.com`,
+  `connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.g.doubleclick.net https://script.google.com https://script.googleusercontent.com https://www.facebook.com https://*.facebook.com`,
   "manifest-src 'self'",
   "worker-src 'self'",
   "media-src 'self'",
@@ -200,13 +202,14 @@ const cspContent = [
     )}
 
     <Fragment set:html={allLd.map(ld => `<script type="application/ld+json">${safeJsonLd(ld)}</script>`).join('\n')} />
+    <slot name="head" />
   </head>
   <body>
-    {!bareHeader && <Header active={active} />}
+    {!bareHeader && <Header active={active} lang={lang} />}
     <main>
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
     {!bareLayout && <StickyWA />}
 
     <script>

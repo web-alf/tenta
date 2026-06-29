@@ -5,10 +5,11 @@ import { getLang, useT, stripLocale } from '@i18n/utils';
 
 interface Props {
   active?: 'beranda' | 'layanan' | 'case' | 'tentang' | 'karir' | 'snk' | 'faq' | 'kontak';
+  lang?: 'en' | 'id';
 }
-const { active = 'beranda' } = Astro.props;
+const { active = 'beranda', lang: propLang } = Astro.props;
 
-const lang = getLang(Astro.currentLocale);
+const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
 // Localize internal path untuk bahasa aktif (EN → prefix /en).
 const L = (path: string) => (lang === 'en' ? `/en${path === '/' ? '' : path}` : path) || '/';

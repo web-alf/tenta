@@ -11,20 +11,20 @@ interface Props {
 }
 const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
 ---
-<section style="padding-top:56px;padding-bottom:56px;background:var(--bg-warm);position:relative;overflow:hidden;">
-  <div class="container" style="display:grid;grid-template-columns:1.1fr 1fr;gap:40px;align-items:center;">
-    <div>
+<section class="lp-hero-section">
+  <div class="container lp-hero-grid">
+    <div class="lp-hero-content">
       <span class="eyebrow">{eyebrow}</span>
-      <h1 style="font-size:50px;margin-top:18px;margin-bottom:18px;">
-        {title} <span style="color:var(--orange-500);">{titleAccent}</span>
+      <h1 class="lp-hero-title">
+        {title} <span class="hero-title-accent" style="color:var(--orange-500);">{titleAccent}</span>
       </h1>
-      <p style="font-size:17px;color:var(--ink-500);max-width:520px;margin-bottom:28px;">{desc}</p>
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <p class="lp-hero-desc">{desc}</p>
+      <div class="lp-hero-actions">
         <a href={ctaHref} class="btn btn-primary">{ctaText} <ArrowRight size={14} /></a>
       </div>
     </div>
-    <div style="position:relative;display:flex;justify-content:center;align-items:center;min-height:360px;">
-      <div class="kraken-float" style="width:100%;max-width:440px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
+    <div class="lp-hero-visual">
+      <div class="kraken-float">
         <picture>
           <source type="image/avif" srcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" sizes="(max-width: 760px) min(440px, 95vw), 440px" />
           <source type="image/webp" srcset="/assets/kraken-hero-400.webp 400w, /assets/kraken-hero-560.webp 560w, /assets/kraken-hero-800.webp 800w" sizes="(max-width: 760px) min(440px, 95vw), 440px" />
@@ -34,3 +34,101 @@ const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
     </div>
   </div>
 </section>
+
+<style>
+  .lp-hero-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+    background: var(--bg-warm);
+    position: relative;
+    overflow: hidden;
+  }
+  .lp-hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .lp-hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .lp-hero-title {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: var(--ink-900);
+  }
+  .lp-hero-desc {
+    font-size: 17px;
+    color: var(--ink-600);
+    max-width: 520px;
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .lp-hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .lp-hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 360px;
+  }
+  .kraken-float {
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
+    filter: drop-shadow(0 24px 48px rgba(255,107,26,0.18));
+  }
+  .hero-title-accent {
+    display: inline;
+  }
+
+  @media (max-width: 900px) {
+    .lp-hero-section {
+      padding-top: 60px;
+      padding-bottom: 60px;
+    }
+    .lp-hero-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      text-align: center;
+    }
+    .lp-hero-content {
+      align-items: center;
+    }
+    .lp-hero-title {
+      font-size: 38px;
+      max-width: 600px;
+    }
+    .lp-hero-desc {
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 16px;
+    }
+    .lp-hero-visual {
+      min-height: auto;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .lp-hero-section {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+    .lp-hero-title {
+      font-size: 32px;
+    }
+    .hero-title-accent {
+      display: block;
+      margin-top: 4px;
+    }
+  }
+</style>
