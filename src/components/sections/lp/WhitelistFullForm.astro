@@ -22,8 +22,6 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
       data-platform={platform}
       data-lang={lang}
       data-msg-sent={t('form.sent')}
-      data-err-nama={t('form.err.nama')}
-      data-err-wa={t('form.err.wa')}
       data-err-ktp={t('mwf.err.ktp')}
       data-err-ktp-size={t('mwf.err.ktp.size')}
       data-err-ktp-type={t('mwf.err.ktp.type')}
@@ -34,46 +32,33 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
       <input type="text" name="website_hp" tabindex="-1" autocomplete="off" class="sf-hp" aria-hidden="true" />
 
       <div class="sf-field">
-        <label for={`${formId}-nama`}>{t('form.nama')} <span class="sf-req">*</span></label>
-        <input id={`${formId}-nama`} type="text" name="nama" placeholder={t('form.nama.ph')} required maxlength="100" />
-      </div>
-
-      <div class="sf-field">
-        <label for={`${formId}-wa`}>{t('form.wa')} <span class="sf-req">*</span></label>
-        <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder={t('form.wa.ph')} required maxlength="20" />
-      </div>
-
-      <div class="sf-field">
-        <label for={`${formId}-kategori`}>{t('form.kategori')} <span class="sf-req">*</span></label>
-        <select id={`${formId}-kategori`} name="kategori" required>
-          <option value="" disabled selected>{t('form.kategori.ph')}</option>
-          <option value="UMKM">{t('form.kategori.umkm')}</option>
-          <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
-          <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
-          <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
-          <option value="Fashion">{t('form.kategori.fashion')}</option>
-          <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
-          <option value="Lainnya">{t('form.kategori.lainnya')}</option>
-        </select>
-      </div>
-
-      <div class="sf-field">
         <label for={`${formId}-ktp`}>{t('mwf.ktp')} <span class="sf-req">*</span></label>
         <input id={`${formId}-ktp`} type="file" name="ktp" accept="image/jpeg,image/png,application/pdf" required />
         <span class="sf-help">{t('mwf.ktp.help')}</span>
       </div>
 
+      {platform === 'google' && (
+        <div class="sf-field">
+          <label for={`${formId}-email`}>Email <span class="sf-req">*</span></label>
+          <input id={`${formId}-email`} type="email" name="email" placeholder="contoh@email.com" required maxlength="150" />
+        </div>
+      )}
+
       <div class="sf-field">
-        <label for={`${formId}-website`}>{t('mwf.website')}</label>
-        <input id={`${formId}-website`} type="url" name="website_url" placeholder={t('mwf.website.ph')} maxlength="200" />
+        <label for={`${formId}-website`}>
+          {t('mwf.website')} {platform === 'google' ? <span class="sf-req">*</span> : <span style="font-weight:normal;color:var(--ink-400)">(Opsional)</span>}
+        </label>
+        <input id={`${formId}-website`} type="url" name="website_url" placeholder={t('mwf.website.ph')} required={platform === 'google'} maxlength="200" />
       </div>
 
       <div class="sf-field">
-        <label for={`${formId}-sosmed`}>{t('mwf.sosmed')} <span class="sf-req">*</span></label>
-        <input id={`${formId}-sosmed`} type="text" name="sosmed" placeholder={t('mwf.sosmed.ph')} required maxlength="200" />
+        <label for={`${formId}-sosmed`}>
+          {t('mwf.sosmed')} {platform === 'meta' ? <span class="sf-req">*</span> : <span style="font-weight:normal;color:var(--ink-400)">(Opsional)</span>}
+        </label>
+        <input id={`${formId}-sosmed`} type="text" name="sosmed" placeholder={t('mwf.sosmed.ph')} required={platform === 'meta'} maxlength="200" />
       </div>
 
-      <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
+      <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;margin-top:8px;">
         <span class="sf-btn-label">{t('form.kirim')} <ArrowRight size={14} /></span>
         <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> {t('form.mengirim')}</span>
       </button>
@@ -117,18 +102,20 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
     outline: none; border-color: var(--orange-500);
     box-shadow: 0 0 0 3px rgba(255,107,26,0.15);
   }
-  .sf-field select {
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23334155'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    background-size: 16px;
-    padding-right: 40px;
-    cursor: pointer;
-  }
   .sf-sent { color: #15803d; font-size: 14px; font-weight: 600; margin: 0; }
-  .sf-err { color: #b91c1c; font-size: 14px; margin: 0; }
+  .sf-err { 
+    background-color: #fef2f2;
+    border: 1px solid #f87171;
+    color: #b91c1c; 
+    font-size: 13.5px; 
+    line-height: 1.5;
+    margin: 0; 
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
   .sf-submit { position: relative; }
   .sf-submit .sf-btn-label { display: inline-flex; align-items: center; gap: 8px; }
   .sf-submit .sf-btn-loading { display: none; align-items: center; gap: 8px; }
@@ -151,17 +138,65 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
 
 <script>
   // Webhook Google Apps Script untuk form lengkap (mendukung upload file KTP via POST)
-  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycby1IlACXHdcmc3Grz6rEpV2zATleEO6XAN-_aQSvNaue9sn72KqRXw0SgsJ1vCWdELt/exec';
+  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycbycrJWsxCxVH4BF9Ly6DadA6aAcjO2bgRj7rPXnmE_5Vy_8ZdlmJa7_PN4s8l2zfZeH/exec';
   const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285129992225';
   const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
 
-  const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
-  const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
   const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
   const clip = (v: string, n: number) => v.replace(CTRL_RE, ' ').slice(0, n).trim();
   const MAX_FILE_SIZE = 5 * 1024 * 1024;
   const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
+
+  // Fungsi kompresi gambar otomatis (Client-side)
+  const compressImage = (file: File, maxWidth: number, maxHeight: number, quality: number): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      if (!file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => resolve((e.target?.result as string).split(',')[1]);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target?.result as string;
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+
+          if (width > height) {
+            if (width > maxWidth) {
+              height = Math.round((height * maxWidth) / width);
+              width = maxWidth;
+            }
+          } else {
+            if (height > maxHeight) {
+              width = Math.round((width * maxHeight) / height);
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            resolve((event.target?.result as string).split(',')[1]);
+            return;
+          }
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL('image/jpeg', quality);
+          resolve(dataUrl.split(',')[1]);
+        };
+        img.onerror = error => reject(error);
+      };
+      reader.onerror = error => reject(error);
+    });
+  };
 
   document.querySelectorAll<HTMLFormElement>('form.wff').forEach((form) => {
     const sent = form.querySelector<HTMLElement>('.sf-sent');
@@ -171,17 +206,19 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
     const lang = form.getAttribute('data-lang') ?? 'id';
 
     const MSG = {
-      nama: form.getAttribute('data-err-nama') ?? '',
-      wa: form.getAttribute('data-err-wa') ?? '',
-      ktp: form.getAttribute('data-err-ktp') ?? '',
-      ktpSize: form.getAttribute('data-err-ktp-size') ?? '',
-      ktpType: form.getAttribute('data-err-ktp-type') ?? '',
-      sosmed: form.getAttribute('data-err-sosmed') ?? '',
-      inactive: form.getAttribute('data-err-inactive') ?? '',
+      ktp: form.getAttribute('data-err-ktp') ?? 'Foto KTP wajib diunggah.',
+      ktpSize: form.getAttribute('data-err-ktp-size') ?? 'File KTP terlalu besar. Mohon unggah foto dengan ukuran maksimal 5 MB.',
+      ktpType: form.getAttribute('data-err-ktp-type') ?? 'Format KTP tidak didukung. Harap gunakan format JPG, PNG, atau PDF.',
+      sosmed: form.getAttribute('data-err-sosmed') ?? 'Akun sosial media wajib diisi.',
+      inactive: form.getAttribute('data-err-inactive') ?? 'Sistem sedang dipelihara. Silakan coba lagi nanti.',
     };
 
     const showErr = (t: string) => {
-      if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { if (err) err.hidden = true; }, 5000); }
+      if (err) { 
+        err.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top: 2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> <span>${t}</span>`;
+        err.hidden = false; 
+        setTimeout(() => { if (err) err.hidden = true; }, 7000); 
+      }
     };
 
     let busy = false;
@@ -192,7 +229,7 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
 
     const layanan = platform === 'google' ? 'Google Ads Whitelist' : 'Meta Ads Whitelist';
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (busy) return;
       if (sent) sent.hidden = true;
@@ -200,14 +237,9 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
       const fd = new FormData(form);
       if (String(fd.get('website_hp') ?? '').length > 0) return;
 
-      const nama = clip(String(fd.get('nama') ?? ''), 100);
-      const wa = clip(String(fd.get('whatsapp') ?? ''), 20);
-      const kat = clip(String(fd.get('kategori') ?? ''), 100);
+      const email = clip(String(fd.get('email') ?? ''), 150);
       const sosmed = clip(String(fd.get('sosmed') ?? ''), 200);
       const websiteUrl = clip(String(fd.get('website_url') ?? ''), 200);
-
-      if (!NAME_RE.test(nama)) { showErr(MSG.nama); return; }
-      if (!PHONE_RE.test(wa)) { showErr(MSG.wa); return; }
 
       const ktpInput = form.querySelector<HTMLInputElement>('input[name="ktp"]');
       const ktpFile = ktpInput?.files?.[0];
@@ -215,32 +247,42 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
       if (ktpFile.size > MAX_FILE_SIZE) { showErr(MSG.ktpSize); return; }
       if (!ALLOWED_TYPES.includes(ktpFile.type)) { showErr(MSG.ktpType); return; }
 
-      if (!sosmed.trim()) { showErr(MSG.sosmed); return; }
+      if (platform === 'google') {
+        if (!websiteUrl) { showErr("Website wajib diisi."); return; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr("Email tidak valid."); return; }
+      }
+
+      if (platform === 'meta' && !sosmed) {
+        showErr(MSG.sosmed); return;
+      }
 
       if (!hasEndpoint) { showErr(MSG.inactive); return; }
 
       setLoading(true);
 
-      const reader = new FileReader();
-      reader.onload = function(e_file) {
-        const base64Data = (e_file.target?.result as string).split(',')[1];
+      try {
+        // Kompres gambar menjadi maksimal 1000px dengan kualitas 75%
+        const base64Data = await compressImage(ktpFile, 1000, 1000, 0.75);
         
+        const mimeType = ktpFile.type.startsWith('image/') ? 'image/jpeg' : ktpFile.type;
+        const fileName = ktpFile.type.startsWith('image/') && !ktpFile.name.toLowerCase().endsWith('.jpg') && !ktpFile.name.toLowerCase().endsWith('.jpeg') 
+                         ? ktpFile.name + '.jpg' 
+                         : ktpFile.name;
+
         const payload = {
           platform,
-          nama,
-          whatsapp: wa,
-          kategori: kat,
+          email,
           sosmed,
           website: websiteUrl,
           source: window.location.href.split('#')[0],
           fileData: base64Data,
-          fileName: ktpFile.name,
-          mimeType: ktpFile.type
+          fileName: fileName,
+          mimeType: mimeType
         };
 
         const greeting = lang === 'en'
-          ? `Hello Tentaklik! I'm ${nama}, I'd like to apply for a ${layanan} account.\nBusiness category: ${kat}\nSocial media: ${sosmed}${websiteUrl ? `\nWebsite: ${websiteUrl}` : ''}\n\n(Sent via ${layanan} form)`
-          : `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.\nKategori bisnis: ${kat}\nSosial media: ${sosmed}${websiteUrl ? `\nWebsite: ${websiteUrl}` : ''}\n\n(Dikirim via form ${layanan})`;
+          ? `Hello Tentaklik! I have submitted my documents (KTP) for the ${layanan} application.`
+          : `Halo Tentaklik! Saya baru saja mengirimkan kelengkapan data (KTP) untuk pengajuan ${layanan}.`;
 
         const waUrl = WA_NUMBER
           ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(greeting)}`
@@ -248,8 +290,7 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
 
         if (typeof (window as any).fbq === 'function') {
           (window as any).fbq('track', 'Lead', {
-            content_name: `${layanan} Form`,
-            content_category: kat,
+            content_name: `${layanan} Document Form`,
           });
         }
 
@@ -270,14 +311,10 @@ const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
               setTimeout(() => { window.location.href = waUrl; }, 800);
             }
           });
-      };
-
-      reader.onerror = function() {
+      } catch (err) {
         showErr("Gagal memproses file. Silakan coba lagi.");
         setLoading(false);
-      };
-
-      reader.readAsDataURL(ktpFile);
+      }
     });
   });
 </script>
