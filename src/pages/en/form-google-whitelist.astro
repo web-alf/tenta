@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import WhitelistFullForm from '@components/sections/lp/WhitelistFullForm.astro';
+import { site } from '@data/site';
+
+const title = 'Google Ads Whitelist Form';
+const description = 'Apply for a premium Google Ads Whitelist account. Fill in the complete form and our team will contact you via WhatsApp.';
+const url = `${site.url}/en/form-google-whitelist`;
+---
+<BaseLayout
+  title={title}
+  description={description}
+  active="layanan"
+>
+  <Fragment slot="head">
+    <link rel="canonical" href={url} />
+  </Fragment>
+
+  <div style="padding-top:48px;padding-bottom:64px;">
+    <WhitelistFullForm platform="google" />
+  </div>
+</BaseLayout>

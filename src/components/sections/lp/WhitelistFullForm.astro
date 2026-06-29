@@ -1,0 +1,283 @@
+---
+import ArrowRight from '@components/icons/ArrowRight.astro';
+import { getLang, useT } from '@i18n/utils';
+
+interface Props {
+  platform: 'meta' | 'google';
+  lang?: 'en' | 'id';
+}
+const { platform } = Astro.props;
+const lang = Astro.props.lang || getLang(Astro.currentLocale);
+const t = useT(lang);
+const formId = `wff-${platform}`;
+const subKey = platform === 'google' ? 'mwf.sub.google' : 'mwf.sub';
+---
+<section aria-labelledby="wff-heading">
+  <div class="container" style="max-width:620px;">
+    <h2 id="wff-heading" class="section-title">{t('mwf.heading')}</h2>
+    <p class="section-sub" style="margin-bottom:32px;">{t(subKey)}</p>
+    <form
+      id={formId}
+      class="shortform wff"
+      data-platform={platform}
+      data-lang={lang}
+      data-msg-sent={t('form.sent')}
+      data-err-nama={t('form.err.nama')}
+      data-err-wa={t('form.err.wa')}
+      data-err-ktp={t('mwf.err.ktp')}
+      data-err-ktp-size={t('mwf.err.ktp.size')}
+      data-err-ktp-type={t('mwf.err.ktp.type')}
+      data-err-sosmed={t('mwf.err.sosmed')}
+      data-err-inactive={t('form.err.inactive')}
+      novalidate
+    >
+      <input type="text" name="website_hp" tabindex="-1" autocomplete="off" class="sf-hp" aria-hidden="true" />
+
+      <div class="sf-field">
+        <label for={`${formId}-nama`}>{t('form.nama')} <span class="sf-req">*</span></label>
+        <input id={`${formId}-nama`} type="text" name="nama" placeholder={t('form.nama.ph')} required maxlength="100" />
+      </div>
+
+      <div class="sf-field">
+        <label for={`${formId}-wa`}>{t('form.wa')} <span class="sf-req">*</span></label>
+        <input id={`${formId}-wa`} type="tel" name="whatsapp" placeholder={t('form.wa.ph')} required maxlength="20" />
+      </div>
+
+      <div class="sf-field">
+        <label for={`${formId}-kategori`}>{t('form.kategori')} <span class="sf-req">*</span></label>
+        <select id={`${formId}-kategori`} name="kategori" required>
+          <option value="" disabled selected>{t('form.kategori.ph')}</option>
+          <option value="UMKM">{t('form.kategori.umkm')}</option>
+          <option value="Produk Kecantikan">{t('form.kategori.kecantikan')}</option>
+          <option value="Kesehatan">{t('form.kategori.kesehatan')}</option>
+          <option value="Konsultan Pendidikan">{t('form.kategori.pendidikan')}</option>
+          <option value="Fashion">{t('form.kategori.fashion')}</option>
+          <option value="NGO / Yayasan">{t('form.kategori.ngo')}</option>
+          <option value="Lainnya">{t('form.kategori.lainnya')}</option>
+        </select>
+      </div>
+
+      <div class="sf-field">
+        <label for={`${formId}-ktp`}>{t('mwf.ktp')} <span class="sf-req">*</span></label>
+        <input id={`${formId}-ktp`} type="file" name="ktp" accept="image/jpeg,image/png,application/pdf" required />
+        <span class="sf-help">{t('mwf.ktp.help')}</span>
+      </div>
+
+      <div class="sf-field">
+        <label for={`${formId}-website`}>{t('mwf.website')}</label>
+        <input id={`${formId}-website`} type="url" name="website_url" placeholder={t('mwf.website.ph')} maxlength="200" />
+      </div>
+
+      <div class="sf-field">
+        <label for={`${formId}-sosmed`}>{t('mwf.sosmed')} <span class="sf-req">*</span></label>
+        <input id={`${formId}-sosmed`} type="text" name="sosmed" placeholder={t('mwf.sosmed.ph')} required maxlength="200" />
+      </div>
+
+      <button type="submit" class="btn btn-primary sf-submit" style="justify-content:center;width:100%;">
+        <span class="sf-btn-label">{t('form.kirim')} <ArrowRight size={14} /></span>
+        <span class="sf-btn-loading" aria-hidden="true"><span class="sf-spinner"></span> {t('form.mengirim')}</span>
+      </button>
+      <p class="sf-sent" role="status" aria-live="polite" hidden>{t('form.sent')}</p>
+      <p class="sf-err" role="alert" aria-live="assertive" hidden></p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .shortform {
+    background: white;
+    border: 1.5px solid var(--orange-100);
+    border-radius: var(--radius-xl);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .shortform:hover {
+    border-color: var(--orange-300);
+    box-shadow: var(--shadow-md);
+  }
+  .sf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .sf-field { display: flex; flex-direction: column; gap: 6px; }
+  .sf-field label { font-size: 13px; font-weight: 600; color: var(--ink-700); }
+  .sf-req { color: #b91c1c; }
+  .sf-help { font-size: 12px; color: var(--ink-400); }
+  .sf-field input, .sf-field textarea, .sf-field select {
+    font: inherit; padding: 12px 14px;
+    border-radius: var(--radius-md);
+    border: 1.5px solid var(--ink-100); background: white;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .sf-field input[type="file"] {
+    padding: 10px 14px;
+    cursor: pointer;
+  }
+  .sf-field input:focus, .sf-field textarea:focus, .sf-field select:focus {
+    outline: none; border-color: var(--orange-500);
+    box-shadow: 0 0 0 3px rgba(255,107,26,0.15);
+  }
+  .sf-field select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23334155'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .sf-sent { color: #15803d; font-size: 14px; font-weight: 600; margin: 0; }
+  .sf-err { color: #b91c1c; font-size: 14px; margin: 0; }
+  .sf-submit { position: relative; }
+  .sf-submit .sf-btn-label { display: inline-flex; align-items: center; gap: 8px; }
+  .sf-submit .sf-btn-loading { display: none; align-items: center; gap: 8px; }
+  .sf-submit.is-loading .sf-btn-label { display: none; }
+  .sf-submit.is-loading .sf-btn-loading { display: inline-flex; }
+  .sf-submit[disabled] { opacity: 0.85; cursor: progress; }
+  .sf-spinner {
+    width: 15px; height: 15px;
+    border: 2px solid rgba(255,255,255,0.45);
+    border-top-color: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    animation: sf-spin 0.6s linear infinite;
+  }
+  @keyframes sf-spin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) {
+    .sf-spinner { animation-duration: 1.6s; }
+  }
+</style>
+
+<script>
+  // Webhook Google Apps Script untuk form lengkap (mendukung upload file KTP via POST)
+  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycby1IlACXHdcmc3Grz6rEpV2zATleEO6XAN-_aQSvNaue9sn72KqRXw0SgsJ1vCWdELt/exec';
+  const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285129992225';
+  const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
+
+  const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
+  const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+  const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
+  const clip = (v: string, n: number) => v.replace(CTRL_RE, ' ').slice(0, n).trim();
+  const MAX_FILE_SIZE = 5 * 1024 * 1024;
+  const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'application/pdf'];
+  const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
+
+  document.querySelectorAll<HTMLFormElement>('form.wff').forEach((form) => {
+    const sent = form.querySelector<HTMLElement>('.sf-sent');
+    const err = form.querySelector<HTMLElement>('.sf-err');
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const platform = form.getAttribute('data-platform') ?? 'meta';
+    const lang = form.getAttribute('data-lang') ?? 'id';
+
+    const MSG = {
+      nama: form.getAttribute('data-err-nama') ?? '',
+      wa: form.getAttribute('data-err-wa') ?? '',
+      ktp: form.getAttribute('data-err-ktp') ?? '',
+      ktpSize: form.getAttribute('data-err-ktp-size') ?? '',
+      ktpType: form.getAttribute('data-err-ktp-type') ?? '',
+      sosmed: form.getAttribute('data-err-sosmed') ?? '',
+      inactive: form.getAttribute('data-err-inactive') ?? '',
+    };
+
+    const showErr = (t: string) => {
+      if (err) { err.textContent = t; err.hidden = false; setTimeout(() => { if (err) err.hidden = true; }, 5000); }
+    };
+
+    let busy = false;
+    const setLoading = (on: boolean) => {
+      busy = on;
+      if (btn) { btn.disabled = on; btn.classList.toggle('is-loading', on); }
+    };
+
+    const layanan = platform === 'google' ? 'Google Ads Whitelist' : 'Meta Ads Whitelist';
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (busy) return;
+      if (sent) sent.hidden = true;
+
+      const fd = new FormData(form);
+      if (String(fd.get('website_hp') ?? '').length > 0) return;
+
+      const nama = clip(String(fd.get('nama') ?? ''), 100);
+      const wa = clip(String(fd.get('whatsapp') ?? ''), 20);
+      const kat = clip(String(fd.get('kategori') ?? ''), 100);
+      const sosmed = clip(String(fd.get('sosmed') ?? ''), 200);
+      const websiteUrl = clip(String(fd.get('website_url') ?? ''), 200);
+
+      if (!NAME_RE.test(nama)) { showErr(MSG.nama); return; }
+      if (!PHONE_RE.test(wa)) { showErr(MSG.wa); return; }
+
+      const ktpInput = form.querySelector<HTMLInputElement>('input[name="ktp"]');
+      const ktpFile = ktpInput?.files?.[0];
+      if (!ktpFile) { showErr(MSG.ktp); return; }
+      if (ktpFile.size > MAX_FILE_SIZE) { showErr(MSG.ktpSize); return; }
+      if (!ALLOWED_TYPES.includes(ktpFile.type)) { showErr(MSG.ktpType); return; }
+
+      if (!sosmed.trim()) { showErr(MSG.sosmed); return; }
+
+      if (!hasEndpoint) { showErr(MSG.inactive); return; }
+
+      setLoading(true);
+
+      const reader = new FileReader();
+      reader.onload = function(e_file) {
+        const base64Data = (e_file.target?.result as string).split(',')[1];
+        
+        const payload = {
+          platform,
+          nama,
+          whatsapp: wa,
+          kategori: kat,
+          sosmed,
+          website: websiteUrl,
+          source: window.location.href.split('#')[0],
+          fileData: base64Data,
+          fileName: ktpFile.name,
+          mimeType: ktpFile.type
+        };
+
+        const greeting = lang === 'en'
+          ? `Hello Tentaklik! I'm ${nama}, I'd like to apply for a ${layanan} account.\nBusiness category: ${kat}\nSocial media: ${sosmed}${websiteUrl ? `\nWebsite: ${websiteUrl}` : ''}\n\n(Sent via ${layanan} form)`
+          : `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.\nKategori bisnis: ${kat}\nSosial media: ${sosmed}${websiteUrl ? `\nWebsite: ${websiteUrl}` : ''}\n\n(Dikirim via form ${layanan})`;
+
+        const waUrl = WA_NUMBER
+          ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(greeting)}`
+          : '';
+
+        if (typeof (window as any).fbq === 'function') {
+          (window as any).fbq('track', 'Lead', {
+            content_name: `${layanan} Form`,
+            content_category: kat,
+          });
+        }
+
+        fetch(SHORTFORM_URL, { 
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain'
+          },
+          body: JSON.stringify(payload)
+        })
+          .catch(() => {})
+          .finally(() => {
+            form.reset();
+            if (sent) sent.hidden = false;
+            setLoading(false);
+            if (waUrl) {
+              setTimeout(() => { window.location.href = waUrl; }, 800);
+            }
+          });
+      };
+
+      reader.onerror = function() {
+        showErr("Gagal memproses file. Silakan coba lagi.");
+        setLoading(false);
+      };
+
+      reader.readAsDataURL(ktpFile);
+    });
+  });
+</script>
