@@ -220,6 +220,15 @@ const formId = `shortform-${platform}`;
       const waUrl = WA_NUMBER
         ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(platform, lang, nama, kat, pkt, hasPricing))}`
         : '';
+      
+      // Fire Meta Pixel Lead Event
+      if (platform === 'meta' && typeof window.fbq === 'function') {
+        window.fbq('track', 'Lead', {
+          content_name: hasPricing ? pkt : kat,
+          content_category: kat
+        });
+      }
+
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
         .catch(() => {})
         .finally(() => {
