@@ -88,7 +88,7 @@ export const SEWA_PLANS: SewaPlan[] = [
     unit: 'fee topup',
     features: [
       'Sekali topup 300rb - 5jt',
-      'Meta Whitelist resmi',
+      'Akun Whitelist Resmi',
       'Tanpa biaya PPN',
       'Support appeal jalur partner',
       'Saldo pindah otomatis jika disable*',
@@ -103,7 +103,7 @@ export const SEWA_PLANS: SewaPlan[] = [
     featured: true,
     features: [
       'Sekali topup 5jt - 15jt',
-      'Meta Whitelist resmi',
+      'Akun Whitelist Resmi',
       'Tanpa biaya PPN',
       'Support appeal jalur partner',
       'Saldo pindah otomatis jika disable*',
@@ -117,7 +117,7 @@ export const SEWA_PLANS: SewaPlan[] = [
     unit: 'fee topup',
     features: [
       'Topup di atas 15jt',
-      'Meta Whitelist resmi',
+      'Akun Whitelist Resmi',
       'Tanpa biaya PPN',
       'Support appeal jalur partner',
       'Saldo pindah otomatis jika disable*',
