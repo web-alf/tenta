@@ -199,11 +199,15 @@ const formId = `shortform-${platform}`;
       const fd = new FormData(form);
       if (String(fd.get('website') ?? '').length > 0) return; // honeypot
       const nama = clip(String(fd.get('nama') ?? ''), 100);
-      const wa   = clip(String(fd.get('whatsapp') ?? ''), 20);
+      let wa   = clip(String(fd.get('whatsapp') ?? ''), 20);
       const kat  = clip(String(fd.get('kategori') ?? ''), 100);
       const pkt  = clip(String(fd.get('paket') ?? ''), 100);
       if (!NAME_RE.test(nama)) { showErr(MSG.nama); return; }
       if (!PHONE_RE.test(wa))  { showErr(MSG.wa); return; }
+
+      // Auto-format WA: Hapus karakter selain angka dan plus (seperti spasi & strip) 
+      // agar tidak terdeteksi sebagai rumus yang salah oleh Google Sheets
+      wa = wa.replace(/[^\d+]/g, '');
 
       // Belum ada endpoint (URL masih placeholder) → jangan klaim sukses palsu.
       if (!hasEndpoint) { showErr(MSG.inactive); return; }
