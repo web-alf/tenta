@@ -153,7 +153,7 @@ const formId = `shortform-${platform}`;
   const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
 
   const forms = document.querySelectorAll<HTMLFormElement>('form.shortform');
-  const NAME_RE = /^[\p{L}\p{M}\s.\-']{2,100}$/u;
+  const NAME_RE = /^[\p{L}\p{M}\d\s.\-']{2,100}$/u;
   const PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
   const CTRL_RE = new RegExp('[\\u0000-\\u001F\\u007F]', 'g');
   const clip = (v: string, n: number) => v.replace(CTRL_RE, ' ').slice(0, n).trim();
@@ -225,8 +225,9 @@ const formId = `shortform-${platform}`;
       const hasPricing = form.getAttribute('data-has-pricing') === 'true';
 
       const params = new URLSearchParams({
-        platform: plat, nama: nama, whatsapp: wa,
+        platform: plat, nama: nama, whatsapp: "'" + wa,
         kategori: kat, paket: pkt, source: window.location.href.split('#')[0],
+        _t: Date.now().toString(), // mencegah request di-cache oleh browser
       });
 
       // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
