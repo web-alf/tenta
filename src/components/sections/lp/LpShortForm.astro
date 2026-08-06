@@ -243,17 +243,20 @@ const formId = `shortform-${platform}`;
         });
       }
 
-      fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors' })
-        .catch(() => {})
-        .finally(() => {
-          form.reset();
-          if (sent) sent.hidden = false;
-          setLoading(false);
-          if (waUrl) {
-            // Beri jeda singkat agar user lihat status "Terkirim", lalu redirect.
-            setTimeout(() => { window.location.href = waUrl; }, 800);
-          }
-        });
+      // Eksekusi fetch dengan keepalive agar browser tetap mengirim data di background
+      // meskipun user langsung pindah halaman (redirect).
+      fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(() => {});
+
+      // Jangan tunggu response Google (bisa lambat 10-15 detik karena cold-start).
+      // Langsung redirect user setelah 1.5 detik agar UX terasa cepat dan anti-gagal.
+      setTimeout(() => {
+        form.reset();
+        if (sent) sent.hidden = false;
+        setLoading(false);
+        if (waUrl) {
+          window.location.href = waUrl;
+        }
+      }, 1500);
     });
   });
 </script>
