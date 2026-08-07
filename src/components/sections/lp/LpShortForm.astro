@@ -147,7 +147,7 @@ const formId = `shortform-${platform}`;
 <script>
   // Shortform whitelist → Google Apps Script Sheet (GET fire-and-forget).
   // Ganti SHORTFORM_URL dengan URL /exec setelah deploy Apps Script (lihat docs/apps-script/SETUP.md).
-  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycbxyHJH_xuhhVPqS-XEkBSl8jDYOjgHkVe2-Oi5sGnXkxeHXc7MaBtfyDBJkoBe_W7oBGQ/exec';
+  const SHORTFORM_URL = 'https://script.google.com/macros/s/AKfycbyqBbjxA91y18QR_PvcYArI62SSEbdD0JU49PFnlb4Wj7Q1xviBNbwDaHG_jSKZk0OutA/exec';
   // Nomor WA tujuan (sama dengan StickyWA / kontak). PUBLIC_WA_NUMBER di-inline saat build.
   const RAW_WA = import.meta.env.PUBLIC_WA_NUMBER ?? '6285129992225';
   const WA_NUMBER = String(RAW_WA).replace(/\D/g, '').slice(0, 15);
