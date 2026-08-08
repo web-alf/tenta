@@ -64,33 +64,35 @@ const jsonLd = [
   description={seo.description}
   active="layanan"
   bareLayout
-  bareHeader={platform !== 'google'}
+  bareHeader
   jsonLd={jsonLd}
   keywords={seo.keywords}
   preloadHeroSrc="true"
   gtmId={platform === 'google' ? 'GTM-N6FD2GVL' : 'GTM-T2FDL7NM'}
 >
-    <Fragment slot="head">
-      <!-- Meta Pixel Code -->
-      <script is:inline>
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1341980327384883');
-        fbq('track', 'PageView');
-      </script>
-      <!-- End Meta Pixel Code -->
-    </Fragment>
-    <noscript><img height="1" width="1" style="display:none"
-      src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1"
-    /></noscript>
+    {platform === 'meta' && (
+      <Fragment slot="head">
+        <!-- Meta Pixel Code -->
+        <script is:inline>
+          !function(f,b,e,v,n,t,s)
+          {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+          fbq('init', '1341980327384883');
+          fbq('track', 'PageView');
+        </script>
+        <!-- End Meta Pixel Code -->
+        <noscript><img height="1" width="1" style="display:none"
+          src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1"
+        /></noscript>
+      </Fragment>
+    )}
 
-  {platform === 'meta' && <LpHeader platform={platform} lang={lang} />}
+  <LpHeader platform={platform} lang={lang} />
   <LpHero
     eyebrow={content.hero.eyebrow}
     title={content.hero.title}
