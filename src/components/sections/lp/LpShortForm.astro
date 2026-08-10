@@ -253,6 +253,18 @@ const formId = `shortform-${platform}`;
         form.reset();
         if (sent) sent.hidden = false;
         setLoading(false);
+
+        // Push GTM dataLayer event untuk tracking konversi Google Ads.
+        // GTM Trigger: Custom Event → Event Name: generate_lead
+        // GTM Tag: Google Ads Conversion Tracking → trigger dari event ini.
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        (window as any).dataLayer.push({
+          event: 'generate_lead',
+          form_platform: plat,       // 'google' | 'meta'
+          form_kategori: kat,        // kategori bisnis yang dipilih user
+          form_source: window.location.pathname, // path halaman LP
+        });
+
         if (waUrl) {
           window.location.href = waUrl;
         }
