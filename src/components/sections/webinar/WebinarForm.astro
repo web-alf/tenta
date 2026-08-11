@@ -1,0 +1,286 @@
+---
+interface Props { heading: string; sub: string; scriptUrl: string; waNumber: string; priceEarlyBird: string; priceRegular: string; priceOriginal: string; seatLeft: number; }
+const { heading, sub, scriptUrl, waNumber, priceEarlyBird, priceRegular, priceOriginal, seatLeft } = Astro.props;
+---
+<section class="wb-form-section" id="form-registrasi" aria-labelledby="wb-form-heading">
+  <div class="container" style="max-width:680px;">
+    <span class="wb-form-eyebrow">Daftar Webinar</span>
+    <h2 id="wb-form-heading" class="section-title">{heading}</h2>
+    <p class="section-sub" style="margin-bottom:32px;">{sub}</p>
+    <div class="wb-summary-card">
+      <div class="wb-summary-item"><span class="wb-ticket-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span><span><s class="wb-prc-cross">{priceOriginal}</s> <span class="wb-prc-reg">{priceRegular}</span> <strong class="wb-prc-eb">{priceEarlyBird}</strong> <em class="wb-prc-note">untuk {seatLeft} orang pertama</em></span></div>
+    </div>
+    <form id="webinar-meta-form" class="wb-form" data-script-url={scriptUrl} data-wa-number={waNumber} novalidate>
+      <input type="text" name="website" tabindex="-1" autocomplete="off" class="wb-hp" aria-hidden="true" />
+      <div class="wb-field">
+        <label for="wbf-nama">Nama Lengkap <span class="wb-req" aria-hidden="true">*</span></label>
+        <input id="wbf-nama" type="text" name="nama" placeholder="Masukkan nama lengkap" required maxlength="100" autocomplete="name" />
+      </div>
+      <div class="wb-field">
+        <label for="wbf-email">Email Aktif <span class="wb-req" aria-hidden="true">*</span></label>
+        <input id="wbf-email" type="email" name="email" placeholder="contoh@email.com" required maxlength="150" autocomplete="email" />
+      </div>
+      <div class="wb-field">
+        <label for="wbf-wa">Nomor WhatsApp <span class="wb-req" aria-hidden="true">*</span></label>
+        <input id="wbf-wa" type="tel" name="whatsapp" placeholder="08xxxxxxxxxx" required maxlength="20" autocomplete="tel" />
+      </div>
+      <div class="wb-field">
+        <label for="wbf-bisnis">Nama Bisnis / Brand</label>
+        <input id="wbf-bisnis" type="text" name="bisnis" placeholder="Nama bisnis atau brand Anda" maxlength="100" />
+      </div>
+      <div class="wb-field">
+        <label for="wbf-durasi">Berapa lama Anda sudah beriklan di Meta Ads? <span class="wb-req" aria-hidden="true">*</span></label>
+        <select id="wbf-durasi" name="durasi" required>
+          <option value="" disabled selected>— Pilih durasi —</option>
+          <option value="kurang-3-bulan">Kurang dari 3 bulan</option>
+          <option value="3-12-bulan">3–12 bulan</option>
+          <option value="1-3-tahun">1–3 tahun</option>
+          <option value="lebih-3-tahun">Lebih dari 3 tahun</option>
+        </select>
+      </div>
+      <div class="wb-field">
+        <fieldset class="wb-fieldset">
+          <legend class="wb-legend">Apa kendala utama Anda saat menjalankan Meta Ads? <span class="wb-req" aria-hidden="true">*</span></legend>
+          <div class="wb-checkboxes">
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="ROAS rendah" /><span>ROAS rendah</span></label>
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="CPA terlalu tinggi" /><span>CPA terlalu tinggi</span></label>
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="Campaign tidak stabil" /><span>Campaign tidak stabil</span></label>
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="Sulit melakukan scaling" /><span>Sulit melakukan scaling</span></label>
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="Budget cepat habis" /><span>Budget cepat habis</span></label>
+            <label class="wb-check-label"><input type="checkbox" name="kendala" value="Lainnya" /><span>Lainnya</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <label class="wb-consent-label">
+        <input type="checkbox" name="consent" value="yes" />
+        <span>Saya bersedia menerima informasi terkait webinar dan layanan Tentaklik melalui WhatsApp/email.</span>
+      </label>
+      <button type="submit" class="wb-submit-btn" id="wbf-submit">
+        <span class="wbf-label">Daftar Sekarang &mdash; {priceEarlyBird} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        <span class="wbf-loading" aria-hidden="true"><span class="wb-spinner"></span> Mengirim...</span>
+      </button>
+      <p class="wb-quota-note">Kuota peserta terbatas. Daftar segera untuk mengamankan tempat Anda.</p>
+      <p class="wb-msg-sent" role="status" aria-live="polite" hidden>&#10003; Pendaftaran berhasil! Kami akan menghubungi Anda via WhatsApp.</p>
+      <p class="wb-msg-err" role="alert" aria-live="assertive" hidden></p>
+    </form>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal" class="wb-modal" aria-hidden="true">
+    <div class="wb-modal-overlay" tabindex="-1"></div>
+    <div class="wb-modal-content" role="dialog" aria-labelledby="wb-modal-title">
+      <button class="wb-modal-close" aria-label="Tutup popup">&times;</button>
+      
+      <div class="wb-modal-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h3 id="wb-modal-title" class="wb-modal-title">Registrasi Berhasil!</h3>
+      <p class="wb-modal-desc">Selesaikan pembayaran Anda untuk mengamankan kursi (Early Bird).</p>
+      
+      <div class="wb-payment-box">
+        <div class="wb-pay-amount">
+          <span>Total Tagihan</span>
+          <strong>{priceEarlyBird}</strong>
+        </div>
+        <div class="wb-pay-divider"></div>
+        <div class="wb-pay-bank">
+          <span class="wb-bank-name">BCA</span>
+          <div class="wb-bank-acc-wrap">
+            <span class="wb-bank-acc" id="wb-bank-acc">7831988855</span>
+            <button class="wb-copy-btn" id="wb-copy-btn" aria-label="Copy nomor rekening">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span class="wb-copy-txt">Salin</span>
+            </button>
+          </div>
+          <span class="wb-bank-owner">a.n PT Media Pro Indonesia</span>
+        </div>
+      </div>
+      
+      <ul class="wb-pay-steps">
+        <li>1. Transfer sesuai nominal di atas.</li>
+        <li>2. Simpan bukti transfer (screenshot/foto).</li>
+        <li>3. Kirim ke CS kami untuk konfirmasi dan mendapatkan link grup.</li>
+      </ul>
+      
+      <a href="#" id="wb-confirm-btn" class="wb-confirm-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Kirim Bukti via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+<style>
+  .wb-form-section { background: white; }
+  .wb-ticket-icon { display: inline-flex; color: var(--orange-500, #FF6B1A); }
+  .wb-form-eyebrow { display: flex; width: max-content; margin: 0 auto 16px; background: var(--orange-100, #FFE8D6); color: var(--orange-700, #C2410C); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 14px; border-radius: 999px; }
+  .wb-summary-card { display: flex; align-items: center; justify-content: center; gap: 12px; background: var(--bg-warm, #FFF8F3); border: 1.5px solid var(--orange-200, #FFCBA4); border-radius: var(--radius-xl, 16px); padding: 16px 24px; margin-bottom: 32px; flex-wrap: wrap; }
+  .wb-summary-item { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--ink-800, #1E293B); }
+  .wb-prc-cross { color: var(--ink-400, #94A3B8); font-weight: 400; font-size: 13px; }
+  .wb-prc-reg { font-weight: 600; color: var(--ink-700, #334155); margin-right: 4px; }
+  .wb-prc-eb { color: var(--orange-600, #EA580C); font-size: 15px; }
+  .wb-prc-note { color: var(--ink-500, #64748B); font-size: 12px; font-style: normal; }
+  .wb-form { background: white; border: 1.5px solid var(--orange-100, #FFE8D6); border-radius: var(--radius-xl, 16px); padding: 32px; display: flex; flex-direction: column; gap: 18px; box-shadow: 0 4px 24px rgba(255,107,26,0.06); transition: border-color 0.2s, box-shadow 0.2s; }
+  .wb-form:hover { border-color: var(--orange-300, #FD9A6F); box-shadow: 0 8px 32px rgba(255,107,26,0.10); }
+  .wb-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .wb-field { display: flex; flex-direction: column; gap: 6px; }
+  .wb-field label { font-size: 13px; font-weight: 600; color: var(--ink-700, #334155); }
+  .wb-req { color: var(--orange-500, #FF6B1A); }
+  .wb-field input, .wb-field select { font: inherit; padding: 12px 14px; border-radius: var(--radius-md, 10px); border: 1.5px solid var(--ink-100, #E2E8F0); background: white; color: var(--ink-900, #0F172A); transition: border-color 0.15s, box-shadow 0.15s; }
+  .wb-field input:focus, .wb-field select:focus { outline: none; border-color: var(--orange-500, #FF6B1A); box-shadow: 0 0 0 3px rgba(255,107,26,0.15); }
+  .wb-field select { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23334155'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 40px; cursor: pointer; }
+  .wb-fieldset { border: none; padding: 0; margin: 0; }
+  .wb-legend { font-size: 13px; font-weight: 600; color: var(--ink-700, #334155); margin-bottom: 10px; display: block; }
+  .wb-checkboxes { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .wb-check-label { display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--ink-700, #334155); cursor: pointer; padding: 8px 12px; border: 1.5px solid var(--ink-100, #E2E8F0); border-radius: var(--radius-md, 10px); transition: border-color 0.15s, background 0.15s; user-select: none; }
+  .wb-check-label:hover { border-color: var(--orange-300, #FD9A6F); background: var(--orange-50, #FFF4EC); }
+  .wb-check-label input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--orange-500, #FF6B1A); flex-shrink: 0; }
+  .wb-check-label:has(input:checked) { border-color: var(--orange-500, #FF6B1A); background: var(--orange-50, #FFF4EC); }
+  .wb-consent-label { display: flex; align-items: flex-start; gap: 10px; font-size: 12.5px; color: var(--ink-500, #64748B); line-height: 1.5; cursor: pointer; }
+  .wb-consent-label input { margin-top: 2px; width: 14px; height: 14px; accent-color: var(--orange-500, #FF6B1A); flex-shrink: 0; }
+  .wb-submit-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; background: linear-gradient(135deg, #FF6B1A 0%, #FF8C3A 100%); color: #fff; font: inherit; font-size: 16px; font-weight: 700; border: none; border-radius: var(--radius-xl, 16px); cursor: pointer; box-shadow: 0 6px 20px rgba(255,107,26,0.30); transition: transform 0.2s, box-shadow 0.2s; }
+  .wb-submit-btn:hover:not([disabled]) { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,107,26,0.40); }
+  .wb-submit-btn[disabled] { opacity: 0.85; cursor: progress; }
+  .wbf-label { display: inline-flex; align-items: center; gap: 8px; }
+  .wbf-loading { display: none; align-items: center; gap: 8px; }
+  .wb-submit-btn.is-loading .wbf-label { display: none; }
+  .wb-submit-btn.is-loading .wbf-loading { display: inline-flex; }
+  .wb-spinner { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: wb-spin 0.6s linear infinite; }
+  @keyframes wb-spin { to { transform: rotate(360deg); } }
+  .wb-quota-note { display: flex; align-items: center; gap: 6px; justify-content: center; font-size: 12.5px; color: var(--ink-400, #94A3B8); margin: 0; }
+  .wb-msg-sent { color: #15803d; font-size: 14px; font-weight: 600; margin: 0; text-align: center; }
+  .wb-msg-err { color: #b91c1c; font-size: 13.5px; margin: 0; }
+  @media (max-width: 560px) {
+    .wb-form { padding: 24px 18px; }
+    .wb-checkboxes { grid-template-columns: 1fr; }
+    .wb-summary-card { padding: 12px 16px; }
+    .wb-summary-item { font-size: 13px; flex-wrap: wrap; justify-content: center; text-align: center; }
+    .wb-submit-btn { font-size: 14px; padding: 14px; }
+    .wb-field input, .wb-field select { padding: 10px 12px; font-size: 14px; }
+  }
+  /* Modal Styles */
+  .wb-modal { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+  .wb-modal.is-open { opacity: 1; visibility: visible; }
+  .wb-modal-overlay { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); }
+  .wb-modal-content { position: relative; background: #fff; width: 100%; max-width: 420px; border-radius: var(--radius-xl, 20px); padding: 32px 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .wb-modal.is-open .wb-modal-content { transform: translateY(0); }
+  .wb-modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 32px; line-height: 1; color: var(--ink-400, #94A3B8); cursor: pointer; transition: color 0.2s; padding: 0; }
+  .wb-modal-close:hover { color: var(--ink-900, #0F172A); }
+  .wb-modal-icon { width: 56px; height: 56px; border-radius: 50%; background: #dcfce7; color: #16a34a; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .wb-modal-title { font-size: 22px; font-weight: 800; color: var(--ink-900, #0F172A); margin: 0 0 8px; }
+  .wb-modal-desc { font-size: 14px; color: var(--ink-600, #475569); line-height: 1.5; margin: 0 0 24px; }
+  .wb-payment-box { width: 100%; background: var(--bg-warm, #FFF8F3); border: 1.5px solid var(--orange-200, #FFCBA4); border-radius: var(--radius-lg, 12px); padding: 16px 18px; margin-bottom: 24px; text-align: left; }
+  .wb-pay-amount { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .wb-pay-amount span { font-size: 14px; font-weight: 600; color: var(--ink-600, #475569); }
+  .wb-pay-amount strong { font-size: 22px; font-weight: 800; color: var(--orange-600, #EA580C); }
+  .wb-pay-divider { height: 1.5px; background: var(--orange-200, #FFCBA4); margin: 0 -18px 14px; opacity: 0.6; }
+  .wb-pay-bank { display: flex; flex-direction: column; gap: 4px; }
+  .wb-bank-name { font-size: 15px; font-weight: 700; color: var(--ink-900, #0F172A); }
+  .wb-bank-acc-wrap { display: flex; align-items: center; justify-content: space-between; background: white; padding: 10px 14px; border: 1.5px solid var(--orange-100, #FFE8D6); border-radius: 10px; margin-top: 6px; margin-bottom: 6px; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+  .wb-bank-acc { font-size: 19px; font-weight: 800; color: var(--ink-900, #0F172A); letter-spacing: 1px; }
+  .wb-copy-btn { display: flex; align-items: center; gap: 6px; background: var(--orange-50, #FFF4EC); border: 1.5px solid var(--orange-200, #FFCBA4); color: var(--orange-600, #EA580C); font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .wb-copy-btn:hover { background: var(--orange-100, #FFE8D6); border-color: var(--orange-300, #FD9A6F); }
+  .wb-copy-btn.copied { background: #dcfce7; border-color: #86efac; color: #16a34a; }
+  .wb-bank-owner { font-size: 13.5px; color: var(--ink-500, #64748B); font-weight: 500; }
+  .wb-pay-steps { list-style: none; padding: 0; margin: 0 0 28px; text-align: left; font-size: 13.5px; color: var(--ink-600, #475569); display: flex; flex-direction: column; gap: 10px; line-height: 1.5; }
+  .wb-confirm-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 16px; background: #25D366; color: #fff; font-size: 16px; font-weight: 700; border: none; border-radius: var(--radius-xl, 16px); text-decoration: none; box-shadow: 0 6px 20px rgba(37,211,102,0.3); transition: transform 0.2s, box-shadow 0.2s; }
+  .wb-confirm-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(37,211,102,0.4); }
+</style>
+<script>
+  var WB_FORM = document.getElementById('webinar-meta-form') as HTMLFormElement;
+  if (WB_FORM) {
+    var btn = WB_FORM.querySelector('button[type="submit"]') as HTMLButtonElement;
+    var msgSent = WB_FORM.querySelector('.wb-msg-sent') as HTMLElement;
+    var msgErr = WB_FORM.querySelector('.wb-msg-err') as HTMLElement;
+    var scriptUrl = WB_FORM.getAttribute('data-script-url') || '';
+    var waNumber = WB_FORM.getAttribute('data-wa-number') || '';
+    var hasEp = scriptUrl.startsWith('http');
+    var busy = false;
+    var NAME_RE = /^[\p{L}\p{M}\d\s.\-']{2,100}$/u;
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+    function clip(v: any, n: number) { return String(v).replace(/[\u0000-\u001F\u007F]/g, ' ').slice(0, n).trim(); }
+    function showErr(t: string) { if (msgErr) { msgErr.textContent = t; msgErr.hidden = false; setTimeout(function(){ if(msgErr) msgErr.hidden = true; }, 6000); } }
+    function setLoad(on: boolean) { busy = on; if (btn) { btn.disabled = on; btn.classList.toggle('is-loading', on); } }
+    WB_FORM.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (busy) return;
+      if (msgSent) msgSent.hidden = true;
+      var fd = new FormData(WB_FORM);
+      if (String(fd.get('website') || '').length > 0) return;
+      var nama = clip(fd.get('nama') || '', 100);
+      var email = clip(fd.get('email') || '', 150);
+      var wa = clip(fd.get('whatsapp') || '', 20);
+      var bisnis = clip(fd.get('bisnis') || '', 100);
+      var durasi = clip(fd.get('durasi') || '', 50);
+      var kendalaArr = fd.getAll('kendala').map(function(v){ return clip(v, 50); });
+      var kendala = kendalaArr.join(', ');
+      if (!NAME_RE.test(nama)) { showErr('Nama tidak valid (2–100 karakter).'); return; }
+      if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
+      if (!PHONE_RE.test(wa)) { showErr('Nomor WhatsApp tidak valid.'); return; }
+      if (!durasi) { showErr('Pilih durasi pengalaman Meta Ads Anda.'); return; }
+      if (!kendalaArr.length) { showErr('Pilih minimal satu kendala.'); return; }
+      wa = wa.replace(/[^\d+]/g, '');
+      if (!hasEp) { showErr('Form belum aktif. Coba lagi nanti.'); return; }
+      setLoad(true);
+      var params = new URLSearchParams({ nama: nama, email: email, whatsapp: "'" + wa, bisnis: bisnis, durasi: durasi, kendala: kendala, source: window.location.href.split('#')[0], _t: Date.now().toString() });
+      var waMsg = 'Halo Tentaklik! Saya ' + nama + ', ingin mendaftar Webinar Meta Ads "Dari Boncos ke Profit".\nEmail: ' + email + (bisnis ? '\nNama bisnis: ' + bisnis : '') + '\nPengalaman Meta Ads: ' + durasi + '\nKendala: ' + kendala + '\n\n(Dikirim via form webinar)';
+      var waUrl = waNumber ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg) : '';
+      var w = window as any;
+      if (typeof w.fbq === 'function') { w.fbq('track', 'Lead', { content_name: 'Webinar Meta', content_category: 'Webinar' }); }
+      fetch(scriptUrl + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(function(){});
+      setTimeout(function() {
+        WB_FORM.reset();
+        if (msgSent) msgSent.hidden = false;
+        setLoad(false);
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: 'generate_lead', form_platform: 'meta', form_kategori: 'webinar', form_source: window.location.pathname });
+        var modal = document.getElementById('payment-modal');
+        var btnConfirm = document.getElementById('wb-confirm-btn');
+        if (modal && btnConfirm && waUrl) {
+          btnConfirm.setAttribute('href', waUrl);
+          modal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        } else if (waUrl) {
+          window.location.href = waUrl;
+        }
+      }, 1500);
+    });
+  }
+
+  // Modal interactions
+  var modal = document.getElementById('payment-modal');
+  if (modal) {
+    var closeBtn = modal.querySelector('.wb-modal-close') as HTMLButtonElement;
+    var overlay = modal.querySelector('.wb-modal-overlay') as HTMLElement;
+    var copyBtn = document.getElementById('wb-copy-btn') as HTMLButtonElement;
+    var accText = document.getElementById('wb-bank-acc') as HTMLElement;
+    var confirmBtn = document.getElementById('wb-confirm-btn') as HTMLAnchorElement;
+
+    function closeModal() {
+      if (modal) modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (confirmBtn) confirmBtn.addEventListener('click', closeModal);
+
+    if (copyBtn && accText) {
+      copyBtn.addEventListener('click', function() {
+        var text = accText.textContent || '';
+        navigator.clipboard.writeText(text).then(function() {
+          var originalHtml = copyBtn.innerHTML;
+          copyBtn.classList.add('copied');
+          copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span class="wb-copy-txt">Tersalin!</span>';
+          setTimeout(function() {
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = originalHtml;
+          }, 2000);
+        });
+      });
+    }
+  }
+</script>

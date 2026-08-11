@@ -1,0 +1,52 @@
+---
+interface CurriculumItem { number: string; title: string; desc: string; }
+interface Props { heading: string; sub: string; items: CurriculumItem[]; }
+const { heading, sub, items } = Astro.props;
+---
+<section class="wb-curriculum" aria-labelledby="wb-curriculum-heading">
+  <div class="container">
+    <h2 id="wb-curriculum-heading" class="section-title">{heading}</h2>
+    <p class="section-sub" style="margin-bottom:48px;">{sub}</p>
+    <div class="wb-curr-grid">
+      {items.map((item) => (
+        <article class="wb-curr-card reveal">
+          <span class="wb-curr-num" aria-hidden="true">{item.number}</span>
+          <h3 class="wb-curr-title">{item.title}</h3>
+          <p class="wb-curr-desc">{item.desc}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .wb-curriculum { background: white; }
+  .wb-curr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .wb-curr-card {
+    background: var(--bg-warm, #FFF8F3);
+    border: 1.5px solid var(--orange-100, #FFE8D6);
+    border-radius: var(--radius-xl, 16px); padding: 28px 28px 24px;
+    display: flex; flex-direction: column; gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .wb-curr-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #FF6B1A, #FF9A3C); opacity: 0; transition: opacity 0.2s;
+  }
+  .wb-curr-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(255,107,26,0.12); border-color: var(--orange-300, #FD9A6F); }
+  .wb-curr-card:hover::before { opacity: 1; }
+  .wb-curr-num {
+    font-size: 42px; font-weight: 900; line-height: 1; letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #FF6B1A, #FF9A3C);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .wb-curr-title { font-size: 17px; font-weight: 700; color: var(--ink-900, #0F172A); margin: 0; line-height: 1.3; }
+  .wb-curr-desc { font-size: 14px; color: var(--ink-500, #64748B); line-height: 1.6; margin: 0; }
+  @media (max-width: 640px) {
+    .wb-curr-grid { grid-template-columns: 1fr; }
+    .wb-curr-card { padding: 22px 20px 20px; }
+    .wb-curr-num { font-size: 34px; }
+    .wb-curr-title { font-size: 16px; }
+    .wb-curr-desc { font-size: 13.5px; }
+  }
+</style>

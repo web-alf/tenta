@@ -1,0 +1,78 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import WebinarProblems from '@components/sections/webinar/WebinarProblems.astro';
+import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
+import WebinarHero from '@components/sections/webinar/WebinarHero.astro';
+import WebinarCurriculum from '@components/sections/webinar/WebinarCurriculum.astro';
+import WebinarSpeaker from '@components/sections/webinar/WebinarSpeaker.astro';
+import WebinarForm from '@components/sections/webinar/WebinarForm.astro';
+import { WEBINAR_META as W } from '@data/webinar-meta';
+const { seo, event, hero, problems, curriculum, audience, speaker, form } = W;
+const finalDesc = 'Jangan sampai kehabisan. Daftar sekarang dan amankan tempat Anda di early bird ' + event.priceEarlyBird + '.';
+---
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  bareHeader={true}
+  bareLayout={true}
+  noindex={false}
+  gtmId="GTM-T2FDL7NM"
+>
+  <Fragment slot="head">
+    <script is:inline>
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1341980327384883');fbq('track','PageView');
+    </script>
+  </Fragment>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1" /></noscript>
+
+  <WebinarHero
+    eyebrow={hero.eyebrow} title={hero.title} titleAccent={hero.titleAccent}
+    desc={hero.desc} ctaText={hero.ctaText} ctaHref={hero.ctaHref}
+    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
+    earlyBirdDeadline={event.earlyBirdDeadline} seatLeft={event.seatLeft}
+    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal}
+  />
+
+  <WebinarProblems heading="Pernah Mengalami Ini?" sub="Kalau ya, webinar ini memang dibuat untuk Anda." items={problems} />
+
+  <WebinarCurriculum heading={curriculum.heading} sub={curriculum.sub} items={curriculum.items} />
+
+  <section class="wb-audience-section" aria-labelledby="wb-audience-heading">
+    <div class="container" style="max-width:760px;">
+      <h2 id="wb-audience-heading" class="section-title">{audience.heading}</h2>
+      <p class="section-sub" style="margin-bottom:36px;">{audience.sub}</p>
+      <ul class="wb-audience-list" role="list">
+        {audience.items.map((item) => (
+          <li class="wb-audience-item reveal">
+            <span class="wb-audience-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="wb-audience-note">{audience.note}</p>
+    </div>
+  </section>
+
+  <WebinarSpeaker name={speaker.name} title={speaker.title} bio={speaker.bio} photoSrc={speaker.photoSrc} credentials={speaker.credentials} />
+
+  <WebinarForm heading={form.heading} sub={form.sub} scriptUrl={form.scriptUrl} waNumber={form.waNumber} priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal} seatLeft={event.seatLeft} />
+
+  <LpFinalCta title="Kuota Peserta Terbatas!" desc={finalDesc} btn="Daftar Sekarang" href="#form-registrasi" />
+</BaseLayout>
+
+<style is:global>
+  .wb-audience-section { background: var(--bg-warm, #FFF8F3); text-align: center; }
+  .wb-audience-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; text-align: left; }
+  .wb-audience-item { display: flex; align-items: center; gap: 14px; background: white; border: 1.5px solid var(--orange-100, #FFE8D6); border-radius: var(--radius-lg, 12px); padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--ink-800, #1E293B); transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
+  .wb-audience-item:hover { border-color: var(--orange-400, #FB923C); transform: translateX(4px); box-shadow: 0 4px 16px rgba(255,107,26,0.08); }
+  .wb-audience-check { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #FF6B1A, #FF9A3C); color: white; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .wb-audience-note { margin-top: 24px; font-size: 14px; color: var(--ink-500, #64748B); font-style: italic; background: white; border-left: 3px solid var(--orange-400, #FB923C); padding: 12px 16px; border-radius: 0 8px 8px 0; text-align: left; }
+
+  @media (max-width: 480px) {
+    .wb-audience-item { padding: 12px 16px; font-size: 14px; gap: 10px; }
+    .wb-audience-check { width: 24px; height: 24px; }
+    .wb-audience-check svg { width: 12px; height: 12px; }
+    .wb-audience-note { font-size: 13px; padding: 10px 14px; }
+  }
+</style>
