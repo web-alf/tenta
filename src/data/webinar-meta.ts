@@ -1,5 +1,6 @@
 // Webinar Meta LP — Content Data
 // Ganti placeholder sebelum go-live.
+import bilalPhoto from '../assets/webinar/bilal-fb.avif';
 
 export const WEBINAR_META = {
   seo: {
@@ -57,7 +58,7 @@ export const WEBINAR_META = {
     name: 'Bilal Abdurrahman',
     title: 'Meta Ads & Performance Marketing Manager',
     bio: 'Praktisi Performance Marketing dengan fokus pada Meta Ads dan strategi digital advertising berbasis data. Memiliki expertise dalam campaign strategy, audience targeting, creative testing, serta performance optimization untuk membantu bisnis mendapatkan hasil iklan yang lebih efektif dan terukur.',
-    photoSrc: '',                    // TODO: isi URL foto
+    photoSrc: bilalPhoto.src,                    // TODO: isi URL foto
     credentials: ['Campaign Strategy', 'Audience Targeting', 'Performance Optimization'],
   },
   form: {
