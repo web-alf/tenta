@@ -12,6 +12,7 @@
 
 var HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsApp', 'Kategori Bisnis', 'Pilihan Paket', 'Platform', 'URL Asal'];
 var WEBINAR_HEADERS = ['Tanggal', 'Nama', 'Email', 'Nomor WhatsApp', 'Nama Bisnis', 'Lama Beriklan', 'Kendala', 'URL Asal'];
+var WEBINAR_GADS_HEADERS = ['Tanggal', 'Nama', 'Email', 'Nomor WhatsApp', 'Nama Bisnis', 'Status Google Ads', 'URL Asal'];
 var SHEETS = [
   'Meta Whitelist',
   'Meta Whitelist Pricing',
@@ -19,7 +20,8 @@ var SHEETS = [
   'Google Whitelist',
   'Google Whitelist Pricing',
   'Google Whitelist USD',
-  'Webinar Meta'
+  'Webinar Meta',
+  'Webinar Gads'
 ];
 var BRAND_ORANGE = '#FF6B1A';
 
@@ -31,7 +33,9 @@ function ensureSheet(ss, name) {
   var sheet = ss.getSheetByName(name);
   if (!sheet) sheet = ss.insertSheet(name);
 
-  var cols = (name === 'Webinar Meta') ? WEBINAR_HEADERS : HEADERS;
+  var cols = HEADERS;
+  if (name === 'Webinar Meta') cols = WEBINAR_HEADERS;
+  else if (name === 'Webinar Gads') cols = WEBINAR_GADS_HEADERS;
 
   if (sheet.getLastRow() === 0) {
     sheet.appendRow(cols);
@@ -103,6 +107,7 @@ function doGet(e) {
     else if (cleanSource.indexOf('google-whitelist-usd') !== -1) sheetName = 'Google Whitelist USD';
     else if (cleanSource.indexOf('google-whitelist') !== -1 || cleanSource.indexOf('/gads') !== -1) sheetName = 'Google Whitelist';
     else if (cleanSource.indexOf('webinar-meta') !== -1) sheetName = 'Webinar Meta';
+    else if (cleanSource.indexOf('webinar-gads') !== -1) sheetName = 'Webinar Gads';
     else if (platform === 'meta') sheetName = 'Meta Whitelist';
     else if (platform === 'google') sheetName = 'Google Whitelist';
 
@@ -118,6 +123,16 @@ function doGet(e) {
         clip(p.bisnis, 100),
         clip(p.durasi, 50),
         clip(p.kendala, 300),
+        clip(p.source, 300)
+      ]);
+    } else if (sheetName === 'Webinar Gads') {
+      sheet.appendRow([
+        new Date(),
+        clip(p.nama, 100),
+        clip(p.email, 150),
+        clip(p.whatsapp, 20),
+        clip(p.bisnis, 100),
+        clip(p.status_gads, 100),
         clip(p.source, 300)
       ]);
     } else {

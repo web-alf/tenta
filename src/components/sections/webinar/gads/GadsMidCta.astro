@@ -1,0 +1,87 @@
+---
+/**
+ * GadsMidCta — dark band, 2 kolom: kiri statement, kanan penjelasan + CTA.
+ */
+interface Props {
+  eyebrow: string;
+  title: string;
+  titleAccent: string;
+  desc: string;
+  ctaText: string;
+  ctaHref: string;
+}
+const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
+---
+<section class="gd-mid" aria-labelledby="gd-midcta-heading">
+  <div class="gd-mid-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="gd-mid-grid">
+      <div class="gd-mid-left">
+        <span class="gd-mid-eyebrow">{eyebrow}</span>
+        <h2 id="gd-midcta-heading" class="gd-mid-title">
+          {title}
+          <span class="gd-mid-accent">{titleAccent}</span>
+        </h2>
+      </div>
+      <div class="gd-mid-right">
+        <p class="gd-mid-desc">{desc}</p>
+        <a href={ctaHref} class="gd-mid-btn">
+          {ctaText}
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .gd-mid { position: relative; overflow: hidden; background: var(--gd-ink, #0E1B2A); }
+  .gd-mid-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 60% 100% at 82% 110%, rgba(255,122,26,0.22) 0%, transparent 70%);
+  }
+  .gd-mid-grid {
+    position: relative; z-index: 1;
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: center;
+  }
+  .gd-mid-eyebrow {
+    display: inline-flex; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: #FFB37A;
+    background: rgba(255,122,26,0.12); border: 1px solid rgba(255,122,26,0.28);
+    border-radius: 999px; padding: 6px 13px;
+  }
+  .gd-mid-title {
+    font-size: clamp(28px, 3.6vw, 46px); font-weight: 800; line-height: 1.06;
+    letter-spacing: -0.035em; color: #fff; margin: 22px 0 0; text-wrap: balance;
+  }
+  .gd-mid-accent {
+    display: block;
+    background: linear-gradient(100deg, var(--gd-orange, #FF7A1A) 5%, #FFC08A 95%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .gd-mid-right { padding-left: 40px; border-left: 1px solid rgba(255,255,255,0.12); }
+  .gd-mid-desc { font-size: 16.5px; line-height: 1.7; color: rgba(255,255,255,0.62); margin: 0 0 28px; }
+  .gd-mid-btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--gd-orange, #FF7A1A); color: #fff;
+    font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em;
+    padding: 15px 28px; border-radius: 14px; text-decoration: none;
+    box-shadow: 0 10px 26px -12px rgba(255,122,26,0.55);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .gd-mid-btn:hover {
+    background: #FF9447; transform: translateY(-1px);
+    box-shadow: 0 14px 32px -12px rgba(255,122,26,0.7);
+  }
+  .gd-mid-btn svg { transition: transform 0.18s ease; }
+  .gd-mid-btn:hover svg { transform: translateX(3px); }
+
+  @media (max-width: 1040px) {
+    .gd-mid-grid { grid-template-columns: 1fr; gap: 32px; max-width: 680px; }
+    .gd-mid-right { padding-left: 0; border-left: none; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.12); }
+  }
+  @media (max-width: 640px) {
+    .gd-mid-desc { font-size: 15.5px; margin-bottom: 22px; }
+    .gd-mid-btn { width: 100%; justify-content: center; }
+  }
+</style>

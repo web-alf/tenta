@@ -1,0 +1,109 @@
+---
+/**
+ * Webinar Google Ads LP — layout 2 kolom (kiri/kanan) di seluruh section.
+ * Urutan section tetap mengikuti eventgads.md:
+ * 1. Hero (copy | ticket card)
+ * 2. Problems (heading | list)
+ * 3. Curriculum (heading | 5 materi)
+ * 4. Audience (cocok | tidak untuk)
+ * 5. Mid CTA (statement | desc + CTA)
+ * 6. Detail Event (info | harga + CTA)
+ * 7. Form (copy + ringkasan | form card)
+ */
+import BaseLayout from '@layouts/BaseLayout.astro';
+import GadsHero from '@components/sections/webinar/gads/GadsHero.astro';
+import GadsProblems from '@components/sections/webinar/gads/GadsProblems.astro';
+import GadsCurriculum from '@components/sections/webinar/gads/GadsCurriculum.astro';
+import GadsAudience from '@components/sections/webinar/gads/GadsAudience.astro';
+import GadsMidCta from '@components/sections/webinar/gads/GadsMidCta.astro';
+import GadsForm from '@components/sections/webinar/gads/GadsForm.astro';
+import { WEBINAR_GADS as W } from '@data/webinar-gads';
+const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form } = W;
+---
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  bareHeader={true}
+  bareLayout={true}
+  noindex={false}
+  gtmId="GTM-T2FDL7NM"
+>
+  <!-- 1. Hero — kiri copy, kanan ticket card -->
+  <GadsHero
+    hook={hero.hook}
+    title={hero.title} titleAccent={hero.titleAccent}
+    desc={hero.desc} subLines={hero.subLines}
+    ctaText={hero.ctaText} ctaHref={hero.ctaHref}
+    speakerName={speaker.name} speakerTitle={speaker.title} speakerPhoto={speaker.photoSrc}
+    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
+    earlyBirdDeadline={event.earlyBirdDeadline} seatLeft={event.seatLeft}
+    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal}
+  />
+
+  <!-- 2. Problems — kiri heading sticky, kanan list -->
+  <GadsProblems
+    heading={problems.heading} headingAccent={problems.headingAccent}
+    sub={problems.sub} items={problems.items} closer={problems.closer}
+  />
+
+  <!-- 3. Curriculum — kiri heading sticky, kanan 5 materi -->
+  <GadsCurriculum
+    heading={curriculum.heading} items={curriculum.items}
+    eventTime={event.time} eventPlatform={event.platform}
+  />
+
+  <!-- 4. Audience — kiri cocok, kanan tidak untuk -->
+  <GadsAudience
+    heading={audience.heading} suitable={audience.suitable} notFor={audience.notFor}
+  />
+
+  <!-- 5. Mid CTA — dark band 2 kolom -->
+  <GadsMidCta
+    eyebrow={midCta.eyebrow} title={midCta.title} titleAccent={midCta.titleAccent}
+    desc={midCta.desc} ctaText={midCta.ctaText} ctaHref={midCta.ctaHref}
+  />
+
+  <!-- 7. Form — kiri copy + ringkasan, kanan form card -->
+  <GadsForm
+    eyebrow={form.eyebrow} heading={form.heading} headingAccent={form.headingAccent} sub={form.sub}
+    scriptUrl={form.scriptUrl} waNumber={form.waNumber}
+    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular}
+    priceOriginal={event.priceOriginal} seatLeft={event.seatLeft}
+    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
+  />
+</BaseLayout>
+
+<style is:global>
+  /* ── Palet lokal LP Google Ads ────────────────────────────
+     Warm-neutral + satu aksen orange. Dipakai semua komponen Gads*
+     supaya konsisten dan tak lagi hardcode hex acak per file. */
+  :root {
+    --gd-ink:        #0E1B2A;
+    --gd-ink-2:      #2D3D52;
+    --gd-ink-3:      #6B7280;
+    --gd-ink-4:      #8B95A3;
+    --gd-ink-50:     #F5F7FA;
+    --gd-cream:      #FDFAF7;
+    --gd-line:       #ECE5DE;
+    --gd-line-2:     #DFD7CE;
+    --gd-orange:     #FF7A1A;
+    --gd-orange-700: #C94E0E;
+    --gd-orange-200: #FFD7B5;
+    --gd-orange-soft:#FFF1E4;
+  }
+
+  /* Ritme vertikal section LP ini (override padding global 80px) */
+  .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 96px 0; }
+  @media (max-width: 1040px) {
+    .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 68px 0; }
+  }
+  @media (max-width: 640px) {
+    .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 52px 0; }
+  }
+
+  /* Anchor scroll tak ketutup announcement bar sticky */
+  html { scroll-behavior: smooth; }
+  #form-registrasi { scroll-margin-top: 72px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>

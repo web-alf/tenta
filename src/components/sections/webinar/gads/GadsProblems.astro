@@ -1,0 +1,103 @@
+---
+/**
+ * GadsProblems — redesign 2 kolom.
+ * Kiri : heading + sub + closer (sticky)
+ * Kanan: list masalah bernomor
+ */
+interface Props {
+  heading: string;
+  headingAccent: string;
+  sub: string;
+  items: string[];
+  closer: string;
+}
+const { heading, headingAccent, sub, items, closer } = Astro.props;
+---
+<section class="gd-prob" aria-labelledby="gd-problems-heading">
+  <div class="container">
+    <div class="gd-prob-grid">
+
+      <div class="gd-prob-aside">
+        <span class="gd-eyebrow">Diagnosa</span>
+        <h2 id="gd-problems-heading" class="gd-h2">
+          {heading}
+          <span class="gd-h2-accent">{headingAccent}</span>
+        </h2>
+        <p class="gd-prob-sub">{sub}</p>
+        <p class="gd-prob-closer">{closer}</p>
+      </div>
+
+      <ul class="gd-prob-list" role="list">
+        {items.map((item, i) => (
+          <li class="gd-prob-item reveal">
+            <span class="gd-prob-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <span class="gd-prob-txt">{item}</span>
+            <svg class="gd-prob-x" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </div>
+</section>
+<style>
+  .gd-prob { background: #fff; border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-prob-grid {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: 72px; align-items: start;
+  }
+  .gd-prob-aside { position: sticky; top: 96px; }
+
+  .gd-eyebrow {
+    display: inline-flex; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gd-orange-700, #C94E0E);
+    background: var(--gd-orange-soft, #FFF1E4); border-radius: 999px; padding: 6px 13px;
+  }
+  .gd-h2 {
+    font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.032em; color: var(--gd-ink, #0E1B2A); margin: 20px 0 0;
+    text-align: left; text-wrap: balance;
+  }
+  .gd-h2-accent {
+    display: block;
+    background: linear-gradient(100deg, var(--gd-orange, #FF7A1A) 10%, #FF9E52 95%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .gd-prob-sub { font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280); margin: 18px 0 0; max-width: 38ch; }
+  .gd-prob-closer {
+    font-size: 16px; font-weight: 700; color: var(--gd-ink, #0E1B2A);
+    margin: 22px 0 0; padding-top: 20px; letter-spacing: -0.015em;
+    border-top: 1px solid var(--gd-line, #ECE5DE);
+  }
+
+  .gd-prob-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+  .gd-prob-item {
+    display: flex; align-items: center; gap: 18px;
+    padding: 22px 4px; border-bottom: 1px solid var(--gd-line, #ECE5DE);
+    transition: padding-left 0.22s ease;
+  }
+  .gd-prob-item:first-child { border-top: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-prob-item:hover { padding-left: 10px; }
+  .gd-prob-num {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em; flex-shrink: 0;
+    color: var(--gd-ink-4, #8B95A3); font-variant-numeric: tabular-nums;
+  }
+  .gd-prob-txt {
+    flex: 1; font-size: 17px; font-weight: 600; line-height: 1.45;
+    color: var(--gd-ink, #0E1B2A); letter-spacing: -0.018em;
+  }
+  .gd-prob-x { flex-shrink: 0; color: var(--gd-ink-4, #8B95A3); transition: color 0.22s ease; }
+  .gd-prob-item:hover .gd-prob-x { color: var(--gd-orange, #FF7A1A); }
+
+  @media (max-width: 1040px) {
+    .gd-prob-grid { grid-template-columns: 1fr; gap: 36px; max-width: 680px; }
+    .gd-prob-aside { position: static; }
+    .gd-prob-sub { max-width: none; }
+  }
+  @media (max-width: 640px) {
+    .gd-prob-item { padding: 18px 2px; gap: 14px; }
+    .gd-prob-txt { font-size: 15.5px; }
+    .gd-prob-sub, .gd-prob-closer { font-size: 15px; }
+  }
+</style>

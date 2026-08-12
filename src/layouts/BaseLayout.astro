@@ -102,6 +102,12 @@ const cspContent = [
   `frame-src 'self' https://www.googletagmanager.com https://td.doubleclick.net https://*.g.doubleclick.net https://www.facebook.com`,
   "upgrade-insecure-requests",
 ].join('; ');
+
+// CSP produksi dikirim lewat header asli (public/_headers). Meta ini duplikat,
+// dan saat `astro dev` ia memblokir websocket HMR Vite (connect-src 'self' tak
+// mencakup ws:) sehingga modul CSS dev mencabut <style> SSR tanpa bisa
+// menyuntik ulang — halaman tampil tanpa style. Jadi hanya emit di build.
+const emitCspMeta = import.meta.env.PROD;
 ---
 <!DOCTYPE html>
 <html lang={lang} dir="ltr">
@@ -121,7 +127,7 @@ const cspContent = [
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <meta http-equiv="Content-Security-Policy" content={cspContent} />
+    {emitCspMeta && <meta http-equiv="Content-Security-Policy" content={cspContent} />}
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 

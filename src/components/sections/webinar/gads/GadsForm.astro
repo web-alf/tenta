@@ -1,0 +1,421 @@
+---
+/**
+ * GadsForm — redesign 2 kolom.
+ * Kiri : heading pre-form ("Sudah spending?...") + ringkasan harga + trust points
+ * Kanan: form card (Nama, Email, WhatsApp, Nama Bisnis, Status Google Ads radio)
+ * Logic submit + payment modal tidak berubah.
+ */
+interface Props {
+  eyebrow: string;
+  heading: string;
+  headingAccent: string;
+  sub: string;
+  scriptUrl: string;
+  waNumber: string;
+  priceEarlyBird: string;
+  priceRegular: string;
+  priceOriginal: string;
+  seatLeft: number;
+  eventDate: string;
+  eventTime: string;
+  eventPlatform: string;
+}
+const {
+  eyebrow, heading, headingAccent, sub, scriptUrl, waNumber,
+  priceEarlyBird, priceRegular, priceOriginal, seatLeft,
+  eventDate, eventTime, eventPlatform,
+} = Astro.props;
+---
+<section class="gd-form-sec" id="form-registrasi" aria-labelledby="gd-form-heading">
+  <div class="container">
+    <div class="gd-form-grid">
+
+      <!-- ── KIRI: copy + ringkasan ─────────────── -->
+      <div class="gd-form-aside">
+        <span class="gd-eyebrow">{eyebrow}</span>
+        <h2 id="gd-form-heading" class="gd-h2">
+          {heading}
+          <span class="gd-h2-accent">{headingAccent}</span>
+        </h2>
+        <p class="gd-form-sub">{sub}</p>
+
+        <div class="gd-form-summary">
+          <div class="gd-fs-row">
+            <span class="gd-fs-key">Total bayar</span>
+            <span class="gd-fs-price">
+              <s>{priceOriginal}</s>
+              <strong>{priceEarlyBird}</strong>
+            </span>
+          </div>
+          <div class="gd-fs-row">
+            <span class="gd-fs-key">Jadwal</span>
+            <span class="gd-fs-val">{eventDate} · {eventTime}</span>
+          </div>
+          <div class="gd-fs-row">
+            <span class="gd-fs-key">Platform</span>
+            <span class="gd-fs-val">{eventPlatform}</span>
+          </div>
+        </div>
+
+        <ul class="gd-form-trust" role="list">
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2.5"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/></svg>
+            Akses Zoom dikirim setelah pembayaran
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg>
+            Kuota terbatas untuk early bird {priceEarlyBird}
+          </li>
+          <li>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v5.5c0 4.6 3.3 8.4 8 9.5 4.7-1.1 8-4.9 8-9.5V6l-8-3Z"/><path d="M9 12l2 2 4-4"/></svg>
+            Setelah {seatLeft} kursi pertama, harga jadi {priceRegular}
+          </li>
+        </ul>
+      </div>
+
+      <!-- ── KANAN: form ────────────────────────── -->
+      <div class="gd-form-col">
+        <form id="webinar-gads-form" class="gd-form" data-script-url={scriptUrl} data-wa-number={waNumber} novalidate>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" class="gd-hp" aria-hidden="true" />
+
+          <div class="gd-field">
+            <label for="gdf-nama">Nama Lengkap <span class="gd-req" aria-hidden="true">*</span></label>
+            <input id="gdf-nama" type="text" name="nama" placeholder="Masukkan nama lengkap" required maxlength="100" autocomplete="name" />
+          </div>
+          <div class="gd-field">
+            <label for="gdf-email">Email <span class="gd-req" aria-hidden="true">*</span></label>
+            <input id="gdf-email" type="email" name="email" placeholder="contoh@email.com" required maxlength="150" autocomplete="email" />
+          </div>
+          <div class="gd-row2">
+            <div class="gd-field">
+              <label for="gdf-wa">WhatsApp <span class="gd-req" aria-hidden="true">*</span></label>
+              <input id="gdf-wa" type="tel" name="whatsapp" placeholder="08xxxxxxxxxx" required maxlength="20" autocomplete="tel" />
+            </div>
+            <div class="gd-field">
+              <label for="gdf-bisnis">Nama Bisnis</label>
+              <input id="gdf-bisnis" type="text" name="bisnis" placeholder="Nama bisnis atau brand" maxlength="100" />
+            </div>
+          </div>
+
+          <fieldset class="gd-fieldset">
+            <legend>Status Google Ads <span class="gd-req" aria-hidden="true">*</span></legend>
+            <div class="gd-radio-group">
+              <label class="gd-radio">
+                <input type="radio" name="status_gads" value="Aktif" required />
+                <span>Aktif</span>
+              </label>
+              <label class="gd-radio">
+                <input type="radio" name="status_gads" value="Pernah pakai" />
+                <span>Pernah pakai</span>
+              </label>
+              <label class="gd-radio">
+                <input type="radio" name="status_gads" value="Belum tapi mau mulai" />
+                <span>Belum tapi mau mulai</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <button type="submit" class="gd-submit" id="gdf-submit">
+            <span class="gdf-label">Bayar &amp; Amankan Seat <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
+            <span class="gdf-loading" aria-hidden="true"><span class="gd-spinner"></span> Mengirim...</span>
+          </button>
+
+          <p class="gd-msg-sent" role="status" aria-live="polite" hidden>Pendaftaran berhasil! Kami akan menghubungi Anda via WhatsApp.</p>
+          <p class="gd-msg-err" role="alert" aria-live="assertive" hidden></p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div id="payment-modal-gads" class="gd-modal" aria-hidden="true">
+    <div class="gd-modal-overlay" tabindex="-1"></div>
+    <div class="gd-modal-content" role="dialog" aria-labelledby="gd-modal-title">
+      <button class="gd-modal-close" aria-label="Tutup popup">&times;</button>
+      <div class="gd-modal-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <h3 id="gd-modal-title" class="gd-modal-title">Registrasi Berhasil</h3>
+      <p class="gd-modal-desc">Selesaikan pembayaran untuk mengamankan kursi early bird.</p>
+      <div class="gd-pay-box">
+        <div class="gd-pay-amount"><span>Total</span><strong>{priceEarlyBird}</strong></div>
+        <div class="gd-pay-bank">
+          <span class="gd-bank-name">BCA</span>
+          <div class="gd-bank-acc-wrap">
+            <span class="gd-bank-acc" id="gd-bank-acc">7831988855</span>
+            <button class="gd-copy-btn" id="gd-copy-btn" aria-label="Copy nomor rekening">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>Salin</span>
+            </button>
+          </div>
+          <span class="gd-bank-owner">a.n PT Media Pro Indonesia</span>
+        </div>
+      </div>
+      <ol class="gd-pay-steps">
+        <li>Transfer sesuai nominal di atas.</li>
+        <li>Simpan bukti transfer (screenshot/foto).</li>
+        <li>Kirim ke CS kami untuk konfirmasi.</li>
+      </ol>
+      <a href="#" id="gd-confirm-btn" class="gd-confirm-btn" target="_blank" rel="noopener noreferrer">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Kirim Bukti via WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .gd-form-sec { background: #fff; }
+  .gd-form-grid {
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+    gap: 72px; align-items: start;
+  }
+
+  /* ── Kiri ─────────────────────────────────── */
+  .gd-form-aside { position: sticky; top: 96px; }
+  .gd-form-sub { font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280); margin: 18px 0 0; max-width: 40ch; }
+
+  .gd-form-summary {
+    margin-top: 28px; padding: 4px 0;
+    border-top: 1px solid var(--gd-line, #ECE5DE);
+  }
+  .gd-fs-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 13px 0; border-bottom: 1px solid var(--gd-line, #ECE5DE);
+  }
+  .gd-fs-key {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--gd-ink-4, #8B95A3); flex-shrink: 0;
+  }
+  .gd-fs-val { font-size: 15px; font-weight: 600; color: var(--gd-ink, #0E1B2A); text-align: right; letter-spacing: -0.015em; }
+  .gd-fs-price { display: inline-flex; align-items: baseline; gap: 9px; }
+  .gd-fs-price s { font-size: 13.5px; color: var(--gd-ink-4, #8B95A3); }
+  .gd-fs-price strong { font-size: 24px; font-weight: 800; letter-spacing: -0.035em; color: var(--gd-orange-700, #C94E0E); }
+
+  .gd-form-trust { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  .gd-form-trust li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 13.5px; line-height: 1.5; color: var(--gd-ink-3, #6B7280);
+  }
+  .gd-form-trust svg { color: var(--gd-orange, #FF7A1A); flex-shrink: 0; margin-top: 1px; }
+
+  /* ── Kanan: form card ─────────────────────── */
+  .gd-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .gd-form {
+    background: var(--gd-cream, #FDFAF7);
+    border: 1px solid var(--gd-line, #ECE5DE);
+    border-radius: 22px; padding: 32px;
+    display: flex; flex-direction: column; gap: 18px;
+    box-shadow: 0 1px 2px rgba(14,27,42,0.03), 0 20px 48px -28px rgba(14,27,42,0.16);
+  }
+  .gd-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .gd-field { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .gd-field label, .gd-fieldset legend {
+    font-size: 12.5px; font-weight: 700; letter-spacing: 0.02em;
+    color: var(--gd-ink-2, #2D3D52); padding: 0;
+  }
+  .gd-req { color: var(--gd-orange, #FF7A1A); }
+  .gd-field input {
+    font: inherit; font-size: 15px; padding: 13px 15px; border-radius: 12px;
+    border: 1px solid var(--gd-line-2, #DFD7CE); background: #fff;
+    color: var(--gd-ink, #0E1B2A);
+    transition: border-color 0.16s ease, box-shadow 0.16s ease;
+  }
+  .gd-field input::placeholder { color: var(--gd-ink-4, #8B95A3); }
+  .gd-field input:focus {
+    outline: none; border-color: var(--gd-orange, #FF7A1A);
+    box-shadow: 0 0 0 3px rgba(255,122,26,0.14);
+  }
+
+  .gd-fieldset { border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+  .gd-radio-group { display: flex; flex-direction: column; gap: 8px; }
+  .gd-radio {
+    display: flex; align-items: center; gap: 11px;
+    padding: 13px 15px; border: 1px solid var(--gd-line-2, #DFD7CE);
+    border-radius: 12px; background: #fff; cursor: pointer; user-select: none;
+    font-size: 14.5px; font-weight: 600; color: var(--gd-ink-2, #2D3D52);
+    transition: border-color 0.16s ease, background 0.16s ease;
+  }
+  .gd-radio:hover { border-color: var(--gd-orange-200, #FFD7B5); }
+  .gd-radio:has(input:checked) {
+    border-color: var(--gd-orange, #FF7A1A); background: var(--gd-orange-soft, #FFF1E4);
+    color: var(--gd-ink, #0E1B2A);
+  }
+  .gd-radio input[type="radio"] { width: 16px; height: 16px; accent-color: var(--gd-orange, #FF7A1A); flex-shrink: 0; margin: 0; }
+
+  .gd-submit {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    width: 100%; margin-top: 4px; padding: 16px 20px;
+    background: var(--gd-orange, #FF7A1A); color: #fff;
+    font: inherit; font-size: 15.5px; font-weight: 700; letter-spacing: -0.01em;
+    border: none; border-radius: 14px; cursor: pointer;
+    box-shadow: 0 10px 24px -14px rgba(255,122,26,0.6);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  }
+  .gd-submit:hover:not([disabled]) { background: var(--gd-orange-700, #C94E0E); transform: translateY(-1px); box-shadow: 0 14px 30px -14px rgba(255,122,26,0.65); }
+  .gd-submit[disabled] { opacity: 0.75; cursor: progress; }
+  .gdf-label { display: inline-flex; align-items: center; gap: 9px; }
+  .gdf-loading { display: none; align-items: center; gap: 9px; }
+  .gd-submit.is-loading .gdf-label { display: none; }
+  .gd-submit.is-loading .gdf-loading { display: inline-flex; }
+  .gd-spinner { width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.35); border-top-color: #fff; border-radius: 50%; animation: gd-spin 0.6s linear infinite; }
+  @keyframes gd-spin { to { transform: rotate(360deg); } }
+
+  .gd-msg-sent { font-size: 13.5px; font-weight: 600; color: #15803D; margin: 0; }
+  .gd-msg-err { font-size: 13.5px; font-weight: 600; color: #B91C1C; margin: 0; }
+
+  /* ── Modal ────────────────────────────────── */
+  .gd-modal { position: fixed; inset: 0; z-index: 999; display: flex; align-items: center; justify-content: center; padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.28s ease, visibility 0.28s ease; }
+  .gd-modal.is-open { opacity: 1; visibility: visible; }
+  .gd-modal-overlay { position: absolute; inset: 0; background: rgba(14,27,42,0.62); backdrop-filter: blur(6px); }
+  .gd-modal-content {
+    position: relative; background: #fff; width: 100%; max-width: 420px;
+    border-radius: 22px; padding: 32px 28px;
+    box-shadow: 0 30px 70px -20px rgba(14,27,42,0.4);
+    transform: translateY(14px); transition: transform 0.32s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+    max-height: 90vh; overflow-y: auto;
+  }
+  .gd-modal.is-open .gd-modal-content { transform: translateY(0); }
+  .gd-modal-close {
+    position: absolute; top: 8px; right: 8px;
+    width: 44px; height: 44px; /* tap target minimum */
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; font-size: 28px; line-height: 1;
+    color: var(--gd-ink-4, #8B95A3); cursor: pointer; padding: 0;
+    border-radius: 10px; transition: color 0.18s ease, background 0.18s ease;
+  }
+  .gd-modal-close:hover { color: var(--gd-ink, #0E1B2A); background: var(--gd-ink-50, #F5F7FA); }
+  .gd-modal-icon { width: 48px; height: 48px; border-radius: 14px; background: #ECFDF3; color: #15803D; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .gd-modal-title { font-size: 21px; font-weight: 800; letter-spacing: -0.025em; color: var(--gd-ink, #0E1B2A); margin: 0 0 7px; }
+  .gd-modal-desc { font-size: 14.5px; line-height: 1.55; color: var(--gd-ink-3, #6B7280); margin: 0 0 22px; }
+  .gd-pay-box { background: var(--gd-cream, #FDFAF7); border: 1px solid var(--gd-line, #ECE5DE); border-radius: 16px; padding: 18px; margin-bottom: 22px; }
+  .gd-pay-amount { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-pay-amount span { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gd-ink-4, #8B95A3); }
+  .gd-pay-amount strong { font-size: 24px; font-weight: 800; letter-spacing: -0.035em; color: var(--gd-ink, #0E1B2A); }
+  .gd-pay-bank { display: flex; flex-direction: column; gap: 4px; }
+  .gd-bank-name { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gd-ink-3, #6B7280); }
+  .gd-bank-acc-wrap { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #fff; padding: 11px 14px; border: 1px solid var(--gd-line, #ECE5DE); border-radius: 12px; margin: 6px 0; }
+  .gd-bank-acc { font-size: 18px; font-weight: 800; letter-spacing: 0.04em; color: var(--gd-ink, #0E1B2A); font-variant-numeric: tabular-nums; }
+  .gd-copy-btn { display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; background: var(--gd-orange-soft, #FFF1E4); border: none; color: var(--gd-orange-700, #C94E0E); font: inherit; font-size: 12px; font-weight: 700; padding: 7px 14px; border-radius: 10px; cursor: pointer; transition: background 0.18s ease, color 0.18s ease; }
+  .gd-copy-btn:hover { background: var(--gd-orange, #FF7A1A); color: #fff; }
+  .gd-copy-btn.copied { background: #ECFDF3; color: #15803D; }
+  .gd-bank-owner { font-size: 13px; color: var(--gd-ink-3, #6B7280); }
+  .gd-pay-steps { margin: 0 0 24px; padding-left: 20px; font-size: 13.5px; line-height: 1.5; color: var(--gd-ink-3, #6B7280); display: flex; flex-direction: column; gap: 8px; }
+  .gd-confirm-btn { display: flex; align-items: center; justify-content: center; gap: 9px; width: 100%; padding: 15px; background: var(--green-500, #25D366); color: #fff; font-size: 15.5px; font-weight: 700; border-radius: 14px; text-decoration: none; box-shadow: 0 10px 24px -14px rgba(37,211,102,0.7); transition: transform 0.18s ease, box-shadow 0.18s ease; }
+  .gd-confirm-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px -14px rgba(37,211,102,0.8); }
+
+  /* ── Responsive ───────────────────────────── */
+  @media (max-width: 1040px) {
+    .gd-form-grid { grid-template-columns: 1fr; gap: 40px; max-width: 680px; }
+    .gd-form-aside { position: static; }
+    .gd-form-sub { max-width: none; }
+  }
+  @media (max-width: 640px) {
+    .gd-form { padding: 22px 20px; border-radius: 18px; gap: 16px; }
+    .gd-row2 { grid-template-columns: 1fr; gap: 16px; }
+    .gd-field input { font-size: 16px; } /* cegah zoom iOS */
+    .gd-fs-price strong { font-size: 21px; }
+    .gd-modal-content { padding: 26px 20px; }
+  }
+</style>
+
+<script>
+  var GD_FORM = document.getElementById('webinar-gads-form') as HTMLFormElement;
+  if (GD_FORM) {
+    var btn = GD_FORM.querySelector('button[type="submit"]') as HTMLButtonElement;
+    var msgSent = GD_FORM.querySelector('.gd-msg-sent') as HTMLElement;
+    var msgErr = GD_FORM.querySelector('.gd-msg-err') as HTMLElement;
+    var scriptUrl = GD_FORM.getAttribute('data-script-url') || '';
+    var waNumber = GD_FORM.getAttribute('data-wa-number') || '';
+    var hasEp = scriptUrl.startsWith('http');
+    var busy = false;
+    var NAME_RE = /^[\p{L}\p{M}\d\s.\-']{2,100}$/u;
+    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    var PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+    function clip(v: any, n: number) { return String(v).replace(/[\u0000-\u001F\u007F]/g, ' ').slice(0, n).trim(); }
+    function showErr(t: string) { if (msgErr) { msgErr.textContent = t; msgErr.hidden = false; setTimeout(function(){ if(msgErr) msgErr.hidden = true; }, 6000); } }
+    function setLoad(on: boolean) { busy = on; if (btn) { btn.disabled = on; btn.classList.toggle('is-loading', on); } }
+    GD_FORM.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (busy) return;
+      if (msgSent) msgSent.hidden = true;
+      var fd = new FormData(GD_FORM);
+      if (String(fd.get('website') || '').length > 0) return;
+      var nama = clip(fd.get('nama') || '', 100);
+      var email = clip(fd.get('email') || '', 150);
+      var wa = clip(fd.get('whatsapp') || '', 20);
+      var bisnis = clip(fd.get('bisnis') || '', 100);
+      var statusGads = clip(fd.get('status_gads') || '', 50);
+      if (!NAME_RE.test(nama)) { showErr('Nama tidak valid (2–100 karakter).'); return; }
+      if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
+      if (!PHONE_RE.test(wa)) { showErr('Nomor WhatsApp tidak valid.'); return; }
+      if (!statusGads) { showErr('Pilih status Google Ads Anda.'); return; }
+      wa = wa.replace(/[^\d+]/g, '');
+      if (!hasEp) { showErr('Form belum aktif. Coba lagi nanti.'); return; }
+      setLoad(true);
+      var params = new URLSearchParams({ nama: nama, email: email, whatsapp: "'" + wa, bisnis: bisnis, status_gads: statusGads, source: window.location.href.split('#')[0], _t: Date.now().toString() });
+      var waMsg = 'Halo Tentaklik! Saya ' + nama + ', ingin mendaftar Webinar Google Ads "From Click to Conversion".\nEmail: ' + email + (bisnis ? '\nNama bisnis: ' + bisnis : '') + '\nStatus Google Ads: ' + statusGads + '\n\n(Dikirim via form webinar)';
+      var waUrl = waNumber ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg) : '';
+      var w = window as any;
+      fetch(scriptUrl + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(function(){});
+      setTimeout(function() {
+        GD_FORM.reset();
+        if (msgSent) msgSent.hidden = false;
+        setLoad(false);
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({ event: 'generate_lead', form_platform: 'google', form_kategori: 'webinar', form_source: window.location.pathname });
+        var modal = document.getElementById('payment-modal-gads');
+        var btnConfirm = document.getElementById('gd-confirm-btn');
+        if (modal && btnConfirm && waUrl) {
+          btnConfirm.setAttribute('href', waUrl);
+          modal.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+        } else if (waUrl) {
+          window.location.href = waUrl;
+        }
+      }, 1500);
+    });
+  }
+
+  // Modal interactions
+  var gdModal = document.getElementById('payment-modal-gads');
+  if (gdModal) {
+    var closeBtn = gdModal.querySelector('.gd-modal-close') as HTMLButtonElement;
+    var overlay = gdModal.querySelector('.gd-modal-overlay') as HTMLElement;
+    var copyBtn = document.getElementById('gd-copy-btn') as HTMLButtonElement;
+    var accText = document.getElementById('gd-bank-acc') as HTMLElement;
+    var confirmBtn = document.getElementById('gd-confirm-btn') as HTMLAnchorElement;
+
+    function closeGdModal() {
+      if (gdModal) gdModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    if (closeBtn) closeBtn.addEventListener('click', closeGdModal);
+    if (overlay) overlay.addEventListener('click', closeGdModal);
+    if (confirmBtn) confirmBtn.addEventListener('click', closeGdModal);
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && gdModal && gdModal.classList.contains('is-open')) closeGdModal();
+    });
+
+    if (copyBtn && accText) {
+      copyBtn.addEventListener('click', function() {
+        var text = accText.textContent || '';
+        navigator.clipboard.writeText(text).then(function() {
+          var originalHtml = copyBtn.innerHTML;
+          copyBtn.classList.add('copied');
+          copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Tersalin</span>';
+          setTimeout(function() {
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = originalHtml;
+          }, 2000);
+        });
+      });
+    }
+  }
+</script>
