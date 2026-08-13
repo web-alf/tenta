@@ -161,21 +161,26 @@ const formId = `shortform-${platform}`;
   const hasEndpoint = typeof SHORTFORM_URL === 'string' && SHORTFORM_URL.indexOf('http') === 0;
 
   // Greeting WhatsApp disesuaikan per platform + bahasa.
-  function waGreeting(platform: string, lang: string, nama: string, kategori: string, paket: string, hasPricing: boolean): string {
+  function waGreeting(platform: string, lang: string, nama: string, kategori: string, paket: string, hasPricing: boolean, pagePlatform: string): string {
     const layanan = platform === 'google' ? 'Google Ads Whitelist'
                   : platform === 'meta'   ? 'Meta Ads Whitelist'
                   : 'Whitelist';
+                  
+    const sourceForm = pagePlatform === 'google' ? 'Google Ads Whitelist'
+                     : pagePlatform === 'meta'   ? 'Meta Ads Whitelist'
+                     : 'Whitelist';
+
     if (lang === 'en') {
       let m = `Hello Tentaklik! I'm ${nama}, I'd like to request a ${layanan} account.`;
       if (kategori) m += `\nBusiness category: ${kategori}`;
       if (hasPricing && paket) m += `\nSelected plan: ${paket}`;
-      m += `\n\n(Sent via the ${layanan} form)`;
+      m += `\n\n(Sent via the ${sourceForm} form)`;
       return m;
     }
     let msg = `Halo Tentaklik! Saya ${nama}, ingin mengajukan ${layanan}.`;
     if (kategori) msg += `\nKategori bisnis: ${kategori}`;
     if (hasPricing && paket) msg += `\nPilihan paket: ${paket}`;
-    msg += `\n\n(Dikirim via form ${layanan})`;
+    msg += `\n\n(Dikirim via form ${sourceForm})`;
     return msg;
   }
 
@@ -232,7 +237,7 @@ const formId = `shortform-${platform}`;
 
       // Simpan ke sheet (no-cors → opaque, .finally menandai request selesai), lalu arahkan ke WhatsApp.
       const waUrl = WA_NUMBER
-        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(plat, lang, nama, kat, pkt, hasPricing))}`
+        ? `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(waGreeting(plat, lang, nama, kat, pkt, hasPricing, platform))}`
         : '';
       
       // Fire Meta Pixel Lead Event
