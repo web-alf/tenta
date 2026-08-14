@@ -8,7 +8,7 @@
         "@astrojs/cloudflare": "^13.3.0",
         "@fontsource-variable/inter": "^5.2.8",
         "@fontsource-variable/plus-jakarta-sans": "^5.2.8",
-        "astro": "^6.1.0",
+        "astro": "^6.1.0"
       },
       "devDependencies": {
         "@astrojs/check": "^0.9.0",
@@ -16,12 +16,12 @@
         "@tailwindcss/vite": "^4.0.0",
         "tailwindcss": "^4.0.0",
         "typescript": "^5.5.0",
-        "wrangler": "^4.87.0",
-      },
-    },
+        "wrangler": "^4.87.0"
+      }
+    }
   },
   "overrides": {
-    "vite": "^7",
+    "vite": "^7"
   },
   "packages": {
     "@astrojs/check": ["@astrojs/check@0.9.9", "", { "dependencies": { "@astrojs/language-server": "^2.16.7", "chokidar": "^4.0.3", "kleur": "^4.1.5", "yargs": "^17.7.2" }, "peerDependencies": { "typescript": "^5.0.0 || ^6.0.0" }, "bin": { "astro-check": "bin/astro-check.js" } }, "sha512-A5UW8uIuErLWEoRQvzgXpO1gTjUFtK8r7nU2Z7GewAMxUb7bPvpk11qaKKgxqXlHJWlAvaaxy+Xg28A6bmQ1Tg=="],
@@ -1094,6 +1094,6 @@
 
     "vite/esbuild/@esbuild/win32-ia32": ["@esbuild/win32-ia32@0.27.7", "", { "os": "win32", "cpu": "ia32" }, "sha512-SmwKXe6VHIyZYbBLJrhOoCJRB/Z1tckzmgTLfFYOfpMAx63BJEaL9ExI8x7v0oAO3Zh6D/Oi1gVxEYr5oUCFhw=="],
 
-    "vite/esbuild/@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.7", "", { "os": "win32", "cpu": "x64" }, "sha512-56hiAJPhwQ1R4i+21FVF7V8kSD5zZTdHcVuRFMW0hn753vVfQN8xlx4uOPT4xoGH0Z/oVATuR82AiqSTDIpaHg=="],
+    "vite/esbuild/@esbuild/win32-x64": ["@esbuild/win32-x64@0.27.7", "", { "os": "win32", "cpu": "x64" }, "sha512-56hiAJPhwQ1R4i+21FVF7V8kSD5zZTdHcVuRFMW0hn753vVfQN8xlx4uOPT4xoGH0Z/oVATuR82AiqSTDIpaHg=="]
   }
 }

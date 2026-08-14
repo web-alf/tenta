@@ -11,7 +11,7 @@
  */
 
 var HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsApp', 'Kategori Bisnis', 'Pilihan Paket', 'Platform', 'URL Asal'];
-var WEBINAR_HEADERS = ['Tanggal', 'Nama', 'Email', 'Nomor WhatsApp', 'Nama Bisnis', 'Lama Beriklan', 'Kendala', 'URL Asal'];
+var WEBINAR_HEADERS = ['Tanggal', 'Nama', 'Nomor WhatsApp', 'Nama Bisnis / Brand', 'URL Asal'];
 var WEBINAR_GADS_HEADERS = ['Tanggal', 'Nama', 'Email', 'Nomor WhatsApp', 'Nama Bisnis', 'Status Google Ads', 'URL Asal'];
 var SHEETS = [
   'Meta Whitelist',
@@ -118,11 +118,8 @@ function doGet(e) {
       sheet.appendRow([
         new Date(),
         clip(p.nama, 100),
-        clip(p.email, 150),
         clip(p.whatsapp, 20),
-        clip(p.bisnis, 100),
-        clip(p.durasi, 50),
-        clip(p.kendala, 300),
+        clip(p.brand, 150),
         clip(p.source, 300)
       ]);
     } else if (sheetName === 'Webinar Gads') {

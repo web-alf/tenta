@@ -1,15 +1,28 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import WebinarProblems from '@components/sections/webinar/fb/WebinarProblems.astro';
-import LpFinalCta from '@components/sections/lp/LpFinalCta.astro';
-import WebinarHero from '@components/sections/webinar/fb/WebinarHero.astro';
-import WebinarCurriculum from '@components/sections/webinar/fb/WebinarCurriculum.astro';
-import WebinarSpeaker from '@components/sections/webinar/fb/WebinarSpeaker.astro';
-import WebinarForm from '@components/sections/webinar/fb/WebinarForm.astro';
-import { WEBINAR_META as W } from '@data/webinar-meta';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { WEBINAR_META as W } from "@data/webinar-meta";
+import WebinarPromoForm from "@components/sections/webinar/fb/WebinarPromoForm.astro";
+
 const { seo, event, hero, problems, curriculum, audience, speaker, form } = W;
-const finalDesc = 'Jangan sampai kehabisan. Daftar sekarang dan amankan tempat Anda di early bird ' + event.priceEarlyBird + '.';
+
+const ICONS: Record<string, string> = {
+  "trending-down":
+    '<polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/>',
+  target:
+    '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  sliders:
+    '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+  video:
+    '<polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>',
+  "bar-chart":
+    '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+  rupiah:
+    '<circle cx="12" cy="12" r="10"/><path d="M9 16V8h3.5a2.5 2.5 0 0 1 0 5H9"/><path d="M9 13h5"/>',
+  "trending-up":
+    '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+};
 ---
+
 <BaseLayout
   title={seo.title}
   description={seo.description}
@@ -21,58 +34,709 @@ const finalDesc = 'Jangan sampai kehabisan. Daftar sekarang dan amankan tempat A
 >
   <Fragment slot="head">
     <script is:inline>
-      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1341980327384883');fbq('track','PageView');
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("init", "1341980327384883");
+      fbq("track", "PageView");
     </script>
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
+      }
+      .footer {
+        margin-top: 0 !important;
+      }
+    </style>
   </Fragment>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1" /></noscript>
+  <noscript
+    ><img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1"
+    /></noscript
+  >
 
-  <WebinarHero
-    eyebrow={hero.eyebrow} title={hero.title} titleAccent={hero.titleAccent}
-    desc={hero.desc} ctaText={hero.ctaText} ctaHref={hero.ctaHref}
-    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
-    earlyBirdDeadline={event.earlyBirdDeadline} seatLeft={event.seatLeft}
-    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal}
-  />
+  <div class="bg-white overflow-x-hidden">
+    <!-- ============ HERO ============ -->
+    <section
+      class="relative overflow-hidden bg-[#FDF8F4] bg-gradient-to-br from-white to-[#FDF4EB]"
+    >
+      <!-- Wave bawah (merah) -->
+      <div
+        class="absolute bottom-0 left-0 w-full leading-none pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 1440 160"
+          preserveAspectRatio="none"
+          class="w-full h-[80px] md:h-[130px]"
+        >
+          <path
+            d="M0,100 C280,20 520,160 720,100 C920,40 1160,140 1440,80 L1440,160 L0,160 Z"
+            fill="#cc0000"
+            opacity="0.85"></path>
+          <path
+            d="M0,130 C320,50 420,170 720,110 C1020,50 1120,150 1440,110 L1440,160 L0,160 Z"
+            fill="#e60000"></path>
+        </svg>
+      </div>
 
-  <WebinarProblems heading="Pernah Mengalami Ini?" sub="Kalau ya, webinar ini memang dibuat untuk Anda." items={problems} />
+      <div
+        class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-28 md:pt-14 md:pb-40 z-10"
+      >
+        <div
+          class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-8 items-center"
+        >
+          <!-- Kiri -->
+          <div class="text-center lg:text-left">
+            <div
+              class="inline-flex items-center gap-2 bg-[#B31919] text-white text-[11px] md:text-xs font-bold px-1.5 py-1.5 pr-3 rounded-full uppercase tracking-wider mb-6 shadow-sm"
+            >
+              <span
+                class="flex items-center justify-center w-6 h-6 rounded-full bg-[#E02929] text-white shadow-inner"
+              >
+                <svg
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  ><path
+                    d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"
+                  ></path></svg
+                >
+              </span>
+              {hero.ribbon}
+              <span
+                class="bg-white text-[#B31919] px-2 py-0.5 rounded-full text-[10px] md:text-[11px] font-extrabold ml-1"
+                >{hero.ribbonBadge}</span
+              >
+            </div>
 
-  <WebinarCurriculum heading={curriculum.heading} sub={curriculum.sub} items={curriculum.items} />
+            <h1
+              class="font-extrabold text-[#0B1527] leading-[1.1] tracking-tight mb-5 text-4xl sm:text-5xl lg:text-[56px]"
+            >
+              {hero.title}<br />
+              <span class="italic text-[#D31F1F] font-serif pr-2"
+                >{hero.titleAccent}</span
+              >
+            </h1>
 
-  <section class="wb-audience-section" aria-labelledby="wb-audience-heading">
-    <div class="container" style="max-width:760px;">
-      <h2 id="wb-audience-heading" class="section-title">{audience.heading}</h2>
-      <p class="section-sub" style="margin-bottom:36px;">{audience.sub}</p>
-      <ul class="wb-audience-list" role="list">
-        {audience.items.map((item) => (
-          <li class="wb-audience-item reveal">
-            <span class="wb-audience-check" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-      <p class="wb-audience-note">{audience.note}</p>
-    </div>
-  </section>
+            <p class="text-lg md:text-xl font-bold text-[#0B1527] mb-5 text-balance mx-auto lg:mx-0">
+              {hero.subtitle}
+            </p>
 
-  <WebinarSpeaker name={speaker.name} title={speaker.title} bio={speaker.bio} photoSrc={speaker.photoSrc} credentials={speaker.credentials} />
+            <div
+              class="space-y-2 text-[15px] md:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10"
+            >
+              {
+                hero.desc.map((line, i) => (
+                  <p
+                    class={
+                      i === 0
+                        ? "mb-2 text-[#4A5568]"
+                        : "font-extrabold text-[#D31F1F]"
+                    }
+                  >
+                    {line}
+                  </p>
+                ))
+              }
+            </div>
 
-  <WebinarForm heading={form.heading} sub={form.sub} scriptUrl={form.scriptUrl} waNumber={form.waNumber} priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal} seatLeft={event.seatLeft} />
+            <!-- Info pills -->
+            <div
+              class="inline-flex flex-col sm:flex-row items-stretch bg-white rounded-2xl sm:rounded-full border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden mb-8 w-full sm:w-auto max-w-md sm:max-w-none mx-auto lg:mx-0 sm:px-2 relative z-20"
+            >
+              <div class="flex items-center gap-3 px-4 py-3">
+                <div class="text-[#CC1111] flex-shrink-0">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><rect x="3" y="4" width="18" height="18" rx="2" ry="2"
+                    ></rect><line x1="16" y1="2" x2="16" y2="6"></line><line
+                      x1="8"
+                      y1="2"
+                      x2="8"
+                      y2="6"></line><line x1="3" y1="10" x2="21" y2="10"
+                    ></line></svg
+                  >
+                </div>
+                <span
+                  class="text-xs md:text-sm font-bold text-slate-800 text-left leading-tight whitespace-nowrap"
+                  >Sabtu,<br />{event.date.replace("Sabtu, ", "")}</span
+                >
+              </div>
+              <div class="hidden sm:block w-px bg-slate-100 my-3.5"></div>
+              <div
+                class="flex items-center gap-3 px-4 py-3 border-t sm:border-t-0 border-slate-100"
+              >
+                <div class="text-[#CC1111] flex-shrink-0">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><circle cx="12" cy="12" r="10"></circle><polyline
+                      points="12 6 12 12 16 14"></polyline></svg
+                  >
+                </div>
+                <span
+                  class="text-xs md:text-sm font-bold text-slate-800 whitespace-nowrap"
+                  >{event.time}</span
+                >
+              </div>
+              <div class="hidden sm:block w-px bg-slate-100 my-3.5"></div>
+              <div
+                class="flex items-center gap-3 px-4 py-3 border-t sm:border-t-0 border-slate-100"
+              >
+                <div class="text-[#CC1111] flex-shrink-0">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    ><path d="M23 7l-7 5 7 5V7z"></path><rect
+                      x="1"
+                      y="5"
+                      width="15"
+                      height="14"
+                      rx="2"
+                      ry="2"></rect></svg
+                  >
+                </div>
+                <span
+                  class="text-xs md:text-sm font-bold text-slate-800 text-left leading-tight whitespace-nowrap"
+                  >Online<br />via Zoom</span
+                >
+              </div>
+            </div>
 
-  <LpFinalCta title="Kuota Peserta Terbatas!" desc={finalDesc} btn="Daftar Sekarang" href="#form-registrasi" />
+            <div class="relative z-20">
+              <a
+                href={hero.ctaHref}
+                style="background: linear-gradient(to bottom, #E60000, #B30000); color: #ffffff !important;"
+                class="inline-flex items-center justify-center gap-3 text-white font-bold text-base md:text-lg tracking-tight px-9 py-4 rounded-full shadow-[0_8px_20px_rgba(204,0,0,0.3)] hover:shadow-[0_10px_25px_rgba(204,0,0,0.4)] hover:-translate-y-0.5 transition-all"
+              >
+                <span style="color: #ffffff !important;">{hero.ctaText}</span>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#ffffff"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M5 12h14M12 5l7 7-7 7"></path></svg
+                >
+              </a>
+            </div>
+          </div>
+
+          <!-- Kanan: maskot -->
+          <div class="relative z-10 flex justify-center lg:justify-end">
+            <!-- Background square slightly visible -->
+            <div
+              class="relative rounded-[2.5rem] bg-transparent lg:bg-white/50 lg:shadow-[0_20px_50px_rgba(0,0,0,0.03)] lg:backdrop-blur-sm lg:p-2 lg:border lg:border-white/80"
+            >
+              <img
+                src={hero.mascotSrc}
+                alt="Maskot Tentaklik merayakan kemerdekaan bersama Meta Ads"
+                width="1254"
+                height="1254"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="w-full max-w-[460px] lg:max-w-[550px] mx-auto rounded-[2rem]"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PERNAH MENGALAMI INI? ============ -->
+    <section
+      class="relative bg-white py-16 md:py-24 overflow-hidden -mt-[2px] z-10"
+    >
+      <!-- Decorative Wave At Top -->
+      <div
+        class="absolute top-0 left-0 w-full leading-none pointer-events-none z-0"
+        aria-hidden="true"
+      >
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          class="w-full h-[60px] md:h-[100px]"
+        >
+          <path
+            d="M0,20 C320,100 520,0 820,60 C1120,120 1320,20 1440,0 L1440,0 L0,0 Z"
+            fill="#cc0000"
+            opacity="0.9"></path>
+          <path
+            d="M0,50 C380,120 620,20 920,80 C1220,140 1380,40 1440,20 L1440,0 L0,0 Z"
+            fill="#E60000"></path>
+        </svg>
+      </div>
+
+      <!-- Dot pattern left -->
+      <div
+        class="absolute left-[-20px] top-[40%] w-40 h-56 opacity-20 pointer-events-none z-0"
+        style="background-image: radial-gradient(#cc0000 1.5px, transparent 1.5px); background-size: 14px 14px;"
+      >
+      </div>
+
+      <!-- Soft circle right bottom -->
+      <div
+        class="absolute -bottom-20 -right-10 w-[300px] h-[300px] bg-red-100 rounded-full blur-[60px] opacity-60 pointer-events-none z-0"
+      >
+      </div>
+
+      <div
+        class="relative max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8 z-10 pt-10 md:pt-8"
+      >
+        <div
+          class="grid grid-cols-1 lg:grid-cols-[0.8fr_2.2fr] gap-10 lg:gap-14 items-center"
+        >
+          <!-- Kiri: Judul -->
+          <div class="text-left">
+            <div
+              class="flex items-center gap-1.5 mb-5 justify-start"
+            >
+              <div class="w-8 h-[3px] bg-[#D31F1F] rounded-full"></div>
+              <div class="w-1.5 h-1.5 bg-[#D31F1F] rounded-full"></div>
+            </div>
+
+            <h2
+              class="text-4xl md:text-[42px] lg:text-[46px] font-extrabold leading-[1.05] tracking-tight mb-5"
+            >
+              <span class="text-[#0B1527] block mb-1">Pernah</span>
+              <span class="text-[#D31F1F] block">Mengalami Ini?</span>
+            </h2>
+
+            <div class="w-[70px] h-px bg-[#FF8888] mb-6"></div>
+
+            <p
+              class="text-sm md:text-[15px] text-slate-600 font-medium leading-relaxed max-w-[280px]"
+            >
+              {problems.sub}
+            </p>
+          </div>
+
+          <!-- Kanan: Cards -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5"
+          >
+            {
+              problems.items.map((item) => (
+                <div class="bg-white rounded-[1.5rem] border border-red-50 p-6 md:p-7 shadow-[0_10px_40px_rgba(204,0,0,0.05)] hover:shadow-[0_12px_45px_rgba(204,0,0,0.08)] hover:-translate-y-1 transition-all flex flex-col h-full relative">
+                  <div class="w-11 h-11 rounded-[12px] bg-[#FFF0F0] text-[#D31F1F] flex items-center justify-center mb-6 flex-shrink-0">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      set:html={ICONS[item.icon] || ICONS["target"]}
+                    />
+                  </div>
+                  <p class="text-[14px] md:text-[15px] font-extrabold text-[#0B1527] leading-snug flex-grow">
+                    {item.title}
+                  </p>
+                  <div class="w-7 h-[2px] bg-[#FF8888] mt-7 rounded-full" />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KURIKULUM ============ -->
+    <section class="bg-white py-16 md:py-24">
+      <div class="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-start gap-4 mb-12 md:mb-14">
+          <span
+            class="hidden sm:block h-[2px] flex-1 max-w-[120px] bg-gradient-to-r from-transparent to-[#FF8888] rounded-full"
+          ></span>
+          <h2
+            class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#D31F1F] text-left leading-[1.15]"
+          >
+            {curriculum.heading}
+          </h2>
+          <span
+            class="hidden sm:block h-[2px] flex-1 max-w-[120px] bg-gradient-to-l from-transparent to-[#FF8888] rounded-full"
+          ></span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {
+            curriculum.items.map((item) => (
+              <div class="bg-white rounded-[1.5rem] border border-red-50 p-6 md:p-7 shadow-[0_10px_40px_rgba(204,0,0,0.05)] hover:shadow-[0_12px_45px_rgba(204,0,0,0.08)] hover:-translate-y-1 transition-all flex flex-col h-full relative">
+                <div class="w-11 h-11 rounded-[12px] bg-[#FFF0F0] text-[#D31F1F] flex items-center justify-center mb-6 flex-shrink-0">
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    set:html={ICONS[item.icon] || ICONS["target"]}
+                  />
+                </div>
+                <p class="text-[14px] md:text-[15px] font-extrabold text-[#0B1527] leading-snug mb-2">
+                  {item.title}
+                </p>
+                <p class="text-[14px] md:text-[15px] text-slate-600 leading-relaxed flex-grow">
+                  {item.desc}
+                </p>
+                <div class="w-7 h-[2px] bg-[#FF8888] mt-7 rounded-full" />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ AUDIENCE + SPEAKER ============ -->
+    <section class="bg-white py-16 md:py-24">
+      <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-[1.7fr_1fr] gap-6 md:gap-8 items-stretch"
+        >
+          <!-- Cocok Ikut -->
+          <div
+            class="bg-[#FFF0F0] rounded-[2rem] p-8 md:p-10 border border-[#FFE0E0] flex flex-col h-full"
+          >
+            <h2
+              class="text-3xl md:text-4xl font-extrabold text-[#0B1527] leading-tight pb-4"
+            >
+              Siapa yang <span class="text-[#D31F1F]">Cocok Ikut?</span>
+            </h2>
+            <p
+              class="mt-2 text-[15px] md:text-[16px] text-slate-600 leading-relaxed pb-5"
+            >
+              {audience.sub}
+            </p>
+
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 mb-8">
+              {
+                audience.items.map((item) => (
+                  <li class="flex items-start gap-3.5 text-[15px] md:text-base font-bold text-[#0B1527]">
+                    <span class="w-[22px] h-[22px] rounded-full bg-[#D31F1F] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="20 6 9 17 4 12" />
+                      </svg>
+                    </span>
+                    <span class="leading-snug">{item}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div
+              class="mt-auto flex items-start gap-3 bg-white/60 border border-[#FFD0D0] rounded-[14px] p-5"
+            >
+              <svg
+                class="text-[#D31F1F] flex-shrink-0 mt-0.5"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                ><circle cx="12" cy="12" r="10"></circle><line
+                  x1="12"
+                  y1="16"
+                  x2="12"
+                  y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"
+                ></line></svg
+              >
+              <p
+                class="text-[14px] md:text-[15px] text-slate-700 leading-relaxed"
+              >
+                {audience.note}
+              </p>
+            </div>
+          </div>
+
+          <!-- Speaker -->
+          <div
+            class="rounded-[2rem] p-8 md:p-12 text-white relative overflow-hidden"
+            style="background: linear-gradient(140deg, #cc0000 0%, #a30000 60%, #800000 100%);"
+          >
+            <!-- Corner Dot Patterns -->
+            <div
+              class="absolute top-0 right-0 w-64 h-64 opacity-[0.15] pointer-events-none"
+              style="background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 14px 14px; mask-image: radial-gradient(circle at top right, black, transparent);"
+            >
+            </div>
+            <div
+              class="absolute bottom-0 left-0 w-64 h-64 opacity-[0.15] pointer-events-none"
+              style="background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px); background-size: 14px 14px; mask-image: radial-gradient(circle at bottom left, black, transparent);"
+            >
+            </div>
+
+            <div
+              class="flex flex-col items-center gap-6 md:gap-8 text-center justify-center relative z-10"
+            >
+              <div class="flex-shrink-0">
+                <img
+                  src={speaker.photoSrc}
+                  alt={speaker.name}
+                  width="200"
+                  height="200"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-40 h-40 lg:w-48 lg:h-48 rounded-full object-cover aspect-square border-[6px] border-white shadow-[0_12px_30px_rgba(0,0,0,0.3)]"
+                />
+              </div>
+              <div class="flex flex-col items-center max-w-sm">
+                <div
+                  class="inline-flex items-center justify-center bg-white text-[#cc0000] font-extrabold text-[14px] md:text-[15px] px-5 py-1.5 rounded-full mb-4 shadow-sm"
+                >
+                  Meet the Speaker
+                </div>
+
+                <h3
+                  class="text-2xl md:text-3xl font-extrabold mb-1.5 leading-tight"
+                >
+                  {speaker.name}
+                </h3>
+                <p
+                  class="text-[15px] md:text-base font-bold text-white leading-snug text-balance"
+                >
+                  {speaker.title}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA + FORM ============ -->
+    <section
+      class="relative py-16 md:py-24"
+      style="background: linear-gradient(135deg, #cc0000 0%, #b30000 50%, #990000 100%);"
+    >
+      <div class="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 z-10">
+        <div
+          class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center"
+        >
+          <!-- Kiri: pitch + harga -->
+          <div class="text-white pt-2">
+            <div
+              class="inline-block bg-white/10 border border-white/20 backdrop-blur-sm text-white text-[10px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider mb-6"
+            >
+              {form.badge}
+            </div>
+
+            <h2
+              class="text-3xl md:text-[42px] font-extrabold leading-[1.25] mb-6"
+            >
+              Siap Mengetahui Di Mana <br class="hidden sm:block" /><span
+                class="underline decoration-white/30 decoration-4 underline-offset-8"
+                >Budget Iklan Anda Bocor?</span
+              >
+            </h2>
+            <p
+              class="text-base md:text-[17px] text-white/95 leading-relaxed mb-10 max-w-[520px]"
+              style="margin-bottom: 1.5rem;"
+            >
+              {form.sub}
+            </p>
+
+            <!-- Kartu harga -->
+            <div
+              class="bg-white rounded-[1.5rem] p-7 md:p-8 shadow-2xl max-w-sm relative"
+            >
+              <div
+                style="background: linear-gradient(to right, #D31F1F, #E60000); color: #ffffff;"
+                class="inline-block text-[11px] font-extrabold px-3.5 py-1.5 rounded-full uppercase tracking-wider mb-5 shadow-sm"
+              >
+                {form.promoLabel}
+              </div>
+              <div class="text-[14px] font-bold text-slate-500 mb-1.5">
+                HTM biasa
+              </div>
+              <div
+                class="text-2xl font-bold text-slate-400/80 line-through decoration-[3px] decoration-slate-300 mb-1"
+              >
+                {event.priceOriginal}
+              </div>
+              <div
+                class="text-5xl md:text-[54px] font-black text-[#D31F1F] leading-none tracking-tight mb-6"
+              >
+                {event.priceRegular}
+              </div>
+              <div
+                class="bg-[#FFF0F0] border border-[#FFD0D0] rounded-xl py-3 px-4 text-center shadow-inner"
+              >
+                <p
+                  class="text-[14px] font-extrabold text-[#D31F1F] leading-snug"
+                >
+                  {form.priceNote}
+                </p>
+              </div>
+            </div>
+
+            <!-- Info event -->
+            <div
+              class="flex flex-wrap items-center gap-x-6 gap-y-3 mt-7 text-white/95"
+            >
+              <div class="flex items-center gap-2 text-sm font-semibold">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="3" y="4" width="18" height="18" rx="2" ry="2"
+                  ></rect><line x1="16" y1="2" x2="16" y2="6"></line><line
+                    x1="8"
+                    y1="2"
+                    x2="8"
+                    y2="6"></line><line x1="3" y1="10" x2="21" y2="10"
+                  ></line></svg
+                >
+                {event.date}
+              </div>
+              <div class="flex items-center gap-2 text-sm font-semibold">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><circle cx="12" cy="12" r="10"></circle><polyline
+                    points="12 6 12 12 16 14"></polyline></svg
+                >
+                {event.time}
+              </div>
+              <div class="flex items-center gap-2 text-sm font-semibold">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M23 7l-7 5 7 5V7z"></path><rect
+                    x="1"
+                    y="5"
+                    width="15"
+                    height="14"
+                    rx="2"
+                    ry="2"></rect></svg
+                >
+                {event.platform}
+              </div>
+            </div>
+          </div>
+
+          <!-- Kanan: form -->
+          <WebinarPromoForm
+            scriptUrl={form.scriptUrl}
+            waNumber={form.waNumber}
+            heading={form.heading2}
+            consentText={form.consentText}
+            ctaText={form.ctaText}
+            footnote={form.footnote}
+            eventPrice={event.priceRegular}
+          />
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Confetti Kemerdekaan -->
+  <script is:inline src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(function () {
+        var defaults = {
+          colors: ["#cc0000", "#ffffff"],
+          zIndex: 9999,
+          disableForReducedMotion: true // sangat baik untuk performa
+        };
+
+        // Tembakan kiri (satu kali saja tapi meriah)
+        confetti(Object.assign({}, defaults, {
+          particleCount: 60,
+          angle: 60,
+          spread: 70,
+          origin: { x: 0, y: 0.7 }
+        }));
+
+        // Tembakan kanan (satu kali saja tapi meriah)
+        confetti(Object.assign({}, defaults, {
+          particleCount: 60,
+          angle: 120,
+          spread: 70,
+          origin: { x: 1, y: 0.7 }
+        }));
+      }, 600); // delay lebih lama agar halaman selesai render
+    });
+  </script>
 </BaseLayout>
-
-<style is:global>
-  .wb-audience-section { background: var(--bg-warm, #FFF8F3); text-align: center; }
-  .wb-audience-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; text-align: left; }
-  .wb-audience-item { display: flex; align-items: center; gap: 14px; background: white; border: 1.5px solid var(--orange-100, #FFE8D6); border-radius: var(--radius-lg, 12px); padding: 14px 20px; font-size: 15px; font-weight: 600; color: var(--ink-800, #1E293B); transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; }
-  .wb-audience-item:hover { border-color: var(--orange-400, #FB923C); transform: translateX(4px); box-shadow: 0 4px 16px rgba(255,107,26,0.08); }
-  .wb-audience-check { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #FF6B1A, #FF9A3C); color: white; font-size: 13px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .wb-audience-note { margin-top: 24px; font-size: 14px; color: var(--ink-500, #64748B); font-style: italic; background: white; border-left: 3px solid var(--orange-400, #FB923C); padding: 12px 16px; border-radius: 0 8px 8px 0; text-align: left; }
-
-  @media (max-width: 480px) {
-    .wb-audience-item { padding: 12px 16px; font-size: 14px; gap: 10px; }
-    .wb-audience-check { width: 24px; height: 24px; }
-    .wb-audience-check svg { width: 12px; height: 12px; }
-    .wb-audience-note { font-size: 13px; padding: 10px 14px; }
-  }
-</style>

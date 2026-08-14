@@ -1,6 +1,7 @@
 // Webinar Meta LP — Content Data
 // Ganti placeholder sebelum go-live.
 import bilalPhoto from '../assets/webinar/bilal-fb.avif';
+import mascotHero from '../assets/webinar/mockup-fb.avif';
 
 export const WEBINAR_META = {
   seo: {
@@ -10,8 +11,8 @@ export const WEBINAR_META = {
   },
   event: {
     date: 'Sabtu, 22 Agustus 2026',
-    time: '19:00 WIB',
-    platform: 'Zoom Online',
+    time: '20.00 WIB',
+    platform: 'Online via Zoom',
     earlyBirdDeadline: '2026-08-21T23:59:59+07:00',
     seatLeft: 10,
     priceEarlyBird: 'Rp10.000',
@@ -19,51 +20,69 @@ export const WEBINAR_META = {
     priceOriginal: 'Rp99.000',
   },
   hero: {
-    eyebrow: 'Webinar Online · Meta Ads',
-    title: 'Dari',
-    titleAccent: 'Boncos ke Profit',
-    desc: 'Bedah Campaign Meta Ads yang Salah Strategi — temukan di mana budget iklan Anda bocor dan cara memperbaikinya.',
-    ctaText: 'Daftar Sekarang',
+    ribbon: 'Dirgahayu Republik Indonesia',
+    ribbonBadge: 'KE-81',
+    title: 'Dari Boncos',
+    titleAccent: 'ke Profit',
+    subtitle: 'Bedah Campaign Meta Ads yang Salah Strategi',
+    desc: [
+      'Sudah beriklan di Meta Ads, tapi budget terus keluar sementara hasil belum maksimal?',
+      'Bisa jadi masalahnya bukan kurang budget.',
+      'Bisa jadi ada yang salah dalam campaign Anda.',
+    ],
+    ctaText: 'Daftar Webinar Sekarang',
     ctaHref: '#form-registrasi',
+    mascotSrc: mascotHero.src,
   },
-  problems: [
-    { icon: 'trending-down', title: 'Budget naik, hasil justru turun', desc: 'Sudah nambah budget tapi ROAS malah merosot dan cost per lead melonjak.' },
-    { icon: 'target', title: 'ROAS tidak sesuai target', desc: 'Angka di dashboard tidak mencerminkan profit nyata — bingung harus percaya yang mana.' },
-    { icon: 'compass', title: 'Bingung harus optimasi bagian mana', desc: 'Campaign sudah jalan, tapi tidak tahu harus pause, scale, atau edit yang mana dulu.' },
-    { icon: 'palette', title: 'Creative sudah testing, performa tetap tidak stabil', desc: 'Sudah coba banyak creative tapi hasilnya naik-turun tanpa pola yang jelas.' },
-  ],
-  curriculum: {
-    heading: 'Dari Data Campaign, Kita Cari Masalahnya',
-    sub: 'Bukan sekadar teori — kita akan bedah campaign secara langsung dan sistematis.',
+  problems: {
+    heading: 'Pernah Mengalami Ini?',
+    sub: 'Kalau Anda pernah mengalami salah satunya, webinar ini untuk Anda.',
     items: [
-      { number: '01', title: 'Baca Data Campaign', desc: 'Pahami cara membaca performance campaign dan angka yang benar-benar penting: mana yang sinyal, mana yang noise.' },
-      { number: '02', title: 'Temukan Kebocoran Budget', desc: 'Cari tahu bagian mana yang membuat budget tidak bekerja optimal — adset, audience, placement, atau bidding.' },
-      { number: '03', title: 'Tentukan Titik Optimasi', desc: 'Pahami mana yang harus diperbaiki, dipertahankan, atau dihentikan — dengan framework yang sistematis.' },
-      { number: '04', title: 'Ambil Keputusan Berdasarkan Data', desc: 'Jangan lagi mengoptimasi campaign hanya berdasarkan feeling. Buat keputusan yang didukung angka.' },
+      { icon: 'trending-down', title: 'Budget naik, tapi hasil justru turun?' },
+      { icon: 'target', title: 'ROAS tidak sesuai target?' },
+      { icon: 'sliders', title: 'Campaign sudah berjalan, tapi bingung harus optimasi bagian mana?' },
+      { icon: 'video', title: 'Sudah testing creative, tapi performance tetap tidak stabil?' },
+    ],
+  },
+  curriculum: {
+    heading: 'Dalam webinar ini, Anda akan diajak memahami:',
+    items: [
+      { icon: 'bar-chart', title: 'Baca Data Campaign', desc: 'Pelajari cara membaca performance campaign dan memahami angka yang benar-benar penting.' },
+      { icon: 'rupiah', title: 'Temukan Kebocoran Budget', desc: 'Cari tahu bagian mana yang membuat budget tidak bekerja secara optimal.' },
+      { icon: 'target', title: 'Tentukan Titik Optimasi', desc: 'Pahami mana yang harus diperbaiki, dipertahankan, atau dihentikan.' },
+      { icon: 'trending-up', title: 'Ambil Keputusan Berdasarkan Data', desc: 'Jangan lagi mengoptimasi campaign hanya berdasarkan feeling atau asumsi.' },
     ],
   },
   audience: {
     heading: 'Siapa yang Cocok Ikut?',
     sub: 'Webinar ini khusus untuk Anda yang sudah pernah menjalankan Meta Ads.',
     items: [
-      'Business Owner yang sudah beriklan di Meta',
-      'Digital Marketer & Media Buyer',
+      'Business Owner',
       'Performance Marketer',
-      'E-commerce Seller dengan campaign existing',
-      'Advertiser yang ingin scaling tapi stuck',
+      'Digital Marketer',
+      'E-commerce Seller',
+      'Media Buyer',
+      'Advertiser dengan campaign existing',
     ],
-    note: 'Bukan webinar cara pasang iklan dari nol. Kita membahas apa yang harus dilakukan setelah campaign sudah berjalan.',
+    note: 'Bukan webinar "cara pasang iklan dari nol". Kita akan membahas apa yang harus dilakukan setelah campaign sudah berjalan.',
   },
   speaker: {
     name: 'Bilal Abdurrahman',
     title: 'Meta Ads & Performance Marketing Manager',
-    bio: 'Praktisi Performance Marketing dengan fokus pada Meta Ads dan strategi digital advertising berbasis data. Memiliki expertise dalam campaign strategy, audience targeting, creative testing, serta performance optimization untuk membantu bisnis mendapatkan hasil iklan yang lebih efektif dan terukur.',
-    photoSrc: bilalPhoto.src,                    // TODO: isi URL foto
+    bio: 'Praktisi Performance Marketing dengan fokus pada Meta Ads dan strategi digital advertising berbasis data untuk membantu bisnis mendapatkan hasil iklan yang lebih efektif dan terukur.',
+    photoSrc: bilalPhoto.src,
     credentials: ['Campaign Strategy', 'Audience Targeting', 'Performance Optimization'],
   },
   form: {
+    badge: 'Webinar Spesial Kemerdekaan',
     heading: 'Siap Mengetahui Di Mana Budget Iklan Anda Bocor?',
-    sub: 'Daftar sekarang sebelum kuota habis. Isi data berikut untuk mengamankan tempat Anda.',
+    sub: 'Jangan hanya melihat berapa banyak budget yang sudah Anda keluarkan. Cari tahu apa yang sebenarnya terjadi di dalam campaign Anda.',
+    promoLabel: 'Promo Kemerdekaan',
+    priceNote: 'Rp10.000 untuk 10 peserta tercepat!',
+    heading2: 'Form Registrasi',
+    consentText: 'Saya bersedia menerima informasi terkait webinar dan layanan Tentaklik melalui WhatsApp/email.',
+    ctaText: 'Daftar Sekarang',
+    footnote: 'Kuota peserta terbatas.',
     scriptUrl: 'https://script.google.com/macros/s/AKfycbyqBbjxA91y18QR_PvcYArI62SSEbdD0JU49PFnlb4Wj7Q1xviBNbwDaHG_jSKZk0OutA/exec',
     waNumber: '6285129992225',
     pixelId: '1341980327384883',
