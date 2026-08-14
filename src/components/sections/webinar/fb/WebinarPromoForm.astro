@@ -451,11 +451,15 @@ const {
         : "";
 
       const w = window as any;
+      console.log("Mencoba mengirim event Lead ke Meta...");
       if (typeof w.fbq === "function") {
+        console.log("Meta Pixel (fbq) ditemukan. Mengirim event Lead...");
         w.fbq("track", "Lead", {
           content_name: "Webinar Meta Promo",
           content_category: "Webinar",
         });
+      } else {
+        console.log("ERROR: Meta Pixel (fbq) tidak ditemukan di window!");
       }
 
       fetch(scriptUrl + "?" + params.toString(), {
@@ -485,7 +489,7 @@ const {
           // Confetti ledakan (merah putih) ketika berhasil
           const wConfetti = window as any;
           if (typeof wConfetti.confetti === "function") {
-            const defaults = { colors: ["#cc0000", "#ffffff"], zIndex: 10000, disableForReducedMotion: true };
+            const defaults = { colors: ["#cc0000", "#ffffff"], zIndex: 10000 };
             wConfetti.confetti(Object.assign({}, defaults, { particleCount: 70, angle: 60, spread: 80, origin: { x: 0, y: 0.6 } }));
             wConfetti.confetti(Object.assign({}, defaults, { particleCount: 70, angle: 120, spread: 80, origin: { x: 1, y: 0.6 } }));
           }
