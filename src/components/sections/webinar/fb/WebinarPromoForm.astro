@@ -7,6 +7,7 @@ interface Props {
   ctaText?: string;
   footnote?: string;
   eventPrice?: string;
+  trackLead?: boolean;
 }
 const {
   scriptUrl,
@@ -16,6 +17,7 @@ const {
   ctaText = "Daftar Sekarang",
   footnote = "Kuota peserta terbatas.",
   eventPrice = "Rp 0",
+  trackLead = true,
 } = Astro.props;
 ---
 
@@ -35,6 +37,7 @@ const {
     class="space-y-6"
     data-script-url={scriptUrl}
     data-wa-number={waNumber}
+    data-track-lead={String(trackLead)}
     novalidate
   >
     <input
@@ -450,16 +453,21 @@ const {
         ? "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(waMsg)
         : "";
 
+      const trackLeadStr = WB_FORM.getAttribute("data-track-lead") || "true";
+      const shouldTrackLead = trackLeadStr === "true";
+
       const w = window as any;
-      console.log("Mencoba mengirim event Lead ke Meta...");
-      if (typeof w.fbq === "function") {
-        console.log("Meta Pixel (fbq) ditemukan. Mengirim event Lead...");
-        w.fbq("track", "Lead", {
-          content_name: "Webinar Meta Promo",
-          content_category: "Webinar",
-        });
-      } else {
-        console.log("ERROR: Meta Pixel (fbq) tidak ditemukan di window!");
+      if (shouldTrackLead) {
+        console.log("Mencoba mengirim event Lead ke Meta...");
+        if (typeof w.fbq === "function") {
+          console.log("Meta Pixel (fbq) ditemukan. Mengirim event Lead...");
+          w.fbq("track", "Lead", {
+            content_name: "Webinar Meta Promo",
+            content_category: "Webinar",
+          });
+        } else {
+          console.log("ERROR: Meta Pixel (fbq) tidak ditemukan di window!");
+        }
       }
 
       fetch(scriptUrl + "?" + params.toString(), {
