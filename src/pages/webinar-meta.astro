@@ -191,7 +191,7 @@ const ICONS: Record<string, string> = {
                 </div>
                 <span
                   class="text-xs md:text-sm font-bold text-slate-800 text-left leading-tight whitespace-nowrap"
-                  >Sabtu,<br />{event.date.replace("Sabtu, ", "")}</span
+                  >{event.date.split(", ")[0]},<br />{event.date.split(", ")[1]}</span
                 >
               </div>
               <div class="hidden sm:block w-px bg-slate-100 my-3.5"></div>
