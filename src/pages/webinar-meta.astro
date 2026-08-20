@@ -149,23 +149,25 @@ const ICONS: Record<string, string> = {
               </p>
             )}
 
-            <div
-              class="space-y-2 text-[15px] md:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10"
-            >
-              {
-                hero.desc.map((line, i) => (
-                  <p
-                    class={
-                      i === 0
-                        ? "mb-2 text-[#4A5568]"
-                        : "font-extrabold text-[#D31F1F]"
-                    }
-                  >
-                    {line}
-                  </p>
-                ))
-              }
-            </div>
+            {hero.desc && hero.desc.length > 0 && (
+              <div
+                class="space-y-2 text-[15px] md:text-base leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10"
+              >
+                {
+                  hero.desc.map((line, i) => (
+                    <p
+                      class={
+                        i === 0
+                          ? "mb-2 text-[#4A5568]"
+                          : "font-extrabold text-[#D31F1F]"
+                      }
+                    >
+                      {line}
+                    </p>
+                  ))
+                }
+              </div>
+            )}
 
             <!-- Info pills -->
             <div
