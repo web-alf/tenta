@@ -10,7 +10,7 @@ export const WEBINAR_META = {
     keywords: ['webinar meta ads','optimasi meta ads','belajar meta ads','bedah campaign facebook ads','tentaklik webinar'],
   },
   event: {
-    date: 'Sabtu, 28 Agustus 2026',
+    date: 'Jumat, 28 Agustus 2026',
     time: '20.00 WIB',
     platform: 'Online via Zoom',
     earlyBirdDeadline: '2026-08-21T23:59:59+07:00',
