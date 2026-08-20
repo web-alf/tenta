@@ -24,7 +24,7 @@ export const WEBINAR_META = {
     ribbonBadge: 'KE-81',
     title: 'Dari Boncos',
     titleAccent: 'ke Profit',
-    subtitle: 'Bedah Campaign Meta Ads yang Salah Strategi',
+    subtitle: 'Bedah Campaign Meta\u00A0Ads yang Salah Strategi',
     desc: [],
     ctaText: 'Daftar Webinar Sekarang',
     ctaHref: '#form-registrasi',

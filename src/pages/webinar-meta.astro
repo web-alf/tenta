@@ -144,7 +144,7 @@ const ICONS: Record<string, string> = {
             </h1>
 
             {hero.subtitle && (
-              <p class="text-lg md:text-xl font-bold text-[#0B1527] mb-10 text-balance mx-auto lg:mx-0">
+              <p class="text-lg md:text-xl font-bold text-[#0B1527] mb-16 text-balance mx-auto lg:mx-0">
                 {hero.subtitle}
               </p>
             )}
@@ -171,7 +171,7 @@ const ICONS: Record<string, string> = {
 
             <!-- Info pills -->
             <div
-              class="inline-flex flex-col sm:flex-row items-stretch bg-white rounded-2xl sm:rounded-full border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden mb-8 w-full sm:w-auto max-w-md sm:max-w-none mx-auto lg:mx-0 sm:px-2 relative z-20"
+              class="mt-6 inline-flex flex-col sm:flex-row items-stretch bg-white rounded-2xl sm:rounded-full border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] overflow-hidden mb-8 w-full sm:w-auto max-w-md sm:max-w-none mx-auto lg:mx-0 sm:px-2 relative z-20"
             >
               <div class="flex items-center gap-3 px-4 py-3">
                 <div class="text-[#CC1111] flex-shrink-0">
@@ -589,7 +589,7 @@ const ICONS: Record<string, string> = {
             </div>
 
             <h2
-              class="text-3xl md:text-[42px] font-extrabold leading-[1.25] mb-6"
+              class="text-3xl md:text-[42px] font-extrabold leading-[1.25] mb-10"
             >
               Siap Mengetahui Di Mana <br class="hidden sm:block" /><span
                 class="underline decoration-white/30 decoration-4 underline-offset-8"
@@ -597,15 +597,14 @@ const ICONS: Record<string, string> = {
               >
             </h2>
             <p
-              class="text-base md:text-[17px] text-white/95 leading-relaxed mb-10 max-w-[520px]"
-              style="margin-bottom: 1.5rem;"
+              class="text-base md:text-[17px] text-white/95 leading-relaxed mb-16 mt-6 max-w-[520px]"
             >
               {form.sub}
             </p>
 
             <!-- Kartu harga -->
             <div
-              class="bg-white rounded-[1.5rem] p-7 md:p-8 shadow-2xl max-w-sm relative"
+              class="mt-4 bg-white rounded-[1.5rem] p-7 md:p-8 shadow-2xl max-w-sm relative"
             >
               <div
                 style="background: linear-gradient(to right, #D31F1F, #E60000); color: #ffffff;"
@@ -627,13 +626,16 @@ const ICONS: Record<string, string> = {
                 {event.priceRegular}
               </div>
               <div
-                class="bg-[#FFF0F0] border border-[#FFD0D0] rounded-xl py-3 px-4 text-center shadow-inner"
+                class="bg-slate-100 border border-slate-200 rounded-xl py-3 px-4 text-center shadow-inner flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2"
               >
                 <p
-                  class="text-[14px] font-extrabold text-[#D31F1F] leading-snug"
+                  class="text-[13px] md:text-[14px] font-bold text-slate-500 leading-snug line-through decoration-2"
                 >
                   {form.priceNote}
                 </p>
+                <span class="text-[13px] md:text-[14px] font-black text-[#D31F1F] uppercase tracking-wide">
+                  Terpenuhi!
+                </span>
               </div>
             </div>
 
