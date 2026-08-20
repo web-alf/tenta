@@ -5,7 +5,7 @@ Bisa jadi masalahnya bukan kurang budget.
 Bisa jadi ada yang salah dalam campaign Anda.
 Di webinar ini, kita akan membedah cara membaca data campaign, menemukan titik kebocoran budget, dan menentukan bagian yang perlu dioptimasi.
 🎟️ htm biasa 17k, htm 10k untuk 10 orang tercepat
-📅 Sabtu, 22 Agustus 2026
+📅 Sabtu, 28 Agustus 2026
 ⏰ 19:00 WIB
 💻 Online via Zoom
 [ DAFTAR WEBINAR ]
@@ -48,7 +48,7 @@ Praktisi Performance Marketing dengan fokus pada Meta Ads dan strategi digital a
 WEBINAR DETAILS
 DARI BONCOS KE PROFIT
 Bedah Campaign Meta Ads yang Salah Strategi
-📅 Sabtu, 22 Agustus 2026
+📅 Sabtu, 28 Agustus 2026
 ⏰ 19:00 WIB
 💻 Online via Zoom
 🎟️ htm biasa 17k, htm 10k untuk 10 orang tercepat
