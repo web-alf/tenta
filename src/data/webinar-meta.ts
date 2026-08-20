@@ -24,9 +24,9 @@ export const WEBINAR_META = {
     ribbonBadge: 'KE-81',
     title: 'Dari Boncos',
     titleAccent: 'ke Profit',
-    subtitle: '',
+    subtitle: 'Bedah Campaign Meta Ads yang Salah Strategi',
     desc: [
-      'Bedah campaign Meta Ads yang salah strategi. Temukan letak kebocoran budget agar iklan mulai profit.',
+      'Budget iklan terus keluar tapi hasil belum maksimal? Temukan cara membaca data dan menghentikan kebocoran campaign Anda di sini.',
     ],
     ctaText: 'Daftar Webinar Sekarang',
     ctaHref: '#form-registrasi',
