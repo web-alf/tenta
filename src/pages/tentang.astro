@@ -1,8 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import { aboutPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
+
+import imgSono from '@/assets/tentang/sonoprabowo.avif';
+import imgZabarjad from '@/assets/tentang/zabarjad.avif';
+import imgAhzelan from '@/assets/tentang/ahzelan.avif';
 
 const galeriImages = [
   '/assets/galeri/1.jpg', '/assets/galeri/2.jpg', '/assets/galeri/3.jpg',
@@ -18,10 +23,9 @@ const values = [
 ];
 
 const team = [
-  { name: 'Endah W.',     role: 'Founder',            initials: 'EW' },
-  { name: 'Hanuf',        role: 'Lead Performance',   initials: 'HN' },
-  { name: 'Ibnu Fateeh',  role: 'Web Engineering',    initials: 'IF' },
-  { name: 'Dephi Jhons',  role: 'Creative Director',  initials: 'DJ' },
+  { name: 'Sono Prabowo. S.Kep., M.M., M.Pd.', role: 'Founder',                  image: imgSono },
+  { name: 'Zabarjad Dliya U, S.H',             role: 'Chief Operating Officer',  image: imgZabarjad },
+  { name: 'Ahzelan',                           role: 'Chief Technology Officer', image: imgAhzelan },
 ];
 
 const url = `${site.url}/tentang`;
@@ -100,12 +104,14 @@ const jsonLd = [
     <div class="container">
       <h2 class="section-title">Tim Inti</h2>
       <p class="section-sub" style="margin-bottom:40px;">Orang-orang yang turun langsung di project kamu.</p>
-      <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:20px;">
+      <div style="display:flex;justify-content:center;gap:30px;flex-wrap:wrap;">
         {team.map(t => (
-          <div class="card reveal" style="text-align:center;">
-            <div class="avatar" style="width:90px;height:90px;font-size:28px;margin:0 auto 14px;">{t.initials}</div>
-            <h3 style="font-size:16px;">{t.name}</h3>
-            <p style="font-size:13px;color:var(--ink-500);margin-top:4px;">{t.role}</p>
+          <div class="card reveal" style="text-align:center;width:100%;max-width:340px;padding:36px 24px;">
+            <div style="width:140px;height:140px;border-radius:50%;margin:0 auto 20px;overflow:hidden;padding:0;background:var(--ink-50);border:4px solid white;box-shadow:0 8px 24px rgba(14,27,42,0.08);">
+              <Image src={t.image} alt={t.name} style="width:100%;height:100%;object-fit:cover;display:block;" />
+            </div>
+            <h3 style="font-size:18px;margin-bottom:8px;line-height:1.4;">{t.name}</h3>
+            <p style="font-size:14px;color:var(--orange-600);font-weight:600;margin:0;">{t.role}</p>
           </div>
         ))}
       </div>
