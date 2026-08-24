@@ -13,15 +13,23 @@ import { getLang, useT } from '@i18n/utils';
 interface Props {
   data: {
     title: string;
+    title_en?: string;
     titleAccent: string;
+    titleAccent_en?: string;
     eyebrow: string;
+    eyebrow_en?: string;
     desc: string;
+    desc_en?: string;
     icon: 'web' | 'google' | 'meta' | 'konsul';
-    features: { icon: string; title: string; desc: string }[];
+    features: { icon?: string; iconId?: string; title: string; desc: string }[];
+    features_en?: { icon?: string; iconId?: string; title: string; desc: string }[];
     plans: { name: string; tagline: string; price: string; unit: string; featured?: boolean; features: string[] }[];
+    plans_en?: { name: string; tagline: string; price: string; unit: string; featured?: boolean; features: string[] }[];
     process: { title: string; desc: string }[];
+    process_en?: { title: string; desc: string }[];
     faqs: { q: string; a: string }[];
-    seo: { title: string; description: string };
+    faqs_en?: { q: string; a: string }[];
+    seo: { title: string; title_en?: string; description: string; description_en?: string; };
   };
   slug: string;
 }
@@ -38,8 +46,13 @@ const serviceImages: Record<string, string> = {
 };
 const imgSrc = serviceImages[data.icon];
 
-const url = `${site.url}/layanan/${slug}`;
-const serviceKeywordMap: Record<string, string[]> = {
+const url = lang === 'en' ? `${site.url}/en/layanan/${slug}` : `${site.url}/layanan/${slug}`;
+const serviceKeywordMap: Record<string, string[]> = lang === 'en' ? {
+  'website':     ['website development services', 'web developer indonesia', 'landing page services', 'company profile services', 'e-commerce website development'],
+  'google-ads':  ['google ads services', 'google ads specialist', 'google advertising agency', 'search ads services', 'performance max indonesia', 'youtube ads agency'],
+  'meta-ads':    ['meta ads services', 'facebook ads services', 'instagram ads services', 'meta ads specialist', 'facebook advertising agency', 'instagram advertising agency'],
+  'konsultasi':  ['digital marketing consulting', 'digital marketing audit', 'online marketing consultant', 'digital marketing strategy'],
+} : {
   'website':     ['jasa pembuatan website', 'jasa website semarang', 'web developer indonesia', 'jasa landing page', 'jasa company profile', 'jasa e-commerce'],
   'google-ads':  ['jasa google ads', 'google ads specialist', 'jasa iklan google', 'jasa search ads', 'performance max indonesia', 'jasa youtube ads'],
   'meta-ads':    ['jasa meta ads', 'jasa facebook ads', 'jasa instagram ads', 'meta ads specialist', 'jasa iklan facebook', 'jasa iklan instagram'],
@@ -47,32 +60,32 @@ const serviceKeywordMap: Record<string, string[]> = {
 };
 const jsonLd = [
   serviceJsonLd({
-    name: data.seo.title,
-    description: data.seo.description,
+    name: lang === 'en' && data.seo.title_en ? data.seo.title_en : data.seo.title,
+    description: lang === 'en' && data.seo.description_en ? data.seo.description_en : data.seo.description,
     url,
     serviceType: data.eyebrow,
-    plans: data.plans.map(p => ({ name: p.name, price: p.price })),
+    plans: (lang === 'en' && data.plans_en ? data.plans_en : data.plans).map(p => ({ name: p.name, price: p.price })),
   }),
-  faqJsonLd(data.faqs),
+  faqJsonLd(lang === 'en' && data.faqs_en ? data.faqs_en : data.faqs),
   breadcrumbJsonLd([
-    { name: 'Beranda',    url: site.url },
-    { name: 'Layanan',    url: `${site.url}/#layanan` },
-    { name: data.eyebrow, url },
+    { name: lang === 'en' ? 'Home' : 'Beranda', url: lang === 'en' ? `${site.url}/en` : site.url },
+    { name: lang === 'en' ? 'Services' : 'Layanan', url: lang === 'en' ? `${site.url}/en#layanan` : `${site.url}/#layanan` },
+    { name: lang === 'en' && data.eyebrow_en ? data.eyebrow_en : data.eyebrow, url },
   ]),
 ];
 ---
 <BaseLayout
-  title={data.seo.title}
-  description={data.seo.description}
+  title={lang === 'en' && data.seo.title_en ? data.seo.title_en : data.seo.title}
+  description={lang === 'en' && data.seo.description_en ? data.seo.description_en : data.seo.description}
   active="layanan"
   jsonLd={jsonLd}
   keywords={serviceKeywordMap[slug] ?? [data.eyebrow.toLowerCase()]}
 >
   <ServiceHero
-    eyebrow={data.eyebrow}
-    title={data.title}
-    titleAccent={data.titleAccent}
-    desc={data.desc}
+    eyebrow={lang === 'en' && data.eyebrow_en ? data.eyebrow_en : data.eyebrow}
+    title={lang === 'en' && data.title_en ? data.title_en : data.title}
+    titleAccent={lang === 'en' && data.titleAccent_en ? data.titleAccent_en : data.titleAccent}
+    desc={lang === 'en' && data.desc_en ? data.desc_en : data.desc}
   >
     <!-- Ilustrasi per layanan dengan float animation (konsisten dengan beranda) -->
     <div slot="illustration" class="service-img-wrap">
@@ -83,10 +96,10 @@ const jsonLd = [
       </picture>
     </div>
   </ServiceHero>
-  <FeaturesGrid title={t('svc.features.title')} sub={t('svc.features.sub')} items={data.features} />
-  <PricingSection plans={data.plans} service={data.eyebrow} />
-  <ServiceProcess steps={data.process} />
-  <ServiceFAQ items={data.faqs} />
+  <FeaturesGrid title={t('svc.features.title')} sub={t('svc.features.sub')} items={lang === 'en' && data.features_en ? data.features_en : data.features} />
+  <PricingSection plans={lang === 'en' && data.plans_en ? data.plans_en : data.plans} service={data.eyebrow} />
+  <ServiceProcess steps={lang === 'en' && data.process_en ? data.process_en : data.process} />
+  <ServiceFAQ items={lang === 'en' && data.faqs_en ? data.faqs_en : data.faqs} />
   <ServiceCTA />
 </BaseLayout>
 

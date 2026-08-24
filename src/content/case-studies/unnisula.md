@@ -1,10 +1,15 @@
 ---
 brand: "Unnisula"
+brand_en: "Unnisula"
 metric: "6.000+ Mahasiswa Baru"
+metric_en: "6,000+ New Students"
 desc: "Kami membantu Unnisula mendatangkan lebih dari 6.000 pendaftar mahasiswa baru melalui empat pendekatan: redesign website yang lebih rapi dan fokus konversi, optimasi SEO sampai ranking halaman 1 Google, serta campaign Meta Ads dan Google Search Ads yang menjangkau calon mahasiswa se-Indonesia."
+desc_en: "We helped Unnisula attract over 6,000 new student applicants through four approaches: a neater, conversion-focused website redesign, SEO optimization to Google's page 1, and Meta Ads & Google Search Ads campaigns reaching prospective students across Indonesia."
 tags: ["Google Ads", "Meta Ads"]
+tags_en: ["Google Ads", "Meta Ads"]
 industry: "Education"
 period: "1 tahun"
+period_en: "1 year"
 cover: "/assets/case-study/daftarunissula.png"
 publishDate: 2026-04-15
 ---

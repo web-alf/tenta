@@ -243,7 +243,7 @@ export const SEWA_KEYWORDS = [
 ];
 
 // Section "Cocok untuk berbagai industri" — dipakai LP sewa-akun + 2 LP whitelist.
-export interface Industry { label: string; icon: string; tint: string }
+export interface Industry { label: string; iconId: string; tint: string }
 
 export const INDUSTRY_HEADING = {
   title: 'Cocok untuk berbagai industri',
@@ -252,10 +252,121 @@ export const INDUSTRY_HEADING = {
 
 // tint = warna dasar kartu (gradient lembut digenerate di komponen).
 export const INDUSTRIES: Industry[] = [
-  { label: 'Personal Care',   icon: '🧴', tint: '#E8F0FE' },
-  { label: 'Fashion Dewasa',  icon: '👗', tint: '#FCE7F3' },
-  { label: 'Kesehatan',       icon: '🩺', tint: '#E7F6EC' },
-  { label: 'Kecantikan',      icon: '💄', tint: '#F3E8FF' },
-  { label: 'Produk Dewasa',   icon: '📦', tint: '#FFF1E6' },
-  { label: 'NGO / Sosial',    icon: '🤝', tint: '#E6F4F7' },
+  { label: 'Personal Care',   iconId: 'bottle', tint: '#E8F0FE' },
+  { label: 'Fashion Dewasa',  iconId: 'shirt', tint: '#FCE7F3' },
+  { label: 'Kesehatan',       iconId: 'shield-cross', tint: '#E7F6EC' },
+  { label: 'Kecantikan',      iconId: 'sparkles', tint: '#F3E8FF' },
+  { label: 'Produk Dewasa',   iconId: 'box', tint: '#FFF1E6' },
+  { label: 'NGO / Sosial',    iconId: 'heart', tint: '#E6F4F7' },
+];
+
+export const SEWA_HERO_EN = {
+  eyebrow: 'Account Rental',
+  title: 'Keep Ads Running,',
+  titleAccent: 'Without Account Ban Drama.',
+  desc: 'Rent Premium Google & Meta Whitelist Accounts at Tentaklik. Get corporate-grade ad infrastructure with unlimited spending, lightning-fast reviews, and stable performance to scale up your business.',
+} as const;
+
+export const META_WL_EN: WhitelistInfo = {
+  key: 'meta',
+  title: 'Meta Ads Whitelist',
+  desc: 'Verified Facebook & Instagram ad accounts under the official Business Manager of a Meta partner.',
+  benefits: [
+    'Stable account, minimal risk of random restrictions',
+    'No daily spending limit — free to scale',
+    'No VAT applied',
+    'Can be used for all campaign types: Traffic, Leads, Conversions, Catalog, etc.',
+    'Appeal support through a direct line to the Meta team',
+    'Balance automatically transfers to a replacement account if disabled (terms & conditions apply)',
+  ],
+  requirements: [
+    'Have an active personal Facebook account',
+    'Have a Facebook Business Manager (BM)',
+    'Fan Page / Instagram account must be at least 7 days old with existing posts',
+    'Have a website with clear contact information (WhatsApp number / email)',
+    'The advertised product / service does not violate Meta policies',
+  ],
+};
+
+export const GOOGLE_WL_EN: WhitelistInfo = {
+  key: 'google',
+  title: 'Google Ads Whitelist',
+  desc: 'Google Ads account officially managed by Tentaklik, a Google Partner agency.',
+  benefits: [
+    'Lower suspension risk compared to regular personal Google Ads accounts',
+    'No maximum daily spending limit — suitable for large scale',
+    'Faster appeal process as it is directly connected to a Google Partner',
+    'Balance automatically transfers to a replacement account if disabled (terms & conditions apply)',
+    'Technical support by the Tentaklik team, professionals in Google Ads policies',
+  ],
+  requirements: [
+    'Have an active Gmail account',
+    'Have a live website / landing page',
+    'The advertised product / service does not violate Google Ads policies',
+  ],
+};
+
+export const FLOW_META_EN: FlowStep[] = [
+  { no: 1, tahap: 'Register dashboard account', aksi: 'Go to tentaklik.com and register an account with an active email' },
+  { no: 2, tahap: 'Fill out request form', aksi: 'Enter: Meta BM ID, Fan Page link, landing page link, product/service type' },
+  { no: 3, tahap: 'Data verification', aksi: 'The Tentaklik team verifies the BM ID and data completeness (max. 1–2 working hours)' },
+  { no: 4, tahap: 'Account active', aksi: 'The whitelist ad account appears in the client\'s Business Manager — ready to use' },
+  { no: 5, tahap: 'Top-up balance', aksi: 'Transfer to Tentaklik\'s bank / e-wallet + confirm via dashboard or WhatsApp' },
+  { no: 6, tahap: 'Start advertising', aksi: 'Create campaigns in Ads Manager as usual using the active whitelist account' },
+];
+
+export const FLOW_GOOGLE_EN: FlowStep[] = [
+  { no: 1, tahap: 'Register dashboard account', aksi: 'Go to tentaklik.com and register an account with an active Google email' },
+  { no: 2, tahap: 'Fill out request form', aksi: 'Enter: Google Ads Customer ID (if available), website/landing page URL, business category' },
+  { no: 3, tahap: 'MCC setup process', aksi: 'The Tentaklik team creates / links the account to the official MCC (estimated 1×24 working hours)' },
+  { no: 4, tahap: 'Account active', aksi: 'The Google Ads account appears in the client\'s dashboard — ready for top-up' },
+  { no: 5, tahap: 'Top-up balance', aksi: 'Transfer to Tentaklik\'s account + confirm — balance is credited within hours' },
+  { no: 6, tahap: 'Start advertising', aksi: 'Create campaigns in Google Ads according to your business needs' },
+];
+
+export const TOPUP_METHODS_EN: TopupMethod[] = [
+  { metode: 'Bank Transfer', cara: 'Transfer to Tentaklik\'s bank account → confirm via WhatsApp or dashboard with transfer receipt' },
+  { metode: 'E-Wallet (GoPay / OVO / DANA)', cara: 'Transfer to e-wallet number → confirm via WhatsApp with receipt' },
+  { metode: 'Direct Dashboard', cara: 'Login to Tentaklik dashboard → choose Topup menu → select method → follow instructions' },
+];
+
+export const SEWA_FAQS_EN: SewaFaq[] = [
+  { q: 'Is the whitelist account 100% safe from bans?', a: 'No. No account is immune to bans if it violates platform policies. Whitelist accounts are much more resistant to random restrictions, but if the running ads violate Meta or Google TOS, the account can still be disabled. Tentaklik helps with the appeal process for cases not caused by user violations.' },
+  { q: 'Can I have more than one whitelist account?', a: 'Yes. You can request more than one whitelist account according to your campaign needs.' },
+  { q: 'What if my old account is already linked to another whitelist provider?', a: 'For Meta: You need to use a clean new BM. For Google: existing accounts can be linked to Tentaklik\'s MCC, but must be unlinked from the previous provider\'s MCC first.' },
+  { q: 'Can I migrate campaigns from my old account to a Tentaklik whitelist account?', a: 'For Meta: Yes — campaigns already running in the old account can be moved to the whitelist account. For Google: existing accounts can be directly linked to Tentaklik\'s account.' },
+  { q: 'Is there a contract or long-term commitment?', a: 'Yes. If the account is unused for a month, it will be automatically revoked, and the client will be notified in advance by CS.' },
+  { q: 'Why is Tentaklik\'s top-up fee 4% while competitors have 3%?', a: 'Tentaklik positions its service at a slightly more premium level justified by: a free onboarding checklist, more personalized support (not a bot), and a specialized experience for NGO/foundation categories. Moreover, the main efficiency still comes from VAT savings, so clients still save compared to regular accounts.' },
+  { q: 'Is Tentaklik suitable for social organizations or foundations?', a: 'Very suitable. Tentaklik has direct experience accompanying social institutions running donation campaigns. We understand the needs of social content that often gets false-positive restrictions, and whitelist accounts provide extra protection for sensitive campaigns.' },
+  { q: 'How can I contact Tentaklik CS?', a: 'Tentaklik CS can be contacted via WhatsApp at the number listed on tentaklik.com. Operating hours: Monday–Sunday, 24 hours.' },
+  { q: 'Is there an auto top-up feature?', a: 'Currently, top-ups are done manually with confirmation via dashboard or WhatsApp. An auto top-up feature is under development.' },
+];
+
+export const SEWA_SEO_EN = {
+  title: 'Google & Meta Ads Whitelist Account Rental — Tentaklik',
+  description: 'Rent Google Ads & Meta Ads (Facebook & Instagram) whitelist ad accounts at Tentaklik: no spending limit, no VAT, anti random ban, and automatic balance transfer if disabled. Top-up fees start at 3%.',
+} as const;
+
+export const SEWA_KEYWORDS_EN = [
+  'rent ad account',
+  'rent facebook ads account',
+  'rent google ads account',
+  'meta whitelist account',
+  'google whitelist account',
+  'rent meta ads account',
+  'agency ads whitelist',
+];
+
+export const INDUSTRY_HEADING_EN = {
+  title: 'Suitable for various industries',
+  sub: 'Commonly used by advertisers in these industries:',
+} as const;
+
+export const INDUSTRIES_EN: Industry[] = [
+  { label: 'Personal Care',   iconId: 'bottle', tint: '#E8F0FE' },
+  { label: 'Adult Fashion',   iconId: 'shirt', tint: '#FCE7F3' },
+  { label: 'Healthcare',      iconId: 'shield-cross', tint: '#E7F6EC' },
+  { label: 'Beauty',          iconId: 'sparkles', tint: '#F3E8FF' },
+  { label: 'Adult Products',  iconId: 'box', tint: '#FFF1E6' },
+  { label: 'NGO / Social',    iconId: 'heart', tint: '#E6F4F7' },
 ];

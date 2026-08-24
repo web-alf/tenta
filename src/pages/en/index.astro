@@ -23,14 +23,14 @@ const services = await getCollection('services');
 const serviceItems = services
   .sort((a, b) => a.id.localeCompare(b.id))
   .map(s => ({
-    name: s.data.seo.title,
-    url: `${site.url}/layanan/${s.id}`,
-    description: s.data.seo.description,
+    name: lang === 'en' && s.data.seo.title_en ? s.data.seo.title_en : s.data.seo.title,
+    url: `${site.url}/en/layanan/${s.id}`,
+    description: lang === 'en' && s.data.seo.description_en ? s.data.seo.description_en : s.data.seo.description,
   }));
 
 const jsonLd = [
-  faqJsonLd(faqs.map(f => ({ q: f.data.q, a: f.data.a }))),
-  itemListJsonLd(serviceItems, 'Layanan Digital Marketing Tentaklik'),
+  faqJsonLd(faqs.map(f => ({ q: lang === 'en' && f.data.q_en ? f.data.q_en : f.data.q, a: lang === 'en' && f.data.a_en ? f.data.a_en : f.data.a }))),
+  itemListJsonLd(serviceItems, 'Tentaklik Digital Marketing Services'),
 ];
 
 ---
@@ -41,15 +41,15 @@ const jsonLd = [
   preloadHeroSrc="/assets/kraken-hero-560.avif"
   jsonLd={jsonLd}
   keywords={[
-    'jasa digital marketing semarang',
-    'agensi digital marketing semarang',
-    'jasa pembuatan website semarang',
-    'jasa google ads',
-    'jasa meta ads',
-    'jasa facebook ads',
-    'jasa instagram ads',
-    'konsultan digital marketing',
-    'agensi iklan online indonesia',
+    'digital marketing agency semarang',
+    'semarang digital marketing',
+    'website development agency indonesia',
+    'google ads agency',
+    'meta ads agency',
+    'facebook ads services',
+    'instagram ads services',
+    'digital marketing consultant',
+    'online advertising agency indonesia',
     'tentaklik',
   ]}
 >

@@ -3,80 +3,130 @@
     "id": "1",
     "slug": "website-developer",
     "title": "Website Developer",
+    "title_en": "Website Developer",
     "type": "Full-time",
+    "type_en": "Full-time",
     "location": "Jakarta / Remote",
+    "location_en": "Jakarta / Remote",
     "level": "Mid-level",
     "tags": ["React", "Next.js", "Tailwind", "WordPress"],
     "summary": "Bangun website klien yang cepat, rapi, dan conversion-ready. Mulai dari landing page sampai e-commerce.",
+    "summary_en": "Build fast, neat, and conversion-ready client websites. From landing pages to e-commerce.",
     "requirements": [
       "2+ tahun pengalaman frontend (React/Next.js)",
       "Familiar dengan WordPress, Webflow, atau headless CMS",
       "Memahami SEO technical & Core Web Vitals",
       "Bisa bekerja dengan designer & marketer secara kolaboratif"
+    ],
+    "requirements_en": [
+      "2+ years of frontend experience (React/Next.js)",
+      "Familiar with WordPress, Webflow, or headless CMS",
+      "Understanding of technical SEO & Core Web Vitals",
+      "Able to work collaboratively with designers & marketers"
     ]
   },
   {
     "id": "2",
     "slug": "meta-advertiser",
     "title": "Meta Ads Specialist",
+    "title_en": "Meta Ads Specialist",
     "type": "Full-time",
+    "type_en": "Full-time",
     "location": "Jakarta / Remote",
+    "location_en": "Jakarta / Remote",
     "level": "Mid-level",
     "tags": ["Meta Ads", "Facebook", "Instagram", "Pixel"],
     "summary": "Setup, optimasi, dan scaling kampanye Meta Ads untuk brand klien — dari awareness sampai sales.",
+    "summary_en": "Setup, optimize, and scale Meta Ads campaigns for client brands — from awareness to sales.",
     "requirements": [
       "Pengalaman 2+ tahun handle budget iklan Meta minimal Rp50jt/bulan",
       "Mahir setup Pixel, CAPI, dan custom audience",
       "Bisa analisa funnel dan CAC/LTV",
       "Update sama policy & best practice Meta"
+    ],
+    "requirements_en": [
+      "2+ years experience handling Meta ad budgets of at least IDR 50m/month",
+      "Proficient in setting up Pixel, CAPI, and custom audiences",
+      "Able to analyze funnels and CAC/LTV",
+      "Up-to-date with Meta policies & best practices"
     ]
   },
   {
     "id": "3",
     "slug": "google-advertiser",
     "title": "Google Ads Specialist",
+    "title_en": "Google Ads Specialist",
     "type": "Full-time",
+    "type_en": "Full-time",
     "location": "Jakarta / Remote",
+    "location_en": "Jakarta / Remote",
     "level": "Mid-level",
     "tags": ["Google Ads", "Search", "Performance Max", "GA4"],
     "summary": "Bangun & optimasi campaign Google Ads — Search, Display, PMax — dengan tracking yang rapi.",
+    "summary_en": "Build & optimize Google Ads campaigns — Search, Display, PMax — with neat tracking.",
     "requirements": [
       "Pengalaman 2+ tahun Google Ads & GA4",
       "Sertifikasi Google Ads (preferred)",
       "Mahir keyword research, bidding strategy & conversion tracking",
       "Familiar dengan GTM dan attribution modeling"
+    ],
+    "requirements_en": [
+      "2+ years experience in Google Ads & GA4",
+      "Google Ads Certification (preferred)",
+      "Proficient in keyword research, bidding strategy & conversion tracking",
+      "Familiar with GTM and attribution modeling"
     ]
   },
   {
     "id": "4",
     "slug": "tiktok-advertiser",
     "title": "TikTok Ads Specialist",
+    "title_en": "TikTok Ads Specialist",
     "type": "Full-time",
+    "type_en": "Full-time",
     "location": "Jakarta / Remote",
+    "location_en": "Jakarta / Remote",
     "level": "Junior – Mid",
     "tags": ["TikTok Ads", "Spark Ads", "Creative", "UGC"],
     "summary": "Garap kampanye TikTok Ads — dari spark ads sampai creative testing dengan velocity tinggi.",
+    "summary_en": "Handle TikTok Ads campaigns — from spark ads to high-velocity creative testing.",
     "requirements": [
       "Minimal 1 tahun pengalaman TikTok Ads Manager",
       "Punya sense untuk creative & trend TikTok",
       "Bisa colab sama content creator & video editor",
       "Suka eksperimen dan iteratif"
+    ],
+    "requirements_en": [
+      "Minimum 1 year experience with TikTok Ads Manager",
+      "Have a sense for TikTok creatives & trends",
+      "Able to collaborate with content creators & video editors",
+      "Love to experiment and iterate"
     ]
   },
   {
     "id": "5",
     "slug": "customer-specialist",
     "title": "Customer Specialist",
+    "title_en": "Customer Specialist",
     "type": "Full-time",
+    "type_en": "Full-time",
     "location": "Jakarta",
+    "location_en": "Jakarta",
     "level": "Junior",
     "tags": ["Communication", "CRM", "Reporting"],
     "summary": "Jadi jembatan utama antara klien dan tim internal — pastikan ekspektasi rapi & komunikasi mengalir.",
+    "summary_en": "Be the main bridge between clients and the internal team — ensure clear expectations & fluid communication.",
     "requirements": [
       "Pengalaman 1+ tahun di customer success / account handling",
       "Komunikasi tulis & lisan rapi (Bahasa & English basic)",
       "Detail-oriented & terbiasa pakai CRM atau spreadsheet rapih",
       "Sabar, empatik, dan solutif"
+    ],
+    "requirements_en": [
+      "1+ years experience in customer success / account handling",
+      "Neat written & spoken communication (Indonesian & basic English)",
+      "Detail-oriented & accustomed to using CRMs or neat spreadsheets",
+      "Patient, empathetic, and solution-oriented"
     ]
   }
 ]

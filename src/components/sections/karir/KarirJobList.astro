@@ -3,25 +3,28 @@ import ArrowRight from '../../icons/ArrowRight.astro';
 import { getCollection } from 'astro:content';
 import { waLink } from '@data/site';
 
+import { getLang } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+
 const jobsCol = await getCollection('jobs');
 const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
 ---
 <section id="lowongan" style="background:var(--bg-warm);">
   <div class="container">
-    <h2 class="section-title">Posisi yang Dibuka</h2>
-    <p class="section-sub" style="margin-bottom:40px;">{jobs.length} posisi sedang aktif kami buka. Klik untuk detail dan apply.</p>
+    <h2 class="section-title">{lang === 'en' ? 'Open Positions' : 'Posisi yang Dibuka'}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{jobs.length} {lang === 'en' ? 'active positions available. Click for details and to apply.' : 'posisi sedang aktif kami buka. Klik untuk detail dan apply.'}</p>
     <div style="display:flex;flex-direction:column;gap:14px;max-width:980px;margin:0 auto;">
       {jobs.map(j => (
         <div class="job-card reveal" data-job-card>
           <button class="job-card-head" type="button" aria-expanded="false" data-job-toggle>
             <div style="flex:1;text-align:left;">
               <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px;">
-                <h3 style="font-size:20px;margin:0;">{j.data.title}</h3>
-                <span class="job-pill job-pill-orange">{j.data.type}</span>
-                <span class="job-pill">{j.data.location}</span>
+                <h3 style="font-size:20px;margin:0;">{lang === 'en' && j.data.title_en ? j.data.title_en : j.data.title}</h3>
+                <span class="job-pill job-pill-orange">{lang === 'en' && j.data.type_en ? j.data.type_en : j.data.type}</span>
+                <span class="job-pill">{lang === 'en' && j.data.location_en ? j.data.location_en : j.data.location}</span>
                 <span class="job-pill">{j.data.level}</span>
               </div>
-              <p style="font-size:14.5px;color:var(--ink-500);margin:0;">{j.data.summary}</p>
+              <p style="font-size:14.5px;color:var(--ink-500);margin:0;">{lang === 'en' && j.data.summary_en ? j.data.summary_en : j.data.summary}</p>
             </div>
             <span class="job-card-toggle" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -34,16 +37,16 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;">
               {j.data.tags.map(t => <span class="job-tag">{t}</span>)}
             </div>
-            <h4 style="font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink-700);">Yang kami cari:</h4>
+            <h4 style="font-size:14px;font-weight:700;margin-bottom:10px;color:var(--ink-700);">{lang === 'en' ? 'What we are looking for:' : 'Yang kami cari:'}</h4>
             <ul class="job-req-list">
-              {j.data.requirements.map(r => <li>{r}</li>)}
+              {(lang === 'en' && j.data.requirements_en ? j.data.requirements_en : j.data.requirements).map(r => <li>{r}</li>)}
             </ul>
             <div style="display:flex;gap:10px;margin-top:22px;flex-wrap:wrap;">
               <a href="#apply" class="btn btn-primary" data-apply-job={j.data.title}>
-                Apply Posisi Ini <ArrowRight size={14} />
+                {lang === 'en' ? 'Apply for this Position' : 'Apply Posisi Ini'} <ArrowRight size={14} />
               </a>
               <a href={waLink(`Halo Tentaklik, saya tertarik dengan posisi ${j.data.title}`)} target="_blank" rel="noopener noreferrer" class="btn btn-wa">
-                Tanya via WhatsApp
+                {lang === 'en' ? 'Ask via WhatsApp' : 'Tanya via WhatsApp'}
               </a>
             </div>
           </div>

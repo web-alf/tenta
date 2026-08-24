@@ -33,11 +33,11 @@ const cases = allCases
           <!-- Content -->
           <div style="padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1;">
             <div style="display:flex;gap:6px;flex-wrap:wrap;">
-              {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+              {(lang === 'en' && c.data.tags_en ? c.data.tags_en : c.data.tags).map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
             </div>
-            <h3 style="font-size:18px;margin:0;">{c.data.brand}</h3>
-            <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
-            <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.6;">{c.data.desc}</p>
+            <h3 style="font-size:18px;margin:0;">{lang === 'en' && c.data.brand_en ? c.data.brand_en : c.data.brand}</h3>
+            <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{lang === 'en' && c.data.metric_en ? c.data.metric_en : c.data.metric}</div>
+            <p style="font-size:14px;color:var(--ink-500);margin:0;line-height:1.6;">{lang === 'en' && c.data.desc_en ? c.data.desc_en : c.data.desc}</p>
           </div>
         </div>
       ))}

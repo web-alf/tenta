@@ -14,10 +14,10 @@ const sorted = faqs.sort((a, b) => Number(a.id) - Number(b.id));
       {sorted.map((f, i) => (
         <details class="faq-item" open={i === 0}>
           <summary class="faq-q" style="cursor:pointer;list-style:none;">
-            <span>{f.data.q}</span>
+            <span>{lang === 'en' && f.data.q_en ? f.data.q_en : f.data.q}</span>
             <span class="faq-toggle" aria-hidden="true">+</span>
           </summary>
-          <div class="faq-a" style="max-height:none;margin-top:12px;">{f.data.a}</div>
+          <div class="faq-a" style="max-height:none;margin-top:12px;">{lang === 'en' && f.data.a_en ? f.data.a_en : f.data.a}</div>
         </details>
       ))}
     </div>

@@ -15,7 +15,14 @@ interface Props {
 const { lang: propLang } = Astro.props;
 const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
-const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
+const L = (path: string) => {
+  if (lang === 'en') {
+    if (path === '/') return '/en';
+    if (path.startsWith('/#')) return `/en${path.substring(1)}`;
+    return `/en${path}`;
+  }
+  return path || '/';
+};
 ---
 <footer class="footer">
   <div class="container footer-grid">
@@ -55,7 +62,7 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
     <div>
       <h4>{t('footer.kontak')}</h4>
       <ul>
-        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> <a href={waLink('Halo Tentaklik! Saya ingin menanyakan lebih lanjut mengenai layanan digital marketing Anda. Bisa bantu saya?')} target="_blank" rel="noopener noreferrer" class="footer-wa-link">{site.phone}</a></li>
+        <li style="display:flex;align-items:center;gap:8px;"><WhatsApp size={14} /> <a href={waLink(lang === 'en' ? 'Hi Tentaklik! I would like to inquire further about your digital marketing services. Can you help?' : 'Halo Tentaklik! Saya ingin menanyakan lebih lanjut mengenai layanan digital marketing Anda. Bisa bantu saya?')} target="_blank" rel="noopener noreferrer" class="footer-wa-link">{site.phone}</a></li>
         <li style="display:flex;align-items:center;gap:8px;"><Email size={14} /> {site.email}</li>
         <li style="display:flex;align-items:center;gap:8px;"><Pin size={14} /> {site.address}</li>
       </ul>

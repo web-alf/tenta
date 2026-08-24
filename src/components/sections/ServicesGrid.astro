@@ -6,9 +6,9 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
 import ArrowRight from '../icons/ArrowRight.astro';
 
 const services = [
-  { title: 'Website Development',           desc: t('svcgrid.website.desc'), slug: 'website',     icon: 'web' },
-  { title: 'Sewa Akun',                     desc: t('svcgrid.sewaAkun.desc'), slug: 'sewa-akun', icon: 'shield' },
-  { title: 'Konsultasi Digital Marketing',  desc: t('svcgrid.konsultasi.desc'), slug: 'konsultasi', icon: 'konsul' },
+  { title: lang === 'en' ? 'Website Development' : 'Website Development',           desc: t('svcgrid.website.desc'), slug: 'website',     icon: 'web' },
+  { title: lang === 'en' ? 'Account Rental' : 'Sewa Akun',                     desc: t('svcgrid.sewaAkun.desc'), slug: 'sewa-akun', icon: 'shield' },
+  { title: lang === 'en' ? 'Digital Marketing Consulting' : 'Konsultasi Digital Marketing',  desc: t('svcgrid.konsultasi.desc'), slug: 'konsultasi', icon: 'konsul' },
 ] as const;
 ---
 <section id="layanan">

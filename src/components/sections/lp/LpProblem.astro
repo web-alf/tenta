@@ -15,7 +15,15 @@ const { heading, sub, items } = Astro.props;
     <div class="lp-problem-grid">
       {items.map((p) => (
         <article class="lp-problem-card reveal">
-          <span class="lp-problem-icon" aria-hidden="true">{p.icon}</span>
+          <span class="lp-problem-icon" aria-hidden="true">
+            {(() => {
+              if (p.iconId === 'ban') return <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="m4.9 4.9 14.2 14.2" stroke="currentColor" stroke-width="2"/></svg>;
+              if (p.iconId === 'clock') return <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>;
+              if (p.iconId === 'trending-down') return <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none"><path d="M22 17L13.5 8.5 8.5 13.5 2 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 17h6v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>;
+              if (p.iconId === 'help-circle') return <svg width="1em" height="1em" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>;
+              return null;
+            })()}
+          </span>
           <h3 class="lp-problem-title">{p.title}</h3>
           <p class="lp-problem-desc">{p.desc}</p>
         </article>

@@ -20,46 +20,46 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const url = `${site.url}/partner/${entry.id}`;
+const url = lang === 'en' ? `${site.url}/en/partner/${entry.id}` : `${site.url}/partner/${entry.id}`;
 const publishedIso = entry.data.publishDate.toISOString();
 const jsonLd = [
   breadcrumbJsonLd([
-    { name: tr('crumb.beranda'), url: site.url },
-    { name: tr('nav.partner'),   url: `${site.url}/partner` },
-    { name: entry.data.brand, url },
+    { name: tr('crumb.beranda'), url: lang === 'en' ? `${site.url}/en` : site.url },
+    { name: tr('nav.partner'),   url: lang === 'en' ? `${site.url}/en/partner` : `${site.url}/partner` },
+    { name: entry.data.brand_en ?? entry.data.brand, url },
   ]),
   articleJsonLd({
-    title: `${entry.data.brand} — ${entry.data.metric}`,
-    description: entry.data.desc,
+    title: `${entry.data.brand_en ?? entry.data.brand} — ${entry.data.metric_en ?? entry.data.metric}`,
+    description: entry.data.desc_en ?? entry.data.desc,
     url,
     image: entry.data.cover,
     datePublished: entry.data.publishDate,
-    section: entry.data.industry ?? 'Case Study',
-    keywords: [...entry.data.tags, entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
+    section: entry.data.industry_en ?? entry.data.industry ?? 'Case Study',
+    keywords: [...(entry.data.tags_en ?? entry.data.tags), entry.data.brand_en ?? entry.data.brand, 'case study', 'digital marketing', 'tentaklik'],
   }),
 ];
-const metaTitle = `${entry.data.brand} — ${entry.data.metric} | Partner Tentaklik`;
+const metaTitle = lang === 'en' ? `${entry.data.brand_en ?? entry.data.brand} — ${entry.data.metric_en ?? entry.data.metric} | Tentaklik Partner` : `${entry.data.brand} — ${entry.data.metric} | Partner Tentaklik`;
 ---
 <BaseLayout
   title={metaTitle}
-  description={entry.data.desc}
+  description={entry.data.desc_en ?? entry.data.desc}
   active="case"
   jsonLd={jsonLd}
   image={entry.data.cover ?? site.defaultOgImage}
   pageType="article"
   publishedTime={publishedIso}
   modifiedTime={publishedIso}
-  keywords={[...entry.data.tags, entry.data.brand.toLowerCase(), 'case study', 'tentaklik']}
+  keywords={[...(entry.data.tags_en ?? entry.data.tags), (entry.data.brand_en ?? entry.data.brand).toLowerCase(), 'case study', 'tentaklik']}
 >
   <section style="padding-top:56px;padding-bottom:24px;background:var(--bg-warm);">
     <div class="container" style="max-width:820px;">
       <a href={L('/partner')} style="font-size:14px;color:var(--orange-600);">{tr('partner.back')}</a>
       <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;margin-bottom:18px;">
-        {entry.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+        {(entry.data.tags_en ?? entry.data.tags).map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
       </div>
-      <h1 style="font-size:42px;margin-bottom:14px;">{entry.data.brand}</h1>
-      <div style="font-size:32px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">{entry.data.metric}</div>
-      <p style="font-size:17px;color:var(--ink-500);">{entry.data.desc}</p>
+      <h1 style="font-size:42px;margin-bottom:14px;">{entry.data.brand_en ?? entry.data.brand}</h1>
+      <div style="font-size:32px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;margin-bottom:14px;">{entry.data.metric_en ?? entry.data.metric}</div>
+      <p style="font-size:17px;color:var(--ink-500);">{entry.data.desc_en ?? entry.data.desc}</p>
     </div>
   </section>
 

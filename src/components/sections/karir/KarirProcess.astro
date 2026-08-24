@@ -1,5 +1,13 @@
 ---
-const steps = [
+import { getLang } from '@i18n/utils';
+const lang = getLang(Astro.currentLocale);
+
+const steps = lang === 'en' ? [
+  { n: '01', t: 'Submit Application',        d: 'Fill out the form below or send CV via email/WhatsApp.' },
+  { n: '02', t: 'Screening + Interview', d: 'HR call (30 minutes) to get to know you and culture fit.' },
+  { n: '03', t: 'Technical / Case Study', d: 'Small task based on role. Real-world, not a trap.' },
+  { n: '04', t: 'Final & Offering',      d: 'Talk directly with founders + offering discussion.' },
+] : [
   { n: '01', t: 'Submit Lamaran',        d: 'Isi form di bawah atau kirim CV via email/WhatsApp.' },
   { n: '02', t: 'Screening + Interview', d: 'HR call (30 menit) untuk kenalan dan culture fit.' },
   { n: '03', t: 'Technical / Case Study', d: 'Tugas kecil sesuai role. Real-world, bukan jebakan.' },
@@ -8,8 +16,8 @@ const steps = [
 ---
 <section id="proses">
   <div class="container">
-    <h2 class="section-title">Proses Rekrutmen</h2>
-    <p class="section-sub" style="margin-bottom:40px;">Cepat, transparan, dan respect waktu kamu.</p>
+    <h2 class="section-title">{lang === 'en' ? 'Recruitment Process' : 'Proses Rekrutmen'}</h2>
+    <p class="section-sub" style="margin-bottom:40px;">{lang === 'en' ? 'Fast, transparent, and respects your time.' : 'Cepat, transparan, dan respect waktu kamu.'}</p>
     <div style="display:grid;grid-template-columns:repeat(4, 1fr);gap:16px;max-width:1100px;margin:0 auto;">
       {steps.map(s => (
         <div class="process-step reveal">

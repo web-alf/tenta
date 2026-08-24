@@ -10,8 +10,9 @@ import { site } from '@data/site';
 import { getCollection } from 'astro:content';
 
 const jobs = await getCollection('jobs');
-const url = `${site.url}/karir`;
+const url = `${site.url}/en/karir`;
 const datePosted = new Date().toISOString().slice(0, 10);
+const lang = 'en';
 
 const jsonLd = [
   breadcrumbJsonLd([
@@ -19,8 +20,8 @@ const jsonLd = [
     { name: 'Karir', url },
   ]),
   ...jobs.map(j => jobPostingJsonLd({
-    title: j.data.title,
-    description: `${j.data.summary} Persyaratan: ${j.data.requirements.join('; ')}.`,
+    title: lang === 'en' && j.data.title_en ? j.data.title_en : j.data.title,
+    description: `${lang === 'en' && j.data.summary_en ? j.data.summary_en : j.data.summary} Requirements: ${(lang === 'en' && j.data.requirements_en ? j.data.requirements_en : j.data.requirements).join('; ')}.`,
     employmentType: j.data.type,
     location: j.data.location,
     datePosted,
@@ -31,25 +32,25 @@ const jsonLd = [
 ];
 ---
 <BaseLayout
-  title="Karir di Tentaklik — Lowongan Digital Marketing & Web Developer"
-  description="Lowongan kerja di Tentaklik: Web Developer, Meta Ads Specialist, Google Ads Specialist, TikTok Ads, dan Customer Specialist. Gabung tim agensi digital marketing yang serius soal hasil."
+  title="Careers at Tentaklik — Digital Marketing & Web Developer Jobs"
+  description="Job openings at Tentaklik: Web Developer, Meta Ads Specialist, Google Ads Specialist, TikTok Ads, and Customer Specialist. Join a digital marketing agency team that is serious about results."
   active="karir"
   jsonLd={jsonLd}
-  keywords={['lowongan kerja tentaklik', 'karir digital marketing', 'lowongan web developer semarang', 'lowongan meta ads', 'lowongan google ads specialist', 'karir agensi digital']}
+  keywords={['tentaklik job openings', 'digital marketing careers', 'web developer jobs indonesia', 'meta ads jobs', 'google ads specialist jobs', 'digital agency careers']}
 >
   <section style="padding-top:56px;padding-bottom:48px;background:var(--bg-warm);position:relative;overflow:hidden;">
     <div class="container" style="display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;">
       <div>
-        <span class="eyebrow">Karir</span>
+        <span class="eyebrow">Careers</span>
         <h1 style="font-size:48px;margin-top:18px;margin-bottom:18px;">
-          Gabung jadi <span style="color:var(--orange-500);">tentakel</span> baru di Tentaklik.
+          Join as a new <span style="color:var(--orange-500);">tentacle</span> at Tentaklik.
         </h1>
         <p style="font-size:17px;color:var(--ink-500);max-width:540px;">
-          Kami sedang berkembang dan butuh orang-orang yang serius soal craft. Tim kecil, dampak besar — kamu bukan sekadar resource, tapi partner yang ikut bentuk arah Tentaklik.
+          We are growing and need people who are serious about their craft. Small team, big impact — you're not just a resource, but a partner shaping Tentaklik's direction.
         </p>
         <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
-          <a href="#lowongan" class="btn btn-primary">Lihat Lowongan <ArrowRight size={14} /></a>
-          <a href="#proses" class="btn btn-ghost">Cara Apply</a>
+          <a href="#lowongan" class="btn btn-primary">View Openings <ArrowRight size={14} /></a>
+          <a href="#proses" class="btn btn-ghost">How to Apply</a>
         </div>
       </div>
       <div class="kraken-float" style="width:100%;max-width:560px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
@@ -87,10 +88,10 @@ const jsonLd = [
     <div class="container">
       <div class="cta-banner reveal" style="background:var(--orange-500);">
         <div style="flex:1;position:relative;z-index:1;">
-          <h3>Posisi yang kamu cari belum ada?</h3>
-          <p style="margin-top:8px;font-size:15px;opacity:0.95;">Tetap kirim CV kamu — kalau cocok, kami simpan untuk peluang berikutnya.</p>
+          <h3>Can't find the position you're looking for?</h3>
+          <p style="margin-top:8px;font-size:15px;opacity:0.95;">Send us your CV anyway — if there's a fit, we'll keep it for future opportunities.</p>
         </div>
-        <a href="mailto:karir@tentaklik.com" class="btn btn-ghost">Kirim CV ke Kami <ArrowRight size={14} /></a>
+        <a href="mailto:karir@tentaklik.com" class="btn btn-ghost">Send Us Your CV <ArrowRight size={14} /></a>
       </div>
     </div>
   </section>

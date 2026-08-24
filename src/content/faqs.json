@@ -2,21 +2,29 @@
   {
     "id": "1",
     "q": "Apakah ada minimum budget untuk Google/Meta Ads?",
-    "a": "Idealnya Rp 10-15jt/bulan agar algoritma punya cukup data untuk learning. Tapi kami juga bisa diskusi opsi yang lebih kecil untuk awal."
+    "q_en": "Is there a minimum budget for Google/Meta Ads?",
+    "a": "Idealnya Rp 10-15jt/bulan agar algoritma punya cukup data untuk learning. Tapi kami juga bisa diskusi opsi yang lebih kecil untuk awal.",
+    "a_en": "Ideally Rp 10-15m/month so the algorithm has enough data for learning. But we can discuss smaller options to start with."
   },
   {
     "id": "2",
     "q": "Berapa lama sampai ada hasil terlihat?",
-    "a": "Search Ads bisa langsung dapat lead di minggu pertama. Meta dan PMax butuh 14-30 hari untuk lewat learning phase dan stabil."
+    "q_en": "How long until we see results?",
+    "a": "Search Ads bisa langsung dapat lead di minggu pertama. Meta dan PMax butuh 14-30 hari untuk lewat learning phase dan stabil.",
+    "a_en": "Search Ads can generate leads in the first week. Meta and PMax need 14-30 days to pass the learning phase and stabilize."
   },
   {
     "id": "3",
     "q": "Apakah akun ads milik klien atau Tentaklik?",
-    "a": "Akun selalu milik klien. Kami akses sebagai partner/manager — bisa di-revoke kapan saja, transparan 100%."
+    "q_en": "Is the ad account owned by the client or Tentaklik?",
+    "a": "Akun selalu milik klien. Kami akses sebagai partner/manager — bisa di-revoke kapan saja, transparan 100%.",
+    "a_en": "The account is always owned by the client. We access it as a partner/manager — can be revoked anytime, 100% transparent."
   },
   {
     "id": "4",
     "q": "Bagaimana sistem kontrak dan komitmen?",
-    "a": "Minimum 3 bulan agar optimasi punya runway. Setelah itu bulanan dan bisa cancel kapan saja tanpa penalty."
+    "q_en": "How does the contract and commitment work?",
+    "a": "Minimum 3 bulan agar optimasi punya runway. Setelah itu bulanan dan bisa cancel kapan saja tanpa penalty.",
+    "a_en": "Minimum 3 months to give the optimization a runway. After that, it is monthly and can be cancelled anytime without penalty."
   }
 ]

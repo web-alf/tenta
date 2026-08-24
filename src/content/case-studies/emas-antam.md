@@ -1,10 +1,15 @@
 ---
 brand: "Emas Antam"
+brand_en: "Antam Gold"
 metric: "500+ Transaksi"
+metric_en: "500+ Transactions"
 desc: "Kami membantu JualBeliAntam.com menghasilkan lebih dari 500 transaksi jual beli emas Antam melalui tiga pendekatan: redesign website yang bersih dan terpercaya, optimasi SEO untuk keyword bernilai tinggi, dan Google Search Ads yang menargetkan calon customer yang siap melakukan transaksi. Dalam transaksi jual beli emas, tampilan website adalah jaminan kepercayaan — dan kepercayaan adalah mata uang utama."
+desc_en: "We helped JualBeliAntam.com generate over 500 gold buying & selling transactions through three approaches: a clean and trusted website redesign, SEO optimization for high-value keywords, and Google Search Ads targeting ready-to-transact customers. In the gold trading business, a website's appearance is a guarantee of trust — and trust is the main currency."
 tags: ["Website", "Google Ads", "Meta Ads"]
+tags_en: ["Website", "Google Ads", "Meta Ads"]
 industry: "Investment"
 period: "10 bulan"
+period_en: "10 months"
 cover: "/assets/case-study/antam.png"
 publishDate: 2026-04-05
 ---

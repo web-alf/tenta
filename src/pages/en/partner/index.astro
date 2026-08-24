@@ -13,21 +13,21 @@ const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '
 const allCases = (await getCollection('caseStudies')).sort((a, b) =>
   b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
-const filters = [tr('partner.filter.all'), 'Website', 'Google Ads', 'Meta Ads', 'Konsultasi'];
+const filters = [tr('partner.filter.all'), 'Website', 'Google Ads', 'Meta Ads', 'Consulting'];
 
-const url = `${site.url}/partner`;
+const url = `${site.url}/en/partner`;
 const jsonLd = [
   breadcrumbJsonLd([
-    { name: tr('crumb.beranda'), url: site.url },
+    { name: tr('crumb.beranda'), url: `${site.url}/en` },
     { name: tr('nav.partner'), url },
   ]),
   itemListJsonLd(
     allCases.map(c => ({
-      name: `${c.data.brand} — ${c.data.metric}`,
-      url: `${site.url}/partner/${c.id}`,
-      description: c.data.desc,
+      name: `${c.data.brand_en ?? c.data.brand} — ${c.data.metric_en ?? c.data.metric}`,
+      url: `${site.url}/en/partner/${c.id}`,
+      description: c.data.desc_en ?? c.data.desc,
     })),
-    'Partner Tentaklik',
+    'Tentaklik Partners',
   ),
 ];
 
@@ -36,7 +36,7 @@ const seoTitle = lang === 'en'
   : 'Partner Tentaklik — Hasil Nyata Klien Digital Marketing';
 const seoDesc = lang === 'en'
   ? 'Brands & partners that grew with Tentaklik — real numbers, clear periods, and the strategy behind them.'
-  : 'Partner & brand yang tumbuh bareng Tentaklik: hasil nyata Google Ads, Meta Ads, dan website — angka sebenarnya, periode jelas, dan strategi di baliknya.';
+  : 'Partners & brands growing with Tentaklik: real results for Google Ads, Meta Ads, and websites — actual numbers, clear periods, and the strategy behind them.';
 ---
 <BaseLayout
   title={seoTitle}
@@ -67,32 +67,32 @@ const seoDesc = lang === 'en'
 
       <div id="cases-grid" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
         {allCases.map(c => (
-          <div class="card reveal case-card cs-card" data-tags={c.data.tags.join(',')} style="padding:0;overflow:hidden;">
+          <div class="card reveal case-card cs-card" data-tags={(c.data.tags_en ?? c.data.tags).join(',')} style="padding:0;overflow:hidden;">
             <!-- Cover -->
             <div class="cs-cover">
               {c.data.cover ? (
                 <picture>
                   <source type="image/avif" srcset={c.data.cover.replace('.png', '.avif')} />
                   <source type="image/webp" srcset={c.data.cover.replace('.png', '.webp')} />
-                  <img src={c.data.cover} alt={c.data.brand} loading="lazy" decoding="async" width="800" height="450" style="width:100%;height:100%;object-fit:cover;display:block;" />
+                  <img src={c.data.cover} alt={c.data.brand_en ?? c.data.brand} loading="lazy" decoding="async" width="800" height="450" style="width:100%;height:100%;object-fit:cover;display:block;" />
                 </picture>
               ) : (
                 <div style="width:100%;height:100%;background:repeating-linear-gradient(135deg, var(--orange-100), var(--orange-100) 8px, var(--orange-50) 8px, var(--orange-50) 16px);display:flex;align-items:center;justify-content:center;">
-                  <span style="font-family:'Inter Variable', 'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand}</span>
+                  <span style="font-family:'Inter Variable', 'Inter',sans-serif;font-size:12px;color:var(--orange-700);">{c.data.brand_en ?? c.data.brand}</span>
                 </div>
               )}
             </div>
             <!-- Content -->
             <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;">
               <div style="display:flex;justify-content:space-between;align-items:center;">
-                <span style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">{c.data.industry ?? ''}</span>
-                <span style="font-size:11px;color:var(--ink-500);">{c.data.period ?? ''}</span>
+                <span style="font-size:11px;color:var(--ink-500);text-transform:uppercase;letter-spacing:0.05em;font-weight:600;">{c.data.industry_en ?? c.data.industry ?? ''}</span>
+                <span style="font-size:11px;color:var(--ink-500);">{c.data.period_en ?? c.data.period ?? ''}</span>
               </div>
-              <h3 style="font-size:19px;margin:0;">{c.data.brand}</h3>
-              <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{c.data.metric}</div>
-              <p style="font-size:13.5px;color:var(--ink-500);flex:1;margin:0;">{c.data.desc}</p>
+              <h3 style="font-size:19px;margin:0;">{c.data.brand_en ?? c.data.brand}</h3>
+              <div style="font-size:22px;font-weight:800;color:var(--orange-600);font-family:'Plus Jakarta Sans Variable', 'Plus Jakarta Sans',sans-serif;">{c.data.metric_en ?? c.data.metric}</div>
+              <p style="font-size:13.5px;color:var(--ink-500);flex:1;margin:0;">{c.data.desc_en ?? c.data.desc}</p>
               <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;">
-                {c.data.tags.map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
+                {(c.data.tags_en ?? c.data.tags).map(t => <span style="font-size:11px;padding:4px 10px;background:var(--orange-100);color:var(--orange-700);border-radius:999px;font-weight:600;">{t}</span>)}
               </div>
             </div>
           </div>

@@ -17,9 +17,9 @@ const galeriImages = [
 ];
 
 const values = [
-  { icon: '🎯', title: 'Hasil > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
-  { icon: '🔍', title: 'Transparan',         desc: 'Akun ads milik klien, data terbuka, fee jelas dari awal.' },
-  { icon: '🤝', title: 'Long-term Partner',  desc: 'Bukan vendor sekali pakai — kami investasi di growth Anda.' },
+  { iconId: 'target', title: 'Results > Vanity',     desc: 'Yang penting konversi & ROI, bukan sekadar reach atau likes.' },
+  { iconId: 'search', title: 'Transparan',         desc: 'Akun iklan milik klien, data terbuka, fee clear dari awal.' },
+  { iconId: 'partner', title: 'Long-term Partner',  desc: 'Bukan vendor sekali putus — kami invest waktu untuk growth bisnis Anda.' },
 ];
 
 const team = [
@@ -91,7 +91,11 @@ const jsonLd = [
       <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:20px;">
         {values.map(v => (
           <div class="card reveal">
-            <div style="width:50px;height:50px;border-radius:14px;background:var(--orange-100);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;" aria-hidden="true">{v.icon}</div>
+            <div style="width:50px;height:50px;border-radius:14px;background:var(--orange-100);color:var(--orange-700);display:flex;align-items:center;justify-content:center;margin-bottom:14px;" aria-hidden="true">
+              {v.iconId === 'target' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>}
+              {v.iconId === 'search' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>}
+              {v.iconId === 'partner' && <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            </div>
             <h3 style="font-size:18px;margin-bottom:8px;">{v.title}</h3>
             <p style="font-size:14px;color:var(--ink-500);">{v.desc}</p>
           </div>

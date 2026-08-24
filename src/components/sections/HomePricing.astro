@@ -34,7 +34,7 @@ const detailHref = lang === 'en' ? '/en/layanan/sewa-akun' : '/layanan/sewa-akun
       {plans.map((p) => (
         <div class={`pricing-card reveal ${p.featured ? 'featured' : ''}`}>
           <div>
-            <h3 style="font-size:20px;">{p.name}</h3>
+            <h3 style="font-size:24px;margin-bottom:4px;">{p.name}</h3>
             {p.tagline && <p style="font-size:13px;color:var(--ink-500);margin-top:4px;">{p.tagline}</p>}
           </div>
           <div class="price">{p.price}<small> {p.unit}</small></div>
@@ -93,7 +93,7 @@ const detailHref = lang === 'en' ? '/en/layanan/sewa-akun' : '/layanan/sewa-akun
     display: flex; flex-wrap: wrap; justify-content: center;
     gap: 18px; max-width: 1240px; margin: 0 auto;
   }
-  .pricing-grid > :global(.pricing-card) { flex: 1 1 180px; max-width: 260px; }
+  .pricing-grid > :global(.pricing-card) { flex: 1 1 280px; max-width: 340px; }
   .pricing-detail-link { font-size: 14px; font-weight: 600; color: var(--orange-700); }
   @media (max-width: 760px) {
     .rental-divider { display: none; }

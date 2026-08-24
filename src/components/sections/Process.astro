@@ -4,10 +4,10 @@ const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
 
 const steps = [
-  { n: '01', icon: '🔍', title: t('proc.1.t'), desc: t('proc.1.d') },
-  { n: '02', icon: '📋', title: t('proc.2.t'), desc: t('proc.2.d') },
-  { n: '03', icon: '🚀', title: t('proc.3.t'), desc: t('proc.3.d') },
-  { n: '04', icon: '📊', title: t('proc.4.t'), desc: t('proc.4.d') },
+  { n: '01', iconId: 'search', title: t('proc.1.t'), desc: t('proc.1.d') },
+  { n: '02', iconId: 'clipboard', title: t('proc.2.t'), desc: t('proc.2.d') },
+  { n: '03', iconId: 'rocket', title: t('proc.3.t'), desc: t('proc.3.d') },
+  { n: '04', iconId: 'chart', title: t('proc.4.t'), desc: t('proc.4.d') },
 ];
 ---
 <section style="background:var(--bg-warm);">
@@ -20,7 +20,12 @@ const steps = [
           <span class="process-num">{s.n}</span>
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
             <h3 style="font-size:18px;">{s.title}</h3>
-            <span style="font-size:18px;" aria-hidden="true">{s.icon}</span>
+            <span style="font-size:18px;color:var(--orange-600);display:inline-flex;" aria-hidden="true">
+              {s.iconId === 'search' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>}
+              {s.iconId === 'clipboard' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 2H9a1 1 0 00-1 1v2a1 1 0 001 1h6a1 1 0 001-1V3a1 1 0 00-1-1z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {s.iconId === 'rocket' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+              {s.iconId === 'chart' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>}
+            </span>
           </div>
           <p style="font-size:13px;color:var(--ink-500);">{s.desc}</p>
         </div>

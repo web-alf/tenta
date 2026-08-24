@@ -88,3 +88,92 @@ export const DISCLAIMER_SECTIONS: DisclaimerSection[] = [
               <div class="callout callout-good"><strong>✅ Ada bagian yang bikin bingung?</strong> Jangan sungkan kontak kami langsung. Kami lebih prefer ngobrol jujur dari awal daripada ada yang ga jelas di tengah jalan.</div>`,
   },
 ];
+
+export const DISCLAIMER_HERO_EN = {
+  eyebrow: 'Disclaimer',
+  title: 'Tenta<span class="accent">Klik</span> Disclaimer',
+  lede: 'Before we start our collaboration, take 5 minutes to read this — so our expectations are aligned from the beginning.',
+  lastUpdated: '2026-05-05',
+};
+
+export const DISCLAIMER_SECTIONS_EN: DisclaimerSection[] = [
+  {
+    id: 'informasi-website',
+    num: '01',
+    title: 'Information on this Website',
+    contentHtml: `<p>All content on the <strong>tentaklik.com</strong> website — from service descriptions, case studies, to campaign result numbers — is compiled based on our team's real experience and historical data from past projects.</p>
+              <p>Even so, the content here is <strong>informative and general</strong> in nature. It may change at any time as our services, tools, or digital platform policies like Google and Meta evolve.</p>
+              <div class="callout callout-warn"><strong>⚠️ Important note:</strong> We always try to keep information up-to-date, but if there is a discrepancy between the content on the website and the latest service reality, <strong>the prevailing information is the latest updates provided directly by the Tentaklik team.</strong></div>`,
+  },
+  {
+    id: 'hasil-performa',
+    num: '02',
+    title: 'About Results & Ad Performance',
+    contentHtml: `<p>Tentaklik has helped many businesses scale up through digital marketing. The case studies we display are real results — and we are proud of them. But there is one important thing to understand:</p>
+              <p>The numbers in the case studies are actual results from clients with specific business conditions, markets, and timing. <strong>It is not a guarantee</strong> that your business will get exactly the same numbers.</p>
+              <ul>
+                <li>Ad performance is highly influenced by industry conditions, competitors, budget, and the quality of your own product</li>
+                <li>Google and Meta algorithms are constantly changing — we continuously adapt, but external factors remain beyond our control</li>
+                <li>Campaign results can differ across industries, cities, and even seasons</li>
+                <li>The KPIs we chase are always agreed upon together at the start — not arbitrary numbers from us</li>
+              </ul>
+              <div class="callout callout-good"><strong>💡 What we guarantee:</strong> a structured process, measurable strategies, transparent reporting, and a team that genuinely works hard for your business. The best results always come from two-way collaboration.</div>`,
+  },
+  {
+    id: 'kepemilikan-akun',
+    num: '03',
+    title: 'Account Ownership & Our Service Model',
+    contentHtml: `<p>Unlike general agencies, Tentaklik offers a service based on <strong>ad account rental</strong> — meaning your ads are run using Google Ads and Meta Ads accounts owned by Tentaklik, not new accounts in your name.</p>
+              <p>We chose this model because our accounts already have an established <strong>track record, trust score, and performance history</strong> in the eyes of Google and Meta algorithms — so campaigns can optimize faster compared to new accounts with a <em>cold start</em>.</p>
+              <ul>
+                <li>The ad accounts used are owned by Tentaklik — you are renting access and ad capacity</li>
+                <li>During the active collaboration period, the accounts and all running campaigns are fully managed by our team</li>
+                <li>If the collaboration ends, campaigns will be stopped and the accounts return to Tentaklik's full management</li>
+                <li>Campaign performance data (reports, numbers, insights) will still be provided to you transparently via a real-time dashboard</li>
+                <li>Your business information, products, and data we use for advertising purposes are treated as <em>confidential</em> — not shared with third parties</li>
+              </ul>
+              <div class="callout callout-warn"><strong>📌 Important:</strong> Because the accounts are owned by Tentaklik, campaign history <strong>cannot be transferred</strong> to your personal account if the collaboration ends. Make sure you understand this model before starting — if you have questions, ask us first before making a deal.</div>
+              <div class="callout callout-good"><strong>💡 Advantages of this model:</strong> You don't have to bother setting up accounts from scratch, you don't face a long <em>learning period</em>, and you can immediately leverage the reputation of <em>proven</em> accounts. It's more efficient and faster to run.</div>`,
+  },
+  {
+    id: 'platform-pihak-ketiga',
+    num: '04',
+    title: 'Third-Party Platform Services',
+    contentHtml: `<p>As a <strong>Google Partner</strong> and <strong>Meta Business Partner</strong>, Tentaklik operates using platforms owned by third parties. There are important things you need to understand:</p>
+              <ul>
+                <li>Google and Meta ad policies can change at any time and are beyond our control</li>
+                <li>Ad rejection or restriction by the platform is the decision of Google/Meta — not Tentaklik</li>
+                <li>Downtime or technical disruptions from the platform are not our responsibility, but we will always update you if it happens</li>
+                <li>Ad spend is billed directly to the client's account by Google/Meta — Tentaklik does not take a margin from your ad budget</li>
+              </ul>
+              <div class="callout callout-warn"><strong>📌 Ad budget:</strong> We highly recommend a minimum ad budget of <strong>Rp 10–15 million per month</strong> so the strategies we formulate can be executed optimally. Below that, the room for optimization becomes very limited.</div>`,
+  },
+  {
+    id: 'syarat-kerja-sama',
+    num: '05',
+    title: 'Terms & Expectations of Collaboration',
+    contentHtml: `<p>Tentaklik believes the best results are born from a mutually supportive collaboration — not a one-way relationship where you hand everything over and wait for a miracle.</p>
+              <ul>
+                <li>Minimum contract duration is <strong>3 months</strong> — digital optimization takes time, it's not instant magic</li>
+                <li>Clients must provide accurate business information as material for audits and strategies</li>
+                <li>Feedback and approval from the client are needed in the creative and copywriting execution process</li>
+                <li>Tentaklik reserves the right to reject projects that do not align with company values or violate platform policies</li>
+                <li>Significant changes in the scope of work will always be discussed and adjusted together</li>
+              </ul>`,
+  },
+  {
+    id: 'link-eksternal',
+    num: '06',
+    title: 'External Links & References',
+    contentHtml: `<p>The Tentaklik website may display links to external sources like articles or other platforms as additional references. We do not control the content of third-party websites and are <strong>not responsible</strong> for their content, accuracy, or privacy policies.</p>
+              <p>If there is information from an external source that makes you doubt, ask our team directly — it's free, and we are happy to help clarify.</p>`,
+  },
+  {
+    id: 'pembaruan',
+    num: '07',
+    title: 'Disclaimer Updates',
+    contentHtml: `<p>This disclaimer may be updated along with the development of services and applicable policies. We will inform you of any significant changes through this website by indicating the latest update date.</p>
+              <p>By continuing to use Tentaklik services after an update, you are considered to have read and agreed to the latest version of this disclaimer.</p>
+              <div class="callout callout-good"><strong>✅ Is there a confusing part?</strong> Don't hesitate to contact us directly. We prefer honest conversations from the start rather than unclarity midway.</div>`,
+  },
+];

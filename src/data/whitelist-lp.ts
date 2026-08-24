@@ -6,7 +6,7 @@ import type { Industry } from '@data/sewa-akun';
 import type { Lang } from '@i18n/utils';
 
 export interface WhyItem { iconId: 'stable' | 'comfortable' | 'scale' | 'tax' | 'priority' | 'expert' | 'protection'; title: string; desc: string }
-export interface LpProblem { icon: string; title: string; desc: string }
+export interface LpProblem { iconId: string; title: string; desc: string }
 export interface LpPhoto { src: string; alt: string; portrait?: boolean }
 export interface LpTestimonial { stars: number; text: string; name: string; role: string; initials: string; avatar: string; }
 
@@ -51,20 +51,20 @@ export type LpData = MetaLpData | GoogleLpData;
 // Kategori industri khusus 2 LP whitelist (beda dari sewa-akun). Bilingual.
 export const INDUSTRIES_LP: Record<Lang, Industry[]> = {
   id: [
-    { label: 'UMKM',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Produk Kecantikan',    icon: '💄', tint: '#F3E8FF' },
-    { label: 'Travel',               icon: '✈️', tint: '#E8F0FE' },
-    { label: 'Konsultan Pendidikan', icon: '🎓', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
-    { label: 'FnB / Kuliner',        icon: '🍽️', tint: '#E6F4F7' },
+    { label: 'UMKM',                 iconId: 'store', tint: '#FFF1E6' },
+    { label: 'Produk Kecantikan',    iconId: 'sparkles', tint: '#F3E8FF' },
+    { label: 'Travel',               iconId: 'plane', tint: '#E8F0FE' },
+    { label: 'Konsultan Pendidikan', iconId: 'graduation-cap', tint: '#E7F6EC' },
+    { label: 'Fashion',              iconId: 'shirt', tint: '#FCE7F3' },
+    { label: 'FnB / Kuliner',        iconId: 'utensils', tint: '#E6F4F7' },
   ],
   en: [
-    { label: 'SMEs',                 icon: '🏪', tint: '#FFF1E6' },
-    { label: 'Beauty Products',      icon: '💄', tint: '#F3E8FF' },
-    { label: 'Travel',               icon: '✈️', tint: '#E8F0FE' },
-    { label: 'Education Consultant', icon: '🎓', tint: '#E7F6EC' },
-    { label: 'Fashion',              icon: '👗', tint: '#FCE7F3' },
-    { label: 'F&B / Culinary',       icon: '🍽️', tint: '#E6F4F7' },
+    { label: 'SMEs',                 iconId: 'store', tint: '#FFF1E6' },
+    { label: 'Beauty Products',      iconId: 'sparkles', tint: '#F3E8FF' },
+    { label: 'Travel',               iconId: 'plane', tint: '#E8F0FE' },
+    { label: 'Education Consultant', iconId: 'graduation-cap', tint: '#E7F6EC' },
+    { label: 'Fashion',              iconId: 'shirt', tint: '#FCE7F3' },
+    { label: 'F&B / Culinary',       iconId: 'utensils', tint: '#E6F4F7' },
   ],
 };
 
@@ -104,10 +104,10 @@ export const META_LP: Record<Lang, MetaLpData> = {
     problemHeading: 'Saat scale, masalah Meta Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
-      { icon: '🚫', title: 'Akun kena restrict', desc: 'Akun personal/BM biasa rawan random restrict saat spending naik.' },
-      { icon: '⏳', title: 'Review lambat', desc: 'Iklan stuck "in review" berjam-jam — momentum campaign hilang.' },
-      { icon: '📉', title: 'Limit spending', desc: 'Limit harian bikin scale tersendat di momen paling penting.' },
-      { icon: '🤷', title: 'Eskalasi tak jelas', desc: 'Saat akun bermasalah, advertiser jalan sendirian tanpa jalur appeal.' },
+      { iconId: 'ban', title: 'Akun kena restrict', desc: 'Akun personal/BM biasa rawan random restrict saat spending naik.' },
+      { iconId: 'clock', title: 'Review lambat', desc: 'Iklan stuck "in review" berjam-jam — momentum campaign hilang.' },
+      { iconId: 'trending-down', title: 'Limit spending', desc: 'Limit harian bikin scale tersendat di momen paling penting.' },
+      { iconId: 'help-circle', title: 'Eskalasi tak jelas', desc: 'Saat akun bermasalah, advertiser jalan sendirian tanpa jalur appeal.' },
     ],
     benefitHeading: 'Yang kamu dapat dengan akun Meta Whitelist',
     benefits: [
@@ -167,10 +167,10 @@ export const META_LP: Record<Lang, MetaLpData> = {
     problemHeading: 'As you scale, Meta Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
-      { icon: '🚫', title: 'Account restricted', desc: 'Personal/regular BM accounts are prone to random restricts as spending grows.' },
-      { icon: '⏳', title: 'Slow review', desc: 'Ads stuck "in review" for hours — campaign momentum lost.' },
-      { icon: '📉', title: 'Spending limit', desc: 'Daily limits stall scaling at the most critical moment.' },
-      { icon: '🤷', title: 'Unclear escalation', desc: 'When an account has issues, advertisers are on their own with no appeal path.' },
+      { iconId: 'ban', title: 'Account restricted', desc: 'Personal/regular BM accounts are prone to random restricts as spending grows.' },
+      { iconId: 'clock', title: 'Slow review', desc: 'Ads stuck "in review" for hours — campaign momentum lost.' },
+      { iconId: 'trending-down', title: 'Spending limit', desc: 'Daily limits stall scaling at the most critical moment.' },
+      { iconId: 'help-circle', title: 'Unclear escalation', desc: 'When an account has issues, advertisers are on their own with no appeal path.' },
     ],
     benefitHeading: 'What you get with a Meta Whitelist account',
     benefits: [
@@ -233,10 +233,10 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     problemHeading: 'Saat scale, masalah Google Ads makin kompleks',
     problemSub: 'Hal-hal yang bikin advertiser kehilangan momentum:',
     problems: [
-      { icon: '🚫', title: 'Akun kena suspend', desc: 'Akun Google Ads personal rawan suspend saat budget naik cepat.' },
-      { icon: '⏳', title: 'Appeal berbelit', desc: 'Proses banding lama tanpa jalur langsung ke Google.' },
-      { icon: '📉', title: 'Batas spending', desc: 'Limit harian menghambat scale di kampanye yang sedang menang.' },
-      { icon: '🤷', title: 'Support minim', desc: 'Tidak ada pendampingan teknis yang paham kebijakan Google Ads.' },
+      { iconId: 'ban', title: 'Akun kena suspend', desc: 'Akun Google Ads personal rawan suspend saat budget naik cepat.' },
+      { iconId: 'clock', title: 'Appeal berbelit', desc: 'Proses banding lama tanpa jalur langsung ke Google.' },
+      { iconId: 'trending-down', title: 'Batas spending', desc: 'Limit harian menghambat scale di kampanye yang sedang menang.' },
+      { iconId: 'help-circle', title: 'Support minim', desc: 'Tidak ada pendampingan teknis yang paham kebijakan Google Ads.' },
     ],
     benefitHeading: 'Yang kamu dapat dengan akun Google Whitelist',
     benefits: [
@@ -296,10 +296,10 @@ export const GOOGLE_LP: Record<Lang, GoogleLpData> = {
     problemHeading: 'As you scale, Google Ads problems get more complex',
     problemSub: 'Things that make advertisers lose momentum:',
     problems: [
-      { icon: '🚫', title: 'Account suspended', desc: 'Personal Google Ads accounts are prone to suspension when budgets rise quickly.' },
-      { icon: '⏳', title: 'Convoluted appeals', desc: 'A long appeal process with no direct line to Google.' },
-      { icon: '📉', title: 'Spending cap', desc: 'Daily limits hold back scaling on campaigns that are winning.' },
-      { icon: '🤷', title: 'Minimal support', desc: 'No technical guidance from people who understand Google Ads policy.' },
+      { iconId: 'ban', title: 'Account suspended', desc: 'Personal Google Ads accounts are prone to suspension when budgets rise quickly.' },
+      { iconId: 'clock', title: 'Convoluted appeals', desc: 'A long appeal process with no direct line to Google.' },
+      { iconId: 'trending-down', title: 'Spending cap', desc: 'Daily limits hold back scaling on campaigns that are winning.' },
+      { iconId: 'help-circle', title: 'Minimal support', desc: 'No technical guidance from people who understand Google Ads policy.' },
     ],
     benefitHeading: 'What you get with a Google Whitelist account',
     benefits: [

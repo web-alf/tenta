@@ -1,39 +1,39 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { TERMS_SECTIONS, TERMS_HERO } from '@data/terms-sections';
+import { TERMS_SECTIONS_EN, TERMS_HERO_EN } from '@data/terms-sections';
 import { breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 
-const url = `${site.url}/ketentuan`;
+const url = `${site.url}/en/ketentuan`;
 const jsonLd = [
   breadcrumbJsonLd([
-    { name: 'Beranda', url: site.url },
-    { name: 'Ketentuan Layanan', url },
+    { name: 'Home', url: `${site.url}/en` },
+    { name: 'Terms of Service', url },
   ]),
 ];
 
-const lastUpdatedFmt = new Date(TERMS_HERO.lastUpdated).toLocaleDateString('id-ID', {
+const lastUpdatedFmt = new Date(TERMS_HERO_EN.lastUpdated).toLocaleDateString('en-US', {
   day: 'numeric', month: 'long', year: 'numeric',
 });
 ---
 <BaseLayout
-  title="Ketentuan Layanan — Tentaklik"
-  description="Ketentuan Layanan dan Kebijakan Privasi Tentaklik. Persetujuan, layanan, data, cookie, pembayaran, hak kekayaan intelektual, dan hak Anda."
+  title="Terms of Service — Tentaklik"
+  description="Tentaklik Terms of Service and Privacy Policy. Acceptance, services, data, cookies, payments, intellectual property rights, and your rights."
   jsonLd={jsonLd}
   noindex={false}
 >
   <section class="subpage-hero">
     <div class="container">
       <nav class="crumbs" aria-label="breadcrumb">
-        <a href="/">Beranda</a>
+        <a href="/en">Home</a>
         <span class="sep">›</span>
-        <span class="current">Ketentuan Layanan</span>
+        <span class="current">Terms of Service</span>
       </nav>
-      <h1 set:html={TERMS_HERO.title} />
-      <p class="lede">{TERMS_HERO.lede}</p>
+      <h1 set:html={TERMS_HERO_EN.title} />
+      <p class="lede">{TERMS_HERO_EN.lede}</p>
       <div class="meta">
         <span class="meta-dot" aria-hidden="true"></span>
-        Terakhir diperbarui: <strong>{lastUpdatedFmt}</strong>
+        Last updated: <strong>{lastUpdatedFmt}</strong>
       </div>
     </div>
   </section>
@@ -42,16 +42,16 @@ const lastUpdatedFmt = new Date(TERMS_HERO.lastUpdated).toLocaleDateString('id-I
     <div class="container">
       <div class="subpage-grid">
         <aside class="toc">
-          <h5>Daftar Isi</h5>
+          <h5>Table of Contents</h5>
           <ol>
-            {TERMS_SECTIONS.map(s => (
+            {TERMS_SECTIONS_EN.map(s => (
               <li><a href={`#${s.id}`}>{s.title}</a></li>
             ))}
           </ol>
         </aside>
 
         <div class="prose">
-          {TERMS_SECTIONS.map(s => (
+          {TERMS_SECTIONS_EN.map(s => (
             <section id={s.id}>
               <h2><span class="num">{s.num}</span>{s.title}</h2>
               <Fragment set:html={s.contentHtml} />

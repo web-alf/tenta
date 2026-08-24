@@ -10,45 +10,45 @@ import { getLang, useT } from '@i18n/utils';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import {
-  SEWA_HERO, META_WL, GOOGLE_WL, SEWA_PLANS_EN,
-  SEWA_FAQS, SEWA_SEO, SEWA_KEYWORDS,
-  INDUSTRIES, INDUSTRY_HEADING,
+  SEWA_HERO_EN, META_WL_EN, GOOGLE_WL_EN, SEWA_PLANS_EN,
+  SEWA_FAQS_EN, SEWA_SEO_EN, SEWA_KEYWORDS_EN,
+  INDUSTRIES_EN, INDUSTRY_HEADING_EN,
   type WhitelistInfo,
 } from '@data/sewa-akun';
 
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
 
-const url = `${site.url}/layanan/sewa-akun`;
-const wlBlocks: WhitelistInfo[] = [META_WL, GOOGLE_WL];
+const url = `${site.url}/en/layanan/sewa-akun`;
+const wlBlocks: WhitelistInfo[] = [META_WL_EN, GOOGLE_WL_EN];
 
 const jsonLd = [
   serviceJsonLd({
-    name: SEWA_SEO.title,
-    description: SEWA_SEO.description,
+    name: SEWA_SEO_EN.title,
+    description: SEWA_SEO_EN.description,
     url,
-    serviceType: 'Sewa Akun Ads Whitelist',
+    serviceType: 'Ad Account Whitelist Rental',
   }),
-  faqJsonLd(SEWA_FAQS),
+  faqJsonLd(SEWA_FAQS_EN),
   breadcrumbJsonLd([
-    { name: 'Beranda', url: site.url },
-    { name: 'Layanan', url: `${site.url}/#layanan` },
-    { name: 'Sewa Akun', url },
+    { name: 'Home', url: `${site.url}/en` },
+    { name: 'Services', url: `${site.url}/en#layanan` },
+    { name: 'Account Rental', url },
   ]),
 ];
 ---
 <BaseLayout
-  title={SEWA_SEO.title}
-  description={SEWA_SEO.description}
+  title={SEWA_SEO_EN.title}
+  description={SEWA_SEO_EN.description}
   active="layanan"
   jsonLd={jsonLd}
-  keywords={SEWA_KEYWORDS}
+  keywords={SEWA_KEYWORDS_EN}
 >
   <ServiceHero
-    eyebrow={SEWA_HERO.eyebrow}
-    title={SEWA_HERO.title}
-    titleAccent={SEWA_HERO.titleAccent}
-    desc={SEWA_HERO.desc}
+    eyebrow={SEWA_HERO_EN.eyebrow}
+    title={SEWA_HERO_EN.title}
+    titleAccent={SEWA_HERO_EN.titleAccent}
+    desc={SEWA_HERO_EN.desc}
   >
     <div slot="illustration" class="kraken-float" style="width:100%;max-width:480px;margin:0 auto;filter:drop-shadow(0 24px 48px rgba(255,107,26,0.18));">
       <picture>
@@ -69,7 +69,7 @@ const jsonLd = [
           <article class="wl-card reveal">
             <h3 class="wl-title">{wl.title}</h3>
             <p class="wl-desc">{wl.desc}</p>
-            <h4 class="wl-sub">Keunggulan</h4>
+            <h4 class="wl-sub">Advantages</h4>
             <ul class="wl-benefits">
               {wl.benefits.map((b) => (
                 <li><span class="wl-check" aria-hidden="true"><Check size={12} /></span>{b}</li>
@@ -81,11 +81,11 @@ const jsonLd = [
     </div>
   </section>
 
-  <IndustriesGrid items={INDUSTRIES} heading={INDUSTRY_HEADING} bg="warm" />
+  <IndustriesGrid items={INDUSTRIES_EN} heading={INDUSTRY_HEADING_EN} bg="warm" />
 
   <PricingSection plans={SEWA_PLANS_EN} service="Account Rental" />
 
-  <ServiceFAQ items={SEWA_FAQS} />
+  <ServiceFAQ items={SEWA_FAQS_EN} />
   <ServiceCTA />
 </BaseLayout>
 

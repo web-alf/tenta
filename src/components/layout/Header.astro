@@ -12,7 +12,14 @@ const { active = 'beranda', lang: propLang } = Astro.props;
 const lang = propLang || getLang(Astro.currentLocale);
 const t = useT(lang);
 // Localize internal path untuk bahasa aktif (EN → prefix /en).
-const L = (path: string) => (lang === 'en' ? `/en${path === '/' ? '' : path}` : path) || '/';
+const L = (path: string) => {
+  if (lang === 'en') {
+    if (path === '/') return '/en';
+    if (path.startsWith('/#')) return `/en${path.substring(1)}`;
+    return `/en${path}`;
+  }
+  return path || '/';
+};
 // Path netral (tanpa /en) untuk language switcher.
 const basePath = stripLocale(Astro.url.pathname);
 

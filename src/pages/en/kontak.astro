@@ -7,30 +7,30 @@ import Pin from '@components/icons/Pin.astro';
 import { site, waLink } from '@data/site';
 import { contactPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 
-const url = `${site.url}/kontak`;
+const url = `${site.url}/en/kontak`;
 const jsonLd = [
   contactPageJsonLd({ url }),
   breadcrumbJsonLd([
-    { name: 'Beranda', url: site.url },
-    { name: 'Kontak', url },
+    { name: 'Home', url: site.url },
+    { name: 'Contact', url },
   ]),
 ];
 ---
 <BaseLayout
-  title="Kontak Tentaklik — Konsultasi Digital Marketing Gratis"
-  description="Hubungi Tentaklik untuk konsultasi gratis jasa pembuatan website, Google Ads, Meta Ads & digital marketing di Semarang. Isi form atau WhatsApp — kami balas dalam 1×24 jam kerja."
+  title="Contact Tentaklik — Free Digital Marketing Consultation"
+  description="Contact Tentaklik for a free consultation on website development, Google Ads, Meta Ads & digital marketing. Fill out the form or WhatsApp us — we reply within 1x24 working hours."
   active="kontak"
   jsonLd={jsonLd}
-  keywords={['kontak tentaklik', 'konsultasi digital marketing gratis', 'whatsapp tentaklik', 'agensi digital marketing semarang kontak']}
+  keywords={['contact tentaklik', 'free digital marketing consultation', 'tentaklik whatsapp', 'digital marketing agency semarang contact']}
 >
   <section style="padding-top:56px;padding-bottom:40px;background:var(--bg-warm);">
     <div class="container" style="text-align:center;">
-      <span class="eyebrow">Hubungi Kami</span>
+      <span class="eyebrow">Contact Us</span>
       <h1 style="font-size:48px;margin-top:18px;margin-bottom:14px;">
-        Yuk ngobrol soal <span style="color:var(--orange-500);">bisnis Anda</span>.
+        Let's talk about <span style="color:var(--orange-500);">your business</span>.
       </h1>
       <p style="font-size:17px;color:var(--ink-500);max-width:620px;margin:0 auto;">
-        Isi form di bawah atau langsung WhatsApp kami. Kami balas dalam 1×24 jam kerja.
+        Fill out the form below or WhatsApp us directly. We will reply within 1×24 working hours.
       </p>
     </div>
   </section>
@@ -40,9 +40,9 @@ const jsonLd = [
 
       <!-- Left: contact info -->
       <div>
-        <h3 style="font-size:22px;margin-bottom:18px;">Channel Lain</h3>
+        <h3 style="font-size:22px;margin-bottom:18px;">Other Channels</h3>
         <div style="display:flex;flex-direction:column;gap:14px;">
-          <a href={waLink('Halo Tentaklik, saya ingin konsultasi')} target="_blank" rel="noopener noreferrer"
+          <a href={waLink('Hi Tentaklik, I would like to consult')} target="_blank" rel="noopener noreferrer"
             class="contact-row">
             <div class="contact-icon"><WhatsApp size={18} /></div>
             <div>
@@ -60,16 +60,16 @@ const jsonLd = [
           <div class="contact-row">
             <div class="contact-icon"><Pin size={18} /></div>
             <div>
-              <div style="font-size:12px;color:var(--ink-500);">Lokasi</div>
+              <div style="font-size:12px;color:var(--ink-500);">Location</div>
               <div style="font-size:15px;font-weight:600;">{site.address}</div>
             </div>
           </div>
         </div>
         <div style="margin-top:32px;padding:20px;background:var(--orange-50);border-radius:16px;border:1px solid var(--orange-200);">
-          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Jam Operasional</div>
-          <div style="font-size:13px;color:var(--ink-500);">Senin–Kamis · 08:00–16:00 WIB</div>
-          <div style="font-size:13px;color:var(--ink-500);">Jumat · 08:00–17:00 WIB</div>
-          <div style="font-size:13px;color:var(--ink-500);">Sabtu · 08:00–15:00 WIB</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Operational Hours</div>
+          <div style="font-size:13px;color:var(--ink-500);">Monday–Thursday · 08:00–16:00 WIB</div>
+          <div style="font-size:13px;color:var(--ink-500);">Friday · 08:00–17:00 WIB</div>
+          <div style="font-size:13px;color:var(--ink-500);">Saturday · 08:00–15:00 WIB</div>
         </div>
       </div>
 
@@ -139,11 +139,11 @@ const jsonLd = [
     <div class="container">
       <div class="cta-banner reveal">
         <div style="flex:1;">
-          <h3>Lebih cepat lewat WhatsApp?</h3>
-          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Klik tombol di samping untuk langsung chat dengan tim kami.</p>
+          <h3>Faster via WhatsApp?</h3>
+          <p style="margin-top:8px;opacity:0.95;font-size:15px;">Click the button below to chat directly with our team.</p>
         </div>
-        <a href={waLink('Halo Tentaklik')} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
-          Chat WhatsApp <ArrowRight size={14} />
+        <a href={waLink('Halo Tentaklik, I would like to consult')} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          WhatsApp Chat <ArrowRight size={14} />
         </a>
       </div>
     </div>

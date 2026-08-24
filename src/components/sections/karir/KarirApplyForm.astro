@@ -1,28 +1,30 @@
 ---
 import ArrowRight from '../../icons/ArrowRight.astro';
 import { getCollection } from 'astro:content';
+import { getLang } from '@i18n/utils';
 
+const lang = getLang(Astro.currentLocale);
 const jobsCol = await getCollection('jobs');
 const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
 ---
 <section id="apply" style="background:var(--bg-warm);">
   <div class="container">
     <div style="max-width:720px;margin:0 auto;">
-      <h2 class="section-title" style="text-align:center;">Form Lamaran</h2>
-      <p class="section-sub" style="margin-bottom:32px;text-align:center;">Isi data di bawah, tim HR kami akan respon dalam 3 hari kerja.</p>
-      <form id="karir-form" class="card" style="display:flex;flex-direction:column;gap:16px;padding:32px;" autocomplete="on">
+      <h2 class="section-title" style="text-align:center;">{lang === 'en' ? 'Application Form' : 'Form Lamaran'}</h2>
+      <p class="section-sub" style="margin-bottom:32px;text-align:center;">{lang === 'en' ? 'Fill out the form below, our HR team will respond within 3 working days.' : 'Isi data di bawah, tim HR kami akan respon dalam 3 hari kerja.'}</p>
+      <form id="karir-form" class="card" style="display:flex;flex-direction:column;gap:16px;padding:32px;" autocomplete="on" data-lang={lang}>
         <div id="karir-error" style="display:none;padding:14px;background:#FEE2E2;color:#B91C1C;border-radius:10px;font-size:14px;font-weight:600;" role="alert" aria-live="polite"></div>
 
         <!-- Honeypot — hidden from humans -->
         <div aria-hidden="true" style="position:absolute;left:-10000px;top:auto;width:1px;height:1px;overflow:hidden;">
-          <label for="apply-website">Website (jangan diisi)</label>
+          <label for="apply-website">{lang === 'en' ? 'Website (do not fill)' : 'Website (jangan diisi)'}</label>
           <input id="apply-website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
 
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
           <div class="form-field">
-            <label for="apply-name">Nama Lengkap *</label>
-            <input id="apply-name" name="name" required type="text" autocomplete="name" placeholder="Nama lengkap" maxlength="100" pattern="[\p{L}\p{M}\s.\-']{2,100}"/>
+            <label for="apply-name">{lang === 'en' ? 'Full Name' : 'Nama Lengkap'} *</label>
+            <input id="apply-name" name="name" required type="text" autocomplete="name" placeholder={lang === 'en' ? 'Full name' : 'Nama lengkap'} maxlength="100" pattern="[\p{L}\p{M}\s.\-']{2,100}"/>
           </div>
           <div class="form-field">
             <label for="apply-email">Email *</label>
@@ -31,31 +33,31 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
           <div class="form-field">
-            <label for="apply-phone">No. WhatsApp</label>
+            <label for="apply-phone">{lang === 'en' ? 'WhatsApp Number' : 'No. WhatsApp'}</label>
             <input id="apply-phone" name="phone" type="tel" autocomplete="tel" placeholder="0812-xxxx-xxxx" maxlength="20" pattern="[0-9+\-\s()]{6,20}"/>
           </div>
           <div class="form-field">
-            <label for="apply-role">Posisi yang Dilamar *</label>
+            <label for="apply-role">{lang === 'en' ? 'Applied Position' : 'Posisi yang Dilamar'} *</label>
             <select id="apply-role" name="role" required>
-              <option value="">— Pilih posisi —</option>
-              {jobs.map(j => <option value={j.data.title}>{j.data.title}</option>)}
-              <option value="Open Application">Open Application (lainnya)</option>
+              <option value="">{lang === 'en' ? '— Select position —' : '— Pilih posisi —'}</option>
+              {jobs.map(j => <option value={lang === 'en' && j.data.title_en ? j.data.title_en : j.data.title}>{lang === 'en' && j.data.title_en ? j.data.title_en : j.data.title}</option>)}
+              <option value="Open Application">{lang === 'en' ? 'Open Application (others)' : 'Open Application (lainnya)'}</option>
             </select>
           </div>
         </div>
         <div class="form-field">
-          <label for="apply-portfolio">Link Portfolio / CV</label>
+          <label for="apply-portfolio">{lang === 'en' ? 'Portfolio / CV Link' : 'Link Portfolio / CV'}</label>
           <input id="apply-portfolio" name="portfolio" type="url" inputmode="url" placeholder="Link Drive / LinkedIn / GitHub / Behance" maxlength="300"/>
         </div>
         <div class="form-field">
-          <label for="apply-message">Cerita singkat tentang kamu</label>
-          <textarea id="apply-message" name="message" placeholder="Pengalaman terbaik, kenapa Tentaklik, atau apa pun yang ingin kami tahu..." maxlength="2000"></textarea>
+          <label for="apply-message">{lang === 'en' ? 'A short story about you' : 'Cerita singkat tentang kamu'}</label>
+          <textarea id="apply-message" name="message" placeholder={lang === 'en' ? 'Best experience, why Tentaklik, or whatever you want us to know...' : 'Pengalaman terbaik, kenapa Tentaklik, atau apa pun yang ingin kami tahu...'} maxlength="2000"></textarea>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-top:8px;justify-content:center;">
-          Kirim Lamaran <ArrowRight size={14} />
+          {lang === 'en' ? 'Submit Application' : 'Kirim Lamaran'} <ArrowRight size={14} />
         </button>
         <p style="font-size:12.5px;color:var(--ink-500);text-align:center;margin-top:4px;">
-          Submit akan membuka WhatsApp dengan data lamaranmu sudah terisi.
+          {lang === 'en' ? 'Submitting will open WhatsApp with your pre-filled application data.' : 'Submit akan membuka WhatsApp dengan data lamaranmu sudah terisi.'}
         </p>
       </form>
     </div>
@@ -104,21 +106,19 @@ const jobs = jobsCol.sort((a, b) => Number(a.id) - Number(b.id));
       const portfolio = clip(String(fd.get('portfolio') ?? ''), 300);
       const message   = clip(String(fd.get('message')   ?? ''), 2000);
 
-      if (!NAME_RE.test(name))   { showErr('Nama tidak valid (2–100 karakter huruf).'); return; }
-      if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
-      if (phone && !PHONE_RE.test(phone)) { showErr('Nomor WhatsApp tidak valid.'); return; }
-      if (!role)                 { showErr('Pilih posisi yang dilamar.'); return; }
-      if (portfolio && !URL_RE.test(portfolio)) { showErr('Link portfolio harus berupa URL http(s) yang valid.'); return; }
+      const lang = form.getAttribute('data-lang') || 'id';
+      const isEn = lang === 'en';
+
+      if (!NAME_RE.test(name))   { showErr(isEn ? 'Invalid name (2-100 letter characters).' : 'Nama tidak valid (2–100 karakter huruf).'); return; }
+      if (!EMAIL_RE.test(email)) { showErr(isEn ? 'Invalid email format.' : 'Format email tidak valid.'); return; }
+      if (phone && !PHONE_RE.test(phone)) { showErr(isEn ? 'Invalid WhatsApp number.' : 'Nomor WhatsApp tidak valid.'); return; }
+      if (!role)                 { showErr(isEn ? 'Select applied position.' : 'Pilih posisi yang dilamar.'); return; }
+      if (portfolio && !URL_RE.test(portfolio)) { showErr(isEn ? 'Portfolio link must be a valid http(s) URL.' : 'Link portfolio harus berupa URL http(s) yang valid.'); return; }
 
       lastSubmitAt = now;
-      const msg =
-        `Halo Tentaklik, saya ingin melamar di Tentaklik:\n\n` +
-        `Nama: ${name}\n` +
-        `Email: ${email}\n` +
-        `Phone: ${phone}\n` +
-        `Posisi: ${role}\n` +
-        `Portfolio/CV: ${portfolio}\n\n` +
-        `Catatan:\n${message}`;
+      const msg = isEn ?
+        `Hi Tentaklik, I would like to apply for a position at Tentaklik:\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nPosition: ${role}\nPortfolio/CV: ${portfolio}\n\nNote:\n${message}` :
+        `Halo Tentaklik, saya ingin melamar di Tentaklik:\n\nNama: ${name}\nEmail: ${email}\nPhone: ${phone}\nPosisi: ${role}\nPortfolio/CV: ${portfolio}\n\nCatatan:\n${message}`;
       window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener,noreferrer');
       form.reset();
     });

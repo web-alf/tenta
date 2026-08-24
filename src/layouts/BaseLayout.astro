@@ -29,7 +29,7 @@ const hrefEn = withSlash(getAbsoluteLocaleUrl('en', basePath));
 const ogLocale = lang === 'en' ? 'en_US' : 'id_ID';
 const ogLocaleAlt = lang === 'en' ? 'id_ID' : 'en_US';
 
-interface Props {
+export interface Props {
   lang?: 'en' | 'id';
   title: string;
   description?: string;
@@ -50,7 +50,7 @@ interface Props {
 
 const {
   title,
-  description = site.description,
+  description = lang === 'en' ? site.description_en : site.description,
   image = site.defaultOgImage,
   canonical,
   noindex = false,
@@ -76,7 +76,7 @@ const localBusinessLd = localBusinessJsonLd();
 const websiteLd = websiteJsonLd();
 const allLd = [orgLd, localBusinessLd, websiteLd, ...jsonLd];
 
-const metaKeywords = (keywords ?? site.keywords as unknown as string[]).join(', ');
+const metaKeywords = (keywords ?? (lang === 'en' ? site.keywords_en : site.keywords) as unknown as string[]).join(', ');
 const robotsContent = noindex
   ? 'noindex, nofollow'
   : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';

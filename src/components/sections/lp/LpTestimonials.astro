@@ -54,7 +54,7 @@ if (!items) {
             <div class="lp-testi-stars" aria-label={`${t.data.stars} bintang`}>
               {'★'.repeat(t.data.stars)}
             </div>
-            <p class="lp-testi-text">"{t.data.text}"</p>
+            <p class="lp-testi-text">"{isEn && t.data.text_en ? t.data.text_en : t.data.text}"</p>
             <div class="lp-testi-author">
               <span class="lp-testi-avatar">
                 {t.data.avatar ? (
@@ -65,7 +65,7 @@ if (!items) {
               </span>
               <div>
                 <strong>{t.data.name}</strong>
-                <span class="lp-testi-role">{t.data.role}</span>
+                <span class="lp-testi-role">{isEn && t.data.role_en ? t.data.role_en : t.data.role}</span>
               </div>
             </div>
           </div>
@@ -211,7 +211,11 @@ if (!items) {
   }
   :global(.lp-testi-track) {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
     gap: 16px;
     padding: 8px 4px 20px 4px;
   }
@@ -220,7 +224,8 @@ if (!items) {
   }
 
   :global(.lp-testi-card) {
-    scroll-snap-align: none;
+    flex: 0 0 calc(100% - 32px);
+    scroll-snap-align: start;
     background: white;
     border: 1.5px solid var(--orange-100);
     border-radius: var(--radius-xl);
@@ -277,16 +282,8 @@ if (!items) {
   }
 
   @media (min-width: 768px) {
-    :global(.lp-testi-track) {
-      flex-direction: row;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
     :global(.lp-testi-card) {
       flex: 0 0 calc((100% - 32px) / 3);
-      scroll-snap-align: start;
     }
     /* Sembunyikan 2 dot terakhir di desktop karena card ditampilkan 3 sekaligus (total 5 card, max scroll index 2) */
     :global(.lp-testi-dot:nth-last-child(1)),
@@ -297,13 +294,11 @@ if (!items) {
 
   @media (max-width: 680px) {
     :global(.lp-testi-header) {
-      flex-direction: column;
+      flex-direction: row;
       align-items: flex-start;
-      gap: 16px;
+      gap: 12px;
     }
-    :global(.lp-testi-nav) {
-      display: none;
-    }
+
     :global(.lp-testi-title) {
       font-size: 26px;
     }

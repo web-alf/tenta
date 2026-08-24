@@ -1,39 +1,39 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
-import { DISCLAIMER_SECTIONS, DISCLAIMER_HERO } from '@data/disclaimer-sections';
+import { DISCLAIMER_SECTIONS_EN, DISCLAIMER_HERO_EN } from '@data/disclaimer-sections';
 import { breadcrumbJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 
-const url = `${site.url}/disclaimer`;
+const url = `${site.url}/en/disclaimer`;
 const jsonLd = [
   breadcrumbJsonLd([
-    { name: 'Beranda', url: site.url },
+    { name: 'Home', url: `${site.url}/en` },
     { name: 'Disclaimer', url },
   ]),
 ];
 
-const lastUpdatedFmt = new Date(DISCLAIMER_HERO.lastUpdated).toLocaleDateString('id-ID', {
+const lastUpdatedFmt = new Date(DISCLAIMER_HERO_EN.lastUpdated).toLocaleDateString('en-US', {
   day: 'numeric', month: 'long', year: 'numeric',
 });
 ---
 <BaseLayout
   title="Disclaimer — Tentaklik"
-  description="Disclaimer Tentaklik: penjelasan tentang konten website, hasil iklan, kepemilikan akun klien, layanan platform pihak ketiga, dan syarat kerja sama."
+  description="Tentaklik Disclaimer: explanations regarding website content, ad results, client account ownership, third-party platform services, and terms of collaboration."
   jsonLd={jsonLd}
   noindex={false}
 >
   <section class="subpage-hero">
     <div class="container">
       <nav class="crumbs" aria-label="breadcrumb">
-        <a href="/">Beranda</a>
+        <a href="/en">Home</a>
         <span class="sep">›</span>
         <span class="current">Disclaimer</span>
       </nav>
-      <h1 set:html={DISCLAIMER_HERO.title} />
-      <p class="lede">{DISCLAIMER_HERO.lede}</p>
+      <h1 set:html={DISCLAIMER_HERO_EN.title} />
+      <p class="lede">{DISCLAIMER_HERO_EN.lede}</p>
       <div class="meta">
         <span class="meta-dot" aria-hidden="true"></span>
-        Terakhir diperbarui: <strong>{lastUpdatedFmt}</strong>
+        Last updated: <strong>{lastUpdatedFmt}</strong>
       </div>
     </div>
   </section>
@@ -42,16 +42,16 @@ const lastUpdatedFmt = new Date(DISCLAIMER_HERO.lastUpdated).toLocaleDateString(
     <div class="container">
       <div class="subpage-grid">
         <aside class="toc">
-          <h5>Daftar Isi</h5>
+          <h5>Table of Contents</h5>
           <ol>
-            {DISCLAIMER_SECTIONS.map(s => (
+            {DISCLAIMER_SECTIONS_EN.map(s => (
               <li><a href={`#${s.id}`}>{s.title}</a></li>
             ))}
           </ol>
         </aside>
 
         <div class="prose">
-          {DISCLAIMER_SECTIONS.map(s => (
+          {DISCLAIMER_SECTIONS_EN.map(s => (
             <section id={s.id}>
               <h2><span class="num">{s.num}</span>{s.title}</h2>
               <Fragment set:html={s.contentHtml} />

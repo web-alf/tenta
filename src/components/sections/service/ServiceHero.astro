@@ -15,8 +15,8 @@ const { eyebrow, title, titleAccent, desc, ctaText = t('svc.hero.cta') } = Astro
       </h1>
       <p style="font-size:17px;color:var(--ink-500);max-width:520px;margin-bottom:28px;">{desc}</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <a href="#pricing" class="btn btn-primary">Lihat Paket <ArrowRight size={14} /></a>
-        <a href="/kontak" class="btn btn-ghost">{ctaText}</a>
+        <a href="#pricing" class="btn btn-primary">{lang === 'en' ? 'View Plans' : 'Lihat Paket'} <ArrowRight size={14} /></a>
+        <a href={lang === 'en' ? '/en/kontak' : '/kontak'} class="btn btn-ghost">{ctaText}</a>
       </div>
     </div>
     <div style="position:relative;display:flex;justify-content:center;align-items:center;min-height:380px;">
