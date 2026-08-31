@@ -1,23 +1,13 @@
 ---
 /**
- * Webinar Google Ads LP — layout 2 kolom (kiri/kanan) di seluruh section.
- * Urutan section tetap mengikuti eventgads.md:
- * 1. Hero (copy | ticket card)
- * 2. Problems (heading | list)
- * 3. Curriculum (heading | 5 materi)
- * 4. Audience (cocok | tidak untuk)
- * 5. Mid CTA (statement | desc + CTA)
- * 6. Detail Event (info | harga + CTA)
- * 7. Form (copy + ringkasan | form card)
+ * Webinar Google Ads LP — redesign matching Webinar-Google-Ads.html reference.
+ * Visual layout: clean blue/red/yellow/green Google-inspired palette.
+ * Form logic: preserved from GadsForm (webhook + payment modal + WA redirect).
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
-import GadsHero from '@components/sections/webinar/gads/GadsHero.astro';
-import GadsProblems from '@components/sections/webinar/gads/GadsProblems.astro';
-import GadsCurriculum from '@components/sections/webinar/gads/GadsCurriculum.astro';
-import GadsAudience from '@components/sections/webinar/gads/GadsAudience.astro';
-import GadsMidCta from '@components/sections/webinar/gads/GadsMidCta.astro';
-import GadsForm from '@components/sections/webinar/gads/GadsForm.astro';
 import { WEBINAR_GADS as W } from '@data/webinar-gads';
+import '@styles/webinar-gads.css';
+
 const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form } = W;
 ---
 <BaseLayout
@@ -29,81 +19,594 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   noindex={false}
   gtmId="GTM-T2FDL7NM"
 >
-  <!-- 1. Hero — kiri copy, kanan ticket card -->
-  <GadsHero
-    hook={hero.hook}
-    title={hero.title} titleAccent={hero.titleAccent}
-    desc={hero.desc} subLines={hero.subLines}
-    ctaText={hero.ctaText} ctaHref={hero.ctaHref}
-    speakerName={speaker.name} speakerTitle={speaker.title} speakerPhoto={speaker.photoSrc}
-    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
-    earlyBirdDeadline={event.earlyBirdDeadline} seatLeft={event.seatLeft}
-    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular} priceOriginal={event.priceOriginal}
-  />
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "CLICK BANYAK, CUSTOMER SEDIKIT? — Bedah Strategi Google Ads dari Click ke Conversion",
+      "startDate": "2026-09-11T20:00:00+07:00",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": { "@type": "VirtualLocation", "name": "Zoom" },
+      "performer": { "@type": "Person", "name": speaker.name },
+      "offers": {
+        "@type": "Offer",
+        "price": "17000",
+        "priceCurrency": "IDR",
+        "availability": "https://schema.org/LimitedAvailability"
+      }
+    })} />
+  </Fragment>
 
-  <!-- 2. Problems — kiri heading sticky, kanan list -->
-  <GadsProblems
-    heading={problems.heading} headingAccent={problems.headingAccent}
-    sub={problems.sub} items={problems.items} closer={problems.closer}
-  />
+  <!-- ═══ HERO ═══ -->
+  <section class="wg-hero" id="top">
+    <div class="wg-container wg-hero-grid">
+      <div class="wg-reveal">
+        <span class="wg-eyebrow">✦ Webinar Live via Zoom</span>
+        <h1>Click Banyak,<br><span class="wg-blue">Customer Sedikit?</span></h1>
+        <p class="wg-lead">Bedah Strategi Google Ads dari Click ke Conversion.</p>
+        <p class="wg-sublead">Cari tahu apa yang terjadi setelah calon pembeli mengklik iklan Anda, dan temukan titik kebocorannya.</p>
 
-  <!-- 3. Curriculum — kiri heading sticky, kanan 5 materi -->
-  <GadsCurriculum
-    heading={curriculum.heading} items={curriculum.items}
-    eventTime={event.time} eventPlatform={event.platform}
-  />
+        <div class="wg-hero-event-bar">
+          <div class="wg-hevent-item">
+            <svg class="wg-event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span><strong>JADWAL</strong> {event.date} · {event.time}</span>
+          </div>
+          <div class="wg-hevent-item">
+            <svg class="wg-event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <span><strong>AKSES</strong> {event.platform}</span>
+          </div>
+        </div>
 
-  <!-- 4. Audience — kiri cocok, kanan tidak untuk -->
-  <GadsAudience
-    heading={audience.heading} suitable={audience.suitable} notFor={audience.notFor}
-  />
+        <div class="wg-hero-actions">
+          <a class="wg-btn wg-btn-primary" href="#daftar">
+            Daftar Sekarang
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="wg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a class="wg-btn wg-btn-outline" href="#materi">Lihat Materi</a>
+        </div>
+        <p class="wg-micro">
+          <span class="wg-pulse-dot" aria-hidden="true"></span>
+          Promo untuk <strong>{event.seatLeft} orang tercepat</strong> hari ini.
+        </p>
+      </div>
 
-  <!-- 5. Mid CTA — dark band 2 kolom -->
-  <GadsMidCta
-    eyebrow={midCta.eyebrow} title={midCta.title} titleAccent={midCta.titleAccent}
-    desc={midCta.desc} ctaText={midCta.ctaText} ctaHref={midCta.ctaHref}
-  />
+      <!-- Dashboard Mockup Image -->
+      <div class="wg-hero-mockup wg-reveal">
+        <img
+          src={hero.mockupSrc}
+          alt="Performance Overview - Google Ads From Click to Conversion"
+          class="wg-mockup-img"
+          width="560"
+          height="540"
+          loading="eager"
+          decoding="async"
+        />
+      </div>
+    </div>
+  </section>
 
-  <!-- 7. Form — kiri copy + ringkasan, kanan form card -->
-  <GadsForm
-    eyebrow={form.eyebrow} heading={form.heading} headingAccent={form.headingAccent} sub={form.sub}
-    scriptUrl={form.scriptUrl} waNumber={form.waNumber}
-    priceEarlyBird={event.priceEarlyBird} priceRegular={event.priceRegular}
-    priceOriginal={event.priceOriginal} seatLeft={event.seatLeft}
-    eventDate={event.date} eventTime={event.time} eventPlatform={event.platform}
-  />
+  <!-- ═══ PROBLEMS ═══ -->
+  <section class="wg-section">
+    <div class="wg-container wg-problem-grid">
+      <div>
+        <span class="wg-eyebrow wg-eyebrow-red">Kendala Utama</span>
+        <h2>Pernah Mengalami Ini?</h2>
+      </div>
+      <div>
+        <ul class="wg-problem-list">
+          {problems.items.map((item) => (
+            <li>
+              <span class="wg-prob-icon">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+        <div class="wg-problem-solution-callout">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wg-sol-icon" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>{problems.closer}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MATERI / BENEFITS ═══ -->
+  <section id="materi" class="wg-section wg-muted">
+    <div class="wg-container">
+      <span class="wg-eyebrow wg-eyebrow-yellow">Materi Sesi</span>
+      <h2>Yang Anda pahami setelah sesi ini</h2>
+      <div class="wg-benefit-grid">
+        {curriculum.items.map((item, i) => {
+          const colors = ['wg-blue', 'wg-red', 'wg-yellow', 'wg-green'];
+          return (
+            <article class="wg-benefit">
+              <div class={`wg-benefit-icon ${colors[i]}`}>
+                {i === 0 && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>}
+                {i === 1 && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>}
+                {i === 2 && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>}
+                {i === 3 && <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>}
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.desc}</p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ JOURNEY ═══ -->
+  <section class="wg-section">
+    <div class="wg-container">
+      <h2>Kita bedah perjalanan lengkapnya</h2>
+      <p class="wg-intro">Bukan hanya bagian iklan. Sesi ini membahas keseluruhan alur, dari click sampai customer mengambil tindakan.</p>
+      <ol class="wg-journey">
+        <li class="wg-surface">
+          <div class="wg-journey-top"><span class="wg-journey-line" style="--c:var(--wg-blue)"></span>01</div>
+          <h3>Click</h3>
+          <p>Keyword, search intent, dan kualitas iklan.</p>
+        </li>
+        <li class="wg-surface">
+          <div class="wg-journey-top"><span class="wg-journey-line" style="--c:var(--wg-red)"></span>02</div>
+          <h3>Landing Page</h3>
+          <p>Kesesuaian pesan, penawaran, dan alur halaman.</p>
+        </li>
+        <li class="wg-surface">
+          <div class="wg-journey-top"><span class="wg-journey-line" style="--c:var(--wg-green)"></span>03</div>
+          <h3>Conversion</h3>
+          <p>Tindakan customer dan titik yang perlu diperbaiki.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══ AUDIENCE ═══ -->
+  <section class="wg-section wg-muted">
+    <div class="wg-container">
+      <span class="wg-eyebrow wg-eyebrow-green">Target Peserta</span>
+      <h2>{audience.heading}</h2>
+      <p class="wg-sublead" style="margin-top: 10px;">Sesi ini dirancang khusus untuk Anda yang ingin mengoptimalkan performa Google Ads dari click hingga conversion.</p>
+
+      <div class="wg-audience-grid">
+        {audience.suitable.map((item, idx) => {
+          const audColorClasses = ['aud-blue', 'aud-red', 'aud-yellow', 'aud-green', 'aud-blue', 'aud-red'];
+          return (
+            <div class="wg-audience-card">
+              <div class={`wg-aud-icon-wrap ${audColorClasses[idx]}`}>
+                {idx === 0 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>}
+                {idx === 1 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>}
+                {idx === 2 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>}
+                {idx === 3 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>}
+                {idx === 4 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+                {idx === 5 && <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>}
+              </div>
+              <div class="wg-aud-content">
+                <span class="wg-aud-title">{item}</span>
+              </div>
+              <span class="wg-aud-check">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SPEAKER + AGENDA ═══ -->
+  <section id="pembicara" class="wg-section">
+    <div class="wg-container wg-speaker-grid">
+      <div>
+        <p class="wg-eyebrow">Pembicara</p>
+        <div class="wg-speaker-card">
+          {speaker.photoSrc ? (
+            <img src={speaker.photoSrc} alt={speaker.name} class="wg-avatar-img" width="96" height="96" loading="lazy" decoding="async" />
+          ) : (
+            <div class="wg-avatar">HS</div>
+          )}
+          <div>
+            <h2>{speaker.name}</h2>
+            <p>{speaker.title}</p>
+          </div>
+        </div>
+        <p class="wg-speaker-copy">{speaker.bio}</p>
+      </div>
+      <div>
+        <p class="wg-eyebrow">Agenda</p>
+        <ol class="wg-agenda">
+          {curriculum.items.map((item, i) => (
+            <li><span class="wg-num">{i + 1}</span>{item.desc}</li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ PRICE ═══ -->
+  <section class="wg-container wg-price-section">
+    <div class="wg-price-card">
+      <div class="wg-price-content">
+        <div class="wg-price-header-tags">
+          <span class="wg-price-tag wg-tag-blue">✦ Promo Early Bird · Diskon 89%</span>
+        </div>
+
+        <p class="wg-normal">HTM normal <s>{event.priceOriginal}</s> · Reguler {event.priceRegular}</p>
+
+        <div class="wg-promo-wrap">
+          <span class="wg-promo-amount">{event.priceEarlyBird}</span>
+        </div>
+
+        <ul class="wg-price-benefits">
+          <li><span class="wg-pcheck">✓</span> Live Zoom + Q&A Interaktif</li>
+          <li><span class="wg-pcheck">✓</span> Rekaman Video Sesi Full HD</li>
+          <li><span class="wg-pcheck">✓</span> PDF Framework Optimasi Google Ads</li>
+        </ul>
+
+        <p class="wg-promo-note">
+          <span class="wg-pulse-dot" aria-hidden="true"></span>
+          Promo untuk <strong>{event.seatLeft} orang tercepat</strong>
+        </p>
+
+        <div>
+          <a class="wg-btn wg-btn-price" href="#daftar">
+            Daftar Sekarang
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="wg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section id="faq" class="wg-section wg-muted">
+    <div class="wg-container wg-faq-wrap">
+      <div class="wg-faq-header">
+        <h2 class="wg-faq-title"><span class="wg-blue">F</span><span class="wg-red">A</span><span class="wg-yellow">Q</span></h2>
+        <p class="wg-faq-subtitle">Pertanyaan yang sering diajukan seputar webinar Google Ads</p>
+      </div>
+      <div class="wg-faq">
+        <details>
+          <summary>Webinar ini dilaksanakan di mana dan bagaimana cara bergabungnya?</summary>
+          <div class="wg-answer">Webinar diselenggarakan secara 100% online via <strong>Zoom Meeting Live</strong>. Setelah pendaftaran dan pembayaran dikonfirmasi, Anda akan langsung menerima link akses ruangan Zoom serta pengingat jadwal webinar via WhatsApp.</div>
+        </details>
+        <details>
+          <summary>Apakah cocok untuk pemula yang belum pernah memakai Google Ads?</summary>
+          <div class="wg-answer">Webinar ini dirancang khusus bagi Anda yang <strong>sedang atau pernah menjalankan Google Ads</strong> dan ingin memahami alur conversion dari click ke customer. Jika Anda pemula total, Anda tetap dapat belajar gambaran umum strategi dan struktur iklan yang tepat.</div>
+        </details>
+        <details>
+          <summary>Bagaimana jika saya berhalangan hadir tepat waktu saat sesi live?</summary>
+          <div class="wg-answer">Jangan khawatir! Seluruh peserta resmi akan mendapatkan <strong>akses rekaman video sesi webinar (Full HD)</strong> yang bisa diputar ulang kapan saja, lengkap dengan materi presentasi & checklist optimasi format PDF.</div>
+        </details>
+        <details>
+          <summary>Kapan acara ini dilaksanakan dan berapa durasi sesinya?</summary>
+          <div class="wg-answer">Acara dilaksanakan pada <strong>{event.date} pukul {event.time}</strong>. Sesi berlangsung sekitar 90–120 menit, mencakup pemaparan materi bedah strategi serta sesi <strong>Tanya Jawab (Q&A) interaktif langsung</strong> bersama pembicara.</div>
+        </details>
+        <details>
+          <summary>Berapa investasi pendaftaran dan apa saja fasilitas yang didapatkan?</summary>
+          <div class="wg-answer">Harga reguler adalah <strong>{event.priceRegular}</strong> (dari HTM normal {event.priceOriginal}). Khusus <strong>{event.seatLeft} pendaftar tercepat hari ini</strong>, Anda berhak mendapatkan harga promo spesial <strong>{event.priceEarlyBird}</strong>. Fasilitas mencakup sesi live Zoom, rekaman video sesi, PDF checklist optimasi, dan grup WhatsApp peserta.</div>
+        </details>
+        <details>
+          <summary>Mengapa kuota peserta dibatasi dan bagaimana cara mengamankan tempat?</summary>
+          <div class="wg-answer">Kuota dibatasi agar sesi <strong>Tanya Jawab (Q&A) berjalan efektif dan interaktif</strong>, sehingga setiap pertanyaan peserta dapat dibahas dengan maksimal. Cara mengamankan tempat cukup isi formulir di bawah ini dan selesaikan pendaftaran sebelum promo habis.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FORM REGISTRATION ═══ -->
+  <section id="daftar" class="wg-section">
+    <div class="wg-container wg-register-grid">
+      <div class="wg-register-intro">
+        <h2>Siap Ubah Click <span class="wg-blue">Jadi Customer?</span></h2>
+        <p class="wg-intro">Amankan kursi Anda sekarang dan temukan titik kebocoran campaign Google Ads Anda.</p>
+        
+        <div class="wg-reg-highlights">
+          <div class="wg-reg-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wg-reg-icon"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <div>
+              <span class="wg-reg-label">Jadwal Webinar</span>
+              <strong class="wg-reg-val">{event.date} · {event.time}</strong>
+            </div>
+          </div>
+          <div class="wg-reg-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wg-reg-icon"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <div>
+              <span class="wg-reg-label">Lokasi Akses</span>
+              <strong class="wg-reg-val">{event.platform}</strong>
+            </div>
+          </div>
+          <div class="wg-reg-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wg-reg-icon"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div>
+              <span class="wg-reg-label">Penawaran Spesial</span>
+              <strong class="wg-reg-val">{event.priceEarlyBird} (Promo {event.seatLeft} Orang Tercepat)</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="wg-surface wg-form-card">
+        <h3>Formulir Pendaftaran</h3>
+        <p class="wg-form-desc">Isi data Anda untuk mengamankan kursi.</p>
+        <form id="webinar-gads-form" data-script-url={form.scriptUrl} data-wa-number={form.waNumber} novalidate>
+          <!-- Honeypot (bot filter) -->
+          <input type="text" name="wg_bot_filter" tabindex="-1" autocomplete="off" class="wg-hp" aria-hidden="true" />
+          <div class="wg-field">
+            <label for="gdf-nama">Nama Lengkap <span class="wg-req">*</span></label>
+            <input id="gdf-nama" type="text" name="nama" placeholder="Nama Anda" required maxlength="100" autocomplete="name" />
+            <div class="wg-error" id="namaError"></div>
+          </div>
+          <div class="wg-field">
+            <label for="gdf-email">Email <span class="wg-req">*</span></label>
+            <input id="gdf-email" type="email" name="email" placeholder="nama@email.com" required maxlength="150" autocomplete="email" />
+            <div class="wg-error" id="emailError"></div>
+          </div>
+          <div class="wg-field">
+            <label for="gdf-wa">Nomor WhatsApp <span class="wg-req">*</span></label>
+            <input id="gdf-wa" type="tel" name="whatsapp" placeholder="08xxxxxxxxxx" required maxlength="20" autocomplete="tel" />
+            <div class="wg-error" id="whatsappError"></div>
+          </div>
+
+          <fieldset class="wg-fieldset">
+            <legend>Status Google Ads <span class="wg-req">*</span></legend>
+            <div class="wg-radio-group">
+              <label class="wg-radio">
+                <input type="radio" name="status_gads" value="Aktif" required />
+                <span>Aktif</span>
+              </label>
+              <label class="wg-radio">
+                <input type="radio" name="status_gads" value="Pernah pakai" />
+                <span>Pernah pakai</span>
+              </label>
+              <label class="wg-radio">
+                <input type="radio" name="status_gads" value="Belum tapi mau mulai" />
+                <span>Belum tapi mau mulai</span>
+              </label>
+            </div>
+          </fieldset>
+          <button class="wg-btn wg-btn-primary wg-submit" type="submit" id="gdf-submit">
+            <span class="wg-submit-label">Daftar Sekarang</span>
+            <span class="wg-submit-loading" aria-hidden="true"><span class="wg-spinner"></span> Mengirim...</span>
+          </button>
+          <p class="wg-msg-sent" role="status" aria-live="polite" hidden>Pendaftaran berhasil! Kami akan menghubungi Anda via WhatsApp.</p>
+          <p class="wg-msg-err" role="alert" aria-live="assertive" hidden></p>
+          <p class="wg-form-note">Promo {event.priceEarlyBird} untuk {event.seatLeft} orang tercepat. Kuota peserta terbatas.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ MOBILE CTA ═══ -->
+  <div class="wg-mobile-cta">
+    <a class="wg-btn wg-btn-primary" href="#daftar">Daftar Sekarang</a>
+  </div>
+
+  <!-- ═══ PAYMENT MODAL ═══ -->
+  <div id="payment-modal-gads" class="wg-modal" aria-hidden="true">
+    <div class="wg-modal-overlay" tabindex="-1"></div>
+    <div class="wg-modal-content" role="dialog" aria-labelledby="wg-modal-title">
+      <button class="wg-modal-close" aria-label="Tutup popup">&times;</button>
+      
+      <div class="wg-modal-body">
+        <div class="wg-modal-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <h3 id="wg-modal-title" class="wg-modal-title">Registrasi Berhasil</h3>
+        <p class="wg-modal-desc">Selesaikan pembayaran untuk mengamankan kursi early bird.</p>
+        <div class="wg-pay-box">
+          <div class="wg-pay-amount"><span>Total Pembayaran</span><strong>{event.priceEarlyBird}</strong></div>
+          <div class="wg-pay-bank">
+            <span class="wg-bank-name">Transfer Bank BCA</span>
+            <div class="wg-bank-acc-wrap">
+              <span class="wg-bank-acc" id="wg-bank-acc">7831988855</span>
+              <button class="wg-copy-btn" id="wg-copy-btn" aria-label="Copy nomor rekening">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span>Salin</span>
+              </button>
+            </div>
+            <span class="wg-bank-owner">a.n PT Media Pro Indonesia</span>
+          </div>
+        </div>
+        <ol class="wg-pay-steps">
+          <li>Transfer sesuai nominal tepat <strong>{event.priceEarlyBird}</strong>.</li>
+          <li>Simpan bukti transfer (screenshot/foto).</li>
+          <li>Kirim ke CS kami via WhatsApp untuk konfirmasi.</li>
+        </ol>
+      </div>
+
+      <div class="wg-modal-footer">
+        <a href="#" id="wg-confirm-btn" class="wg-confirm-btn" target="_blank" rel="noopener noreferrer">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Kirim Bukti via WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ TOAST ═══ -->
+  <div id="wg-toast" class="wg-toast" role="status" aria-live="polite">
+    <strong id="wg-toast-title"></strong>
+    <span id="wg-toast-text"></span>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCRIPT — Form submission + Payment modal
+       ═══════════════════════════════════════════════════════════ -->
+  <script is:inline>
+    (function() {
+      console.log('[Webinar GAds] Script loaded');
+
+      function initForm() {
+        var form = document.getElementById('webinar-gads-form');
+        if (!form) {
+          console.warn('[Webinar GAds] Form element #webinar-gads-form not found');
+          return;
+        }
+
+        var btn = form.querySelector('button[type="submit"]');
+        var msgSent = form.querySelector('.wg-msg-sent');
+        var msgErr = form.querySelector('.wg-msg-err');
+        var scriptUrl = form.getAttribute('data-script-url') || '';
+        var waNumber = form.getAttribute('data-wa-number') || '';
+        var hasEp = scriptUrl.indexOf('http') === 0;
+        var busy = false;
+
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
+
+        function showErr(t) {
+          console.error('[Webinar GAds] Validation error:', t);
+          if (msgErr) {
+            msgErr.textContent = t;
+            msgErr.hidden = false;
+            setTimeout(function(){ if(msgErr) msgErr.hidden = true; }, 6000);
+          } else {
+            alert(t);
+          }
+        }
+
+        function setLoad(on) {
+          busy = on;
+          if (btn) {
+            btn.disabled = on;
+            if (on) btn.classList.add('is-loading'); else btn.classList.remove('is-loading');
+          }
+        }
+
+        function doSubmit(e) {
+          if (e) e.preventDefault();
+          console.log('[Webinar GAds] Submit triggered');
+          if (busy) return;
+          if (msgSent) msgSent.hidden = true;
+          if (msgErr) msgErr.hidden = true;
+
+          var fd = new FormData(form);
+          var hp = String(fd.get('wg_bot_filter') || '').trim();
+          if (hp.length > 0) {
+            console.warn('[Webinar GAds] Bot check triggered');
+            return;
+          }
+
+          var nama = String(fd.get('nama') || '').trim();
+          var email = String(fd.get('email') || '').trim();
+          var waRaw = String(fd.get('whatsapp') || '').trim();
+          var statusGads = String(fd.get('status_gads') || '').trim();
+
+          console.log('[Webinar GAds] Form data:', { nama: nama, email: email, waRaw: waRaw, statusGads: statusGads });
+
+          if (nama.length < 2) { showErr('Nama tidak valid (minimal 2 karakter).'); return; }
+          if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
+          if (!PHONE_RE.test(waRaw)) { showErr('Nomor WhatsApp tidak valid.'); return; }
+          if (!statusGads) { showErr('Pilih status Google Ads Anda.'); return; }
+
+          var wa = waRaw.replace(/[^\d+]/g, '');
+          if (!hasEp) { showErr('Form belum aktif. Coba lagi nanti.'); return; }
+
+          setLoad(true);
+
+          var params = new URLSearchParams({
+            nama: nama,
+            email: email,
+            whatsapp: "'" + wa,
+            bisnis: '',
+            profesi: '',
+            status_gads: statusGads,
+            source: window.location.href.split('#')[0],
+            _t: Date.now().toString()
+          });
+
+          var waMsg = 'Halo Tentaklik! Saya ' + nama + ', ingin mendaftar Webinar Google Ads "From Click to Conversion".\nEmail: ' + email + '\nStatus Google Ads: ' + statusGads + '\n\n(Dikirim via form webinar)';
+          var waUrl = waNumber ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg) : '';
+
+          console.log('[Webinar GAds] Sending fetch request to:', scriptUrl);
+          fetch(scriptUrl + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(function(err){
+            console.error('[Webinar GAds] Fetch error:', err);
+          });
+
+          setTimeout(function() {
+            form.reset();
+            if (msgSent) msgSent.hidden = false;
+            setLoad(false);
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'generate_lead', form_platform: 'google', form_kategori: 'webinar', form_source: window.location.pathname });
+
+            var modal = document.getElementById('payment-modal-gads');
+            var btnConfirm = document.getElementById('wg-confirm-btn');
+            if (modal && btnConfirm && waUrl) {
+              btnConfirm.setAttribute('href', waUrl);
+              modal.removeAttribute('aria-hidden');
+              modal.classList.add('is-open');
+              document.body.style.overflow = 'hidden';
+            } else if (waUrl) {
+              window.location.href = waUrl;
+            }
+          }, 1000);
+        }
+
+        form.addEventListener('submit', doSubmit);
+        if (btn) {
+          btn.addEventListener('click', function(e) {
+            doSubmit(e);
+          });
+        }
+
+        console.log('[Webinar GAds] Form submission handler attached successfully');
+      }
+
+      function initModal() {
+        var wgModal = document.getElementById('payment-modal-gads');
+        if (!wgModal) return;
+
+        var closeBtn = wgModal.querySelector('.wg-modal-close');
+        var overlay = wgModal.querySelector('.wg-modal-overlay');
+        var copyBtn = document.getElementById('wg-copy-btn');
+        var accText = document.getElementById('wg-bank-acc');
+        var confirmBtn = document.getElementById('wg-confirm-btn');
+
+        function closeWgModal() {
+          if (wgModal) {
+            wgModal.classList.remove('is-open');
+            wgModal.setAttribute('aria-hidden', 'true');
+          }
+          document.body.style.overflow = '';
+        }
+
+        if (closeBtn) closeBtn.addEventListener('click', closeWgModal);
+        if (overlay) overlay.addEventListener('click', closeWgModal);
+        if (confirmBtn) confirmBtn.addEventListener('click', closeWgModal);
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && wgModal && wgModal.classList.contains('is-open')) closeWgModal();
+        });
+
+        if (copyBtn && accText) {
+          copyBtn.addEventListener('click', function() {
+            var text = accText.textContent || '';
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(text).then(function() {
+                var originalHtml = copyBtn.innerHTML;
+                copyBtn.classList.add('copied');
+                copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Tersalin</span>';
+                setTimeout(function() {
+                  copyBtn.classList.remove('copied');
+                  copyBtn.innerHTML = originalHtml;
+                }, 2000);
+              });
+            }
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() { initForm(); initModal(); });
+      } else {
+        initForm(); initModal();
+      }
+    })();
+  </script>
+
 </BaseLayout>
-
-<style is:global>
-  /* ── Palet lokal LP Google Ads ────────────────────────────
-     Warm-neutral + satu aksen orange. Dipakai semua komponen Gads*
-     supaya konsisten dan tak lagi hardcode hex acak per file. */
-  :root {
-    --gd-ink:        #0E1B2A;
-    --gd-ink-2:      #2D3D52;
-    --gd-ink-3:      #6B7280;
-    --gd-ink-4:      #8B95A3;
-    --gd-ink-50:     #F5F7FA;
-    --gd-cream:      #FDFAF7;
-    --gd-line:       #ECE5DE;
-    --gd-line-2:     #DFD7CE;
-    --gd-orange:     #FF7A1A;
-    --gd-orange-700: #C94E0E;
-    --gd-orange-200: #FFD7B5;
-    --gd-orange-soft:#FFF1E4;
-  }
-
-  /* Ritme vertikal section LP ini (override padding global 80px) */
-  .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 96px 0; }
-  @media (max-width: 1040px) {
-    .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 68px 0; }
-  }
-  @media (max-width: 640px) {
-    .gd-prob, .gd-curr, .gd-aud, .gd-mid, .gd-det, .gd-form-sec { padding: 52px 0; }
-  }
-
-  /* Anchor scroll tak ketutup announcement bar sticky */
-  html { scroll-behavior: smooth; }
-  #form-registrasi { scroll-margin-top: 72px; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-</style>

@@ -5,20 +5,24 @@
  */
 interface Props {
   heading: string;
+  leadIn?: string;
+  note?: string;
   suitable: string[];
   notFor: string;
 }
-const { heading, suitable, notFor } = Astro.props;
+const { heading, leadIn, note, suitable, notFor } = Astro.props;
 ---
 <section class="gd-aud" aria-labelledby="gd-audience-heading">
   <div class="container">
     <div class="gd-aud-head">
       <span class="gd-eyebrow">Peserta</span>
       <h2 id="gd-audience-heading" class="gd-h2">{heading}</h2>
+      {leadIn && <p class="gd-aud-leadin">{leadIn}</p>}
     </div>
 
     <div class="gd-aud-grid">
       <div class="gd-aud-card gd-aud-yes reveal">
+        <div class="gd-aud-dots" aria-hidden="true"></div>
         <div class="gd-aud-card-head">
           <span class="gd-aud-icon gd-aud-icon-yes" aria-hidden="true">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
@@ -42,47 +46,82 @@ const { heading, suitable, notFor } = Astro.props;
         </ul>
       </div>
     </div>
+
+    {note && <p class="gd-aud-note">{note}</p>}
   </div>
 </section>
 <style>
   .gd-aud { background: #fff; border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-eyebrow {
+    display: inline-flex; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gd-orange-700, #C94E0E);
+    background: var(--gd-orange-soft, #FFF1E4); border-radius: 999px; padding: 6px 13px;
+  }
+  .gd-h2 {
+    font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.032em; color: var(--gd-ink, #0E1B2A); margin: 20px 0 0;
+    text-align: left; text-wrap: balance;
+  }
   .gd-aud-head { max-width: 1180px; margin: 0 auto 40px; }
+  .gd-aud-leadin { font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280); margin: 16px 0 0; max-width: 62ch; }
+  .gd-aud-note {
+    font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280);
+    max-width: 1180px; margin: 32px auto 0; padding-top: 28px;
+    border-top: 1px solid var(--gd-line, #ECE5DE);
+  }
   .gd-aud-grid {
     max-width: 1180px; margin: 0 auto;
     display: grid; grid-template-columns: 1.25fr 1fr; gap: 24px; align-items: start;
   }
   .gd-aud-card {
+    position: relative; overflow: hidden;
     border: 1px solid var(--gd-line, #ECE5DE); border-radius: 20px; padding: 28px;
     background: var(--gd-cream, #FDFAF7);
   }
+  .gd-aud-yes {
+    border: none; color: #fff;
+    background: linear-gradient(140deg, var(--gd-orange, #FF7A1A) 0%, var(--gd-orange-700, #C94E0E) 65%, #9C3D0B 100%);
+    box-shadow: 0 20px 44px -22px rgba(201,78,14,0.55);
+  }
+  .gd-aud-dots {
+    position: absolute; top: 0; right: 0; width: 180px; height: 180px;
+    opacity: 0.16; pointer-events: none;
+    background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+    -webkit-mask-image: radial-gradient(circle at top right, black, transparent);
+    mask-image: radial-gradient(circle at top right, black, transparent);
+  }
   .gd-aud-no { background: #fff; }
-  .gd-aud-card-head { display: flex; align-items: center; gap: 11px; }
+  .gd-aud-card-head { position: relative; z-index: 1; display: flex; align-items: center; gap: 11px; }
   .gd-aud-icon {
     width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
     display: inline-flex; align-items: center; justify-content: center;
   }
-  .gd-aud-icon-yes { background: var(--gd-orange-soft, #FFF1E4); color: var(--gd-orange, #FF7A1A); }
+  .gd-aud-icon-yes { background: rgba(255,255,255,0.2); color: #fff; }
   .gd-aud-icon-no { background: var(--gd-ink-50, #F5F7FA); color: var(--gd-ink-4, #8B95A3); }
   .gd-aud-label {
     font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
     color: var(--gd-ink-3, #6B7280); margin: 0;
   }
+  .gd-aud-yes .gd-aud-label { color: rgba(255,255,255,0.85); }
 
-  .gd-aud-list { list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; }
+  .gd-aud-list { position: relative; z-index: 1; list-style: none; margin: 20px 0 0; padding: 0; display: flex; flex-direction: column; }
   .gd-aud-list li {
     font-size: 16px; font-weight: 600; letter-spacing: -0.018em; line-height: 1.45;
     color: var(--gd-ink, #0E1B2A); padding: 13px 0;
     border-bottom: 1px solid var(--gd-line, #ECE5DE);
   }
   .gd-aud-list li:last-child { border-bottom: none; padding-bottom: 0; }
+  .gd-aud-yes .gd-aud-list li { color: #fff; border-bottom-color: rgba(255,255,255,0.18); }
   .gd-aud-list-no li { color: var(--gd-ink-3, #6B7280); font-weight: 500; }
 
   @media (max-width: 1040px) {
-    .gd-aud-grid, .gd-aud-head { max-width: 680px; }
+    .gd-aud-grid, .gd-aud-head, .gd-aud-note { max-width: 680px; }
     .gd-aud-grid { grid-template-columns: 1fr; gap: 16px; }
   }
   @media (max-width: 640px) {
     .gd-aud-head { margin-bottom: 28px; }
+    .gd-aud-note { margin-top: 24px; padding-top: 22px; font-size: 15px; }
     .gd-aud-card { padding: 22px 20px; border-radius: 16px; }
     .gd-aud-list li { font-size: 15px; padding: 11px 0; }
   }

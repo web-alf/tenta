@@ -1,4 +1,5 @@
 // @ts-check
+// Dev server trigger reload
 import { defineConfig, envField } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { EnumChangefreq } from 'sitemap';

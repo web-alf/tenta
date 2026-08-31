@@ -1,0 +1,84 @@
+---
+/**
+ * GadsSpeaker — section "Meet the Speaker" sesuai eventgads.md.
+ * Foto besar + nama + title + bio, ditempatkan setelah Audience, sebelum MidCta.
+ */
+interface Props {
+  name: string;
+  title: string;
+  bio: string;
+  photoSrc: string;
+}
+const { name, title, bio, photoSrc } = Astro.props;
+const hasPhoto = photoSrc && photoSrc.length > 0;
+---
+<section class="gd-spk" aria-labelledby="gd-speaker-heading">
+  <div class="gd-spk-dots" aria-hidden="true"></div>
+  <div class="container">
+    <div class="gd-spk-grid">
+      <div class="gd-spk-ava">
+        {hasPhoto ? (
+          <img src={photoSrc} alt={`Foto ${name}`} width="140" height="140" loading="lazy" decoding="async" />
+        ) : (
+          <span class="gd-spk-ph" aria-hidden="true">
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </span>
+        )}
+      </div>
+      <div class="gd-spk-body">
+        <span class="gd-eyebrow">Meet the Speaker</span>
+        <h2 id="gd-speaker-heading" class="gd-spk-name">{name}</h2>
+        <p class="gd-spk-title">{title}</p>
+        <p class="gd-spk-bio">{bio}</p>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+  .gd-spk { position: relative; overflow: hidden; background: var(--gd-cream, #FDFAF7); border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-spk-dots {
+    position: absolute; right: -20px; bottom: -20px;
+    width: 180px; height: 180px; opacity: 0.14; pointer-events: none;
+    background-image: radial-gradient(var(--gd-orange, #FF7A1A) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+  }
+  .gd-spk-grid {
+    position: relative; z-index: 1;
+    max-width: 1180px; margin: 0 auto;
+    display: grid; grid-template-columns: 140px 1fr; gap: 40px; align-items: center;
+  }
+  .gd-spk-ava { flex-shrink: 0; }
+  .gd-spk-ava img, .gd-spk-ph {
+    width: 140px; height: 140px; border-radius: 50%; object-fit: cover; display: block;
+    background: var(--gd-orange-soft, #FFF1E4); color: var(--gd-orange, #FF7A1A);
+    box-shadow: 0 0 0 5px #fff, 0 18px 40px -18px rgba(14,27,42,0.28);
+  }
+  .gd-spk-ph { display: flex; align-items: center; justify-content: center; }
+  .gd-spk-body { min-width: 0; }
+  .gd-eyebrow {
+    display: inline-flex; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gd-orange-700, #C94E0E);
+    background: var(--gd-orange-soft, #FFF1E4); border-radius: 999px; padding: 6px 13px;
+  }
+  .gd-spk-name {
+    font-size: clamp(24px, 2.6vw, 32px); font-weight: 800; letter-spacing: -0.025em;
+    color: var(--gd-ink, #0E1B2A); margin: 16px 0 0;
+  }
+  .gd-spk-title {
+    font-size: 15px; font-weight: 600; color: var(--gd-orange-700, #C94E0E);
+    margin: 6px 0 0;
+  }
+  .gd-spk-bio {
+    font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280);
+    margin: 14px 0 0; max-width: 62ch;
+  }
+
+  @media (max-width: 1040px) {
+    .gd-spk-grid { max-width: 680px; }
+  }
+  @media (max-width: 640px) {
+    .gd-spk-grid { grid-template-columns: 1fr; gap: 20px; text-align: center; justify-items: center; }
+    .gd-spk-ava img, .gd-spk-ph { width: 104px; height: 104px; }
+    .gd-spk-bio { max-width: none; }
+  }
+</style>

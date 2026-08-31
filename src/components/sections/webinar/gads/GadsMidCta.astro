@@ -9,10 +9,17 @@ interface Props {
   desc: string;
   ctaText: string;
   ctaHref: string;
+  footnote?: string;
 }
-const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
+const { eyebrow, title, titleAccent, desc, ctaText, ctaHref, footnote } = Astro.props;
 ---
 <section class="gd-mid" aria-labelledby="gd-midcta-heading">
+  <div class="gd-mid-wave gd-mid-wave-top" aria-hidden="true">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,50 C280,10 520,80 720,50 C920,20 1160,70 1440,40 L1440,0 L0,0 Z" fill="#fff"></path>
+    </svg>
+  </div>
+  <div class="gd-mid-dots" aria-hidden="true"></div>
   <div class="gd-mid-glow" aria-hidden="true"></div>
   <div class="container">
     <div class="gd-mid-grid">
@@ -29,15 +36,26 @@ const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
           {ctaText}
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M12.5 5.5 19 12l-6.5 6.5"/></svg>
         </a>
+        {footnote && <p class="gd-mid-footnote">{footnote}</p>}
       </div>
     </div>
   </div>
 </section>
 <style>
   .gd-mid { position: relative; overflow: hidden; background: var(--gd-ink, #0E1B2A); }
+  .gd-mid-wave {
+    position: absolute; top: 0; left: 0; width: 100%; line-height: 0; pointer-events: none; z-index: 0;
+  }
+  .gd-mid-wave svg { width: 100%; height: 48px; display: block; }
+  .gd-mid-dots {
+    position: absolute; left: 6%; bottom: 14%;
+    width: 160px; height: 160px; opacity: 0.1; pointer-events: none;
+    background-image: radial-gradient(#ffffff 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+  }
   .gd-mid-glow {
     position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 60% 100% at 82% 110%, rgba(255,122,26,0.22) 0%, transparent 70%);
+    background: radial-gradient(ellipse 60% 100% at 82% 110%, rgba(255,122,26,0.3) 0%, transparent 70%);
   }
   .gd-mid-grid {
     position: relative; z-index: 1;
@@ -75,6 +93,7 @@ const { eyebrow, title, titleAccent, desc, ctaText, ctaHref } = Astro.props;
   }
   .gd-mid-btn svg { transition: transform 0.18s ease; }
   .gd-mid-btn:hover svg { transform: translateX(3px); }
+  .gd-mid-footnote { font-size: 13px; color: rgba(255,255,255,0.45); margin: 16px 0 0; }
 
   @media (max-width: 1040px) {
     .gd-mid-grid { grid-template-columns: 1fr; gap: 32px; max-width: 680px; }

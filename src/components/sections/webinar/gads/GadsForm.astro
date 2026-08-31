@@ -27,6 +27,7 @@ const {
 } = Astro.props;
 ---
 <section class="gd-form-sec" id="form-registrasi" aria-labelledby="gd-form-heading">
+  <div class="gd-form-dots" aria-hidden="true"></div>
   <div class="container">
     <div class="gd-form-grid">
 
@@ -169,14 +170,36 @@ const {
 </section>
 
 <style>
-  .gd-form-sec { background: #fff; }
+  .gd-form-sec { position: relative; overflow: hidden; background: #fff; }
+  .gd-form-dots {
+    position: absolute; left: -24px; top: 8%;
+    width: 150px; height: 200px; opacity: 0.12; pointer-events: none;
+    background-image: radial-gradient(var(--gd-orange, #FF7A1A) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+  }
   .gd-form-grid {
+    position: relative; z-index: 1;
     max-width: 1180px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
     gap: 72px; align-items: start;
   }
 
   /* ── Kiri ─────────────────────────────────── */
+  .gd-eyebrow {
+    display: inline-flex; font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gd-orange-700, #C94E0E);
+    background: var(--gd-orange-soft, #FFF1E4); border-radius: 999px; padding: 6px 13px;
+  }
+  .gd-h2 {
+    font-size: clamp(28px, 3.2vw, 42px); font-weight: 800; line-height: 1.08;
+    letter-spacing: -0.032em; color: var(--gd-ink, #0E1B2A); margin: 20px 0 0;
+    text-align: left; text-wrap: balance;
+  }
+  .gd-h2-accent {
+    display: block;
+    background: linear-gradient(100deg, var(--gd-orange, #FF7A1A) 10%, #FF9E52 95%);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
   .gd-form-aside { position: sticky; top: 96px; }
   .gd-form-sub { font-size: 16px; line-height: 1.65; color: var(--gd-ink-3, #6B7280); margin: 18px 0 0; max-width: 40ch; }
 

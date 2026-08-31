@@ -14,6 +14,7 @@ interface Props {
 const { heading, headingAccent, sub, items, closer } = Astro.props;
 ---
 <section class="gd-prob" aria-labelledby="gd-problems-heading">
+  <div class="gd-prob-dots" aria-hidden="true"></div>
   <div class="container">
     <div class="gd-prob-grid">
 
@@ -23,13 +24,13 @@ const { heading, headingAccent, sub, items, closer } = Astro.props;
           {heading}
           <span class="gd-h2-accent">{headingAccent}</span>
         </h2>
-        <p class="gd-prob-sub">{sub}</p>
+        {sub && <p class="gd-prob-sub">{sub}</p>}
         <p class="gd-prob-closer">{closer}</p>
       </div>
 
       <ul class="gd-prob-list" role="list">
         {items.map((item, i) => (
-          <li class="gd-prob-item reveal">
+          <li class="gd-prob-card reveal">
             <span class="gd-prob-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
             <span class="gd-prob-txt">{item}</span>
             <svg class="gd-prob-x" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -41,8 +42,15 @@ const { heading, headingAccent, sub, items, closer } = Astro.props;
   </div>
 </section>
 <style>
-  .gd-prob { background: #fff; border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-prob { position: relative; overflow: hidden; background: #fff; border-bottom: 1px solid var(--gd-line, #ECE5DE); }
+  .gd-prob-dots {
+    position: absolute; right: -20px; top: 12%;
+    width: 150px; height: 200px; opacity: 0.14; pointer-events: none;
+    background-image: radial-gradient(var(--gd-orange, #FF7A1A) 1.5px, transparent 1.5px);
+    background-size: 14px 14px;
+  }
   .gd-prob-grid {
+    position: relative; z-index: 1;
     max-width: 1180px; margin: 0 auto;
     display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
     gap: 72px; align-items: start;
@@ -71,24 +79,36 @@ const { heading, headingAccent, sub, items, closer } = Astro.props;
     border-top: 1px solid var(--gd-line, #ECE5DE);
   }
 
-  .gd-prob-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .gd-prob-item {
-    display: flex; align-items: center; gap: 18px;
-    padding: 22px 4px; border-bottom: 1px solid var(--gd-line, #ECE5DE);
-    transition: padding-left 0.22s ease;
+  .gd-prob-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
   }
-  .gd-prob-item:first-child { border-top: 1px solid var(--gd-line, #ECE5DE); }
-  .gd-prob-item:hover { padding-left: 10px; }
+  .gd-prob-card {
+    position: relative;
+    display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+    padding: 24px 48px 24px 22px; border-radius: 18px;
+    background: #fff; border: 1px solid var(--gd-line, #ECE5DE);
+    box-shadow: 0 1px 2px rgba(14,27,42,0.03), 0 16px 34px -26px rgba(14,27,42,0.16);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+  .gd-prob-card:first-child { grid-column: 1 / -1; }
+  .gd-prob-card:hover {
+    transform: translateY(-3px); border-color: var(--gd-orange-200, #FFD7B5);
+    box-shadow: 0 20px 40px -24px rgba(14,27,42,0.22);
+  }
   .gd-prob-num {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.06em; flex-shrink: 0;
-    color: var(--gd-ink-4, #8B95A3); font-variant-numeric: tabular-nums;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--gd-orange, #FF7A1A); font-variant-numeric: tabular-nums;
   }
   .gd-prob-txt {
     flex: 1; font-size: 17px; font-weight: 600; line-height: 1.45;
     color: var(--gd-ink, #0E1B2A); letter-spacing: -0.018em;
   }
-  .gd-prob-x { flex-shrink: 0; color: var(--gd-ink-4, #8B95A3); transition: color 0.22s ease; }
-  .gd-prob-item:hover .gd-prob-x { color: var(--gd-orange, #FF7A1A); }
+  .gd-prob-x {
+    position: absolute; top: 22px; right: 22px;
+    color: var(--gd-ink-4, #8B95A3); transition: color 0.22s ease;
+  }
+  .gd-prob-card:hover .gd-prob-x { color: var(--gd-orange, #FF7A1A); }
 
   @media (max-width: 1040px) {
     .gd-prob-grid { grid-template-columns: 1fr; gap: 36px; max-width: 680px; }
@@ -96,7 +116,9 @@ const { heading, headingAccent, sub, items, closer } = Astro.props;
     .gd-prob-sub { max-width: none; }
   }
   @media (max-width: 640px) {
-    .gd-prob-item { padding: 18px 2px; gap: 14px; }
+    .gd-prob-list { grid-template-columns: 1fr; }
+    .gd-prob-card:first-child { grid-column: auto; }
+    .gd-prob-card { padding: 20px; gap: 12px; }
     .gd-prob-txt { font-size: 15.5px; }
     .gd-prob-sub, .gd-prob-closer { font-size: 15px; }
   }
