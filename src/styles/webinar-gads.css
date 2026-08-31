@@ -42,13 +42,19 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 /* ── Base utilities ───────────────────── */
 .wg-container { width: min(1120px, calc(100% - 40px)); margin: auto; }
 .wg-section { padding: 96px 0; }
-.wg-section h2 {
-  font-size: clamp(34px, 4.2vw, 48px);
+.wg-section h2, .wg-register-intro h2 {
+  font-size: clamp(30px, 3.8vw, 42px);
   line-height: 1.15;
   letter-spacing: -.025em;
-  font-weight: 650;
+  font-weight: 700;
   color: var(--wg-ink);
+  font-family: var(--wg-font);
   margin-bottom: 12px;
+}
+.wg-section h2 span.wg-blue,
+.wg-register-intro h2 span.wg-blue {
+  color: var(--wg-blue);
+  font-weight: 700;
 }
 .wg-muted { background: var(--wg-muted-bg); border-block: 1px solid var(--wg-line); }
 

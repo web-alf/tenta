@@ -91,7 +91,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
     <div class="wg-container wg-problem-grid">
       <div>
         <span class="wg-eyebrow wg-eyebrow-red">Kendala Utama</span>
-        <h2>Pernah Mengalami Ini?</h2>
+        <h2>Pernah Mengalami <span class="wg-blue">Kendala Ini?</span></h2>
       </div>
       <div>
         <ul class="wg-problem-list">
@@ -116,7 +116,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <section id="materi" class="wg-section wg-muted">
     <div class="wg-container">
       <span class="wg-eyebrow wg-eyebrow-yellow">Materi Sesi</span>
-      <h2>Yang Anda pahami setelah sesi ini</h2>
+      <h2>Yang Anda Pelajari <span class="wg-blue">Sesi Ini</span></h2>
       <div class="wg-benefit-grid">
         {curriculum.items.map((item, i) => {
           const colors = ['wg-blue', 'wg-red', 'wg-yellow', 'wg-green'];
@@ -140,7 +140,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <!-- ═══ JOURNEY ═══ -->
   <section class="wg-section">
     <div class="wg-container">
-      <h2>Kita bedah perjalanan lengkapnya</h2>
+      <h2>Bedah Perjalanan <span class="wg-blue">Click to Customer</span></h2>
       <p class="wg-intro">Bukan hanya bagian iklan. Sesi ini membahas keseluruhan alur, dari click sampai customer mengambil tindakan.</p>
       <ol class="wg-journey">
         <li class="wg-surface">
@@ -166,7 +166,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <section class="wg-section wg-muted">
     <div class="wg-container">
       <span class="wg-eyebrow wg-eyebrow-green">Target Peserta</span>
-      <h2>{audience.heading}</h2>
+      <h2>Siapa yang Wajib <span class="wg-blue">Hadir?</span></h2>
       <p class="wg-sublead" style="margin-top: 10px;">Sesi ini dirancang khusus untuk Anda yang ingin mengoptimalkan performa Google Ads dari click hingga conversion.</p>
 
       <div class="wg-audience-grid">
@@ -199,7 +199,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <section id="pembicara" class="wg-section">
     <div class="wg-container wg-speaker-grid">
       <div>
-        <p class="wg-eyebrow">Pembicara</p>
+        <span class="wg-eyebrow">Pembicara</span>
         <div class="wg-speaker-card">
           {speaker.photoSrc ? (
             <img src={speaker.photoSrc} alt={speaker.name} class="wg-avatar-img" width="96" height="96" loading="lazy" decoding="async" />
@@ -214,7 +214,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         <p class="wg-speaker-copy">{speaker.bio}</p>
       </div>
       <div>
-        <p class="wg-eyebrow">Agenda</p>
+        <span class="wg-eyebrow">Agenda</span>
         <ol class="wg-agenda">
           {curriculum.items.map((item, i) => (
             <li><span class="wg-num">{i + 1}</span>{item.desc}</li>
@@ -263,7 +263,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <section id="faq" class="wg-section wg-muted">
     <div class="wg-container wg-faq-wrap">
       <div class="wg-faq-header">
-        <h2 class="wg-faq-title"><span class="wg-blue">F</span><span class="wg-red">A</span><span class="wg-yellow">Q</span></h2>
+        <h2>Pertanyaan Sering <span class="wg-blue">Diajukan (FAQ)</span></h2>
         <p class="wg-faq-subtitle">Pertanyaan yang sering diajukan seputar webinar Google Ads</p>
       </div>
       <div class="wg-faq">
