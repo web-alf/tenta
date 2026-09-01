@@ -50,11 +50,11 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         <div class="wg-hero-event-bar">
           <div class="wg-hevent-item">
             <svg class="wg-event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <span><strong>JADWAL</strong> {event.date} · {event.time}</span>
+            <span>{event.date} · {event.time}</span>
           </div>
           <div class="wg-hevent-item">
             <svg class="wg-event-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            <span><strong>AKSES</strong> {event.platform}</span>
+            <span>{event.platform}</span>
           </div>
         </div>
 
@@ -240,8 +240,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
 
         <ul class="wg-price-benefits">
           <li><span class="wg-pcheck">✓</span> Live Zoom + Q&A Interaktif</li>
-          <li><span class="wg-pcheck">✓</span> Rekaman Video Sesi Full HD</li>
-          <li><span class="wg-pcheck">✓</span> PDF Framework Optimasi Google Ads</li>
+          <li><span class="wg-pcheck">✓</span> PDF Materi Optimasi Google Ads</li>
         </ul>
 
         <p class="wg-promo-note">
@@ -277,7 +276,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         </details>
         <details>
           <summary>Bagaimana jika saya berhalangan hadir tepat waktu saat sesi live?</summary>
-          <div class="wg-answer">Jangan khawatir! Seluruh peserta resmi akan mendapatkan <strong>akses rekaman video sesi webinar (Full HD)</strong> yang bisa diputar ulang kapan saja, lengkap dengan materi presentasi & checklist optimasi format PDF.</div>
+          <div class="wg-answer">Jangan khawatir! Seluruh peserta resmi tetap akan mendapatkan <strong>PDF materi & checklist optimasi Google Ads</strong> yang dapat dipelajari kapan saja.</div>
         </details>
         <details>
           <summary>Kapan acara ini dilaksanakan dan berapa durasi sesinya?</summary>
@@ -285,7 +284,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         </details>
         <details>
           <summary>Berapa investasi pendaftaran dan apa saja fasilitas yang didapatkan?</summary>
-          <div class="wg-answer">Harga reguler adalah <strong>{event.priceRegular}</strong> (dari HTM normal {event.priceOriginal}). Khusus <strong>{event.seatLeft} pendaftar tercepat hari ini</strong>, Anda berhak mendapatkan harga promo spesial <strong>{event.priceEarlyBird}</strong>. Fasilitas mencakup sesi live Zoom, rekaman video sesi, PDF checklist optimasi, dan grup WhatsApp peserta.</div>
+          <div class="wg-answer">Harga reguler adalah <strong>{event.priceRegular}</strong> (dari HTM normal {event.priceOriginal}). Khusus <strong>{event.seatLeft} pendaftar tercepat hari ini</strong>, Anda berhak mendapatkan harga promo spesial <strong>{event.priceEarlyBird}</strong>. Fasilitas mencakup sesi live Zoom, PDF materi & checklist optimasi, dan grup WhatsApp peserta.</div>
         </details>
         <details>
           <summary>Mengapa kuota peserta dibatasi dan bagaimana cara mengamankan tempat?</summary>
