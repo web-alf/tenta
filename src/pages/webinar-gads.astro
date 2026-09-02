@@ -1,14 +1,14 @@
 ---
 /**
- * Webinar Google Ads LP — redesign matching Webinar-Google-Ads.html reference.
- * Visual layout: clean blue/red/yellow/green Google-inspired palette.
- * Form logic: preserved from GadsForm (webhook + payment modal + WA redirect).
+ * Webinar Google Ads LP — Redesign matching Google brand aesthetic.
+ * Update: 100% FREE Webinar with direct Telegram group join CTA.
  */
 import BaseLayout from '@layouts/BaseLayout.astro';
 import { WEBINAR_GADS as W } from '@data/webinar-gads';
 import '@styles/webinar-gads.css';
 
-const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form } = W;
+const { seo, event, hero, speaker, problems, curriculum, audience } = W;
+const telegramUrl = W.telegramUrl || 'https://t.me/+VNMH0DQXiU82MGFl';
 ---
 <BaseLayout
   title={seo.title}
@@ -20,7 +20,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   gtmId="GTM-T2FDL7NM"
 >
   <Fragment slot="head">
-    <script type="application/ld+json" set:html={JSON.stringify({
+    <script is:inline type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Event",
       "name": "CLICK BANYAK, CUSTOMER SEDIKIT? — Bedah Strategi Google Ads dari Click ke Conversion",
@@ -31,9 +31,9 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
       "performer": { "@type": "Person", "name": speaker.name },
       "offers": {
         "@type": "Offer",
-        "price": "17000",
+        "price": "0",
         "priceCurrency": "IDR",
-        "availability": "https://schema.org/LimitedAvailability"
+        "availability": "https://schema.org/InStock"
       }
     })} />
   </Fragment>
@@ -42,7 +42,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
   <section class="wg-hero" id="top">
     <div class="wg-container wg-hero-grid">
       <div class="wg-reveal">
-        <span class="wg-eyebrow">✦ Webinar Live via Zoom</span>
+        <span class="wg-eyebrow">✦ Webinar Live · 100% GRATIS</span>
         <h1>Click Banyak,<br><span class="wg-blue">Customer Sedikit?</span></h1>
         <p class="wg-lead">Bedah Strategi Google Ads dari Click ke Conversion.</p>
         <p class="wg-sublead">Cari tahu apa yang terjadi setelah calon pembeli mengklik iklan Anda, dan temukan titik kebocorannya.</p>
@@ -59,15 +59,15 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         </div>
 
         <div class="wg-hero-actions">
-          <a class="wg-btn wg-btn-primary" href="#daftar">
-            Daftar Sekarang
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="wg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <a class="wg-btn wg-btn-telegram wg-hero-tg-btn" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
+            Gabung Telegram (Gratis)
           </a>
           <a class="wg-btn wg-btn-outline" href="#materi">Lihat Materi</a>
         </div>
         <p class="wg-micro">
           <span class="wg-pulse-dot" aria-hidden="true"></span>
-          Promo untuk <strong>{event.seatLeft} orang tercepat</strong> hari ini.
+          100% Gratis. Link Zoom & materi PDF dibagikan di Telegram.
         </p>
       </div>
 
@@ -224,34 +224,35 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
     </div>
   </section>
 
-  <!-- ═══ PRICE ═══ -->
+  <!-- ═══ PRICE / INVESTASI ═══ -->
   <section class="wg-container wg-price-section">
     <div class="wg-price-card">
       <div class="wg-price-content">
         <div class="wg-price-header-tags">
-          <span class="wg-price-tag wg-tag-blue">✦ Promo Early Bird · Diskon 89%</span>
+          <span class="wg-price-tag wg-tag-blue">✦ 100% GRATIS · Sesi Live Zoom</span>
         </div>
 
-        <p class="wg-normal">HTM normal <s>{event.priceOriginal}</s> · Reguler {event.priceRegular}</p>
+        <p class="wg-normal">HTM normal <s>{event.priceOriginal}</s> · Khusus Hari Ini</p>
 
         <div class="wg-promo-wrap">
-          <span class="wg-promo-amount">{event.priceEarlyBird}</span>
+          <span class="wg-promo-amount">100% FREE</span>
         </div>
 
         <ul class="wg-price-benefits">
           <li><span class="wg-pcheck">✓</span> Live Zoom + Q&A Interaktif</li>
-          <li><span class="wg-pcheck">✓</span> PDF Materi Optimasi Google Ads</li>
+          <li><span class="wg-pcheck">✓</span> Materi PDF</li>
+          <li><span class="wg-pcheck">✓</span> Akses Komunitas & Group Telegram</li>
         </ul>
 
         <p class="wg-promo-note">
           <span class="wg-pulse-dot" aria-hidden="true"></span>
-          Promo untuk <strong>{event.seatLeft} orang tercepat</strong>
+          Sesi live <strong>100% Gratis tanpa biaya tersembunyi</strong>
         </p>
 
         <div>
-          <a class="wg-btn wg-btn-price" href="#daftar">
-            Daftar Sekarang
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="wg-btn-arrow"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <a class="wg-btn wg-btn-telegram wg-btn-price" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
+            Gabung Telegram Sekarang
           </a>
         </div>
       </div>
@@ -268,7 +269,7 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
       <div class="wg-faq">
         <details>
           <summary>Webinar ini dilaksanakan di mana dan bagaimana cara bergabungnya?</summary>
-          <div class="wg-answer">Webinar diselenggarakan secara 100% online via <strong>Zoom Meeting Live</strong>. Setelah pendaftaran dan pembayaran dikonfirmasi, Anda akan langsung menerima link akses ruangan Zoom serta pengingat jadwal webinar via WhatsApp.</div>
+          <div class="wg-answer">Webinar diselenggarakan secara 100% online via <strong>Zoom Meeting Live</strong>. Untuk mendapatkan link akses Zoom serta pengingat jadwal webinar, Anda cukup bergabung ke <strong>Grup Telegram Peserta</strong> secara Gratis.</div>
         </details>
         <details>
           <summary>Apakah cocok untuk pemula yang belum pernah memakai Google Ads?</summary>
@@ -276,30 +277,30 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
         </details>
         <details>
           <summary>Bagaimana jika saya berhalangan hadir tepat waktu saat sesi live?</summary>
-          <div class="wg-answer">Jangan khawatir! Seluruh peserta resmi tetap akan mendapatkan <strong>PDF materi & checklist optimasi Google Ads</strong> yang dapat dipelajari kapan saja.</div>
+          <div class="wg-answer">Jangan khawatir! Seluruh peserta di grup Telegram tetap akan mendapatkan <strong>Materi PDF</strong> yang dibagikan secara gratis.</div>
         </details>
         <details>
           <summary>Kapan acara ini dilaksanakan dan berapa durasi sesinya?</summary>
           <div class="wg-answer">Acara dilaksanakan pada <strong>{event.date} pukul {event.time}</strong>. Sesi berlangsung sekitar 90–120 menit, mencakup pemaparan materi bedah strategi serta sesi <strong>Tanya Jawab (Q&A) interaktif langsung</strong> bersama pembicara.</div>
         </details>
         <details>
-          <summary>Berapa investasi pendaftaran dan apa saja fasilitas yang didapatkan?</summary>
-          <div class="wg-answer">Harga reguler adalah <strong>{event.priceRegular}</strong> (dari HTM normal {event.priceOriginal}). Khusus <strong>{event.seatLeft} pendaftar tercepat hari ini</strong>, Anda berhak mendapatkan harga promo spesial <strong>{event.priceEarlyBird}</strong>. Fasilitas mencakup sesi live Zoom, PDF materi & checklist optimasi, dan grup WhatsApp peserta.</div>
+          <summary>Berapa biaya pendaftarannya dan apa saja yang didapatkan?</summary>
+          <div class="wg-answer">Webinar ini <strong>100% GRATIS (Rp0)</strong>. Tidak ada biaya pendaftaran maupun biaya tersembunyi. Fasilitas mencakup sesi live Zoom, Materi PDF, serta akses ke grup Telegram peserta.</div>
         </details>
         <details>
-          <summary>Mengapa kuota peserta dibatasi dan bagaimana cara mengamankan tempat?</summary>
-          <div class="wg-answer">Kuota dibatasi agar sesi <strong>Tanya Jawab (Q&A) berjalan efektif dan interaktif</strong>, sehingga setiap pertanyaan peserta dapat dibahas dengan maksimal. Cara mengamankan tempat cukup isi formulir di bawah ini dan selesaikan pendaftaran sebelum promo habis.</div>
+          <summary>Bagaimana cara mengamankan tempat?</summary>
+          <div class="wg-answer">Cukup klik tombol <strong>Gabung Telegram</strong> di halaman ini. Anda akan langsung diarahkan ke grup Telegram peserta tempat link Zoom dan pengingat webinar dibagikan.</div>
         </details>
       </div>
     </div>
   </section>
 
-  <!-- ═══ FORM REGISTRATION ═══ -->
+  <!-- ═══ TELEGRAM JOIN SECTION ═══ -->
   <section id="daftar" class="wg-section">
     <div class="wg-container wg-register-grid">
       <div class="wg-register-intro">
         <h2>Siap Ubah Click <span class="wg-blue">Jadi Customer?</span></h2>
-        <p class="wg-intro">Amankan kursi Anda sekarang dan temukan titik kebocoran campaign Google Ads Anda.</p>
+        <p class="wg-intro">Amankan tempat Anda sekarang. Link Zoom dan Materi PDF dibagikan eksklusif di dalam grup Telegram peserta.</p>
         
         <div class="wg-reg-highlights">
           <div class="wg-reg-item">
@@ -319,293 +320,75 @@ const { seo, event, hero, speaker, problems, curriculum, audience, midCta, form 
           <div class="wg-reg-item">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="wg-reg-icon"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <div>
-              <span class="wg-reg-label">Penawaran Spesial</span>
-              <strong class="wg-reg-val">{event.priceEarlyBird} (Promo {event.seatLeft} Orang Tercepat)</strong>
+              <span class="wg-reg-label">Biaya Pendaftaran</span>
+              <strong class="wg-reg-val" style="color: var(--wg-green); font-weight: 700;">100% GRATIS (Rp0)</strong>
             </div>
           </div>
         </div>
       </div>
-      <div class="wg-surface wg-form-card">
-        <h3>Formulir Pendaftaran</h3>
-        <p class="wg-form-desc">Isi data Anda untuk mengamankan kursi.</p>
-        <form id="webinar-gads-form" data-script-url={form.scriptUrl} data-wa-number={form.waNumber} novalidate>
-          <!-- Honeypot (bot filter) -->
-          <input type="text" name="wg_bot_filter" tabindex="-1" autocomplete="off" class="wg-hp" aria-hidden="true" />
-          <div class="wg-field">
-            <label for="gdf-nama">Nama Lengkap <span class="wg-req">*</span></label>
-            <input id="gdf-nama" type="text" name="nama" placeholder="Nama Anda" required maxlength="100" autocomplete="name" />
-            <div class="wg-error" id="namaError"></div>
-          </div>
-          <div class="wg-field">
-            <label for="gdf-email">Email <span class="wg-req">*</span></label>
-            <input id="gdf-email" type="email" name="email" placeholder="nama@email.com" required maxlength="150" autocomplete="email" />
-            <div class="wg-error" id="emailError"></div>
-          </div>
-          <div class="wg-field">
-            <label for="gdf-wa">Nomor WhatsApp <span class="wg-req">*</span></label>
-            <input id="gdf-wa" type="tel" name="whatsapp" placeholder="08xxxxxxxxxx" required maxlength="20" autocomplete="tel" />
-            <div class="wg-error" id="whatsappError"></div>
-          </div>
 
-          <fieldset class="wg-fieldset">
-            <legend>Status Google Ads <span class="wg-req">*</span></legend>
-            <div class="wg-radio-group">
-              <label class="wg-radio">
-                <input type="radio" name="status_gads" value="Aktif" required />
-                <span>Aktif</span>
-              </label>
-              <label class="wg-radio">
-                <input type="radio" name="status_gads" value="Pernah pakai" />
-                <span>Pernah pakai</span>
-              </label>
-              <label class="wg-radio">
-                <input type="radio" name="status_gads" value="Belum tapi mau mulai" />
-                <span>Belum tapi mau mulai</span>
-              </label>
-            </div>
-          </fieldset>
-          <button class="wg-btn wg-btn-primary wg-submit" type="submit" id="gdf-submit">
-            <span class="wg-submit-label">Daftar Sekarang</span>
-            <span class="wg-submit-loading" aria-hidden="true"><span class="wg-spinner"></span> Mengirim...</span>
-          </button>
-          <p class="wg-msg-sent" role="status" aria-live="polite" hidden>Pendaftaran berhasil! Kami akan menghubungi Anda via WhatsApp.</p>
-          <p class="wg-msg-err" role="alert" aria-live="assertive" hidden></p>
-          <p class="wg-form-note">Promo {event.priceEarlyBird} untuk {event.seatLeft} orang tercepat. Kuota peserta terbatas.</p>
-        </form>
+      <!-- Telegram Direct Join Card -->
+      <div class="wg-surface wg-telegram-card">
+        <div class="wg-tg-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
+          <span>Grup Resmi Peserta</span>
+        </div>
+        <h3>Grup Telegram Peserta Webinar</h3>
+        <p class="wg-tg-desc">Tanpa perlu isi form ribet! Langsung klik tombol di bawah untuk bergabung ke grup Telegram. Link Zoom dan Materi PDF akan dibagikan di dalam grup.</p>
+        
+        <ul class="wg-tg-perks">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="wg-tg-check"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Akses Link Zoom Sesi Live Webinar</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="wg-tg-check"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Download Materi PDF</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="wg-tg-check"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Pengingat Jadwal & Diskusi Komunitas</span>
+          </li>
+        </ul>
+
+        <a class="wg-btn wg-btn-telegram wg-btn-tg-main" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
+          Masuk Group Telegram Sekarang
+        </a>
+
+        <p class="wg-tg-note">
+          <span class="wg-pulse-dot" aria-hidden="true"></span>
+          100% Gratis. Akses instan langsung via Telegram.
+        </p>
       </div>
     </div>
   </section>
 
-
   <!-- ═══ MOBILE CTA ═══ -->
   <div class="wg-mobile-cta">
-    <a class="wg-btn wg-btn-primary" href="#daftar">Daftar Sekarang</a>
+    <a class="wg-btn wg-btn-telegram" href={telegramUrl} target="_blank" rel="noopener noreferrer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
+      Gabung Group Telegram (Gratis)
+    </a>
   </div>
 
-  <!-- ═══ PAYMENT MODAL ═══ -->
-  <div id="payment-modal-gads" class="wg-modal" aria-hidden="true">
-    <div class="wg-modal-overlay" tabindex="-1"></div>
-    <div class="wg-modal-content" role="dialog" aria-labelledby="wg-modal-title">
-      <button class="wg-modal-close" aria-label="Tutup popup">&times;</button>
-      
-      <div class="wg-modal-body">
-        <div class="wg-modal-icon">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-            <polyline points="22 4 12 14.01 9 11.01"/>
-          </svg>
-        </div>
-        <h3 id="wg-modal-title" class="wg-modal-title">Registrasi Berhasil</h3>
-        <p class="wg-modal-desc">Selesaikan pembayaran untuk mengamankan kursi early bird.</p>
-        <div class="wg-pay-box">
-          <div class="wg-pay-amount"><span>Total Pembayaran</span><strong>{event.priceEarlyBird}</strong></div>
-          <div class="wg-pay-bank">
-            <span class="wg-bank-name">Transfer Bank BCA</span>
-            <div class="wg-bank-acc-wrap">
-              <span class="wg-bank-acc" id="wg-bank-acc">7831988855</span>
-              <button class="wg-copy-btn" id="wg-copy-btn" aria-label="Copy nomor rekening">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span>Salin</span>
-              </button>
-            </div>
-            <span class="wg-bank-owner">a.n PT Media Pro Indonesia</span>
-          </div>
-        </div>
-        <ol class="wg-pay-steps">
-          <li>Transfer sesuai nominal tepat <strong>{event.priceEarlyBird}</strong>.</li>
-          <li>Simpan bukti transfer (screenshot/foto).</li>
-          <li>Kirim ke CS kami via WhatsApp untuk konfirmasi.</li>
-        </ol>
-      </div>
-
-      <div class="wg-modal-footer">
-        <a href="#" id="wg-confirm-btn" class="wg-confirm-btn" target="_blank" rel="noopener noreferrer">
-          <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          Kirim Bukti via WhatsApp
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══ TOAST ═══ -->
-  <div id="wg-toast" class="wg-toast" role="status" aria-live="polite">
-    <strong id="wg-toast-title"></strong>
-    <span id="wg-toast-text"></span>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       SCRIPT — Form submission + Payment modal
-       ═══════════════════════════════════════════════════════════ -->
+  <!-- Analytics tracking for Telegram clicks -->
   <script is:inline>
     (function() {
-      console.log('[Webinar GAds] Script loaded');
-
-      function initForm() {
-        var form = document.getElementById('webinar-gads-form');
-        if (!form) {
-          console.warn('[Webinar GAds] Form element #webinar-gads-form not found');
-          return;
-        }
-
-        var btn = form.querySelector('button[type="submit"]');
-        var msgSent = form.querySelector('.wg-msg-sent');
-        var msgErr = form.querySelector('.wg-msg-err');
-        var scriptUrl = form.getAttribute('data-script-url') || '';
-        var waNumber = form.getAttribute('data-wa-number') || '';
-        var hasEp = scriptUrl.indexOf('http') === 0;
-        var busy = false;
-
-        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        var PHONE_RE = /^[0-9+\-\s()]{6,20}$/;
-
-        function showErr(t) {
-          console.error('[Webinar GAds] Validation error:', t);
-          if (msgErr) {
-            msgErr.textContent = t;
-            msgErr.hidden = false;
-            setTimeout(function(){ if(msgErr) msgErr.hidden = true; }, 6000);
-          } else {
-            alert(t);
-          }
-        }
-
-        function setLoad(on) {
-          busy = on;
-          if (btn) {
-            btn.disabled = on;
-            if (on) btn.classList.add('is-loading'); else btn.classList.remove('is-loading');
-          }
-        }
-
-        function doSubmit(e) {
-          if (e) e.preventDefault();
-          console.log('[Webinar GAds] Submit triggered');
-          if (busy) return;
-          if (msgSent) msgSent.hidden = true;
-          if (msgErr) msgErr.hidden = true;
-
-          var fd = new FormData(form);
-          var hp = String(fd.get('wg_bot_filter') || '').trim();
-          if (hp.length > 0) {
-            console.warn('[Webinar GAds] Bot check triggered');
-            return;
-          }
-
-          var nama = String(fd.get('nama') || '').trim();
-          var email = String(fd.get('email') || '').trim();
-          var waRaw = String(fd.get('whatsapp') || '').trim();
-          var statusGads = String(fd.get('status_gads') || '').trim();
-
-          console.log('[Webinar GAds] Form data:', { nama: nama, email: email, waRaw: waRaw, statusGads: statusGads });
-
-          if (nama.length < 2) { showErr('Nama tidak valid (minimal 2 karakter).'); return; }
-          if (!EMAIL_RE.test(email)) { showErr('Format email tidak valid.'); return; }
-          if (!PHONE_RE.test(waRaw)) { showErr('Nomor WhatsApp tidak valid.'); return; }
-          if (!statusGads) { showErr('Pilih status Google Ads Anda.'); return; }
-
-          var wa = waRaw.replace(/[^\d+]/g, '');
-          if (!hasEp) { showErr('Form belum aktif. Coba lagi nanti.'); return; }
-
-          setLoad(true);
-
-          var params = new URLSearchParams({
-            nama: nama,
-            email: email,
-            whatsapp: "'" + wa,
-            bisnis: '',
-            profesi: '',
-            status_gads: statusGads,
-            source: window.location.href.split('#')[0],
-            _t: Date.now().toString()
+      var tgLinks = document.querySelectorAll('a[href*="t.me"]');
+      tgLinks.forEach(function(link) {
+        link.addEventListener('click', function() {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'join_telegram',
+            form_platform: 'telegram',
+            form_kategori: 'webinar_gads',
+            form_source: window.location.pathname
           });
-
-          var waMsg = 'Halo Tentaklik! Saya ' + nama + ', ingin mendaftar Webinar Google Ads "From Click to Conversion".\nEmail: ' + email + '\nStatus Google Ads: ' + statusGads + '\n\n(Dikirim via form webinar)';
-          var waUrl = waNumber ? 'https://wa.me/' + waNumber + '?text=' + encodeURIComponent(waMsg) : '';
-
-          console.log('[Webinar GAds] Sending fetch request to:', scriptUrl);
-          fetch(scriptUrl + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(function(err){
-            console.error('[Webinar GAds] Fetch error:', err);
-          });
-
-          setTimeout(function() {
-            form.reset();
-            if (msgSent) msgSent.hidden = false;
-            setLoad(false);
-            window.dataLayer = window.dataLayer || [];
-            window.dataLayer.push({ event: 'generate_lead', form_platform: 'google', form_kategori: 'webinar', form_source: window.location.pathname });
-
-            var modal = document.getElementById('payment-modal-gads');
-            var btnConfirm = document.getElementById('wg-confirm-btn');
-            if (modal && btnConfirm && waUrl) {
-              btnConfirm.setAttribute('href', waUrl);
-              modal.removeAttribute('aria-hidden');
-              modal.classList.add('is-open');
-              document.body.style.overflow = 'hidden';
-            } else if (waUrl) {
-              window.location.href = waUrl;
-            }
-          }, 1000);
-        }
-
-        form.addEventListener('submit', doSubmit);
-        if (btn) {
-          btn.addEventListener('click', function(e) {
-            doSubmit(e);
-          });
-        }
-
-        console.log('[Webinar GAds] Form submission handler attached successfully');
-      }
-
-      function initModal() {
-        var wgModal = document.getElementById('payment-modal-gads');
-        if (!wgModal) return;
-
-        var closeBtn = wgModal.querySelector('.wg-modal-close');
-        var overlay = wgModal.querySelector('.wg-modal-overlay');
-        var copyBtn = document.getElementById('wg-copy-btn');
-        var accText = document.getElementById('wg-bank-acc');
-        var confirmBtn = document.getElementById('wg-confirm-btn');
-
-        function closeWgModal() {
-          if (wgModal) {
-            wgModal.classList.remove('is-open');
-            wgModal.setAttribute('aria-hidden', 'true');
-          }
-          document.body.style.overflow = '';
-        }
-
-        if (closeBtn) closeBtn.addEventListener('click', closeWgModal);
-        if (overlay) overlay.addEventListener('click', closeWgModal);
-        if (confirmBtn) confirmBtn.addEventListener('click', closeWgModal);
-        document.addEventListener('keydown', function(e) {
-          if (e.key === 'Escape' && wgModal && wgModal.classList.contains('is-open')) closeWgModal();
         });
-
-        if (copyBtn && accText) {
-          copyBtn.addEventListener('click', function() {
-            var text = accText.textContent || '';
-            if (navigator.clipboard) {
-              navigator.clipboard.writeText(text).then(function() {
-                var originalHtml = copyBtn.innerHTML;
-                copyBtn.classList.add('copied');
-                copyBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>Tersalin</span>';
-                setTimeout(function() {
-                  copyBtn.classList.remove('copied');
-                  copyBtn.innerHTML = originalHtml;
-                }, 2000);
-              });
-            }
-          });
-        }
-      }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { initForm(); initModal(); });
-      } else {
-        initForm(); initModal();
-      }
+      });
     })();
   </script>
 
 </BaseLayout>
+
