@@ -1,7 +1,18 @@
-# Apache / LiteSpeed Header Configuration
+# Apache / LiteSpeed Header Configuration for Ad Conversions (Google, Meta, TikTok)
 <IfModule mod_headers.c>
-  # Hapus Content-Security-Policy agar skrip Google Ads & Meta Ads tidak terblokir
+  # 1. Hapus header pembatas yang dapat memblokir skrip, iframe, & piksel konversi iklan
   Header unset Content-Security-Policy
-  Header set X-Content-Type-Options "nosniff"
+  Header unset Cross-Origin-Resource-Policy
+  Header unset Cross-Origin-Opener-Policy
+  Header unset X-Frame-Options
+  Header unset Permissions-Policy
+
+  # 2. Izinkan Cross-Origin (CORS) agar request beacon, fetch, & piksel konversi lancar
+  Header set Access-Control-Allow-Origin "*"
+  Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT"
+  Header set Access-Control-Allow-Headers "*"
+
+  # 3. Referrer-Policy agar Google Ads, Meta Ads & TikTok Ads menerima URL halaman konversi dengan lengkap
   Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Content-Type-Options "nosniff"
 </IfModule>
