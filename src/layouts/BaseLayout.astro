@@ -85,30 +85,6 @@ const JSONLD_ESCAPE = new RegExp('[<>&\u2028\u2029]', 'g');
 function safeJsonLd(value: unknown): string {
   return JSON.stringify(value).replace(JSONLD_ESCAPE, (ch) => '\\u' + ch.charCodeAt(0).toString(16).padStart(4, '0'));
 }
-
-const cspContent = [
-  "default-src 'self'",
-  "base-uri 'self'",
-  "object-src 'none'",
-  "frame-ancestors 'self' https://tagassistant.google.com https://*.google.com https://*.facebook.com",
-  "form-action 'self' https:",
-  `script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://www.googleadservices.com https://*.googleadservices.com https://googleads.g.doubleclick.net https://*.doubleclick.net https://*.g.doubleclick.net https://www.googlesyndication.com https://*.googlesyndication.com https://*.google.com https://*.google.co.id https://static.cloudflareinsights.com https://cdn-cgi/ https://connect.facebook.net https://*.facebook.net https://www.facebook.com https://*.facebook.com`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' data: https://fonts.gstatic.com",
-  `img-src 'self' data: blob: https://www.googletagmanager.com https://*.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://*.doubleclick.net https://*.g.doubleclick.net https://*.google.com https://*.google.co.id https://www.googleadservices.com https://*.googleadservices.com https://www.googlesyndication.com https://*.googlesyndication.com https://www.facebook.com https://*.facebook.com`,
-  `connect-src 'self' https: wss:`,
-  "manifest-src 'self'",
-  "worker-src 'self' blob:",
-  "media-src 'self'",
-  `frame-src 'self' https://www.googletagmanager.com https://*.googletagmanager.com https://td.doubleclick.net https://*.g.doubleclick.net https://*.doubleclick.net https://*.google.com https://www.facebook.com https://*.facebook.com`,
-  "upgrade-insecure-requests",
-].join('; ');
-
-// CSP produksi dikirim lewat header asli (public/_headers). Meta ini duplikat,
-// dan saat `astro dev` ia memblokir websocket HMR Vite (connect-src 'self' tak
-// mencakup ws:) sehingga modul CSS dev mencabut <style> SSR tanpa bisa
-// menyuntik ulang — halaman tampil tanpa style. Jadi hanya emit di build.
-const emitCspMeta = import.meta.env.PROD;
 ---
 <!DOCTYPE html>
 <html lang={lang} dir="ltr">
@@ -128,7 +104,6 @@ const emitCspMeta = import.meta.env.PROD;
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    {emitCspMeta && <meta http-equiv="Content-Security-Policy" content={cspContent} />}
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
