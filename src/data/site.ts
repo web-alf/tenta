@@ -43,6 +43,7 @@ export const site = {
     facebook: 'https://facebook.com/tentaklik',
     linkedin: 'https://linkedin.com/company/tentaklik',
     twitter: 'https://twitter.com/tentaklik',
+    telegram: 'https://t.me/komunitastentaklik',
   },
   twitterHandle: '@tentaklik',
 

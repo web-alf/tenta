@@ -1,6 +1,7 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
 import Star from '../icons/Star.astro';
+import Telegram from '../icons/Telegram.astro';
 import { getLang, useT } from '@i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
@@ -17,32 +18,47 @@ const features = [
     <div style="position:absolute;bottom:-60px;left:-100px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle, rgba(255,122,26,0.06), rgba(255,122,26,0) 70%);"></div>
   </div>
   <div class="container hero-grid" style="display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;position:relative;z-index:1;">
-    <div>
-      <div style="display:inline-flex;align-items:center;gap:10px;padding:8px 14px;border-radius:999px;background:white;border:1px solid var(--ink-100);box-shadow:0 2px 8px rgba(31,26,23,0.04);font-size:13px;font-weight:600;color:var(--ink-700);">
-        <span style="width:22px;height:22px;border-radius:6px;background:var(--orange-500);display:inline-flex;align-items:center;justify-content:center;">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" fill="white"/><path d="M9 12l2 2 4-4" stroke="var(--orange-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </span>
-        {t('hero.badge')}
+    <div class="hero-content">
+      <div class="hero-badge-wrap">
+        <div class="hero-badge">
+          <span style="width:22px;height:22px;border-radius:6px;background:var(--orange-500);display:inline-flex;align-items:center;justify-content:center;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" fill="white"/><path d="M9 12l2 2 4-4" stroke="var(--orange-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          {t('hero.badge')}
+        </div>
       </div>
-      <h1 class="hero-title" style="font-size:44px;line-height:1.15;margin-top:22px;margin-bottom:20px;letter-spacing:-0.015em;">
-        {t('hero.title1')} <span style="color:var(--orange-500);">{t('hero.titleAccent')}</span><br/>
-        {t('hero.title2')}
-      </h1>
-      <p style="font-size:16px;color:var(--ink-500);max-width:540px;margin-bottom:32px;line-height:1.65;">
+      {lang === 'en' ? (
+        <h1 class="hero-title">
+          {t('hero.title1')} <span style="color:var(--orange-500);">{t('hero.titleAccent')}</span><br/>
+          {t('hero.title2')}
+        </h1>
+      ) : (
+        <h1 class="hero-title">
+          Buat Bisnis Kamu <span style="color:var(--orange-500);">10X Lebih</span><br/>
+          <span style="color:var(--orange-500);">Maju</span> Bersama TENTA
+        </h1>
+      )}
+      <p class="hero-desc">
         {t('hero.desc')}
       </p>
-      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-bottom:36px;align-items:center;">
-        <a href="#final-cta" class="btn btn-wa" style="padding-inline:22px;">
-          {t('hero.cta')}
-          <ArrowRight size={14} />
-        </a>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <div style="display:flex;align-items:center;gap:4px;">
+      <div class="hero-cta-group">
+        <div class="hero-buttons-wrap">
+          <a href="#final-cta" class="btn btn-wa hero-cta-btn">
+            {t('hero.cta')}
+            <ArrowRight size={14} />
+          </a>
+          <a href="https://t.me/komunitastentaklik" target="_blank" rel="noopener noreferrer" class="btn btn-telegram hero-cta-btn">
+            <Telegram size={18} />
+            {t('hero.telegram')}
+          </a>
+        </div>
+        <div class="hero-rating-wrap">
+          <div class="hero-stars" style="display:flex;align-items:center;gap:4px;">
             <Star size={16} /><Star size={16} /><Star size={16} /><Star size={16} /><Star size={16} />
           </div>
-          <div style="display:flex;flex-direction:column;">
-            <div style="font-size:15px;font-weight:700;color:var(--ink-900);line-height:1.1;">4.9 / 5</div>
-            <div style="font-size:12.5px;color:var(--ink-500);margin-top:2px;">{t('hero.proof')}</div>
+          <div class="hero-rating-info">
+            <span class="hero-score">4.9 / 5</span>
+            <span class="hero-proof">{t('hero.proof')}</span>
           </div>
         </div>
       </div>
@@ -94,6 +110,74 @@ const features = [
 </section>
 
 <style>
+  .hero-badge-wrap {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: white;
+    border: 1px solid var(--ink-100);
+    box-shadow: 0 2px 8px rgba(31,26,23,0.04);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-700);
+  }
+  .hero-title {
+    font-size: 44px;
+    line-height: 1.15;
+    margin-top: 22px;
+    margin-bottom: 20px;
+    letter-spacing: -0.015em;
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--ink-500);
+    max-width: 540px;
+    margin-bottom: 32px;
+    line-height: 1.65;
+  }
+  .hero-cta-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 36px;
+  }
+  .hero-buttons-wrap {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .hero-cta-btn {
+    padding-inline: 20px;
+  }
+  .hero-rating-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-rating-info {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-score {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink-900);
+    line-height: 1.1;
+  }
+  .hero-proof {
+    font-size: 12.5px;
+    color: var(--ink-500);
+    margin-top: 2px;
+  }
+
   .hero-feature-cell { display:flex; align-items:center; gap:14px; padding:16px; }
   .hero-feature-icon { width:44px; height:44px; border-radius:12px; background:var(--orange-50); color:var(--orange-700); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
 
@@ -113,6 +197,110 @@ const features = [
   }
   .kraken-float :global(picture) { display: block; width: 100%; }
   .kraken-float :global(img) { width: 100%; height: auto; display: block; }
+
+  /* === Option 1: Mobile Centered Hero (< 768px) === */
+  @media (max-width: 768px) {
+    .hero-content {
+      text-align: center !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    .hero-badge-wrap {
+      display: flex !important;
+      justify-content: center !important;
+      width: 100% !important;
+    }
+    .hero-badge {
+      margin-inline: auto !important;
+    }
+    .hero-title {
+      font-size: clamp(26px, 7vw, 34px) !important;
+      line-height: 1.25 !important;
+      text-align: center !important;
+      text-wrap: balance !important;
+      margin-top: 16px !important;
+      margin-bottom: 14px !important;
+      width: 100% !important;
+    }
+    .hero-desc {
+      font-size: 14.5px !important;
+      line-height: 1.6 !important;
+      text-align: center !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-bottom: 24px !important;
+      max-width: 480px !important;
+    }
+    .hero-cta-group {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      gap: 16px !important;
+      margin-bottom: 28px !important;
+    }
+    .hero-buttons-wrap {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 100% !important;
+      max-width: 380px !important;
+      gap: 12px !important;
+      margin-inline: auto !important;
+    }
+    .hero-cta-btn {
+      width: 100% !important;
+      max-width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 14px 24px !important;
+      font-size: 15px !important;
+      box-sizing: border-box !important;
+      border-radius: var(--radius-pill) !important;
+    }
+    .hero-rating-wrap {
+      display: flex !important;
+      flex-direction: row !important;
+      justify-content: center !important;
+      align-items: center !important;
+      gap: 8px !important;
+      flex-wrap: wrap !important;
+      width: 100% !important;
+      margin-inline: auto !important;
+    }
+    .hero-rating-info {
+      display: flex !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    .hero-score {
+      font-size: 14px !important;
+    }
+    .hero-score::after {
+      content: "•";
+      margin-left: 6px;
+      color: var(--ink-300);
+      font-weight: normal;
+    }
+    .hero-proof {
+      font-size: 13px !important;
+      margin-top: 0 !important;
+    }
+    .hero-mascot-wrap {
+      min-height: auto !important;
+      width: 100% !important;
+      display: flex !important;
+      justify-content: center !important;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .kraken-float { animation: none; }
   }
