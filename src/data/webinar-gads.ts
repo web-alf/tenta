@@ -19,7 +19,7 @@ export const WEBINAR_GADS = {
     priceOriginal: 'Rp99.000',
     isFree: true,
   },
-  telegramUrl: 'https://t.me/+VNMH0DQXiU82MGFl',
+  telegramUrl: 'https://t.me/+mUZLSiegI6o0N2Jl',
   hero: {
     hook: 'Click Banyak, Customer Sedikit?',
     title: 'Bedah Strategi Google Ads',
@@ -34,7 +34,7 @@ export const WEBINAR_GADS = {
       'Tapi cara membaca dan mengoptimasi campaign-nya.',
     ],
     ctaText: 'Gabung Telegram (Gratis)',
-    ctaHref: 'https://t.me/+VNMH0DQXiU82MGFl',
+    ctaHref: 'https://t.me/+mUZLSiegI6o0N2Jl',
   },
   speaker: {
     name: 'Hanif Sayyid',
@@ -85,7 +85,7 @@ export const WEBINAR_GADS = {
     titleAccent: 'Sekarang Saatnya Cari Customer-nya.',
     desc: 'Jangan puas hanya dengan traffic. Cari tahu apa yang terjadi setelah mereka klik, temukan titik kebocoran dari click hingga conversion, agar budget Google Ads tidak berhenti di angka click saja.',
     ctaText: 'Gabung Group Telegram (Gratis)',
-    ctaHref: 'https://t.me/+VNMH0DQXiU82MGFl',
+    ctaHref: 'https://t.me/+mUZLSiegI6o0N2Jl',
     footnote: '100% Gratis · Akses Zoom & Materi dibagikan via Telegram',
   },
   form: {
