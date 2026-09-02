@@ -1,0 +1,7 @@
+# Apache / LiteSpeed Header Configuration
+<IfModule mod_headers.c>
+  # Hapus Content-Security-Policy agar skrip Google Ads & Meta Ads tidak terblokir
+  Header unset Content-Security-Policy
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
