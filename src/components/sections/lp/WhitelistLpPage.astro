@@ -68,7 +68,7 @@ const jsonLd = [
   jsonLd={jsonLd}
   keywords={seo.keywords}
   preloadHeroSrc="true"
-  gtmId="GTM-N6FD2GVL"
+  gtmId={platform === 'google' ? 'GTM-N6FD2GVL' : 'GTM-T2FDL7NM'}
 >
     {platform === 'meta' && (
       <Fragment slot="head">

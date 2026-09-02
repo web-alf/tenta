@@ -248,27 +248,47 @@ const formId = `shortform-${platform}`;
         });
       }
 
-      // Eksekusi fetch dengan keepalive agar browser tetap mengirim data di background
-      // meskipun user langsung pindah halaman (redirect).
+      // Fire TikTok Pixel Event (SubmitForm & CompleteRegistration)
+      if (typeof (window as any).ttq === 'object' && typeof (window as any).ttq.track === 'function') {
+        (window as any).ttq.track('SubmitForm', {
+          content_name: hasPricing ? pkt : kat,
+          content_category: kat
+        });
+        (window as any).ttq.track('CompleteRegistration', {
+          content_name: hasPricing ? pkt : kat
+        });
+      }
+
+      // Fire direct gtag conversion if present
+      if (typeof (window as any).gtag === 'function') {
+        (window as any).gtag('event', 'conversion', {
+          event_category: 'lead',
+          event_label: plat
+        });
+      }
+
+      // Push GTM dataLayer event untuk tracking konversi Google Ads, Meta Ads, & TikTok Ads via GTM.
+      (window as any).dataLayer = (window as any).dataLayer || [];
+      (window as any).dataLayer.push({
+        event: 'generate_lead',
+        form_platform: plat,       // 'google' | 'meta'
+        form_kategori: kat,        // kategori bisnis yang dipilih user
+        form_source: window.location.pathname, // path halaman LP
+      });
+      (window as any).dataLayer.push({
+        event: 'conversion',
+        event_category: 'lead',
+        form_platform: plat
+      });
+
+      // Eksekusi fetch dengan keepalive agar data sheet tetap terkirim di background
       fetch(SHORTFORM_URL + '?' + params.toString(), { mode: 'no-cors', keepalive: true }).catch(() => {});
 
-      // Jangan tunggu response Google (bisa lambat 10-15 detik karena cold-start).
-      // Langsung redirect user setelah 1.5 detik agar UX terasa cepat dan anti-gagal.
+      // Langsung redirect user ke WhatsApp setelah 1.5 detik
       setTimeout(() => {
         form.reset();
         if (sent) sent.hidden = false;
         setLoading(false);
-
-        // Push GTM dataLayer event untuk tracking konversi Google Ads.
-        // GTM Trigger: Custom Event → Event Name: generate_lead
-        // GTM Tag: Google Ads Conversion Tracking → trigger dari event ini.
-        (window as any).dataLayer = (window as any).dataLayer || [];
-        (window as any).dataLayer.push({
-          event: 'generate_lead',
-          form_platform: plat,       // 'google' | 'meta'
-          form_kategori: kat,        // kategori bisnis yang dipilih user
-          form_source: window.location.pathname, // path halaman LP
-        });
 
         if (waUrl) {
           window.location.href = waUrl;
