@@ -56,7 +56,48 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
   color: var(--wg-blue);
   font-weight: 700;
 }
-.wg-muted { background: var(--wg-muted-bg); border-block: 1px solid var(--wg-line); }
+/* ── Hero Dual-Pill Badge ──────────────── */
+.wg-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px 3px 4px;
+  background: var(--wg-blue-soft);
+  border: 1px solid #d2e3fc;
+  border-radius: 999px;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px rgba(26, 115, 232, 0.08);
+  width: fit-content;
+  max-width: 100%;
+}
+.wg-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 9px;
+  background: var(--wg-blue);
+  color: #ffffff;
+  border-radius: 999px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 2px rgba(26, 115, 232, 0.25);
+  flex-shrink: 0;
+}
+.wg-badge-spark {
+  width: 10px;
+  height: 10px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+.wg-badge-text {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--wg-blue-hover);
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
 
 .wg-eyebrow {
   display: inline-flex;
@@ -155,7 +196,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
   gap: 70px;
   align-items: center;
 }
-.wg-hero h1 { font-size: clamp(38px, 4.5vw, 58px); line-height: 1.08; margin: 20px 0 16px; letter-spacing: -.03em; color: var(--wg-ink); font-weight: 650; }
+.wg-hero h1 { font-size: clamp(36px, 4.2vw, 56px); line-height: 1.1; margin: 20px 0 16px; letter-spacing: -.025em; color: var(--wg-ink); font-weight: 700; }
 .wg-lead { font-size: 19px; color: var(--wg-ink); font-weight: 600; margin-bottom: 6px; }
 .wg-sublead { font-size: 15.5px; line-height: 1.6; color: var(--wg-soft); max-width: 540px; margin-bottom: 24px; }
 
@@ -352,10 +393,6 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
   font-size: 12.5px; font-weight: 700;
 }
 
-/* ── Price Section (Glassmorphism Redesign) ───── */
-.wg-price-section {
-  padding: 60px 0 90px;
-}
 /* ── Price Section (Minimalist Google Style) ───── */
 .wg-price-section {
   padding: 60px 0 80px;
@@ -723,7 +760,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 @media (max-width: 820px) {
   body { padding-bottom: 74px; }
   .wg-hero-grid { grid-template-columns: 1fr; min-height: auto; padding: 32px 0 52px; gap: 40px; }
-  .wg-hero h1 { font-size: 46px; }
+  .wg-hero h1 { font-size: 48px; }
   .wg-problem-grid, .wg-speaker-grid, .wg-register-grid { grid-template-columns: 1fr; gap: 44px; }
   .wg-benefit-grid { gap: 36px; }
   .wg-journey { grid-template-columns: 1fr; }
@@ -742,7 +779,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 @media (max-width: 560px) {
   .wg-container { width: min(100% - 30px, 1120px); }
   .wg-hero-grid { padding: 20px 0 36px; gap: 32px; }
-  .wg-hero h1 { font-size: 36px; line-height: 1.08; margin: 20px 0 16px; }
+  .wg-hero h1 { font-size: 36px; line-height: 1.12; margin: 18px 0 14px; }
   .wg-lead { font-size: 17px; }
   .wg-sublead { font-size: 15px; }
   .wg-event-info { display: grid; gap: 14px; margin-top: 24px; }
@@ -789,7 +826,7 @@ html { scroll-behavior: smooth; scroll-padding-top: 78px; }
 /* ── Responsive 380px (Ultra-Small Screens) ── */
 @media (max-width: 380px) {
   .wg-container { width: calc(100% - 24px); }
-  .wg-hero h1 { font-size: 31px; }
+  .wg-hero h1 { font-size: 32px; }
   .wg-price-card { padding: 28px 14px; }
   .wg-form-card { padding: 16px 12px; }
   .wg-field label, .wg-fieldset legend { font-size: 12px; }
