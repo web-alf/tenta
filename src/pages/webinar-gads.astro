@@ -18,6 +18,7 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
   bareLayout={true}
   noindex={false}
   gtmId="GTM-T2FDL7NM"
+  disableGads={true}
 >
   <Fragment slot="head">
     <!-- Meta Pixel Code -->
@@ -91,7 +92,7 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
         </div>
         <p class="wg-micro">
           <span class="wg-pulse-dot" aria-hidden="true"></span>
-          100% Gratis. Link Zoom & materi PDF dibagikan di Telegram.
+          <span>100% Gratis. Link Zoom & materi PDF dibagikan di Telegram.</span>
         </p>
       </div>
 
@@ -250,7 +251,7 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
 
   <!-- ═══ PRICE / INVESTASI ═══ -->
   <section id="investasi" class="wg-container wg-price-section">
-    <div class="wg-price-card">
+    <div class="wg-price-card" data-cta-card>
       <div class="wg-price-content">
         <div class="wg-price-header-tags">
           <span class="wg-price-tag wg-tag-blue">✦ 100% GRATIS · Sesi Live Zoom</span>
@@ -263,17 +264,32 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
         </div>
 
         <ul class="wg-price-benefits">
-          <li><span class="wg-pcheck">✓</span> Live Zoom + Q&A Interaktif</li>
-          <li><span class="wg-pcheck">✓</span> Materi PDF</li>
-          <li><span class="wg-pcheck">✓</span> Akses Komunitas & Group Telegram</li>
+          <li>
+            <span class="wg-pcheck" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span>Live Zoom + Q&A Interaktif</span>
+          </li>
+          <li>
+            <span class="wg-pcheck" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span>Materi PDF Lengkap</span>
+          </li>
+          <li>
+            <span class="wg-pcheck" aria-hidden="true">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </span>
+            <span>Akses Komunitas & Group Telegram</span>
+          </li>
         </ul>
 
-        <p class="wg-promo-note">
+        <div class="wg-promo-note">
           <span class="wg-pulse-dot" aria-hidden="true"></span>
-          Sesi live <strong>100% Gratis tanpa biaya tersembunyi</strong>
-        </p>
+          <span>Sesi live <strong>100% Gratis tanpa biaya tersembunyi</strong></span>
+        </div>
 
-        <div>
+        <div class="wg-price-cta-wrap">
           <a class="wg-btn wg-btn-telegram wg-btn-price" href={telegramUrl} target="_blank" rel="noopener noreferrer">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
             Gabung Komunitas Sekarang!
@@ -352,7 +368,7 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
       </div>
 
       <!-- Telegram Direct Join Card -->
-      <div class="wg-surface wg-telegram-card">
+      <div class="wg-surface wg-telegram-card" data-cta-card>
         <div class="wg-tg-badge">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
           <span>Grup Resmi Peserta</span>
@@ -382,23 +398,24 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
 
         <p class="wg-tg-note">
           <span class="wg-pulse-dot" aria-hidden="true"></span>
-          100% Gratis. Akses instan langsung via Telegram.
+          <span>100% Gratis. Akses instan langsung via Telegram.</span>
         </p>
       </div>
     </div>
   </section>
 
   <!-- ═══ MOBILE CTA ═══ -->
-  <div class="wg-mobile-cta">
+  <div class="wg-mobile-cta" id="mobile-cta-bar">
     <a class="wg-btn wg-btn-telegram" href={telegramUrl} target="_blank" rel="noopener noreferrer">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.02-1.96 1.25-5.54 3.69-.52.36-1 .54-1.43.53-.47-.01-1.37-.26-2.05-.48-.83-.27-1.49-.42-1.43-.88.03-.24.38-.49 1.04-.75 4.06-1.77 6.78-2.94 8.14-3.51 3.88-1.62 4.69-1.9 5.21-1.91.12 0 .37.03.54.17.14.12.18.28.2.4.01.06.02.21 0 .35z"/></svg>
       Gabung Komunitas Sekarang!
     </a>
   </div>
 
-  <!-- Analytics tracking for Telegram clicks -->
+  <!-- Analytics tracking & UX Enhancements -->
   <script is:inline>
     (function() {
+      // 1. Tracking clicks for Telegram
       var tgLinks = document.querySelectorAll('a[href*="t.me"]');
       tgLinks.forEach(function(link) {
         link.addEventListener('click', function() {
@@ -418,6 +435,33 @@ const telegramUrl = W.telegramUrl || 'https://t.me/+mUZLSiegI6o0N2Jl';
           }
         });
       });
+
+      // 2. Hide sticky mobile CTA when on-page CTA card is in view
+      var mobileCta = document.getElementById('mobile-cta-bar');
+      var ctaCards = document.querySelectorAll('[data-cta-card]');
+      if (mobileCta && ctaCards.length > 0 && 'IntersectionObserver' in window) {
+        var visibleCount = 0;
+        var observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              visibleCount++;
+            } else {
+              visibleCount = Math.max(0, visibleCount - 1);
+            }
+          });
+          if (visibleCount > 0) {
+            mobileCta.classList.add('wg-mobile-cta--hidden');
+          } else {
+            mobileCta.classList.remove('wg-mobile-cta--hidden');
+          }
+        }, {
+          threshold: 0.15
+        });
+
+        ctaCards.forEach(function(card) {
+          observer.observe(card);
+        });
+      }
     })();
   </script>
 

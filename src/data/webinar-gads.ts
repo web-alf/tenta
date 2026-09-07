@@ -16,7 +16,7 @@ export const WEBINAR_GADS = {
     seatLeft: 10,
     priceEarlyBird: 'GRATIS',
     priceRegular: 'Rp0',
-    priceOriginal: 'Rp99.000',
+    priceOriginal: 'Rp299.000',
     isFree: true,
   },
   telegramUrl: 'https://t.me/+mUZLSiegI6o0N2Jl',
