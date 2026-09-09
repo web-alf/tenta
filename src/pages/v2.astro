@@ -94,19 +94,19 @@
     fill: #FF7A1A !important;
   }
 
-  /* Header Konsultasi Button (Desktop) - White background, black text, orange border */
+  /* Header Konsultasi Button (Desktop) - Solid orange background, white text */
   .elementor-element-744cce71 .elementor-button {
-    background-color: #FFFFFF !important;
-    color: #1F2124 !important;
+    background-color: #FF7A1A !important;
+    color: #FFFFFF !important;
     border: 2px solid #FF7A1A !important;
   }
   .elementor-element-744cce71 .elementor-button:hover {
-    background-color: #FFF7ED !important;
-    color: #FF7A1A !important;
-    border-color: #EA580C !important;
+    background-color: #F26416 !important;
+    border-color: #F26416 !important;
+    color: #FFFFFF !important;
   }
   .elementor-element-744cce71 .elementor-button .elementor-button-text {
-    color: inherit !important;
+    color: #FFFFFF !important;
   }
 
   .elementor-item.elementor-item-active,
@@ -228,53 +228,57 @@
     opacity: 1 !important;
   }
 
-  /* Hamburger Menu Toggle Button styling */
+  /* Desktop default: hide hamburger menu toggle */
   .elementor-menu-toggle {
-    cursor: pointer !important;
-    -webkit-tap-highlight-color: transparent !important;
-    user-select: none !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    width: 42px !important;
-    height: 42px !important;
-    padding: 0 !important;
-    border: 1.5px solid #E2E8F0 !important;
-    border-radius: 8px !important;
-    background-color: #FFFFFF !important;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
-    color: #FF7A1A !important;
-    transition: all 0.2s ease !important;
-  }
-  .elementor-menu-toggle:hover {
-    border-color: #FF7A1A !important;
-    background-color: #FFF7ED !important;
-  }
-  .elementor-menu-toggle svg {
-    width: 24px !important;
-    height: 24px !important;
-    color: inherit !important;
-    stroke: currentColor !important;
-  }
-  /* Show only open icon when closed, hide close icon */
-  .elementor-menu-toggle .elementor-menu-toggle__icon--open {
-    display: block !important;
-  }
-  .elementor-menu-toggle .elementor-menu-toggle__icon--close {
     display: none !important;
-  }
-  /* Show only close icon when active/opened, hide open icon */
-  .elementor-menu-toggle.elementor-active .elementor-menu-toggle__icon--open,
-  .elementor-menu-toggle[aria-expanded="true"] .elementor-menu-toggle__icon--open {
-    display: none !important;
-  }
-  .elementor-menu-toggle.elementor-active .elementor-menu-toggle__icon--close,
-  .elementor-menu-toggle[aria-expanded="true"] .elementor-menu-toggle__icon--close {
-    display: block !important;
   }
 
   /* Tablet & Mobile Header: Logo on the LEFT, Menu Toggle on the RIGHT */
   @media (max-width: 1024px) {
+    /* Hamburger Menu Toggle Button styling on tablet & mobile */
+    .elementor-menu-toggle {
+      cursor: pointer !important;
+      -webkit-tap-highlight-color: transparent !important;
+      user-select: none !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      width: 42px !important;
+      height: 42px !important;
+      padding: 0 !important;
+      border: 1.5px solid #E2E8F0 !important;
+      border-radius: 8px !important;
+      background-color: #FFFFFF !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+      color: #FF7A1A !important;
+      transition: all 0.2s ease !important;
+    }
+    .elementor-menu-toggle:hover {
+      border-color: #FF7A1A !important;
+      background-color: #FFF7ED !important;
+    }
+    .elementor-menu-toggle svg {
+      width: 24px !important;
+      height: 24px !important;
+      color: inherit !important;
+      stroke: currentColor !important;
+    }
+    /* Show only open icon when closed, hide close icon */
+    .elementor-menu-toggle .elementor-menu-toggle__icon--open {
+      display: block !important;
+    }
+    .elementor-menu-toggle .elementor-menu-toggle__icon--close {
+      display: none !important;
+    }
+    /* Show only close icon when active/opened, hide open icon */
+    .elementor-menu-toggle.elementor-active .elementor-menu-toggle__icon--open,
+    .elementor-menu-toggle[aria-expanded="true"] .elementor-menu-toggle__icon--open {
+      display: none !important;
+    }
+    .elementor-menu-toggle.elementor-active .elementor-menu-toggle__icon--close,
+    .elementor-menu-toggle[aria-expanded="true"] .elementor-menu-toggle__icon--close {
+      display: block !important;
+    }
     .elementor-51 .elementor-element.elementor-element-5db33051 > .elementor-container {
       display: flex !important;
       flex-direction: row !important;
