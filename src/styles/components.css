@@ -84,7 +84,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .btn-telegram {
   background: #ffffff;
-  border: 1.5px solid var(--ink-900);
+  border: 1.5px solid var(--ink-200);
   color: var(--orange-700);
   box-shadow: 0 2px 8px rgba(31, 26, 23, 0.04);
 }
@@ -93,7 +93,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .btn-telegram:hover {
   background: var(--orange-50);
-  border-color: var(--orange-700);
+  border-color: var(--orange-500);
   color: var(--orange-700);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(255, 122, 26, 0.12);
