@@ -8,6 +8,51 @@ html = html.replace(
   '<a href="#" class="header-logo-link"><img src="/logo-full.png" alt="Tentaklik" title="Tentaklik" class="header-logo-img" style="max-height: 42px; width: auto; max-width: 170px; display: inline-block;" /></a>'
 );
 
+// 1.2 Replace Favicons with official Tentaklik favicons
+const tentaklikFavicons = `
+	<link rel="icon" type="image/png" sizes="512x512" href="/icon-512.png" />
+	<link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+	<link rel="icon" type="image/png" sizes="32x32" href="/icon-32.png" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />`;
+
+html = html.replace(
+  /<link rel="icon"[^>]+32x32\.png"[^>]*>\s*<link rel="icon"[^>]+192x192\.png"[^>]*>\s*<link rel="apple-touch-icon"[^>]+180x180\.png"[^>]*>/gi,
+  tentaklikFavicons
+);
+
+// 1.3 Replace Google Fonts: swap Jost & Poppins for Tentaklik's Inter & Plus Jakarta Sans
+html = html.replace(
+  /<link href="https:\/\/fonts\.googleapis\.com\/css2\?family=Jost[^"]*" rel="stylesheet">/gi,
+  '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">'
+);
+
+// 1.4 Replace Title and Meta descriptions with Tentaklik standards
+html = html.replace(
+  /<title>.*?<\/title>/gi,
+  '<title>Jasa Pembuatan Website Profesional & Konversi Tinggi — Tentaklik</title>'
+);
+html = html.replace(
+  /<meta name="description" content="[^"]*"\s*\/?>/gi,
+  '<meta name="description" content="Jasa pembuatan website profesional untuk bisnis di Indonesia: landing page, company profile, hingga toko online. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata." />'
+);
+html = html.replace(
+  /<meta property="og:title" content="[^"]*"\s*\/?>/gi,
+  '<meta property="og:title" content="Jasa Pembuatan Website Profesional & Konversi Tinggi — Tentaklik" />'
+);
+html = html.replace(
+  /<meta property="og:description" content="[^"]*"\s*\/?>/gi,
+  '<meta property="og:description" content="Jasa pembuatan website profesional untuk bisnis di Indonesia: landing page, company profile, hingga toko online. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata." />'
+);
+html = html.replace(
+  /<meta name="twitter:title" content="[^"]*"\s*\/?>/gi,
+  '<meta name="twitter:title" content="Jasa Pembuatan Website Profesional & Konversi Tinggi — Tentaklik" />'
+);
+html = html.replace(
+  /<meta name="twitter:description" content="[^"]*"\s*\/?>/gi,
+  '<meta name="twitter:description" content="Jasa pembuatan website profesional untuk bisnis di Indonesia: landing page, company profile, hingga toko online. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata." />'
+);
+
 // 1.5 Place Logo on left and Toggle on right on mobile: remove reverse-mobile/reverse-tablet
 html = html.replace('elementor-reverse-tablet elementor-reverse-mobile', '');
 
@@ -65,7 +110,7 @@ html = html.split('class=" show collapse"').join('class=" collapse"');
 html = html.replace('class="elementor elementor-16"', 'class="elementor elementor-16" id="content"');
 html = html.replace(/href="#collapse-([a-f0-9]+)"/gi, 'href="#Collapse-$1"');
 
-// 6.8 Replace old blue WordPress footer with Tentaklik official footer (Clean without divider lines, normal partner badges)
+// 6.8 Replace old blue WordPress footer with Tentaklik official footer
 const tentaklikFooter = `
 <footer class="footer">
   <div class="container footer-grid">
@@ -143,11 +188,16 @@ const tentaklikFooter = `
 const footerRegex = /<footer data-elementor-type="footer"[\s\S]*?<\/footer>/i;
 html = html.replace(footerRegex, tentaklikFooter);
 
-// 7. Tentaklik branding CSS overrides
-// Preserves 100% of Elementor's native mobile & responsive design from template's style.css
+// 7. Tentaklik Unified Design System Overrides
 const brandCss = `
 <style is:inline>
   :root {
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-heading: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --e-global-typography-primary-font-family: 'Plus Jakarta Sans', sans-serif !important;
+    --e-global-typography-secondary-font-family: 'Inter', sans-serif !important;
+    --e-global-typography-text-font-family: 'Inter', sans-serif !important;
+    --e-global-typography-accent-font-family: 'Plus Jakarta Sans', sans-serif !important;
     --e-global-color-d49ac81: #FF7A1A !important;
     --e-global-color-58a3f5b: #FF7A1A !important;
     --e-global-color-332724a: #FF7A1A !important;
@@ -160,40 +210,122 @@ const brandCss = `
     max-width: 100%;
   }
 
-  /* General Elementor Button Defaults (Orange primary buttons) */
+  /* ── 1. Tentaklik Typography ── */
+  body, 
+  .elementor, 
+  .elementor p, 
+  .elementor span:not(.elementor-counter-number):not(.elementor-price-table__integer-part), 
+  .elementor li, 
+  .elementor a, 
+  .elementor input, 
+  .elementor-widget-text-editor, 
+  .elementor-widget-text-editor p,
+  .elementor-icon-box-description, 
+  .ekit-accordion-desc, 
+  .ekit-accordion--content p,
+  .elementor-price-table__description, 
+  .elementor-price-table__features-list, 
+  .elementor-icon-list-text,
+  .elementor-counter-title {
+    font-family: var(--font-sans) !important;
+    line-height: 1.6 !important;
+  }
+
+  h1, h2, h3, h4, h5, h6,
+  .elementor-heading-title,
+  .elementor-price-table__header,
+  .elementor-price-table__heading,
+  .elementor-price-table__price,
+  .elementor-price-table__integer-part,
+  .elementor-counter-number-wrapper,
+  .elementor-counter-number,
+  .ekit-accordion-title,
+  .elementor-icon-box-title,
+  .elementor-icon-box-title span,
+  .elementor-button,
+  .btn {
+    font-family: var(--font-heading) !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .elementor-heading-title {
+    font-weight: 700 !important;
+    color: #0E1B2A !important;
+  }
+
+  /* ── 2. Tentaklik Signature Pill Badges (Eyebrows) ── */
+  .elementor-element-3d6e6f05 .elementor-heading-title,
+  .elementor-element-4dd281f7 .elementor-heading-title,
+  .elementor-element-2bab9493 .elementor-heading-title,
+  .elementor-element-3064da64 .elementor-heading-title {
+    display: inline-flex !important;
+    align-items: center !important;
+    background: #FFF4EB !important;
+    color: #FF7A1A !important;
+    border: 1px solid #FFE3CC !important;
+    padding: 6px 18px !important;
+    border-radius: 999px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.04em !important;
+    text-transform: uppercase !important;
+    margin-bottom: 12px !important;
+    box-shadow: 0 2px 8px rgba(255, 122, 26, 0.08) !important;
+  }
+
+  /* ── 3. Tentaklik Signature Pill Buttons ── */
+  .elementor-button {
+    border-radius: 999px !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.01em !important;
+    transition: all 0.25s ease !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* General Elementor Button Defaults (Orange primary pill buttons) */
   .elementor-button, 
   .elementor-button:focus {
     background-color: #FF7A1A !important;
     color: #FFFFFF !important;
     border: 2px solid #FF7A1A !important;
-    transition: all 0.25s ease !important;
+    border-radius: 999px !important;
+    box-shadow: 0 6px 18px rgba(255, 122, 26, 0.28) !important;
   }
   .elementor-button:hover {
     background-color: #F26416 !important;
     border-color: #F26416 !important;
     color: #FFFFFF !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 24px rgba(255, 122, 26, 0.38) !important;
   }
   .elementor-button .elementor-button-text {
     color: inherit !important;
   }
 
-  /* Hero Secondary Button: Right Button (Konsultasi) - White background, black text, orange border */
+  /* Hero Secondary Button: Right Button (Konsultasi) - Tentaklik Ghost/Outline Pill */
   .elementor-element.elementor-element-fb10aa8 .elementor-button,
   .elementor-element.elementor-element-fb10aa8 .elementor-button:focus {
     background-color: #FFFFFF !important;
-    color: #1F2124 !important;
+    color: #0E1B2A !important;
     border: 2px solid #FF7A1A !important;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+    border-radius: 999px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
   }
   .elementor-element.elementor-element-fb10aa8 .elementor-button .elementor-button-text,
   .elementor-element.elementor-element-fb10aa8 .elementor-button .elementor-button-content-wrapper {
-    color: #1F2124 !important;
-    fill: #1F2124 !important;
+    color: #0E1B2A !important;
+    fill: #0E1B2A !important;
   }
   .elementor-element.elementor-element-fb10aa8 .elementor-button:hover {
-    background-color: #FFF7ED !important;
+    background-color: #FFF4EB !important;
     color: #FF7A1A !important;
     border-color: #FF7A1A !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 18px rgba(255, 122, 26, 0.16) !important;
   }
   .elementor-element.elementor-element-fb10aa8 .elementor-button:hover .elementor-button-text,
   .elementor-element.elementor-element-fb10aa8 .elementor-button:hover .elementor-button-content-wrapper {
@@ -201,34 +333,159 @@ const brandCss = `
     fill: #FF7A1A !important;
   }
 
-  /* Header Konsultasi Button (Desktop) - Solid orange background, white text */
+  /* Header Konsultasi Button (Desktop) - Solid orange pill button */
   .elementor-element-744cce71 .elementor-button {
     background-color: #FF7A1A !important;
     color: #FFFFFF !important;
     border: 2px solid #FF7A1A !important;
+    border-radius: 999px !important;
+    padding: 10px 24px !important;
+    box-shadow: 0 4px 14px rgba(255, 122, 26, 0.24) !important;
   }
   .elementor-element-744cce71 .elementor-button:hover {
     background-color: #F26416 !important;
     border-color: #F26416 !important;
     color: #FFFFFF !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 6px 18px rgba(255, 122, 26, 0.32) !important;
   }
   .elementor-element-744cce71 .elementor-button .elementor-button-text {
     color: #FFFFFF !important;
   }
 
+  /* Pricing Package Buttons */
+  /* Starter (elementor-element-48672874) & Bisnis (elementor-element-32bb167e): Tinted Pill */
+  .elementor-element-48672874 .elementor-button,
+  .elementor-element-32bb167e .elementor-button {
+    background-color: #FFF4EB !important;
+    color: #FF7A1A !important;
+    border: 2px solid #FFC79A !important;
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(255, 122, 26, 0.08) !important;
+  }
+  .elementor-element-48672874 .elementor-button .elementor-button-text,
+  .elementor-element-32bb167e .elementor-button .elementor-button-text {
+    color: #FF7A1A !important;
+  }
+  .elementor-element-48672874 .elementor-button:hover,
+  .elementor-element-32bb167e .elementor-button:hover {
+    background-color: #FF7A1A !important;
+    color: #FFFFFF !important;
+    border-color: #FF7A1A !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(255, 122, 26, 0.3) !important;
+  }
+  .elementor-element-48672874 .elementor-button:hover .elementor-button-text,
+  .elementor-element-32bb167e .elementor-button:hover .elementor-button-text {
+    color: #FFFFFF !important;
+  }
+
+  /* Standard (Featured) Package: Solid Orange Primary Pill */
+  .elementor-element-a92f3c7 .elementor-button {
+    background-color: #FF7A1A !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FF7A1A !important;
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 6px 20px rgba(255, 122, 26, 0.35) !important;
+  }
+  .elementor-element-a92f3c7 .elementor-button .elementor-button-text {
+    color: #FFFFFF !important;
+  }
+  .elementor-element-a92f3c7 .elementor-button:hover {
+    background-color: #F26416 !important;
+    border-color: #F26416 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 10px 26px rgba(255, 122, 26, 0.45) !important;
+  }
+
+  /* Final Bottom CTA Button */
+  .elementor-element-3289532a .elementor-button {
+    background-color: #FF7A1A !important;
+    color: #FFFFFF !important;
+    border: 2px solid #FF7A1A !important;
+    border-radius: 999px !important;
+    font-weight: 700 !important;
+    padding: 14px 32px !important;
+    box-shadow: 0 8px 24px rgba(255, 122, 26, 0.32) !important;
+  }
+  .elementor-element-3289532a .elementor-button:hover {
+    background-color: #F26416 !important;
+    border-color: #F26416 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 12px 28px rgba(255, 122, 26, 0.42) !important;
+  }
+
+  /* ── 4. Tentaklik Pricing Cards & Container Styling ── */
+  .elementor-element-1e9c81bf,
+  .elementor-element-72c924a4 {
+    border: 1.5px solid #E5E8EC !important;
+    border-radius: 24px !important;
+    background-color: #FFFFFF !important;
+    box-shadow: 0 4px 20px rgba(31, 26, 23, 0.04) !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+  }
+  .elementor-element-1e9c81bf:hover,
+  .elementor-element-72c924a4:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 16px 36px rgba(31, 26, 23, 0.08) !important;
+    border-color: #FFC79A !important;
+  }
+
+  /* Featured Standard Package */
+  .elementor-element-4b15f55e {
+    border: 2.5px solid #FF7A1A !important;
+    border-radius: 24px !important;
+    background-color: #FFFFFF !important;
+    box-shadow: 0 16px 40px rgba(255, 122, 26, 0.15) !important;
+    position: relative !important;
+    transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  }
+  .elementor-element-4b15f55e:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 20px 48px rgba(255, 122, 26, 0.24) !important;
+  }
+
+  /* Price Tags Typography */
+  .elementor-element-7b9bf2a5 .elementor-heading-title,
+  .elementor-element-124d90a4 .elementor-heading-title,
+  .elementor-element-3373216d .elementor-heading-title {
+    color: #FF7A1A !important;
+    font-weight: 700 !important;
+    font-size: 20px !important;
+  }
+  .elementor-element-13658b79 .elementor-heading-title,
+  .elementor-element-619e5f99 .elementor-heading-title,
+  .elementor-element-706b389d .elementor-heading-title {
+    color: #0E1B2A !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em !important;
+  }
+
+  /* Final CTA Container */
+  .elementor-element-4d5bd2f0 {
+    border-radius: 28px !important;
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEEDD 100%) !important;
+    border: 1.5px solid #FFD8BA !important;
+    box-shadow: 0 10px 30px rgba(255, 122, 26, 0.08) !important;
+  }
+
+  /* Nav active items & counters */
   .elementor-item.elementor-item-active,
   .elementor-item:hover {
     color: #FF7A1A !important;
   }
   .elementor-counter-number-wrapper {
     color: #FF7A1A !important;
+    font-weight: 800 !important;
   }
   .elementor-custom-embed-play {
     background: #FF7A1A !important;
     border-radius: 50% !important;
   }
 
-  /* Crisp white icons inside solid orange badges - perfectly sized, never stretched */
+  /* ── 5. Crisp white icons inside solid orange badges ── */
   .elementor-view-stacked .elementor-icon {
     background-color: #FF7A1A !important;
     color: #FFFFFF !important;
@@ -248,7 +505,8 @@ const brandCss = `
     min-height: 60px !important;
     max-height: 60px !important;
     flex: 0 0 60px !important;
-    border-radius: 12px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 14px rgba(255, 122, 26, 0.22) !important;
   }
   .elementor-view-stacked.elementor-shape-circle .elementor-icon {
     width: 64px !important;
@@ -259,6 +517,7 @@ const brandCss = `
     max-height: 64px !important;
     flex: 0 0 64px !important;
     border-radius: 50% !important;
+    box-shadow: 0 4px 14px rgba(255, 122, 26, 0.22) !important;
   }
   .elementor-view-stacked .elementor-icon svg {
     color: #FFFFFF !important;
@@ -340,9 +599,8 @@ const brandCss = `
     display: none !important;
   }
 
-  /* Tablet & Mobile Header: Logo on the LEFT, Menu Toggle on the RIGHT */
+  /* Tablet & Mobile Header */
   @media (max-width: 1024px) {
-    /* Hamburger Menu Toggle Button styling on tablet & mobile */
     .elementor-menu-toggle {
       cursor: pointer !important;
       -webkit-tap-highlight-color: transparent !important;
@@ -370,14 +628,12 @@ const brandCss = `
       color: inherit !important;
       stroke: currentColor !important;
     }
-    /* Show only open icon when closed, hide close icon */
     .elementor-menu-toggle .elementor-menu-toggle__icon--open {
       display: block !important;
     }
     .elementor-menu-toggle .elementor-menu-toggle__icon--close {
       display: none !important;
     }
-    /* Show only close icon when active/opened, hide open icon */
     .elementor-menu-toggle.elementor-active .elementor-menu-toggle__icon--open,
     .elementor-menu-toggle[aria-expanded="true"] .elementor-menu-toggle__icon--open {
       display: none !important;
@@ -395,7 +651,6 @@ const brandCss = `
       width: 100% !important;
       box-sizing: border-box !important;
     }
-    /* Logo Column: Left aligned */
     .elementor-51 .elementor-element.elementor-element-3d09dac8 {
       order: 1 !important;
       width: auto !important;
@@ -417,7 +672,6 @@ const brandCss = `
       width: auto !important;
       display: block !important;
     }
-    /* Menu Toggle Column: Right aligned */
     .elementor-51 .elementor-element.elementor-element-79590ac3 {
       order: 2 !important;
       width: auto !important;
@@ -453,7 +707,7 @@ const brandCss = `
       z-index: 9999 !important;
       background-color: #FFFFFF !important;
       box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.1) !important;
-      border-radius: 7px !important;
+      border-radius: 12px !important;
     }
     .elementor-51 .elementor-element.elementor-element-374310bb .elementor-nav-menu--dropdown .elementor-item {
       color: #1F2124 !important;
@@ -469,18 +723,31 @@ const brandCss = `
     }
   }
 
-  /* FAQ Accordion Styling & Smooth Toggle */
+  /* ── 6. FAQ Accordion Styling (Tentaklik Clean Rounded Cards) ── */
+  .ekit-wid-con .elementskit-accordion .elementskit-card {
+    border: 1px solid #E5E8EC !important;
+    border-radius: 14px !important;
+    overflow: hidden !important;
+    margin-bottom: 14px !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+  .ekit-wid-con .elementskit-accordion .elementskit-card:hover {
+    border-color: #FFC79A !important;
+    box-shadow: 0 4px 12px rgba(255, 122, 26, 0.06) !important;
+  }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link {
     cursor: pointer !important;
     transition: background-color 0.25s ease, color 0.25s ease !important;
+    padding: 16px 20px !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="true"] {
     background-color: #FF7A1A !important;
     color: #FFFFFF !important;
-    border-radius: 7px 7px 0 0 !important;
+    border-radius: 14px 14px 0 0 !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="true"] .ekit-accordion-title {
     color: #FFFFFF !important;
+    font-weight: 700 !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="true"] .ekit_accordion_active_icon {
     display: block !important;
@@ -493,12 +760,13 @@ const brandCss = `
     display: none !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="false"] {
-    background-color: #f7f9fb !important;
-    color: #1f2124 !important;
-    border-radius: 7px !important;
+    background-color: #F8FAFC !important;
+    color: #0E1B2A !important;
+    border-radius: 14px !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="false"] .ekit-accordion-title {
-    color: #1f2124 !important;
+    color: #0E1B2A !important;
+    font-weight: 600 !important;
   }
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="false"] .ekit_accordion_active_icon {
     display: none !important;
@@ -510,6 +778,13 @@ const brandCss = `
   .ekit-wid-con .elementskit-accordion .elementskit-card-header > .elementskit-btn-link[aria-expanded="false"] .ekit_accordion_normal_icon i {
     color: #FF7A1A !important;
   }
+  .ekit-wid-con .elementskit-card-body.ekit-accordion--content {
+    background-color: #FFFFFF !important;
+    padding: 16px 20px 20px !important;
+    color: #4B5563 !important;
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
   .ekit-wid-con .collapse:not(.in):not(.show) {
     display: none !important;
   }
@@ -518,13 +793,13 @@ const brandCss = `
     display: block !important;
   }
 
-  /* ── Tentaklik Official Footer ── */
+  /* ── 7. Tentaklik Official Footer ── */
   .footer {
     background-color: #0E1B2A !important;
     color: #D1D5DB !important;
     padding: 64px 0 32px !important;
     margin-top: 40px !important;
-    font-family: 'Poppins', 'Jost', sans-serif !important;
+    font-family: 'Inter', sans-serif !important;
     border: none !important;
   }
   .footer .container {
@@ -587,8 +862,8 @@ const brandCss = `
     color: #FFFFFF !important;
     font-size: 16px !important;
     margin-bottom: 16px !important;
-    font-weight: 600 !important;
-    font-family: 'Poppins', sans-serif !important;
+    font-weight: 700 !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
   }
   .footer ul {
     list-style: none !important;
@@ -700,7 +975,7 @@ html = html.replace('</head>', brandCss + '\n</head>');
 html = html.split('<script src="/template/assets/js/').join('<script is:inline src="/template/assets/js/');
 
 // 9. Prepend Astro frontmatter
-const astroDoc = '---\n// Exact layout, sections, fonts, copywriting & responsive mode from template with Tentaklik orange & SVGs\n---\n' + html;
+const astroDoc = '---\n// Exact layout, sections, fonts, copywriting & responsive mode with Tentaklik primary design system\n---\n' + html;
 
 fs.writeFileSync('src/pages/v2.astro', astroDoc, 'utf8');
-console.log('SUCCESS: Generated v2.astro with template native responsive mode restored!');
+console.log('SUCCESS: Generated v2.astro with Tentaklik primary design system!');
