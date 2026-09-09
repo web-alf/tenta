@@ -57,8 +57,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   color: var(--orange-600);
 }
 .btn-wa {
-  background: var(--orange-700);
+  background: var(--orange-500);
   color: white;
+  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.28);
+}
+.btn-wa:hover {
+  background: var(--orange-600);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(255, 107, 26, 0.34);
 }
 .btn-wa::before {
   content: "";
