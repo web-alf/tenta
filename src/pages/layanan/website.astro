@@ -107,23 +107,37 @@ const faqs = [
   },
 ];
 
+const pageKeywords = [
+  'jasa pembuatan website',
+  'jasa pembuatan website profesional',
+  'jasa bikin website',
+  'jasa website company profile',
+  'jasa landing page',
+  'jasa website semarang',
+  'web developer indonesia',
+  'jasa website toko online',
+  'bikin website murah',
+  'jasa buat website umkm',
+  'tentaklik',
+];
+
 const jsonLd = [
   serviceJsonLd({
     name: pageSeo.title,
     description: pageSeo.description,
     url,
-    serviceType: "Website Development",
+    serviceType: "Jasa Pembuatan Website",
     plans: [
-      { name: "Starter", price: "3.990.000" },
-      { name: "Standard", price: "5.940.000" },
-      { name: "Bisnis", price: "7.490.000" },
+      { name: "Starter", price: "3990000" },
+      { name: "Standard", price: "5940000" },
+      { name: "Bisnis", price: "7490000" },
     ],
   }),
   faqJsonLd(faqs),
   breadcrumbJsonLd([
     { name: 'Beranda', url: site.url },
     { name: 'Layanan', url: `${site.url}/#layanan` },
-    { name: 'Website', url },
+    { name: 'Jasa Pembuatan Website', url },
   ]),
 ];
 ---
@@ -131,6 +145,8 @@ const jsonLd = [
 <BaseLayout
   title={pageSeo.title}
   description={pageSeo.description}
+  keywords={pageKeywords}
+  image="/assets/services/webdev.png"
   active="layanan"
   jsonLd={jsonLd}
 >
