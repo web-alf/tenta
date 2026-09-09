@@ -1,0 +1,75 @@
+---
+const bonuses = [
+  'Konsultasi Strategi Digital Marketing & Iklan Berbayar',
+  'Setup Google Analytics 4 & Integrasi Meta Pixel',
+  'Bimbingan Langsung Pengelolaan Konten Website',
+  'Garansi Maintenance & Bantuan Teknis Responsif',
+];
+---
+
+<section class="py-20 lg:py-28 bg-gradient-to-b from-white to-orange-50/50 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left: Bonus Graphic -->
+      <div class="lg:col-span-6">
+        <div class="relative rounded-2xl bg-white p-4 shadow-xl border border-orange-100 overflow-hidden">
+          <img
+            src="/assets/redesign/pesen-website-banyak-bonus-ahzelan.webp"
+            alt="Bonus Pembuatan Website Tentaklik"
+            class="w-full h-auto rounded-xl object-cover"
+            loading="lazy"
+            width="768"
+            height="697"
+          />
+        </div>
+      </div>
+
+      <!-- Right: Bonus Copy -->
+      <div class="lg:col-span-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100 text-[#C94E0E] text-xs font-bold uppercase tracking-wider mb-4">
+          Bonus Spesial Klien Tentaklik
+        </div>
+        
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0E1B2A] tracking-tight leading-tight mb-6">
+          Bukan Cuma Website, Kami Ingin Bisnis Anda <span class="text-[#FF7A1A]">Benar-Benar Tumbuh</span>
+        </h2>
+
+        <div class="space-y-4 text-gray-600 text-base sm:text-lg leading-relaxed mb-8">
+          <p>
+            Banyak jasa pembuatan website di luar sana yang selesai membuat website lalu meninggalkannya begitu saja tanpa kejelasan arah pemasaran.
+          </p>
+          <p>
+            Sebagai agensi digital marketing, <strong>Tentaklik</strong> melengkapi website Anda dengan infrastruktur analitik, integrasi tracking conversion, dan arahan strategi agar website Anda siap menjadi mesin penghasil penjualan.
+          </p>
+        </div>
+
+        <!-- Bonus Checklist -->
+        <div class="space-y-3 mb-10">
+          {bonuses.map((b) => (
+            <div class="flex items-center gap-3">
+              <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+                </svg>
+              </span>
+              <span class="text-sm sm:text-base font-semibold text-gray-800">{b}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Action Button -->
+        <a
+          href="#harga"
+          class="inline-flex items-center gap-2 px-7 py-4 rounded-xl bg-[#FF7A1A] hover:bg-[#F26416] text-white text-base font-bold shadow-lg shadow-orange-500/25 hover:shadow-xl transition-all"
+        >
+          <span>Klaim Bonus & Buat Sekarang</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>

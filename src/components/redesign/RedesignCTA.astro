@@ -1,0 +1,72 @@
+---
+import WhatsApp from '@components/icons/WhatsApp.astro';
+import { waLink } from '@data/site';
+
+const ctaWaUrl = waLink('Halo Tentaklik, saya ingin konsultasi dan memulai pembuatan website bisnis saya');
+---
+
+<section class="py-20 lg:py-24 bg-gradient-to-br from-[#0E1B2A] via-[#1A2A3D] to-[#0E1B2A] text-white relative overflow-hidden">
+  <!-- Glowing background elements -->
+  <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-[#FF7A1A]/20 to-orange-500/10 rounded-full blur-3xl"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-orange-400 text-xs font-bold uppercase tracking-wider mb-6">
+      Mulai Transformasi Digital Hari Ini
+    </div>
+
+    <h2 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight mb-6">
+      Siap Buat Bisnis Anda <br class="hidden sm:inline" />
+      <span class="bg-gradient-to-r from-[#FF7A1A] via-orange-400 to-amber-300 bg-clip-text text-transparent">
+        10X Lebih Maju & Kredibel?
+      </span>
+    </h2>
+
+    <p class="text-base sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+      Jangan tunda lagi. Bangun aset digital terbaik bisnis Anda sekarang dan rasakan kemudahan mendatangkan calon pelanggan baru setiap hari.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+      <a
+        href={ctaWaUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4.5 rounded-2xl bg-[#FF7A1A] hover:bg-[#F26416] text-white text-base sm:text-lg font-bold shadow-xl shadow-orange-500/30 hover:shadow-2xl hover:shadow-orange-500/50 transition-all duration-200 hover:-translate-y-0.5"
+      >
+        <WhatsApp size={22} class="text-white" />
+        <span>Hubungi Kami via WhatsApp</span>
+      </a>
+
+      <a
+        href="#harga"
+        class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4.5 rounded-2xl bg-white/10 hover:bg-white/15 text-white border border-white/20 text-base sm:text-lg font-bold transition-all duration-200 hover:-translate-y-0.5"
+      >
+        <span>Lihat Pilihan Paket</span>
+      </a>
+    </div>
+
+    <!-- Trust signals -->
+    <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm font-semibold text-gray-300">
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Respon Cepat & Ramah</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>Konsultasi 100% Gratis</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+        <span>After Sales & Garansi Terbaik</span>
+      </div>
+    </div>
+
+  </div>
+</section>

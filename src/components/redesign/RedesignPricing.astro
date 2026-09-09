@@ -1,0 +1,171 @@
+---
+import WhatsApp from '@components/icons/WhatsApp.astro';
+import { waLink } from '@data/site';
+
+const plans = [
+  {
+    name: 'Starter',
+    tagline: 'Cocok untuk UMKM atau profesional yang ingin mulai go-online dengan anggaran efisien.',
+    price: '3.990.000',
+    renewal: 'Perpanjangan Rp 990.000 / tahun',
+    featured: false,
+    waText: 'Salam Tentaklik, saya tertarik dengan paket website STARTER',
+    features: [
+      { text: 'Gratis Domain .com / .id (1 Tahun)', included: true },
+      { text: 'Cloud Hosting Cepat & Stabil', included: true },
+      { text: '100% Mobile & Tablet Responsive', included: true },
+      { text: 'Desain Elegan & Profesional (1-3 Halaman)', included: true },
+      { text: 'Gratis Sertifikat Keamanan SSL', included: true },
+      { text: 'Akses Admin 100% Milik Anda', included: true },
+      { text: 'Setup Dasar SEO & Meta Tag', included: true },
+      { text: 'Integrasi Tombol WhatsApp & Media Sosial', included: true },
+      { text: 'Email Bisnis Profesional (1 Akun)', included: false },
+      { text: 'Integrasi Google Analytics 4 & Meta Pixel', included: false },
+    ],
+  },
+  {
+    name: 'Standard',
+    tagline: 'Pilihan terpopuler untuk bisnis & brand yang ingin website berkonversi tinggi dan siap diiklankan.',
+    price: '5.940.000',
+    renewal: 'Perpanjangan Rp 1.200.000 / tahun',
+    featured: true,
+    badge: 'PALING POPULER',
+    waText: 'Salam Tentaklik, saya tertarik dengan paket website STANDARD',
+    features: [
+      { text: 'Semua Keunggulan Paket Starter', included: true },
+      { text: 'Custom Desain Eksklusif (Hingga 5-7 Halaman)', included: true },
+      { text: 'Cloud Hosting High-Performance Lebih Cepat', included: true },
+      { text: 'Integrasi WhatsApp Chatbot & Formulir Lead', included: true },
+      { text: 'Setup Google Analytics 4 & Meta Pixel Tracking', included: true },
+      { text: 'Hingga 5 Email Bisnis (@domainanda.com)', included: true },
+      { text: 'Full Backup Otomatis & Proteksi Spam', included: true },
+      { text: 'Priority Support & Panduan Pengelolaan', included: true },
+      { text: 'Konsultasi Strategi Iklan Meta / Google Ads', included: true },
+      { text: 'Payment Gateway Otomatis (E-Commerce)', included: false },
+    ],
+  },
+  {
+    name: 'Custom / Pro',
+    tagline: 'Solusi website skala besar dengan arsitektur khusus, database, atau integrasi sistem bisnis.',
+    price: 'Negosiasi',
+    renewal: 'Menyesuaikan spesifikasi server & scope',
+    featured: false,
+    waText: 'Salam Tentaklik, saya ingin konsultasi paket website CUSTOM / PRO',
+    features: [
+      { text: 'Semua Keunggulan Paket Standard', included: true },
+      { text: 'Arsitektur Khusus (E-commerce, Donasi, Booking, Web App)', included: true },
+      { text: 'Integrasi Payment Gateway (QRIS, VA, E-Wallet)', included: true },
+      { text: 'Multi-Language (ID & EN)', included: true },
+      { text: 'Server VPS Dedicated / High Traffic Readiness', included: true },
+      { text: 'Custom Database & Dashboard Manajemen Internal', included: true },
+      { text: 'A/B Testing & Optimasi Kecepatan Ekstrem', included: true },
+      { text: 'Dedicated Project Manager & SLA Khusus', included: true },
+      { text: 'Unlimited Konsultasi Digital Marketing', included: true },
+      { text: 'Garansi Penuh & Maintenance Prioritas', included: true },
+    ],
+  },
+];
+---
+
+<section id="harga" class="py-20 lg:py-28 bg-gray-50/50 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-100 text-[#C94E0E] text-xs font-bold uppercase tracking-wider mb-4">
+        Transparan & Tanpa Biaya Tersembunyi
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0E1B2A] tracking-tight mb-4">
+        Pilihan Paket Pembuatan Website
+      </h2>
+      <p class="text-gray-600 text-base sm:text-lg">
+        Investasi terbaik untuk membangun aset digital bisnis Anda. Seluruh paket sudah termasuk kepemilikan penuh dan dukungan teknis.
+      </p>
+    </div>
+
+    <!-- 3 Pricing Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+      {plans.map((p) => (
+        <div class={`rounded-3xl p-8 sm:p-10 flex flex-col justify-between transition-all duration-300 relative ${
+          p.featured
+            ? 'bg-white border-2 border-[#FF7A1A] shadow-2xl shadow-orange-500/15 ring-4 ring-orange-500/10 lg:-translate-y-2'
+            : 'bg-white border border-gray-200 shadow-sm hover:shadow-xl hover:border-gray-300'
+        }`}>
+          
+          {/* Top Badge for Featured */}
+          {p.featured && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 rounded-full bg-gradient-to-r from-[#FF7A1A] to-[#F26416] text-white text-xs font-black tracking-wider uppercase shadow-md">
+              {p.badge}
+            </div>
+          )}
+
+          <div>
+            <!-- Name & Tagline -->
+            <h3 class="text-2xl font-extrabold text-[#0E1B2A] mb-2">{p.name}</h3>
+            <p class="text-xs text-gray-500 min-h-[36px] mb-6 leading-relaxed">{p.tagline}</p>
+
+            <!-- Price -->
+            <div class="mb-6 pb-6 border-b border-gray-100">
+              <div class="flex items-baseline gap-1">
+                {p.price !== 'Negosiasi' && <span class="text-lg font-bold text-gray-700">Rp</span>}
+                <span class="text-4xl sm:text-5xl font-black text-[#0E1B2A] tracking-tight">
+                  {p.price}
+                </span>
+              </div>
+              <div class="text-xs font-medium text-gray-500 mt-2">
+                {p.renewal}
+              </div>
+            </div>
+
+            <!-- Features List -->
+            <div class="space-y-3.5 mb-8">
+              <div class="text-xs font-bold uppercase tracking-wider text-gray-400">Fasilitas yang didapatkan:</div>
+              {p.features.map((f) => (
+                <div class="flex items-start gap-3 text-xs sm:text-sm">
+                  {f.included ? (
+                    <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </span>
+                  ) : (
+                    <span class="w-5 h-5 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </span>
+                  )}
+                  <span class={f.included ? 'text-gray-700 font-medium' : 'text-gray-400 line-through'}>
+                    {f.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Card Button -->
+          <div class="pt-4 border-t border-gray-100">
+            <a
+              href={waLink(p.waText)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class={`w-full inline-flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-bold text-sm transition-all duration-200 shadow-sm ${
+                p.featured
+                  ? 'bg-[#FF7A1A] hover:bg-[#F26416] text-white shadow-orange-500/30 hover:shadow-lg'
+                  : 'bg-[#0E1B2A] hover:bg-[#1A2A3D] text-white hover:shadow-md'
+              }`}
+            >
+              <WhatsApp size={18} class="text-white" />
+              <span>Pilih Paket {p.name}</span>
+            </a>
+            <p class="text-[11px] text-center text-gray-400 mt-2">
+              *Tanya-tanya & konsultasi gratis via WhatsApp
+            </p>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>

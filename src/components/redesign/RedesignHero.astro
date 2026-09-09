@@ -1,0 +1,136 @@
+---
+import WhatsApp from '@components/icons/WhatsApp.astro';
+import { waLink } from '@data/site';
+
+const heroWaUrl = waLink('Halo Tentaklik, saya ingin konsultasi buat website untuk bisnis saya');
+---
+
+<section id="beranda" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-28 bg-gradient-to-b from-orange-50/40 via-white to-white">
+  <!-- Subtle background ambient glows -->
+  <div class="pointer-events-none absolute -top-24 right-1/4 w-96 h-96 bg-orange-400/10 rounded-full blur-3xl"></div>
+  <div class="pointer-events-none absolute top-1/2 -left-20 w-80 h-80 bg-amber-300/10 rounded-full blur-3xl"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Copy & CTAs -->
+      <div class="lg:col-span-7 flex flex-col items-start text-left">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-100/70 border border-orange-200/80 text-[#C94E0E] text-xs sm:text-sm font-semibold mb-6 shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-[#FF7A1A] animate-pulse"></span>
+          <span>#onlinekanbisnisanda bersama Tentaklik</span>
+        </div>
+
+        <!-- Main Headline -->
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#0E1B2A] tracking-tight leading-[1.15] mb-6">
+          Buat Bisnis Kamu <span class="bg-gradient-to-r from-[#FF7A1A] via-[#F26416] to-[#C94E0E] bg-clip-text text-transparent">10X Lebih Maju</span> Pakai Website Profesional
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl mb-8">
+          Bukan sekadar jasa pembuatan website biasa, kami rancang website modern, loading super ngebut, dan didesain khusus untuk meningkatkan penjualan dengan after sales terbaik.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-10">
+          <a
+            href="#harga"
+            class="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-gradient-to-r from-[#FF7A1A] to-[#F26416] hover:from-[#F26416] hover:to-[#C94E0E] text-white text-base font-bold shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 transition-all duration-200 hover:-translate-y-0.5 text-center"
+          >
+            <span>Buat Sekarang</span>
+            <svg class="w-5 h-5 transition-transform duration-150 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+
+          <a
+            href={heroWaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white hover:bg-gray-50 text-[#0E1B2A] border-2 border-gray-200 hover:border-[#FF7A1A] text-base font-bold shadow-xs hover:shadow-md transition-all duration-200 hover:-translate-y-0.5 text-center"
+          >
+            <WhatsApp size={20} class="text-[#25D366]" />
+            <span>Konsultasi Gratis</span>
+          </a>
+        </div>
+
+        <!-- 3 Feature Bullets -->
+        <div class="pt-6 border-t border-gray-100 w-full flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-semibold text-gray-700">
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <span>Sekali Bayar</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <span>Akses 100% Milik Anda</span>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <span>Full Support & Garansi</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Hero Visual Showcase -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-lg lg:max-w-none">
+          <!-- Background card shadow -->
+          <div class="absolute -inset-2 rounded-3xl bg-gradient-to-tr from-orange-400/20 to-amber-300/20 blur-xl"></div>
+          
+          <!-- Image Container -->
+          <div class="relative rounded-2xl bg-white p-3 sm:p-4 shadow-2xl border border-gray-100 overflow-hidden">
+            <img
+              src="/assets/redesign/jasa-pembuatan-website-after-sales-terbaik-sepanjang-masa.webp"
+              alt="Jasa Pembuatan Website Tentaklik"
+              class="w-full h-auto rounded-xl object-cover transform hover:scale-[1.02] transition-transform duration-500"
+              width="896"
+              height="764"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+
+          <!-- Floating Badge 1: PageSpeed -->
+          <div class="absolute -bottom-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-xl border border-gray-100 flex items-center gap-3 animate-bounce [animation-duration:4s]">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black text-lg">
+              98
+            </div>
+            <div>
+              <div class="text-xs font-bold text-gray-900">PageSpeed Score</div>
+              <div class="text-[11px] text-emerald-600 font-semibold">Ultra Fast Loading ⚡</div>
+            </div>
+          </div>
+
+          <!-- Floating Badge 2: Conversion -->
+          <div class="absolute -top-4 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-xl border border-gray-100 flex items-center gap-3 hidden sm:flex">
+            <div class="w-10 h-10 rounded-xl bg-orange-50 text-[#FF7A1A] flex items-center justify-center">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-gray-900">Konversi Optimal</div>
+              <div class="text-[11px] text-gray-500 font-medium">Siap Iklan & SEO</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

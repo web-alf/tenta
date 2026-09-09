@@ -1,0 +1,93 @@
+---
+---
+
+<section class="py-20 lg:py-28 bg-[#0E1B2A] text-white relative overflow-hidden">
+  <!-- Subtle dark glow effects -->
+  <div class="pointer-events-none absolute -top-40 right-0 w-96 h-96 bg-[#FF7A1A]/10 rounded-full blur-3xl"></div>
+  <div class="pointer-events-none absolute -bottom-40 left-0 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl"></div>
+
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+    
+    <!-- Badges & Heading -->
+    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-orange-400 text-xs font-bold uppercase tracking-wider mb-6">
+      Sistemasi Bisnis Otomatis
+    </div>
+
+    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-8">
+      Mengurus Bisnis Jadi <span class="bg-gradient-to-r from-orange-400 to-amber-300 bg-clip-text text-transparent">Lebih Teratur & Efisien</span>
+    </h2>
+
+    <!-- Video Frame / Embed -->
+    <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 max-w-4xl mx-auto mb-10 group aspect-video bg-black flex items-center justify-center">
+      <!-- Thumbnail Image -->
+      <img
+        id="video-thumbnail"
+        src="/assets/redesign/ngurusin-bisnis-lebih-mudah-min.webp"
+        alt="Mengurus Bisnis Lebih Mudah dengan Website"
+        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90"
+        loading="lazy"
+      />
+      
+      <!-- Overlay Play Button -->
+      <button
+        id="play-video-btn"
+        type="button"
+        class="absolute z-20 w-20 h-20 rounded-full bg-[#FF7A1A] hover:bg-[#F26416] text-white flex items-center justify-center shadow-xl shadow-orange-500/40 hover:scale-110 transition-all duration-200 cursor-pointer"
+        aria-label="Putar Video Penjelasan"
+      >
+        <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </button>
+
+      <!-- Video Container Container (Dynamically injected upon click) -->
+      <div id="video-iframe-container" class="hidden absolute inset-0 w-full h-full z-30"></div>
+    </div>
+
+    <!-- Description -->
+    <div class="max-w-3xl mx-auto space-y-4 text-gray-300 text-base sm:text-lg leading-relaxed mb-10">
+      <p>
+        Sebuah bisnis pasti membutuhkan website karena bisa menghemat waktu berharga Anda, sehingga Anda bisa fokus pada hal krusial seperti penjualan, ekspansi, dan pelayanan pelanggan.
+      </p>
+      <p class="text-orange-200/90 font-medium">
+        Tampilan kreatif & interaktif adalah prioritas kami, ditambah after-sales responsif yang siap membimbing strategi digital marketing bisnis Anda. Setelah website Anda tayang, Anda tidak akan kami lepas sendirian!
+      </p>
+    </div>
+
+    <!-- CTA Button -->
+    <a
+      href="#harga"
+      class="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#FF7A1A] to-[#F26416] hover:from-[#F26416] hover:to-[#C94E0E] text-white font-bold text-base shadow-lg shadow-orange-500/25 hover:shadow-xl hover:shadow-orange-500/35 transition-all duration-200 hover:-translate-y-0.5"
+    >
+      <span>Miliki Website Sekarang</span>
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+      </svg>
+    </a>
+
+  </div>
+</section>
+
+<script>
+  const playBtn = document.getElementById('play-video-btn');
+  const iframeContainer = document.getElementById('video-iframe-container');
+  const thumbnail = document.getElementById('video-thumbnail');
+
+  if (playBtn && iframeContainer && thumbnail) {
+    playBtn.addEventListener('click', () => {
+      iframeContainer.innerHTML = `
+        <iframe 
+          class="w-full h-full" 
+          src="https://www.youtube-nocookie.com/embed/XoZbnZkzpyo?autoplay=1&rel=0" 
+          title="Video Penjelasan Website" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      `;
+      iframeContainer.classList.remove('hidden');
+      playBtn.classList.add('hidden');
+      thumbnail.classList.add('hidden');
+    });
+  }
+</script>

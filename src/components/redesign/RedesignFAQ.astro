@@ -1,0 +1,66 @@
+---
+const faqs = [
+  {
+    q: 'Berapa lama estimasi proses pembuatan website sampai online?',
+    a: 'Untuk paket Starter biasanya memakan waktu 3–5 hari kerja setelah materi lengkap. Untuk paket Standard memakan waktu sekitar 7–14 hari kerja, dan paket Custom menyesuaikan kompleksitas fitur yang diminta.',
+  },
+  {
+    q: 'Apakah saya bisa mengedit teks, foto, dan produk sendiri nanti?',
+    a: 'Tentu saja! Anda akan diberikan akses admin 100% serta tutorial panduan praktis yang mudah dipahami orang awam sekalipun tanpa perlu latar belakang pemrograman.',
+  },
+  {
+    q: 'Apakah biaya paket sudah termasuk domain (.com/.id) dan hosting?',
+    a: 'Ya, seluruh paket pembuatan website Tentaklik sudah termasuk gratis nama domain (.com atau .id) dan hosting cloud berkecepatan tinggi untuk tahun pertama.',
+  },
+  {
+    q: 'Apakah ada biaya tersembunyi atau iuran bulanan?',
+    a: 'Tidak ada biaya bulanan sama sekali. Biaya pembuatan hanya dibayarkan sekali di awal. Biaya berikutnya hanyalah perpanjangan tahunan untuk hosting dan domain mulai tahun ke-2.',
+  },
+  {
+    q: 'Bagaimana jika saya belum memiliki materi teks atau foto produk yang bagus?',
+    a: 'Tim Tentaklik siap membantu menyusun copywriting menarik dan mengkurasi materi grafis berkualitas tinggi agar tampilan website Anda tetap profesional dan berdaya pikat tinggi.',
+  },
+  {
+    q: 'Apakah website ini sudah siap dipakai untuk beriklan di Google Ads & Meta Ads?',
+    a: 'Sangat siap. Kami mengoptimalkan struktur website dengan prinsip mobile-first, loading super cepat (PageSpeed tinggi), serta pemasangan tracking Pixel & Analytics sehingga siap mendulang konversi maksimal saat diiklankan.',
+  },
+];
+---
+
+<section id="faq" class="py-20 lg:py-28 bg-white relative">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF7A1A] text-xs font-bold uppercase tracking-wider mb-4">
+        Pertanyaan Umum
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0E1B2A] tracking-tight mb-4">
+        Frequently Asked Questions (FAQ)
+      </h2>
+      <p class="text-gray-600 text-base sm:text-lg">
+        Hal-hal yang sering ditanyakan sebelum memulai pembuatan website bersama Tentaklik.
+      </p>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="space-y-4">
+      {faqs.map((item) => (
+        <details class="group rounded-2xl border border-gray-200/90 bg-gray-50/50 p-6 [&_summary::-webkit-details-marker]:hidden transition-all duration-200 hover:border-orange-200 open:bg-white open:shadow-md open:border-orange-200">
+          <summary class="flex cursor-pointer items-center justify-between gap-4 text-left font-bold text-gray-900 group-hover:text-[#FF7A1A] transition-colors">
+            <span class="text-base sm:text-lg">{item.q}</span>
+            <span class="shrink-0 rounded-full p-1.5 text-gray-400 group-hover:text-[#FF7A1A] transition-transform duration-200 group-open:-rotate-180">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="mt-4 pt-4 border-t border-gray-100 text-sm sm:text-base text-gray-600 leading-relaxed">
+            {item.a}
+          </div>
+        </details>
+      ))}
+    </div>
+
+  </div>
+</section>

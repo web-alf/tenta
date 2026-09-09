@@ -1,0 +1,63 @@
+---
+const clients = [
+  { name: 'Al Fatihah', src: '/assets/redesign/client-alfatihah-min.png' },
+  { name: 'Al Huffadz', src: '/assets/redesign/client-alhuffadz-min.png' },
+  { name: 'MPA', src: '/assets/redesign/client-mpa-min.png' },
+  { name: 'BMH', src: '/assets/redesign/client-bmh-min.png' },
+  { name: 'Sandaran', src: '/assets/redesign/client-sandaran-min.png' },
+  { name: 'Asgatour', src: '/assets/redesign/client-asgatour-min.png' },
+];
+
+const stats = [
+  { value: '172+', label: 'Proyek Website Selesai', desc: 'Selesai tepat waktu & langsung live' },
+  { value: '500+', label: 'Bisnis Online Terbantu', desc: 'Dari UMKM, brand, hingga korporasi' },
+  { value: '99.8%', label: 'Tingkat Kepuasan Klien', desc: 'Dukungan after-sales responsif' },
+];
+---
+
+<section class="py-16 bg-white border-y border-gray-100 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Title -->
+    <div class="text-center mb-10">
+      <p class="text-xs sm:text-sm font-bold tracking-widest text-[#FF7A1A] uppercase mb-2">
+        Kredibilitas & Rekam Jejak
+      </p>
+      <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0E1B2A]">
+        Dipercaya 742+ Klien & Partner Bisnis
+      </h3>
+    </div>
+
+    <!-- Client Logos Carousel / Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 sm:gap-8 items-center justify-center mb-16">
+      {clients.map((c) => (
+        <div class="h-20 p-3 rounded-xl bg-gray-50/70 border border-gray-100 flex items-center justify-center hover:bg-white hover:border-orange-200 hover:shadow-md transition-all duration-200 grayscale hover:grayscale-0 opacity-75 hover:opacity-100">
+          <img
+            src={c.src}
+            alt={c.name}
+            class="max-h-12 w-auto object-contain"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {stats.map((stat) => (
+        <div class="rounded-2xl bg-gradient-to-br from-orange-50/80 via-white to-white p-8 border border-orange-100/90 text-center shadow-2xs hover:shadow-md transition-all">
+          <div class="text-4xl sm:text-5xl font-black bg-gradient-to-r from-[#FF7A1A] to-[#F26416] bg-clip-text text-transparent mb-2">
+            {stat.value}
+          </div>
+          <div class="text-base font-bold text-[#0E1B2A] mb-1">
+            {stat.label}
+          </div>
+          <div class="text-xs text-gray-500">
+            {stat.desc}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
