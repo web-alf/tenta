@@ -9,23 +9,23 @@ import { site } from '@data/site';
 const url = `${site.url}/en/layanan/website`;
 
 const pageSeo = {
-  title: "Professional Website Development & High-Conversion Services — Tentaklik",
-  description: "Professional website development services in Indonesia: high-converting landing pages, corporate company profiles, and e-commerce stores. Fast loading, mobile-first, SEO-ready, and conversion-focused.",
+  title: "Professional Website Development Services & High Conversion — Tentaklik",
+  description: "Professional website development services in Indonesia: high-converting landing pages, corporate profiles, and e-commerce stores. Fast loading, mobile-first, SEO-ready, and conversion-focused.",
 };
 
 const clientLogos = [
-  { src: '/assets/layanan/website/client-alfatihah-min.png', alt: 'Client Al-Fatihah' },
-  { src: '/assets/layanan/website/client-alhuffadz-min.png', alt: 'Client Al-Huffadz' },
-  { src: '/assets/layanan/website/client-mpa-min.png', alt: 'Client MPA' },
-  { src: '/assets/layanan/website/client-bmh-min.png', alt: 'Client BMH' },
-  { src: '/assets/layanan/website/client-sandaran-min.png', alt: 'Client Sandaran' },
-  { src: '/assets/layanan/website/client-asgatour-min.png', alt: 'Client Asgatour' },
+  { src: '/assets/layanan/website/client-alfatihah-min.png', alt: 'client-alfatihah-min.png' },
+  { src: '/assets/layanan/website/client-alhuffadz-min.png', alt: 'client-alhuffadz-min.png' },
+  { src: '/assets/layanan/website/client-mpa-min.png', alt: 'client-mpa-min.png' },
+  { src: '/assets/layanan/website/client-bmh-min.png', alt: 'client-bmh-min.png' },
+  { src: '/assets/layanan/website/client-sandaran-min.png', alt: 'client-sandaran-min.png' },
+  { src: '/assets/layanan/website/client-asgatour-min.png', alt: 'client-asgatour-min.png' },
 ];
 
 const portfolios = [
   {
     title: "PT. Grajevan",
-    desc: "Corporate company profile featuring a contemporary and elegant design",
+    desc: "Corporate company profile featuring a contemporary, elegant aesthetic",
     img: "/assets/layanan/website/grajevan-mockup-min.png",
   },
   {
@@ -35,7 +35,7 @@ const portfolios = [
   },
   {
     title: "Rumah Yatim Indonesia",
-    desc: "Social foundation web platform with seamless online donation and crowdfunding features",
+    desc: "Social foundation web platform with seamless online donation and crowdfunding",
     img: "/assets/layanan/website/rumah-yatim-indonesia-mockup-min.png",
   },
   {
@@ -73,7 +73,7 @@ const features = [
   },
   {
     title: "Complete documentation",
-    desc: "Intuitive administration dashboards and clear documentation for effortless management",
+    desc: "Intuitive administration dashboards and clear documentation for effortless content management",
     icon: "book",
   },
   {
@@ -94,12 +94,12 @@ const faqs = [
     a: "Development timelines depend on scope and materials, but standard projects typically take only 1–7 business days.",
   },
   {
-    q: "What if I don't have technical skills?",
+    q: "What if I do not have technical skills?",
     a: "No worries at all! We provide personalized onboarding and clear step-by-step guidance until you feel completely confident managing your site.",
   },
   {
     q: "Can pricing be customized to fit my budget?",
-    a: "Absolutely. Let's discuss your exact project goals so we can recommend the most effective and economical solution.",
+    a: "Absolutely. Let us discuss your exact project goals so we can recommend the most effective and economical solution.",
   },
   {
     q: "Do you offer after-sales technical support?",
@@ -182,103 +182,91 @@ const jsonLd = [
             <ArrowRight size={16} />
           </a>
         </div>
-
+        
         <div class="v2-hero-badges">
           <div class="v2-badge-item">
             <span class="v2-badge-icon"><Check size={13} /></span>
-            <span>Lifetime warranty</span>
+            <span>Sekali bayar</span>
           </div>
           <div class="v2-badge-item">
             <span class="v2-badge-icon"><Check size={13} /></span>
-            <span>Free regular revisions</span>
+            <span>Akses 100%</span>
           </div>
           <div class="v2-badge-item">
             <span class="v2-badge-icon"><Check size={13} /></span>
-            <span>Free consultation</span>
+            <span>Full support</span>
           </div>
         </div>
       </div>
       
       <div class="v2-hero-visual">
         <div class="v2-hero-img-box">
-          <img
-            src="/assets/layanan/website/jasa-pembuatan-website-hero.webp"
-            alt="Professional Website Development Services"
-            width="560"
-            height="480"
-            fetchpriority="high"
-            decoding="async"
-          />
+          <picture>
+            <source srcset="/assets/layanan/website/jasa-pembuatan-website-hero.webp" type="image/webp" />
+            <img
+              src="/assets/layanan/website/jasa-pembuatan-website-hero.png"
+              alt="jasa pembuatan website after sales terbaik sepanjang masa"
+              width="896"
+              height="764"
+              class="v2-hero-img"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </picture>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 2. Solusi Masalah Section (4 Poin) -->
-  <section class="v2-problem-section">
-    <div class="container">
-      <div class="v2-section-head">
-        <h2 class="v2-sec-title">Often experiencing these issues when creating a website?</h2>
-        <p class="v2-sec-subtitle">Many assume building a website is complicated, expensive, and yields no return. In reality, the issue comes down to selecting the wrong development partner.</p>
+  <!-- 2. Solusi Terbaik Buat Sukses Di Era Digital -->
+  <section class="v2-solution-section" id="tentang">
+    <div class="container v2-solution-grid">
+      <div class="v2-solution-visual">
+        <img
+          src="/assets/layanan/website/jasa-pembuatan-website-after-sales-terbaik-min.webp"
+          alt="jasa pembuatan website after sales terbaik min"
+          width="960"
+          height="640"
+          loading="lazy"
+          class="v2-solution-img"
+        />
       </div>
-
-      <div class="v2-problem-grid">
-        <div class="v2-prob-card">
-          <div class="v2-prob-num">01</div>
-          <div class="v2-prob-body">
-            <h3>High costs, subpar results</h3>
-            <p>You paid millions of rupiah only to end up with an outdated design that falls short of expectations</p>
-          </div>
+      <div class="v2-solution-content">
+        <h2 class="v2-sec-title">The optimal solution to succeed in the digital era</h2>
+        <div class="v2-sec-desc">
+          <p>Modern advancements make conventional methods increasingly ineffective for sustaining business growth.</p>
+          <p>Your business scales significantly faster when you adapt and leverage digital media. Do not wait until you are left behind—take action today!</p>
         </div>
-
-        <div class="v2-prob-card">
-          <div class="v2-prob-num">02</div>
-          <div class="v2-prob-body">
-            <h3>Slow & delayed delivery</h3>
-            <p>Promised within a week, yet weeks slip past with no clear communication or project updates</p>
-          </div>
-        </div>
-
-        <div class="v2-prob-card">
-          <div class="v2-prob-num">03</div>
-          <div class="v2-prob-body">
-            <h3>Poor after-sales support</h3>
-            <p>As soon as the site launches, you are left abandoned whenever bugs or technical glitches arise</p>
-          </div>
-        </div>
-
-        <div class="v2-prob-card">
-          <div class="v2-prob-num">04</div>
-          <div class="v2-prob-body">
-            <h3>Not mobile friendly</h3>
-            <p>Broken smartphone layouts drive prospective buyers away before they even consider converting</p>
-          </div>
+        <div class="v2-btn-wrap">
+          <a href="#buat" class="btn btn-primary" title="buatsekarang">
+            Build now! <ArrowRight size={14} />
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 3. Nilai / 3 Pilar Section -->
+  <!-- 3. Value Proposition / 3 Fitur Nilai -->
   <section class="v2-values-section">
     <div class="container v2-values-grid">
-      <div class="v2-values-cards">
+      <div class="v2-value-cards">
         <div class="v2-value-card">
           <div class="v2-value-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
           </div>
           <div>
-            <h3>Trusted credibility</h3>
-            <p>A dedicated website instantly elevates your brand reputation and authority far beyond standard social media profiles</p>
+            <h3>Abundant organic traffic</h3>
+            <p>Customers increasingly prefer online solutions because they can access services from home effortlessly, making a website an essential asset</p>
           </div>
         </div>
 
         <div class="v2-value-card">
           <div class="v2-value-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           </div>
           <div>
             <h3>Broader market reach</h3>
-            <p>An online presence empowers customers across regions to discover your products easily and accelerate revenue</p>
+            <p>When your business is online, potential customers can discover your products or services with ease, accelerating your business growth</p>
           </div>
         </div>
 
@@ -288,7 +276,7 @@ const jsonLd = [
           </div>
           <div>
             <h3>Systematized operations</h3>
-            <p>Beyond marketing, a web platform serves as an operational asset for inquiries, customer support, and order processing</p>
+            <p>Beyond marketing, a website acts as an operational asset to automate customer service, streamline order processing, and organize reports</p>
           </div>
         </div>
       </div>
@@ -296,7 +284,7 @@ const jsonLd = [
       <div class="v2-values-info">
         <h2 class="v2-sec-title">The ultimate website development solution</h2>
         <div class="v2-sec-desc">
-          <p>Don't just take our word for it—our web development solutions have empowered hundreds of entrepreneurs, SMEs, and brands to scale online effortlessly.</p>
+          <p>Do not just take our word for it—our web development solutions have empowered hundreds of entrepreneurs, SMEs, and brands to scale online effortlessly.</p>
           <p>Many businesses hit a ceiling by clinging to manual, inefficient legacy methods. The time to transition into the digital era is now.</p>
         </div>
       </div>
@@ -328,59 +316,119 @@ const jsonLd = [
               <img src={client.src} alt={client.alt} loading="lazy" />
             </div>
           ))}
+          {clientLogos.map((client) => (
+            <div class="v2-client-item" aria-hidden="true">
+              <img src={client.src} alt={client.alt} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="v2-stats-grid">
+        <div class="v2-stat-card">
+          <div class="v2-stat-num">172<span>+</span></div>
+          <div class="v2-stat-label">Projects completed</div>
+        </div>
+        <div class="v2-stat-card">
+          <div class="v2-stat-num">500<span>+</span></div>
+          <div class="v2-stat-label">Online businesses</div>
+        </div>
+        <div class="v2-stat-card">
+          <div class="v2-stat-num">300<span>+</span></div>
+          <div class="v2-stat-label">Design templates</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5. Video / Showcase Section -->
-  <section class="v2-video-section">
+  <!-- 5. Mengurus Bisnis Jadi Lebih Teratur (Redesigned Video Showcase) -->
+  <section class="v2-video-section" id="video">
     <div class="container">
-      <div class="v2-section-head">
-        <h2 class="v2-sec-title">Build a website that doesn't just look great, but drives revenue!</h2>
-        <p class="v2-sec-subtitle">We craft high-impact websites combining striking modern design, blazing-fast speed, and conversion-optimized architecture.</p>
+      <div class="v2-video-header">
+        <h2 class="v2-sec-title">Streamline your business with structured systems</h2>
       </div>
 
-      <div class="v2-video-wrapper">
-        <div class="v2-browser-mockup">
-          <div class="v2-browser-header">
-            <div class="v2-browser-dots">
-              <span class="v2-dot red"></span>
-              <span class="v2-dot yellow"></span>
-              <span class="v2-dot green"></span>
-            </div>
-            <div class="v2-browser-address">
-              <span>https://tentaklik.com</span>
-            </div>
+      <!-- Modern Cinematic Video Showcase -->
+      <div class="v2-video-showcase">
+        <div class="v2-video-player-box" id="v2-video-box">
+          <img
+            id="v2-video-poster"
+            src="/assets/layanan/website/ngurusin-bisnis-lebih-mudah-min.webp"
+            alt="Mengurus Bisnis Jadi Lebih Teratur"
+            class="v2-video-poster-img"
+            loading="lazy"
+          />
+          <button
+            type="button"
+            id="v2-play-button"
+            class="v2-video-play-btn"
+            aria-label="Putar Video"
+          >
+            <span class="v2-video-ripple"></span>
+            <span class="v2-video-play-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="6 4 20 12 6 20 6 4"/>
+              </svg>
+            </span>
+          </button>
+          <div id="v2-iframe-wrap" class="v2-iframe-container" style="display: none;"></div>
+        </div>
+      </div>
+
+      <!-- Structured Benefit Cards (Exact Copywriting Verbatim) -->
+      <div class="v2-video-cards">
+        <div class="v2-benefit-card">
+          <div class="v2-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
           </div>
-          <div class="v2-browser-screen">
-            <img
-              src="/assets/layanan/website/jasa-pembuatan-website-after-sales-terbaik-min.webp"
-              alt="Website Showcase"
-              loading="lazy"
-            />
+          <div class="v2-benefit-text">
+            <p>
+              Every modern business requires a website to save valuable time and allow leadership to focus on sales and scaling without operational friction.
+            </p>
           </div>
         </div>
+
+        <div class="v2-benefit-card highlight">
+          <div class="v2-benefit-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+            </svg>
+          </div>
+          <div class="v2-benefit-text">
+            <p>
+              Creative and interactive design is essential, complemented by dedicated after-sales guidance in digital marketing. You are never left to navigate online growth alone!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <div class="v2-video-cta-wrap">
+        <a href="#buat" class="btn btn-primary" title="miliki">
+          Get started now <ArrowRight size={16} />
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- 6. Portfolio Showcase Section (6 Project) -->
+  <!-- 6. Section Portofolio Mockup -->
   <section class="v2-portfolio-section" id="portofolio">
     <div class="container">
       <div class="v2-section-head">
-        <h2 class="v2-sec-title">Our website portfolio</h2>
-        <p class="v2-sec-subtitle">A showcase of tailored web platforms crafted for diverse enterprises and organizations across Indonesia</p>
+        <h2 class="v2-sec-title">Portfolio</h2>
       </div>
 
       <div class="v2-portfolio-grid">
         {portfolios.map((item) => (
-          <div class="v2-port-card">
-            <div class="v2-port-img">
+          <div class="v2-portfolio-card">
+            <div class="v2-portfolio-img-wrap">
               <img src={item.img} alt={item.title} loading="lazy" />
             </div>
-            <div class="v2-port-content">
-              <h3>{item.title}</h3>
+            <div class="v2-portfolio-content">
+              <h5>{item.title}</h5>
               <p>{item.desc}</p>
             </div>
           </div>
@@ -394,7 +442,7 @@ const jsonLd = [
     <div class="container">
       <div class="v2-section-head">
         <h2 class="v2-sec-title">The best choice for your business</h2>
-        <p class="v2-sec-subtitle">Core premium features engineered to accelerate your digital growth and streamline operations</p>
+        <p class="v2-sec-subtitle">Top-tier website features designed to take your business to the next level</p>
       </div>
 
       <div class="v2-features-grid">
@@ -434,7 +482,7 @@ const jsonLd = [
       <div class="v2-bonus-visual">
         <img
           src="/assets/layanan/website/pesen-website-banyak-bonus-ahzelan.webp"
-          alt="Dedicated Technical Support & After Sales"
+          alt="No #1 Jasa Pembuatan Website After Sales Terbaik"
           width="768"
           height="697"
           loading="lazy"
@@ -443,7 +491,7 @@ const jsonLd = [
       <div class="v2-bonus-content">
         <h2 class="v2-sec-title">Beyond code, we are dedicated to helping your business flourish</h2>
         <div class="v2-sec-desc">
-          <p>We deliver more than just a functional website; we deliver measurable business impact.</p>
+          <p>We do not just hand over a website; we deliver measurable business impact.</p>
           <p>If you only needed basic template code, you could find cheap alternatives anywhere.</p>
           <p>Our commitment is providing a holistic digital foundation so your brand consistently outpaces market competitors.</p>
         </div>
@@ -456,12 +504,12 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- 9. Pricing Section -->
+  <!-- 9. Pricing Section (Tabel Paket & Harga SAMA PERSIS /v2) -->
   <section class="v2-pricing-section" id="buat">
     <div class="container">
       <div class="v2-section-head">
         <h2 class="v2-sec-title">Build your website right now</h2>
-        <p class="v2-sec-subtitle">Don't let manual routines hold your business back while competitors leverage digital efficiency</p>
+        <p class="v2-sec-subtitle">Do not let your business lag behind using outdated methods when competitors are moving digital</p>
       </div>
 
       <div class="v2-pricing-grid">
@@ -470,70 +518,77 @@ const jsonLd = [
           <div class="v2-plan-header">
             <h3>Starter</h3>
             <p class="v2-plan-tagline">Ideal for ventures launching online on a lean budget while unlocking the growth potential of a web presence</p>
-            <div class="v2-plan-price-box">
-              <span class="v2-price-strike">Rp 5.000.000</span>
-              <div class="v2-plan-price">
-                <span class="v2-price-curr">Rp</span>
-                <span class="v2-price-val">3.990.000</span>
-              </div>
-            </div>
-            <a
-              href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Starter%20website%20package"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-ghost v2-plan-btn"
-              title="pesan"
-            >
-              Build now! <ArrowRight size={14} />
-            </a>
           </div>
+          <div class="v2-plan-strike">Rp 5.000.000</div>
+          <div class="v2-plan-price-box">
+            <span class="v2-plan-curr">Rp</span>
+            <span class="v2-plan-amount">3.990.000</span>
+          </div>
+          <div class="v2-plan-renew">Annual renewal Rp 990.000/year</div>
+          <a
+            href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Starter%20website%20package"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost v2-plan-btn"
+            title="starter"
+          >
+            Select plan
+          </a>
+          <div class="v2-plan-notice">*Prices are subject to increase without prior notice—secure your slot today</div>
           <div class="v2-plan-features">
+            <h4>What you get:</h4>
             <ul>
-              <li><Check size={16} /> <span>Free .com domain</span></li>
-              <li><Check size={16} /> <span>Free 1-year high-speed hosting</span></li>
-              <li><Check size={16} /> <span>Selection of elegant themes</span></li>
-              <li><Check size={16} /> <span>2x design revisions</span></li>
-              <li><Check size={16} /> <span>Integrated WhatsApp live chat</span></li>
-              <li><Check size={16} /> <span>Lifetime error warranty</span></li>
-              <li><Check size={16} /> <span>Free digital marketing consultation</span></li>
-              <li><Check size={16} /> <span>Delivered in 3-7 business days</span></li>
+              <li><span class="v2-chk"><Check size={13} /></span> Stable hosting &amp; free domain</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Full responsive</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Elegant design</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Free SSL certificate</li>
+              <li><span class="v2-chk"><Check size={13} /></span> 100% full admin access</li>
+              <li><span class="v2-chk"><Check size={13} /></span> SEO setup &amp; optimization</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Security &amp; maintenance</li>
+              <li><span class="v2-chk"><Check size={13} /></span> System updates</li>
+              <li class="disabled"><span class="v2-cross">&#10005;</span> Dedicated technical support</li>
+              <li class="disabled"><span class="v2-cross">&#10005;</span> Full regular backup</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Special bonus</li>
             </ul>
           </div>
         </div>
 
         <!-- Paket 2: Standard (Featured) -->
         <div class="v2-plan-card featured">
-          <div class="v2-plan-badge">Most popular</div>
           <div class="v2-plan-header">
             <h3>Standard</h3>
             <p class="v2-plan-tagline">Recommended for consumer-facing businesses and retail brands seeking custom visual identity and enhanced reach</p>
-            <div class="v2-plan-price-box">
-              <span class="v2-price-strike">Rp 7.000.000</span>
-              <div class="v2-plan-price">
-                <span class="v2-price-curr">Rp</span>
-                <span class="v2-price-val">5.940.000</span>
-              </div>
-            </div>
-            <a
-              href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Standard%20website%20package"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-primary v2-plan-btn"
-              title="pesan"
-            >
-              Build now! <ArrowRight size={14} />
-            </a>
           </div>
+          <div class="v2-plan-strike">Rp 7.000.000</div>
+          <div class="v2-plan-price-box">
+            <span class="v2-plan-curr">Rp</span>
+            <span class="v2-plan-amount">5.940.000</span>
+          </div>
+          <div class="v2-plan-renew">Annual renewal Rp 1.200.000/year</div>
+          <a
+            href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Standard%20website%20package"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary v2-plan-btn"
+            title="standard"
+          >
+            Select plan
+          </a>
+          <div class="v2-plan-notice">*Prices are subject to increase without prior notice—secure your slot today</div>
           <div class="v2-plan-features">
+            <h4>What you get:</h4>
             <ul>
-              <li><Check size={16} /> <span>All Starter plan features included</span></li>
-              <li><Check size={16} /> <span>Custom brand-aligned design</span></li>
-              <li><Check size={16} /> <span>Up to 5 custom website pages</span></li>
-              <li><Check size={16} /> <span>Google Analytics & Meta Pixel setup</span></li>
-              <li><Check size={16} /> <span>Foundational on-page SEO optimization</span></li>
-              <li><Check size={16} /> <span>5x design revisions</span></li>
-              <li><Check size={16} /> <span>Full website management guide</span></li>
-              <li><Check size={16} /> <span>Delivered in 5-10 business days</span></li>
+              <li><span class="v2-chk"><Check size={13} /></span> Stable hosting &amp; free domain</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Full responsive</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Elegant design</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Free SSL certificate</li>
+              <li><span class="v2-chk"><Check size={13} /></span> 100% full admin access</li>
+              <li><span class="v2-chk"><Check size={13} /></span> SEO setup &amp; optimization</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Security &amp; maintenance</li>
+              <li><span class="v2-chk"><Check size={13} /></span> System updates</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Dedicated technical support</li>
+              <li class="disabled"><span class="v2-cross">&#10005;</span> Full regular backup</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Exclusive bonus++</li>
             </ul>
           </div>
         </div>
@@ -543,33 +598,37 @@ const jsonLd = [
           <div class="v2-plan-header">
             <h3>Bisnis</h3>
             <p class="v2-plan-tagline">Built for B2B enterprises, corporate firms, and manufacturers demanding scale, speed, and tailored integrations</p>
-            <div class="v2-plan-price-box">
-              <span class="v2-price-strike">Rp 15.000.000</span>
-              <div class="v2-plan-price">
-                <span class="v2-price-curr">Rp</span>
-                <span class="v2-price-val">7.490.000</span>
-              </div>
-            </div>
-            <a
-              href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Business%20website%20package"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-ghost v2-plan-btn"
-              title="pesan"
-            >
-              Build now! <ArrowRight size={14} />
-            </a>
           </div>
+          <div class="v2-plan-strike">Rp 15.000.000</div>
+          <div class="v2-plan-price-box">
+            <span class="v2-plan-curr">Rp</span>
+            <span class="v2-plan-amount">7.490.000</span>
+          </div>
+          <div class="v2-plan-renew">Perpanjangan Rp. 1.490.000/tahun</div>
+          <a
+            href="https://api.whatsapp.com/send?phone=6285129992225&#038;text=Hello%2C%20I%20am%20interested%20in%20the%20Business%20website%20package"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-ghost v2-plan-btn"
+            title="bisnis"
+          >
+            Select plan
+          </a>
+          <div class="v2-plan-notice">*Prices are subject to increase without prior notice—secure your slot today</div>
           <div class="v2-plan-features">
+            <h4>What you get:</h4>
             <ul>
-              <li><Check size={16} /> <span>All Standard plan features included</span></li>
-              <li><Check size={16} /> <span>Unlimited website pages</span></li>
-              <li><Check size={16} /> <span>Custom quote request & inquiry forms</span></li>
-              <li><Check size={16} /> <span>Ultra-fast performance optimization</span></li>
-              <li><Check size={16} /> <span>Professional business email configuration</span></li>
-              <li><Check size={16} /> <span>Unlimited design revisions</span></li>
-              <li><Check size={16} /> <span>24/7 priority technical support</span></li>
-              <li><Check size={16} /> <span>Delivered in 7-14 business days</span></li>
+              <li><span class="v2-chk"><Check size={13} /></span> Stable hosting &amp; free domain</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Full responsive</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Elegant design</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Free SSL certificate</li>
+              <li><span class="v2-chk"><Check size={13} /></span> 100% full admin access</li>
+              <li><span class="v2-chk"><Check size={13} /></span> SEO setup &amp; optimization</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Security &amp; maintenance</li>
+              <li><span class="v2-chk"><Check size={13} /></span> System updates</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Dedicated technical support</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Full regular backup</li>
+              <li><span class="v2-chk"><Check size={13} /></span> Exclusive bonus+++</li>
             </ul>
           </div>
         </div>
@@ -577,24 +636,19 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- 10. FAQ Accordion Section -->
+  <!-- 10. FAQ Section (Accordion Native) -->
   <section class="v2-faq-section" id="faq">
-    <div class="container">
-      <div class="v2-section-head">
-        <h2 class="v2-sec-title">Frequently asked questions</h2>
-        <p class="v2-sec-subtitle">Find clear answers to common questions about our development process, pricing, and ongoing support</p>
-      </div>
-
+    <div class="container" style="max-width: 860px;">
       <div class="v2-faq-list">
-        {faqs.map((faq, index) => (
-          <details class="v2-faq-item" open={index === 0}>
-            <summary class="v2-faq-summary">
+        {faqs.map((faq, idx) => (
+          <details class="v2-faq-item" open={idx === 0}>
+            <summary class="v2-faq-question">
               <span>{faq.q}</span>
-              <span class="v2-faq-chevron">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              <span class="v2-faq-arrow">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
               </span>
             </summary>
-            <div class="v2-faq-body">
+            <div class="v2-faq-answer">
               <p>{faq.a}</p>
             </div>
           </details>
@@ -603,15 +657,17 @@ const jsonLd = [
     </div>
   </section>
 
-  <!-- 11. Final CTA Banner Section -->
-  <section class="v2-final-cta-section">
+  <!-- 11. Bottom CTA Banner (Homepage Style) -->
+  <section class="v2-bottom-cta">
     <div class="container">
-      <div class="v2-final-cta-card">
-        <div class="v2-cta-content">
-          <h2 class="v2-cta-title">What are you waiting for? Let's build your website today!</h2>
-          <p class="v2-cta-desc">Leave uncertainty behind and take the first decisive step toward multiplying your business impact.</p>
+      <div class="v2-cta-banner">
+        <div class="v2-cta-text">
+          <h2>Ready to scale your business with a website?</h2>
+          <p>Select your package now and <a href="/en/kontak" style="color:#ffffff;font-weight:700;text-decoration:underline;">contact us</a> to start crafting your website exactly to your vision</p>
+        </div>
+        <div class="v2-cta-action">
           <a href="#buat" class="btn btn-ghost v2-cta-btn" title="buatwebsite">
-            Build now! <ArrowRight size={16} />
+            Build now! <ArrowRight size={14} />
           </a>
         </div>
       </div>
@@ -1709,3 +1765,29 @@ const jsonLd = [
     }
   }
 </style>
+
+<script>
+  const playBtn = document.getElementById('v2-play-button');
+  const iframeWrap = document.getElementById('v2-iframe-wrap');
+  const poster = document.getElementById('v2-video-poster');
+
+  if (playBtn && iframeWrap && poster) {
+    playBtn.addEventListener('click', () => {
+      iframeWrap.innerHTML = `
+        <iframe 
+          src="https://www.youtube-nocookie.com/embed/XoZbnZkzpyo?autoplay=1&rel=0" 
+          title="Mengurus Bisnis Jadi Lebih Teratur" 
+          width="100%"
+          height="100%"
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;display:block;"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      `;
+      iframeWrap.style.display = 'block';
+      playBtn.style.display = 'none';
+      poster.style.display = 'none';
+    });
+  }
+</script>
