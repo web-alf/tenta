@@ -724,7 +724,7 @@
     line-height:2;
     text-align:center;
     text-decoration:none;
-    text-transform:uppercase;
+    text-transform:none;
     position:relative;
     z-index:1;
     overflow:hidden;
@@ -1104,7 +1104,7 @@
   line-height: 24px;
   border-radius: 10px;
   padding: 10px 28px;
-  text-transform: uppercase;
+  text-transform: none;
   position: relative;
   z-index: 1;
   overflow: hidden;
@@ -1816,29 +1816,52 @@ body.book-call-modal-open {
 /* Button enhancements matching Tentaklik brand */
 
 .v2-page .home-button,
-.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button {
+.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button,
+.v2-page .button {
   background: var(--orange-500, #FF7A1A) !important;
   color: #FFFFFF !important;
-  border-radius: var(--radius-pill, 999px) !important;
+  border-radius: var(--radius-pill, 9999px) !important;
   border: none !important;
-  font-family: 'Inter Variable', 'Inter', sans-serif !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.02em;
-  padding: 14px 28px !important;
-  box-shadow: 0 4px 14px rgba(255, 122, 26, 0.28) !important;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.2 !important;
+  padding: 13px 24px !important;
+  box-shadow: 0 6px 16px rgba(255, 107, 26, 0.28) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-transform: none !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
 }
 
 .v2-page .home-button:hover,
-.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button:hover {
+.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button:hover,
+.v2-page .button:hover {
   background: var(--orange-600, #F26416) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 122, 26, 0.38) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 10px 22px rgba(255, 107, 26, 0.34) !important;
   color: #FFFFFF !important;
+}
+
+.v2-page .home-button:active,
+.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button:active,
+.v2-page .button:active {
+  transform: translateY(0) !important;
+}
+
+.v2-page .home-button svg,
+.v2-page .solutions .solutions-wrapper .cards-wrapper .card .card-content .button svg,
+.v2-page .button svg {
+  flex-shrink: 0 !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  color: currentColor !important;
 }
 
 .v2-page .home-button::after,
@@ -2052,9 +2075,10 @@ body.book-call-modal-open {
   align-items: center !important;
   gap: 6px !important;
   color: var(--orange-500, #FF7A1A) !important;
-  font-family: 'Inter Variable', 'Inter', sans-serif !important;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif !important;
   font-size: 15px !important;
   font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
   margin-top: 6px !important;
   transition: gap 0.2s ease, color 0.2s ease !important;
   text-align: center !important;
@@ -2069,6 +2093,7 @@ body.book-call-modal-open {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', sans-serif !important;
   font-weight: 600 !important;
   color: var(--ink-700, #2D3D52) !important;
   font-size: 14px !important;
