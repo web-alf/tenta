@@ -141,7 +141,6 @@
 
     // 5. Vanilla Book a Call Modal Handler
     const bookCallModal = document.getElementById('book-call-modal');
-    const bookCallDirectModal = document.getElementById('book-call-modal-direct');
 
     function showBookCallChoices(widget) {
       if (!widget) return;
@@ -170,10 +169,6 @@
       if (bookCallModal) {
         bookCallModal.classList.remove('is-open');
         bookCallModal.setAttribute('aria-hidden', 'true');
-      }
-      if (bookCallDirectModal) {
-        bookCallDirectModal.classList.remove('is-open');
-        bookCallDirectModal.setAttribute('aria-hidden', 'true');
       }
       document.body.classList.remove('book-call-modal-open');
       if (bookCallModal) {
