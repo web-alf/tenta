@@ -1,0 +1,112 @@
+/* Normal desktop :1200px. */
+@media (min-width: 1200px) and (max-width: 1500px) {
+.postbox__titles {
+	font-size: 24px;
+}
+
+}
+
+
+/* Normal desktop :992px. */
+@media (min-width: 992px) and (max-width: 1200px) {
+.postbox__titles {
+	font-size: 24px;
+}
+.logo {
+	padding: 0;
+}
+
+}
+
+ 
+/* Tablet desktop :768px. */
+@media (min-width: 768px) and (max-width: 991px) {
+.blog__wrapper,.blog__details-wrapper {
+	margin: 0;
+}
+.custom-footer-2 {
+	padding-left: 0;
+}
+.custom-footer-3 {
+	padding-left: 0;
+}
+.footer__pl-70 {
+	padding-left: 15px;
+}
+.footer__pl-90 {
+	padding-left: 15px;
+}
+.logged-in header .sticky {
+	margin-top: 32px;
+}
+.sidebar__menu {
+	margin-left: 15px;
+}
+.logo {
+	padding: 0;
+}
+
+
+}
+
+ 
+/* small mobile :320px. */
+@media (max-width: 767px) {
+.latest-comments ul li ul.children {
+	padding-left: 0;
+}
+.blog__wrapper,.blog__details-wrapper {
+	margin: 0;
+}
+.postbox__title {
+	font-size: 24px;
+}
+.custom-footer-2 {
+	padding-left: 0;
+}
+.custom-footer-3 {
+	padding-left: 0;
+}
+.footer__pl-70 {
+	padding-left: 15px;
+}
+.footer__pl-90 {
+	padding-left: 15px;
+}
+.admin-bar .header__transparent {
+  margin-top: 46px;
+}
+.admin-bar .header__area.sticky {
+  margin-top: 0;
+}
+.admin-bar header .sticky {
+	margin-top: 0;
+}
+.sidebar-toggle-btn {
+	margin-left: 30px;
+}
+.logo {
+	padding: 0;
+}
+.hero__features-item-list ul li {
+	width: 100%;
+	float: left;
+	margin-right: 0 !important;
+}
+
+.hero__search input {
+	margin-bottom: 10px;
+}
+ 
+}
+ 
+/* Large Mobile :480px. */
+@media only screen and (min-width: 560px) and (max-width: 767px) {
+.postbox__titles {
+	font-size: 24px;
+}
+.hero__search input {
+	margin-bottom: 10px;
+}
+ 
+}

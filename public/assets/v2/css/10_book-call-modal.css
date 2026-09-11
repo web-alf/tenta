@@ -1,0 +1,152 @@
+/* Book a Call popup modal (HubSpot meetings embed) */
+.book-call-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.book-call-modal.is-open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.book-call-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.book-call-modal__dialog {
+    position: relative;
+    background: #fff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 735px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 40px 24px 24px;
+}
+
+.book-call-modal__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    line-height: 1;
+    cursor: pointer;
+    color: #181818;
+}
+
+body.book-call-modal-open {
+    overflow: hidden;
+}
+
+.book-call-modal__title {
+    margin: 0 0 33.5px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    color: #2d2d2d;
+}
+
+.book-call-modal__cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 600px) {
+    .book-call-modal__cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.book-call-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 20px 24px;
+    border: 1.43px solid #f5d5bb;
+    border-radius: 18.72px;
+    background: #fff4ec;
+    cursor: pointer;
+    text-align: left;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.book-call-card:hover,
+.book-call-card:focus-visible {
+    border-color: #f5d5bb;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.book-call-card__image {
+    display: flex;
+    width: 100%;
+    max-width: 110px;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    border-radius: 18.72px;
+    border: 1px solid #f5d5bb;
+    background: #fff;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-call-card__image img {
+    width: 100%;
+    max-width: 89px;
+    aspect-ratio: 1;
+}
+
+.book-call-card__title {
+    font-size: 22px;
+    line-height: 1;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin: 0 auto;
+    font-family: "Montserrat", sans-serif;
+}
+
+.book-call-card__cta {
+    font-size: 19px;
+    color: #555;
+    margin: 0 auto;
+    margin-top: 10px;
+    font-weight: 700;
+    line-height: 1;
+    color: #F26B18;
+    text-align: center;
+    font-family: "Montserrat", sans-serif;
+}
+
+.book-call-modal__back {
+    display: inline-block;
+    margin-bottom: 12px;
+    border: none;
+    background: transparent;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px 0;
+}
+
+.book-call-modal__back:hover {
+    color: #181818;
+}
