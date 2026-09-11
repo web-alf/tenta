@@ -1671,6 +1671,7 @@ body.book-call-modal-open {
     background: #fff4ec;
     cursor: pointer;
     text-align: left;
+    text-decoration: none;
     transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -2033,6 +2034,7 @@ body.book-call-modal-open {
   outline: none !important;
   width: 100% !important;
   box-sizing: border-box !important;
+  text-decoration: none !important;
 }
 
 .v2-page .book-call-card:hover,

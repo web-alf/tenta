@@ -1,5 +1,12 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { waLink } from '@data/site';
+
+const waWhitelistMsg = 'Halo Tentaklik, saya tertarik dan ingin konsultasi mengenai layanan Sewa Akun Whitelist Ads (Google & Meta Ads).\n\nBoleh minta info lebih lanjut mengenai persyaratan dan ketentuannya? Terima kasih!';
+const waWebMarketingMsg = 'Halo Tentaklik, saya tertarik dan ingin konsultasi mengenai layanan Website & Digital Marketing untuk bisnis saya.\n\nBoleh minta info lebih lanjut mengenai paket dan layanannya? Terima kasih!';
+
+const waWhitelistUrl = waLink(waWhitelistMsg);
+const waWebMarketingUrl = waLink(waWebMarketingMsg);
 ---
 
 <BaseLayout
@@ -599,40 +606,26 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                         <div class="book-call-header">
                             <span class="book-call-badge">Jadwalkan konsultasi</span>
                             <h2 class="book-call-modal__title">Pilih layanan konsultasi Anda:</h2>
-                            <p class="book-call-subtitle">Pilih layanan di bawah untuk konsultasi 1-on-1 langsung bersama tim spesialis kami</p>
+                            <p class="book-call-subtitle">Pilih layanan di bawah untuk konsultasi 1-on-1 langsung bersama tim spesialis kami via WhatsApp</p>
                         </div>
                         <div class="book-call-modal__cards">
-                            <button type="button" class="book-call-card" data-book-call-target="premium-agency">
+                            <a href={waWhitelistUrl} target="_blank" rel="noopener noreferrer" class="book-call-card">
                                 <span class="book-call-card__image">
                                     <img src="/assets/v2/images/24ceeab876d6bcb5beb5e76fc80d1f0bad040afe.png"
                                         alt="Sewa Akun Whitelist Ads Icon" />
                                 </span>
                                 <span class="book-call-card__title">Sewa akun whitelist ads</span>
                                 <span class="book-call-card__cta">Konsultasi sekarang &rarr;</span>
-                            </button>
-                            <button type="button" class="book-call-card" data-book-call-target="performance-marketing">
+                            </a>
+                            <a href={waWebMarketingUrl} target="_blank" rel="noopener noreferrer" class="book-call-card">
                                 <span class="book-call-card__image">
                                     <img src="/assets/v2/images/3cbab90826edcc51642c4dff4c06137d9024654e.png"
                                         alt="Website & Digital Marketing Icon" />
                                 </span>
                                 <span class="book-call-card__title">Website &amp; digital marketing</span>
                                 <span class="book-call-card__cta">Konsultasi sekarang &rarr;</span>
-                            </button>
+                            </a>
                         </div>
-                    </div>
-
-                    <div class="book-call-modal__panel" data-book-call-view="panel"
-                        data-book-call-panel="premium-agency" hidden>
-                        <button type="button" class="book-call-modal__back" data-book-call-back>&larr; Kembali</button>
-                        <div class="meetings-iframe-container"
-                            data-src="https://portal.orangetrail.io/meetings/marko-kostre/io?embed=true"></div>
-                    </div>
-
-                    <div class="book-call-modal__panel" data-book-call-view="panel"
-                        data-book-call-panel="performance-marketing" hidden>
-                        <button type="button" class="book-call-modal__back" data-book-call-back>&larr; Kembali</button>
-                        <div class="meetings-iframe-container"
-                            data-src="https://meetings-eu1.hubspot.com/alex-jankovic/pm?embed=true"></div>
                     </div>
                 </div>
             </div>
@@ -648,37 +641,23 @@ import BaseLayout from '@layouts/BaseLayout.astro';
                 <div class="book-call-modal__choices" data-book-call-view="choices">
                     <h2 class="book-call-modal__title">Pilih layanan konsultasi Anda:</h2>
                     <div class="book-call-modal__cards">
-                        <button type="button" class="book-call-card" data-book-call-target="premium-agency">
+                        <a href={waWhitelistUrl} target="_blank" rel="noopener noreferrer" class="book-call-card">
                             <span class="book-call-card__image">
                                 <img src="/assets/v2/images/24ceeab876d6bcb5beb5e76fc80d1f0bad040afe.png"
                                     alt="Sewa Akun Whitelist Ads Icon" />
                             </span>
                             <span class="book-call-card__title">Sewa akun whitelist ads</span>
                             <span class="book-call-card__cta">Konsultasi sekarang &rarr;</span>
-                        </button>
-                        <button type="button" class="book-call-card" data-book-call-target="performance-marketing">
+                        </a>
+                        <a href={waWebMarketingUrl} target="_blank" rel="noopener noreferrer" class="book-call-card">
                             <span class="book-call-card__image">
                                 <img src="/assets/v2/images/3cbab90826edcc51642c4dff4c06137d9024654e.png"
                                     alt="Website & Digital Marketing Icon" />
                             </span>
                             <span class="book-call-card__title">Website &amp; digital marketing</span>
                             <span class="book-call-card__cta">Konsultasi sekarang &rarr;</span>
-                        </button>
+                        </a>
                     </div>
-                </div>
-
-                <div class="book-call-modal__panel" data-book-call-view="panel" data-book-call-panel="premium-agency"
-                    hidden>
-                    <button type="button" class="book-call-modal__back" data-book-call-back>&larr; Kembali</button>
-                    <div class="meetings-iframe-container"
-                        data-src="https://portal.orangetrail.io/meetings/marko-kostre/io?embed=true"></div>
-                </div>
-
-                <div class="book-call-modal__panel" data-book-call-view="panel"
-                    data-book-call-panel="performance-marketing" hidden>
-                    <button type="button" class="book-call-modal__back" data-book-call-back>&larr; Kembali</button>
-                    <div class="meetings-iframe-container"
-                        data-src="https://meetings-eu1.hubspot.com/alex-jankovic/pm?embed=true"></div>
                 </div>
             </div>
         </div>
@@ -689,5 +668,4 @@ import BaseLayout from '@layouts/BaseLayout.astro';
   <!-- Swiper & Page Interactive Scripts -->
   <script is:inline src="/assets/v2/js/08_swiper.min.js"></script>
   <script is:inline src="/assets/v2/js/v2-scripts.js"></script>
-  <script is:inline src="/assets/v2/js/02_MeetingsEmbedCode.js"></script>
 </BaseLayout>

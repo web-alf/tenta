@@ -198,21 +198,9 @@
         return;
       }
 
-      const targetBtn = e.target.closest('[data-book-call-target]');
-      if (targetBtn) {
-        const widget = targetBtn.closest('.book-call-widget');
-        if (widget) {
-          showBookCallPanel(widget, targetBtn.dataset.bookCallTarget);
-        }
-        return;
-      }
-
-      const backBtn = e.target.closest('[data-book-call-back]');
-      if (backBtn) {
-        const widget = backBtn.closest('.book-call-widget');
-        if (widget) {
-          showBookCallChoices(widget);
-        }
+      // Close modal if a WhatsApp consultation card inside the modal is clicked
+      if (e.target.closest('#book-call-modal .book-call-card')) {
+        closeModal();
         return;
       }
     });
