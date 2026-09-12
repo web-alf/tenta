@@ -8,8 +8,8 @@ import ArrowRight from '../icons/ArrowRight.astro';
   <div class="container">
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;">
-        <h2 class="section-title cta-title" style="color:white;margin:0;">{t('ctab.title')}</h2>
-        <p style="margin-top:8px;opacity:0.95;font-size:15px;">{t('ctab.desc')}</p>
+        <h2 class="section-title cta-title" style="color:white;margin:0;text-align:left;">{t('ctab.title')}</h2>
+        <p style="margin-top:8px;opacity:0.95;font-size:15px;text-align:left;">{t('ctab.desc')}</p>
       </div>
       <a href="#final-cta" class="btn btn-ghost">{t('ctab.btn')} <ArrowRight size={14} /></a>
     </div>
@@ -17,12 +17,7 @@ import ArrowRight from '../icons/ArrowRight.astro';
 </section>
 
 <style>
-  @media (max-width: 768px) {
-    .cta-banner {
-      text-align: center;
-    }
-    .cta-title {
-      text-align: center !important;
-    }
+  .cta-title {
+    text-align: left !important;
   }
 </style>
