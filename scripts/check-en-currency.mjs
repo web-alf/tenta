@@ -190,7 +190,6 @@ const usdHtmlPattern = (value) => new RegExp(htmlUsd(value), 'i');
 const monthlySpendHtml = new RegExp(`Monthly${htmlSpace}spend${htmlSpace}:${htmlSpace}${htmlUsd('0')}${htmlSpace}${htmlDash}${htmlSpace}${htmlUsd('10,000')}`, 'i');
 
 const builtPages = [
-  ['dist/client/en/index.html', usdHtmlPattern('31'), 'English homepage'],
   ['dist/client/en/kontak/index.html', usdHtmlPattern('300'), 'English contact'],
   ['dist/client/en/layanan/sewa-akun/index.html', monthlySpendHtml, 'English account-rental'],
   ['dist/client/meta-whitelist-usd/index.html', usdHtmlPattern('31'), 'Meta Whitelist USD'],

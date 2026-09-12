@@ -2,17 +2,16 @@
 import { getLang, useT } from '@i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
-const L = (p: string) => (lang === 'en' ? '/en' + (p === '/' ? '' : p) : p) || '/';
 import ArrowRight from '../icons/ArrowRight.astro';
 ---
 <section style="padding-top:0;">
   <div class="container">
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;">
-        <h3>{t('ctab.title')}</h3>
+        <h2 class="section-title cta-title" style="color:white;text-align:left;margin:0;">{t('ctab.title')}</h2>
         <p style="margin-top:8px;opacity:0.95;font-size:15px;">{t('ctab.desc')}</p>
       </div>
-      <a href={L('/kontak')} class="btn btn-ghost">{t('ctab.btn')} <ArrowRight size={14} /></a>
+      <a href="#final-cta" class="btn btn-ghost">{t('ctab.btn')} <ArrowRight size={14} /></a>
     </div>
   </div>
 </section>

@@ -1,0 +1,189 @@
+---
+import { getLang } from '@i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+
+const benefits = lang === 'en' ? [
+  {
+    icon: '/assets/v2/images/icon-arrow.svg',
+    alt: 'diamond vector icon',
+    title: 'Premium Whitelist Accounts',
+    desc: 'Official pre-vetted ad accounts with priority status, high trust score, and stable performance'
+  },
+  {
+    icon: '/assets/v2/images/animation-main.svg',
+    alt: 'rocket vector icon',
+    title: 'Unlimited Spending Limit',
+    desc: 'Exclusive ad accounts with unlimited spend limit from day one, no warm-up queues'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-1.svg',
+    alt: 'ticket vector icon',
+    title: 'Safe Green Zone Status',
+    desc: 'Official green zone status from partner platforms ensuring safe and ban-resistant ads'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-2.svg',
+    alt: 'vector icon',
+    title: 'Measured Consulting & Strategy',
+    desc: 'Supported by specialist teams guiding you with data-driven strategy recommendations'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-3.svg',
+    alt: 'chain vector icon',
+    title: 'Responsive Dedicated Support',
+    desc: 'Priority communication access directly from our specialist team, not a bot'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-4.svg',
+    alt: 'dollar vector icon',
+    title: 'Easy Transactions & Payments',
+    desc: 'Easy payment via local bank transfer, zero VAT, and no credit card surcharge fees'
+  }
+] : [
+  {
+    icon: '/assets/v2/images/icon-arrow.svg',
+    alt: 'diamond vector icon',
+    title: 'Akun whitelist premium',
+    desc: 'Akun iklan pre-vetted resmi berstatus prioritas dengan trust score tinggi dan performa stabil'
+  },
+  {
+    icon: '/assets/v2/images/animation-main.svg',
+    alt: 'rocket vector icon',
+    title: 'Limit belanja tanpa batas',
+    desc: 'Akun iklan eksklusif dengan limit spend tanpa batas sejak hari pertama, bebas antre warm-up'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-1.svg',
+    alt: 'ticket vector icon',
+    title: 'Status green zone aman',
+    desc: 'Akun berstatus green zone resmi dari platform mitra sehingga aman dan anti random banned'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-2.svg',
+    alt: 'vector icon',
+    title: 'Konsultasi & strategi terukur',
+    desc: 'Didukung tim spesialis yang mendampingi dan memberikan rekomendasi strategi berbasis data'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-3.svg',
+    alt: 'chain vector icon',
+    title: 'Dedicated support responsif',
+    desc: 'Akses komunikasi prioritas yang responsif langsung dari tim spesialis kami, bukan bot'
+  },
+  {
+    icon: '/assets/v2/images/animation-step-4.svg',
+    alt: 'dollar vector icon',
+    title: 'Kemudahan transaksi & bayar',
+    desc: 'Solusi pembayaran mudah via transfer bank lokal, bebas PPN dan tanpa beban fee kartu kredit'
+  }
+];
+---
+
+<section class="why-us-section" style="padding: 64px 0; position: relative;">
+  <div class="container">
+    <div class="why-us-header" style="text-align: center; margin-bottom: 48px;">
+      {lang === 'en' ? (
+        <h2 class="why-us-title">
+          Why Clients <span style="color: var(--orange-500, #FF7A1A);">Choose Tentaklik</span>
+        </h2>
+      ) : (
+        <h2 class="why-us-title">
+          Kenapa klien <span style="color: var(--orange-500, #FF7A1A);">memilih Tentaklik</span>
+        </h2>
+      )}
+    </div>
+
+    <div class="why-us-grid">
+      {benefits.map((b) => (
+        <div class="why-us-card reveal">
+          <div class="why-us-card-icon">
+            <img src={b.icon} alt={b.alt} loading="lazy" width="40" height="40" />
+          </div>
+          <h3 class="why-us-card-title">{b.title}</h3>
+          <p class="why-us-card-desc">{b.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-us-title {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--ink-900, #1F1A17);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .why-us-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .why-us-card {
+    background: #FFFDF9;
+    border: 1px solid rgba(255, 122, 26, 0.12);
+    border-radius: 20px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .why-us-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 122, 26, 0.32);
+    box-shadow: 0 14px 32px rgba(255, 122, 26, 0.08);
+  }
+
+  .why-us-card-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .why-us-card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .why-us-card-title {
+    font-size: 19px;
+    font-weight: 700;
+    color: var(--ink-900, #1F1A17);
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+
+  .why-us-card-desc {
+    font-size: 14.5px;
+    color: var(--ink-500, #666);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 992px) {
+    .why-us-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .why-us-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .why-us-card {
+      padding: 24px 20px;
+    }
+  }
+</style>

@@ -1,0 +1,175 @@
+---
+import { getLang } from '@i18n/utils';
+import { waLink } from '@data/site';
+
+const lang = getLang(Astro.currentLocale);
+
+const waWhitelistMsg = lang === 'en'
+  ? 'Hello Tentaklik, I am interested in Ad Whitelist Account Rental (Google & Meta Ads).\n\nCould I get more details? Thank you!'
+  : 'Halo Tentaklik, saya tertarik dan ingin konsultasi mengenai layanan Sewa Akun Whitelist Ads (Google & Meta Ads).\n\nBoleh minta info lebih lanjut mengenai persyaratan dan ketentuannya? Terima kasih!';
+
+const waWebMarketingMsg = lang === 'en'
+  ? 'Hello Tentaklik, I am interested in Website & Digital Marketing services.\n\nCould I get more details? Thank you!'
+  : 'Halo Tentaklik, saya tertarik dan ingin konsultasi mengenai layanan Website & Digital Marketing untuk bisnis saya.\n\nBoleh minta info lebih lanjut mengenai paket dan layanannya? Terima kasih!';
+
+const waWhitelistUrl = waLink(waWhitelistMsg);
+const waWebMarketingUrl = waLink(waWebMarketingMsg);
+---
+
+<section id="final-cta" class="consultation-booking-section" style="padding: 72px 0 88px; position: relative;">
+  <div class="container">
+    <div class="consultation-header" style="text-align: center; margin-bottom: 44px;">
+      <span class="consultation-badge">
+        {lang === 'en' ? 'SCHEDULE A CONSULTATION' : 'JADWALKAN KONSULTASI'}
+      </span>
+      <h2 class="consultation-title">
+        {lang === 'en' ? 'Choose your consultation service:' : 'Pilih layanan konsultasi Anda:'}
+      </h2>
+      <p class="consultation-sub">
+        {lang === 'en'
+          ? 'Select a service below for a 1-on-1 consultation directly with our specialist team via WhatsApp'
+          : 'Pilih layanan di bawah untuk konsultasi 1-on-1 langsung bersama tim spesialis kami via WhatsApp'}
+      </p>
+    </div>
+
+    <div class="consultation-cards-grid">
+      <a href={waWhitelistUrl} target="_blank" rel="noopener noreferrer" class="consultation-card reveal">
+        <div class="consultation-card-icon">
+          <img src="/assets/v2/images/icon-whitelist-ads.png" alt="Sewa Akun Whitelist Ads Icon" width="48" height="48" loading="lazy" />
+        </div>
+        <h3 class="consultation-card-title">
+          {lang === 'en' ? 'Ad Whitelist Account Rental' : 'Sewa akun whitelist ads'}
+        </h3>
+        <span class="consultation-card-cta">
+          {lang === 'en' ? 'Consult now' : 'Konsultasi sekarang'} &rarr;
+        </span>
+      </a>
+
+      <a href={waWebMarketingUrl} target="_blank" rel="noopener noreferrer" class="consultation-card reveal">
+        <div class="consultation-card-icon">
+          <img src="/assets/v2/images/icon-web-digital-marketing.png" alt="Website & Digital Marketing Icon" width="48" height="48" loading="lazy" />
+        </div>
+        <h3 class="consultation-card-title">
+          {lang === 'en' ? 'Website & Digital Marketing' : 'Website & digital marketing'}
+        </h3>
+        <span class="consultation-card-cta">
+          {lang === 'en' ? 'Consult now' : 'Konsultasi sekarang'} &rarr;
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .consultation-badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: #FFF0E5;
+    color: var(--orange-600, #E65E00);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .consultation-title {
+    font-size: clamp(26px, 4vw, 36px);
+    font-weight: 800;
+    color: var(--ink-900, #1F1A17);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .consultation-sub {
+    font-size: 15px;
+    color: var(--ink-500, #666666);
+    max-width: 580px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .consultation-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .consultation-card {
+    background: #FFFFFF;
+    border: 1px solid var(--ink-100, #EAE6E1);
+    border-radius: 24px;
+    padding: 44px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(31, 26, 23, 0.04);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .consultation-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 122, 26, 0.35);
+    box-shadow: 0 16px 36px rgba(255, 122, 26, 0.12);
+  }
+
+  .consultation-card-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    background: #FFF5ED;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    transition: transform 0.2s ease;
+  }
+
+  .consultation-card:hover .consultation-card-icon {
+    transform: scale(1.05);
+  }
+
+  .consultation-card-icon img {
+    max-width: 48px;
+    max-height: 48px;
+    object-fit: contain;
+  }
+
+  .consultation-card-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink-900, #1F1A17);
+    margin-bottom: 16px;
+    line-height: 1.35;
+  }
+
+  .consultation-card-cta {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--orange-500, #FF7A1A);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s ease;
+  }
+
+  .consultation-card:hover .consultation-card-cta {
+    gap: 10px;
+  }
+
+  @media (max-width: 640px) {
+    .consultation-cards-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .consultation-card {
+      padding: 32px 24px;
+    }
+  }
+</style>

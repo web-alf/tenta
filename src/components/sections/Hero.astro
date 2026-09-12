@@ -1,7 +1,8 @@
 ---
 import ArrowRight from '../icons/ArrowRight.astro';
 import Star from '../icons/Star.astro';
-import Telegram from '../icons/Telegram.astro';
+import WhatsApp from '../icons/WhatsApp.astro';
+import { waLink } from '@data/site';
 import { getLang, useT } from '@i18n/utils';
 const lang = getLang(Astro.currentLocale);
 const t = useT(lang);
@@ -34,8 +35,8 @@ const features = [
         </h1>
       ) : (
         <h1 class="hero-title">
-          Buat Bisnis Kamu <span style="color:var(--orange-500);">10X Lebih</span><br/>
-          <span style="color:var(--orange-500);">Maju</span> Bersama TENTA
+          Masalah iklanmu <span style="color:var(--orange-500);">selesai</span><br/>
+          dengan <span style="color:var(--orange-500);">satu KLIK</span>
         </h1>
       )}
       <p class="hero-desc">
@@ -43,13 +44,13 @@ const features = [
       </p>
       <div class="hero-cta-group">
         <div class="hero-buttons-wrap">
-          <a href="#final-cta" class="btn btn-wa hero-cta-btn">
+          <a href="#layanan" class="btn btn-primary hero-cta-btn">
             {t('hero.cta')}
             <ArrowRight size={14} />
           </a>
-          <a href="https://t.me/komunitastentaklik" target="_blank" rel="noopener noreferrer" class="btn btn-telegram hero-cta-btn">
-            <Telegram size={18} />
-            {t('hero.telegram')}
+          <a href={waLink(lang === 'en' ? 'Hello Tentaklik, I want to consult about digital marketing' : 'Halo Tentaklik, saya mau konsultasi digital marketing')} target="_blank" rel="noopener noreferrer" class="btn btn-telegram hero-cta-btn">
+            <WhatsApp size={18} />
+            {t('hero.waConsult')}
           </a>
         </div>
         <div class="hero-rating-wrap">
@@ -140,6 +141,7 @@ const features = [
     max-width: 540px;
     margin-bottom: 32px;
     line-height: 1.65;
+    white-space: pre-line;
   }
   .hero-cta-group {
     display: flex;

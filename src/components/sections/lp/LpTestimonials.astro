@@ -166,11 +166,12 @@ if (!items) {
     max-width: 640px;
   }
   :global(.lp-testi-title) {
-    font-size: 32px;
+    font-size: clamp(26px, 4vw, 34px);
     font-weight: 800;
     color: var(--ink-900);
     margin: 0 0 10px 0;
     line-height: 1.25;
+    letter-spacing: -0.02em;
   }
   :global(.lp-testi-sub) {
     font-size: 16px;

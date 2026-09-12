@@ -87,7 +87,7 @@ export const site = {
 
   rating: {
     value: 4.9,
-    count: 1720,
+    count: 172,
     bestRating: 5,
     worstRating: 1,
   },

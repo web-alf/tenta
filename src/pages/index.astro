@@ -3,12 +3,10 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import Hero from '@components/sections/Hero.astro';
 import ServicesGrid from '@components/sections/ServicesGrid.astro';
 import CTABanner from '@components/sections/CTABanner.astro';
-import Process from '@components/sections/Process.astro';
+import WhyUs from '@components/sections/WhyUs.astro';
 import Testimonials from '@components/sections/lp/LpTestimonials.astro';
-import CaseStudiesPreview from '@components/sections/CaseStudiesPreview.astro';
-import HomePricing from '@components/sections/HomePricing.astro';
 import FAQ from '@components/sections/FAQ.astro';
-import FinalCTA from '@components/sections/FinalCTA.astro';
+import ConsultationBooking from '@components/sections/ConsultationBooking.astro';
 import { faqJsonLd, itemListJsonLd } from '@lib/seo';
 import { site } from '@data/site';
 import { getCollection } from 'astro:content';
@@ -56,10 +54,8 @@ const jsonLd = [
   <Hero />
   <ServicesGrid />
   <CTABanner />
-  <Process />
+  <WhyUs />
   <Testimonials title={tr('testi.title')} sub={tr('testi.sub')} />
-  <CaseStudiesPreview />
-  <HomePricing />
   <FAQ />
-  <FinalCTA />
+  <ConsultationBooking />
 </BaseLayout>
