@@ -5,28 +5,28 @@ export const site = {
   legalName: 'Tentaklik Digital Agency',
   // Entitas hukum (badan usaha) yang mengelola & memiliki brand Tentaklik.
   // Ditampilkan di footer + dipakai structured data agar konsisten dengan verifikasi Google.
-  legalEntity: 'PT Media Pro Indonesia',
+  legalEntity: 'PT. Tentakel Bisnis Digital',
   url: PUBLIC_SITE_URL,
   wa: PUBLIC_WA_NUMBER,
-  email: 'tentaklik@mediapro.work',
+  email: 'hi@tentaklik.com',
   emailKarir: 'karir@tentaklik.com',
   phone: '085129992225',
   phoneIntl: '+6285129992225',
-  address: 'Semarang, Indonesia',
+  address: 'Indonesia',
   foundingDate: '2023-01-01',
 
   geo: {
-    streetAddress: 'Semarang',
-    addressLocality: 'Semarang',
-    addressRegion: 'Jawa Tengah',
-    postalCode: '50241',
+    streetAddress: 'Indonesia',
+    addressLocality: 'Indonesia',
+    addressRegion: 'Indonesia',
+    postalCode: '50000',
     addressCountry: 'ID',
     latitude: -6.9666,
     longitude: 110.4167,
   },
 
   areaServed: [
-    'Semarang', 'Jakarta', 'Surabaya', 'Bandung', 'Yogyakarta', 'Bali',
+    'Jakarta', 'Surabaya', 'Bandung', 'Yogyakarta', 'Bali',
     'Medan', 'Makassar', 'Solo', 'Indonesia',
   ],
 
@@ -47,8 +47,8 @@ export const site = {
   },
   twitterHandle: '@tentaklik',
 
-  description: 'Agensi digital marketing Semarang untuk jasa pembuatan website, Google Ads, Meta Ads (Facebook & Instagram), dan konsultasi digital marketing untuk UMKM dan brand di Indonesia.',
-  description_en: 'Digital marketing agency in Semarang for website development, Google Ads, Meta Ads (Facebook & Instagram), and digital marketing consulting for SMEs and brands in Indonesia.',
+  description: 'Agensi digital marketing untuk jasa pembuatan website, Google Ads, Meta Ads (Facebook & Instagram), dan konsultasi digital marketing untuk UMKM dan brand di Indonesia.',
+  description_en: 'Digital marketing agency for website development, Google Ads, Meta Ads (Facebook & Instagram), and digital marketing consulting for SMEs and brands in Indonesia.',
   shortDescription: 'Agensi untuk website, Google Ads, Meta Ads, dan konsultasi digital marketing.',
   shortDescription_en: 'Agency for websites, Google Ads, Meta Ads, and digital marketing consulting.',
   footerTagline: 'Penyedia solusi digital marketing terintegrasi yang menghadirkan akses akun whitelist Google Ads & Meta Ads premium, optimasi website, dan konsultasi bisnis untuk mendukung pertumbuhan eksponensial brand di pasar lintas negara',

@@ -96,7 +96,7 @@ export const TERMS_SECTIONS: TermsSection[] = [
                 <li><strong>Menerima salinan</strong> data Anda dalam format yang portabel</li>
                 <li><strong>Menarik persetujuan</strong> untuk komunikasi pemasaran kapan saja</li>
               </ul>
-              <p>Untuk menggunakan hak-hak ini, hubungi kami di <a href="mailto:tentaklik@mediapro.work">tentaklik@mediapro.work</a>. Kami akan memberikan tanggapan dalam waktu 30 hari.</p>`,
+              <p>Untuk menggunakan hak-hak ini, hubungi kami di <a href="mailto:hi@tentaklik.com">hi@tentaklik.com</a>. Kami akan memberikan tanggapan dalam waktu 30 hari.</p>`,
   },
   {
     id: 'pembayaran',
@@ -147,8 +147,8 @@ export const TERMS_SECTIONS: TermsSection[] = [
     contentHtml: `<p>Ada pertanyaan tentang Ketentuan ini atau Kebijakan Privasi kami? Hubungi kami:</p>
               <ul>
                 <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285129992225" target="_blank" rel="noopener noreferrer">085129992225</a></li>
-                <li><strong>Email:</strong> <a href="mailto:tentaklik@mediapro.work">tentaklik@mediapro.work</a></li>
-                <li><strong>Alamat:</strong> Semarang, Indonesia</li>
+                <li><strong>Email:</strong> <a href="mailto:hi@tentaklik.com">hi@tentaklik.com</a></li>
+                <li><strong>Alamat:</strong> Indonesia</li>
               </ul>`,
   },
   {
@@ -292,7 +292,7 @@ export const TERMS_SECTIONS_EN: TermsSection[] = [
                 <li><strong>Receive a copy</strong> of your data in a portable format</li>
                 <li><strong>Withdraw consent</strong> for marketing communications at any time</li>
               </ul>
-              <p>To exercise these rights, contact us at <a href="mailto:tentaklik@mediapro.work">tentaklik@mediapro.work</a>. We will provide a response within 30 days.</p>`,
+              <p>To exercise these rights, contact us at <a href="mailto:hi@tentaklik.com">hi@tentaklik.com</a>. We will provide a response within 30 days.</p>`,
   },
   {
     id: 'pembayaran',
@@ -343,8 +343,8 @@ export const TERMS_SECTIONS_EN: TermsSection[] = [
     contentHtml: `<p>Have questions about these Terms or our Privacy Policy? Contact us:</p>
               <ul>
                 <li><strong>WhatsApp:</strong> <a href="https://wa.me/6285129992225" target="_blank" rel="noopener noreferrer">085129992225</a></li>
-                <li><strong>Email:</strong> <a href="mailto:tentaklik@mediapro.work">tentaklik@mediapro.work</a></li>
-                <li><strong>Address:</strong> Semarang, Indonesia</li>
+                <li><strong>Email:</strong> <a href="mailto:hi@tentaklik.com">hi@tentaklik.com</a></li>
+                <li><strong>Address:</strong> Indonesia</li>
               </ul>`,
   },
   {

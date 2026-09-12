@@ -79,6 +79,6 @@ faqs_en:
 seo:
   title: "Konsultasi Digital Marketing Indonesia — Audit & Strategi 90 Hari | Tentaklik"
   title_en: "Digital Marketing Consulting in Indonesia — 90-Day Audit & Strategy | Tentaklik"
-  description: "Konsultasi digital marketing untuk bisnis di Semarang & seluruh Indonesia: audit funnel, strategi channel mix, roadmap 90 hari, dan rekomendasi tools — actionable, bukan teori."
+  description: "Konsultasi digital marketing untuk bisnis di seluruh Indonesia: audit funnel, strategi channel mix, roadmap 90 hari, dan rekomendasi tools — actionable, bukan teori."
   description_en: "Digital marketing consulting for businesses in Indonesia: funnel audit, channel mix strategy, 90-day roadmap, and tools recommendations — actionable, not theories."
 ---

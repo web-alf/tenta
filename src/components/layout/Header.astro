@@ -440,9 +440,17 @@ const langOptions = [
     transition: background 0.15s, color 0.15s, border-color 0.15s;
   }
   .mobile-lang-item.active { background: var(--orange-50); color: var(--orange-700); border-color: var(--orange-200); }
-  /* Tombol Kontak tetap solid oranye walau di halaman /kontak (tak ikut style .active nav teks) */
-  .nav-kontak-btn.active, .nav-kontak-btn.active::after { color: white; background: var(--orange-500); }
-  .nav-kontak-btn.active::after { display: none; }
+  /* Tombol Hubungi Kami tetap solid oranye dengan teks putih (#fff) */
+  .nav-kontak-btn,
+  .mobile-kontak-btn,
+  .mobile-drawer-links > a.mobile-kontak-btn,
+  .mobile-drawer-links > a.mobile-kontak-btn:hover,
+  .mobile-drawer-links > a.mobile-kontak-btn.active {
+    color: #ffffff !important;
+    background: var(--orange-500) !important;
+  }
+  .nav-kontak-btn.active::after,
+  .mobile-kontak-btn.active::after { display: none; }
 </style>
 
 <script>

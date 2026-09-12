@@ -77,8 +77,8 @@ faqs_en:
   - { q: "How fast can we see results?", a: "Search ads can generate leads in the first week. PMax requires 14-30 days for its learning phase." }
   - { q: "Is there a contract?", a: "A minimum commitment of 3 months to give optimizations enough runway. After that, it's monthly and you can cancel anytime." }
 seo:
-  title: "Jasa Google Ads Specialist Semarang & Indonesia — Tentaklik"
-  title_en: "Google Ads Specialist Agency in Semarang & Indonesia — Tentaklik"
-  description: "Jasa Google Ads profesional di Semarang & seluruh Indonesia: Search, Display, Performance Max, dan YouTube Ads. Setup tracking GA4, audit akun, dan optimasi mingguan agar setiap rupiah menghasilkan."
-  description_en: "Professional Google Ads agency in Semarang & Indonesia: Search, Display, Performance Max, and YouTube Ads. GA4 tracking setup, account audit, and weekly optimization so every rupiah generates results."
+  title: "Jasa Google Ads Specialist Indonesia — Tentaklik"
+  title_en: "Google Ads Specialist Agency in Indonesia — Tentaklik"
+  description: "Jasa Google Ads profesional di seluruh Indonesia: Search, Display, Performance Max, dan YouTube Ads. Setup tracking GA4, audit akun, dan optimasi mingguan agar setiap rupiah menghasilkan."
+  description_en: "Professional Google Ads agency in Indonesia: Search, Display, Performance Max, and YouTube Ads. GA4 tracking setup, account audit, and weekly optimization so every rupiah generates results."
 ---

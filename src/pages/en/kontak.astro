@@ -3,7 +3,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import WhatsApp from '@components/icons/WhatsApp.astro';
 import Email from '@components/icons/Email.astro';
-import Pin from '@components/icons/Pin.astro';
 import { site, waLink } from '@data/site';
 import { contactPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 
@@ -57,13 +56,6 @@ const jsonLd = [
               <div style="font-size:15px;font-weight:600;">{site.email}</div>
             </div>
           </a>
-          <div class="contact-row">
-            <div class="contact-icon"><Pin size={18} /></div>
-            <div>
-              <div style="font-size:12px;color:var(--ink-500);">Location</div>
-              <div style="font-size:15px;font-weight:600;">{site.address}</div>
-            </div>
-          </div>
         </div>
         <div style="margin-top:32px;padding:20px;background:var(--orange-50);border-radius:16px;border:1px solid var(--orange-200);">
           <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Operational Hours</div>

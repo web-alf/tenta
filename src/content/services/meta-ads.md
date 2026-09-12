@@ -79,6 +79,6 @@ faqs_en:
 seo:
   title: "Jasa Meta Ads — Facebook & Instagram Ads Specialist Indonesia | Tentaklik"
   title_en: "Meta Ads Agency — Facebook & Instagram Ads Specialist in Indonesia | Tentaklik"
-  description: "Jasa Meta Ads (Facebook & Instagram Ads) profesional Indonesia: setup Pixel + CAPI, creative testing, audience layering, dan optimasi funnel dari awareness sampai sales untuk bisnis di Semarang & seluruh Indonesia."
+  description: "Jasa Meta Ads (Facebook & Instagram Ads) profesional Indonesia: setup Pixel + CAPI, creative testing, audience layering, dan optimasi funnel dari awareness sampai sales untuk bisnis di seluruh Indonesia."
   description_en: "Professional Meta Ads (Facebook & Instagram Ads) agency in Indonesia: Pixel + CAPI setup, creative testing, audience layering, and funnel optimization from awareness to sales for businesses across Indonesia."
 ---

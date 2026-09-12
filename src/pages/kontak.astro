@@ -3,7 +3,6 @@ import BaseLayout from '@layouts/BaseLayout.astro';
 import ArrowRight from '@components/icons/ArrowRight.astro';
 import WhatsApp from '@components/icons/WhatsApp.astro';
 import Email from '@components/icons/Email.astro';
-import Pin from '@components/icons/Pin.astro';
 import { site, waLink } from '@data/site';
 import { contactPageJsonLd, breadcrumbJsonLd } from '@lib/seo';
 
@@ -18,7 +17,7 @@ const jsonLd = [
 ---
 <BaseLayout
   title="Kontak Tentaklik — Konsultasi Digital Marketing Gratis"
-  description="Hubungi Tentaklik untuk konsultasi gratis jasa pembuatan website, Google Ads, Meta Ads & digital marketing di Semarang. Isi form atau WhatsApp — kami balas dalam 1×24 jam kerja."
+  description="Hubungi Tentaklik untuk konsultasi gratis jasa pembuatan website, Google Ads, Meta Ads & digital marketing. Isi form atau WhatsApp — kami balas dalam 1×24 jam kerja."
   active="kontak"
   jsonLd={jsonLd}
   keywords={['kontak tentaklik', 'konsultasi digital marketing gratis', 'whatsapp tentaklik', 'agensi digital marketing semarang kontak']}
@@ -57,13 +56,6 @@ const jsonLd = [
               <div style="font-size:15px;font-weight:600;">{site.email}</div>
             </div>
           </a>
-          <div class="contact-row">
-            <div class="contact-icon"><Pin size={18} /></div>
-            <div>
-              <div style="font-size:12px;color:var(--ink-500);">Lokasi</div>
-              <div style="font-size:15px;font-weight:600;">{site.address}</div>
-            </div>
-          </div>
         </div>
         <div style="margin-top:32px;padding:20px;background:var(--orange-50);border-radius:16px;border:1px solid var(--orange-200);">
           <div style="font-size:14px;font-weight:700;margin-bottom:6px;">⏰ Jam Operasional</div>

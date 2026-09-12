@@ -334,7 +334,7 @@ export function jobPostingJsonLd(opts: {
       '@type': 'Place',
       address: {
         '@type': 'PostalAddress',
-        addressLocality: opts.location.split('/')[0]?.trim() || 'Semarang',
+        addressLocality: opts.location.split('/')[0]?.trim() || 'Indonesia',
         addressRegion: site.geo.addressRegion,
         addressCountry: 'ID',
       },
@@ -366,7 +366,7 @@ export function aboutPageJsonLd(opts: { url: string }) {
     '@type': 'AboutPage',
     url: opts.url,
     name: 'Tentang Tentaklik',
-    description: 'Tentaklik adalah agensi digital marketing Semarang yang fokus pada hasil nyata — website, Google Ads, Meta Ads, dan konsultasi.',
+    description: 'Tentaklik adalah agensi digital marketing yang fokus pada hasil nyata — website, Google Ads, Meta Ads, dan konsultasi.',
     isPartOf: { '@id': WEBSITE_ID },
     about: { '@id': ORG_ID },
     mainEntity: { '@id': ORG_ID },

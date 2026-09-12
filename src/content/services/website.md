@@ -77,8 +77,8 @@ faqs_en:
   - { q: "What is the payment system?", a: "50% down payment, 30% when development is done, 20% upon go-live. We can discuss more flexible installments if needed." }
   - { q: "What makes it different from templates?", a: "Custom design, optimized copywriting, full tracking integration, and post-launch support — not just the looks." }
 seo:
-  title: "Jasa Pembuatan Website Profesional Semarang & Indonesia — Tentaklik"
-  title_en: "Professional Website Development Agency in Semarang & Indonesia — Tentaklik"
-  description: "Jasa pembuatan website profesional untuk bisnis di Semarang & Indonesia: landing page, company profile, hingga e-commerce. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata."
+  title: "Jasa Pembuatan Website Profesional Indonesia — Tentaklik"
+  title_en: "Professional Website Development Agency in Indonesia — Tentaklik"
+  description: "Jasa pembuatan website profesional untuk bisnis di Indonesia: landing page, company profile, hingga e-commerce. Fast loading, mobile-first, SEO-ready, dan didesain untuk konversi nyata."
   description_en: "Professional website development agency for businesses in Indonesia: landing pages, company profiles, to e-commerce. Fast loading, mobile-first, SEO-ready, and designed for real conversions."
 ---
