@@ -101,8 +101,8 @@ export const UI = {
     'svcgrid.sub': 'Solusi terbaik buat bisnis kamu dapat lebih banyak klik',
     'svcgrid.website.desc': 'Lengkapi iklan dengan website dan landing page yang lebih menghasilkan.',
     'svcgrid.sewaAkun.desc': 'Buat kebutuhan marketing bisnis kamu dengan kinerja tinggi dan dukungan prioritas.',
-    'svcgrid.konsultasi.desc': 'Akhiri rasa penasaran pada pemasaran dengan konsultasi pada yang berpengalaman.',
-    'svcgrid.cta': 'Lihat Layanan',
+    'svcgrid.konsultasi.desc': 'Akhiri rasa penasaran pada pemasaran, konsultasi ke yang berpengalaman.',
+    'svcgrid.cta': 'Selengkapnya',
     // ── Home: CTABanner ──
     'ctab.title': 'Bingung pilih mana buat bisnis Anda?',
     'ctab.desc': 'Yuk coba ngobrol dulu bareng tim kita sampai ketemu solusi paling efektif buat bisnis Anda.',
@@ -276,7 +276,7 @@ export const UI = {
     'svcgrid.website.desc': 'Landing pages, company profiles, and conversion-focused websites.',
     'svcgrid.sewaAkun.desc': 'Google & Meta whitelist ad accounts — no spending limit, no VAT, anti random ban.',
     'svcgrid.konsultasi.desc': 'Funnel audit, channel strategy, and actionable priority recommendations.',
-    'svcgrid.cta': 'View Service',
+    'svcgrid.cta': 'Learn More',
     // ── Home: CTABanner ──
     'ctab.title': 'Not sure which one fits your business?',
     'ctab.desc': 'Let’s chat with our team to find the most effective solution for your business.',

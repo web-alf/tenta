@@ -8,10 +8,21 @@ import ArrowRight from '../icons/ArrowRight.astro';
   <div class="container">
     <div class="cta-banner reveal" style="background:var(--orange-500);">
       <div style="flex:1;">
-        <h2 class="section-title cta-title" style="color:white;text-align:left;margin:0;">{t('ctab.title')}</h2>
+        <h2 class="section-title cta-title" style="color:white;margin:0;">{t('ctab.title')}</h2>
         <p style="margin-top:8px;opacity:0.95;font-size:15px;">{t('ctab.desc')}</p>
       </div>
       <a href="#final-cta" class="btn btn-ghost">{t('ctab.btn')} <ArrowRight size={14} /></a>
     </div>
   </div>
 </section>
+
+<style>
+  @media (max-width: 768px) {
+    .cta-banner {
+      text-align: center;
+    }
+    .cta-title {
+      text-align: center !important;
+    }
+  }
+</style>
