@@ -7,11 +7,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build && node scripts/check-en-currency.mjs --require-build",
-    "preview": "bun run build && wrangler dev",
+    "preview": "npm run build && wrangler dev",
     "astro": "astro",
     "check": "astro check",
     "generate-types": "wrangler types",
-    "deploy": "bun run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^13.3.0",
