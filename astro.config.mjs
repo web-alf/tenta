@@ -49,11 +49,14 @@ export default defineConfig({
 
   compressHTML: true,
 
-  prefetch: {
-    prefetchAll: false,
-    defaultStrategy: 'hover',
-  },
+  // prefetch dinonaktifkan: tidak ada data-astro-prefetch di codebase,
+  // modul page.*.js (±2.3 KB) ikut termuat di semua halaman tanpa guna.
 
+  // prefetch: {
+  //   prefetchAll: false,
+  //   defaultStrategy: 'hover',
+  // },
+  
   integrations: [
     sitemap({
       changefreq: EnumChangefreq.WEEKLY,

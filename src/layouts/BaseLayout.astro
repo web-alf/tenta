@@ -1,7 +1,7 @@
 ---
 import '@styles/global.css';
-import '@fontsource-variable/plus-jakarta-sans';
-import '@fontsource-variable/inter';
+import interWoff2 from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import jakartaWoff2 from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
 import Header from '@components/layout/Header.astro';
 import Footer from '@components/layout/Footer.astro';
 import StickyWA from '@components/layout/StickyWA.astro';
@@ -167,19 +167,15 @@ function safeJsonLd(value: unknown): string {
 
     {gtmId && (
       <Fragment>
-        <!-- Google Tag Manager -->
-        <script is:inline set:html={`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','${gtmId}');`}></script>
+        <!-- Google Tag Manager (stub sinkron; gtm.js dimuat deferred di bawah agar tidak memblokir main thread) -->
+        <script is:inline set:html={`window.dataLayer=window.dataLayer||[];window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});`}></script>
         <!-- End Google Tag Manager -->
       </Fragment>
     )}
 
     {isTargetLp && (
       <Fragment>
-        <!-- Meta Pixel Code -->
+        <!-- Meta Pixel Code (stub sinkron; fbevents.js dimuat deferred agar tidak menambah TBT) -->
         <script is:inline set:html={`
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;
@@ -199,9 +195,7 @@ function safeJsonLd(value: unknown): string {
             }
           });
           if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-          n.queue=[];t=b.createElement(e);t.async=!0;
-          t.src=v;s=b.getElementsByTagName(e)[0];
-          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          n.queue=[]}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           fbq('set', 'autoConfig', false, '1341980327384883');
           fbq('init', '1341980327384883');
@@ -212,12 +206,11 @@ function safeJsonLd(value: unknown): string {
         /></noscript>
         <!-- End Meta Pixel Code -->
 
-        <!-- TikTok Pixel Code -->
+        <!-- TikTok Pixel Code (stub sinkron; events.js dimuat deferred agar tidak menambah TBT) -->
         <script is:inline set:html={`
           !function (w, d, t) {
             w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-            ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+            var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};ttq._pending=ttq._pending||[];ttq._pending.push(r+"?sdkid="+e+"&lib="+t)};
             ttq.load('DAOI0C3C77U88MSNV1I0');
             ttq.page();
           }(window, document, 'ttq');
@@ -302,28 +295,48 @@ function safeJsonLd(value: unknown): string {
     <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
     <link rel="manifest" href="/manifest.webmanifest" />
 
-    {preloadHeroSrc && (
+    {preloadHeroSrc && preloadHeroSrc.includes('tentaklik-home-hero') ? (
+      <Fragment set:html={`<link rel="preload" as="image" imagesrcset="/assets/brand/tentaklik-home-hero-480.avif 480w, /assets/brand/tentaklik-home-hero-720.avif 720w, /assets/brand/tentaklik-home-hero.avif 900w" imagesizes="(max-width: 768px) min(480px, 95vw), 440px" type="image/avif" fetchpriority="high" />`} />
+    ) : preloadHeroSrc ? (
       <Fragment set:html={`<link rel="preload" as="image" imagesrcset="/assets/kraken-hero-400.avif 400w, /assets/kraken-hero-560.avif 560w, /assets/kraken-hero-800.avif 800w" imagesizes="(max-width: 760px) min(480px, 95vw), 560px" type="image/avif" fetchpriority="high" />`} />
-    )}
+    ) : null}
 
     <link rel="dns-prefetch" href="https://wa.me" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet" />
+    <!-- Font self-hosted (@fontsource-variable via global.css); preload subset latin untuk FCP/LCP teks -->
+    <link rel="preload" as="font" type="font/woff2" href={interWoff2} crossorigin="anonymous" />
+    <link rel="preload" as="font" type="font/woff2" href={jakartaWoff2} crossorigin="anonymous" />
 
     <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     {gaId && <link rel="dns-prefetch" href="https://www.google-analytics.com" />}
-    <!-- Google tag (gtag.js) — GA4 (opsional via env) + Google Ads conversion AW-304997094 -->
+    <!-- Google tag (gtag.js) — GA4 (opsional via env) + Google Ads conversion AW-304997094.
+         Stub gtag sinkron agar semua pemanggilan gtag() tetap ter-queue; gtag.js dimuat deferred. -->
     {(!disableGads || gaId) && (
-      <Fragment>
-        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId ?? (!disableGads ? 'AW-304997094' : '')}`}></script>
-        <script
-          is:inline
-          set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());${gaId ? `gtag('config','${gaId}');` : ''}${!disableGads ? `gtag('config','AW-304997094');` : ''}`}
-        />
-      </Fragment>
+      <script
+        is:inline
+        set:html={`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());${gaId ? `gtag('config','${gaId}');` : ''}${!disableGads ? `gtag('config','AW-304997094');` : ''}`}
+      />
     )}
     <!-- End Google tag -->
+
+    <!-- Deferred third-party loader: muat GTM/gtag/pixel setelah first interaction atau idle setelah load.
+         Semua event yang terjadi sebelum script termuat tetap aman karena di-queue di dataLayer/fbq.queue/ttq. -->
+    <script is:inline set:html={`
+      (function(){
+        var loaded=false;
+        function inject(src){var s=document.createElement('script');s.async=true;s.src=src;document.head.appendChild(s);}
+        function loadAll(){
+          if(loaded)return;loaded=true;
+          ${gtmId ? `inject('https://www.googletagmanager.com/gtm.js?id=${gtmId}');` : ''}
+          ${(!disableGads || gaId) ? `inject('https://www.googletagmanager.com/gtag/js?id=${gaId || 'AW-304997094'}');` : ''}
+          ${isTargetLp ? `inject('https://connect.facebook.net/en_US/fbevents.js');
+          if(window.ttq&&window.ttq._pending){window.ttq._pending.forEach(inject);window.ttq._pending=[];}` : ''}
+          ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){removeEventListener(ev,loadAll,{passive:true});});
+        }
+        ['pointerdown','keydown','touchstart','scroll'].forEach(function(ev){addEventListener(ev,loadAll,{passive:true,once:true});});
+        if(document.readyState==='complete'){setTimeout(loadAll,3000);}
+        else{addEventListener('load',function(){setTimeout(loadAll,3000);});}
+      })();
+    `}></script>
 
 
     <Fragment set:html={allLd.map(ld => `<script type="application/ld+json">${safeJsonLd(ld)}</script>`).join('\n')} />
