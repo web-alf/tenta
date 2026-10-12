@@ -1,0 +1,650 @@
+---
+/**
+ * Webinar Google Ads S2 — modern light layout (orange · hijau · hitam · putih).
+ * 100% gratis, CTA langsung join grup Telegram.
+ */
+import BaseLayout from "@layouts/BaseLayout.astro";
+import ArrowRight from "@components/icons/ArrowRight.astro";
+import { WEBINAR_GADS_S2 as W } from "@data/webinar-gads-s2";
+import "../styles/webinar-s2.css";
+
+const {
+  seo,
+  event,
+  hero,
+  problems,
+  curriculum,
+  audience,
+  speaker,
+  details,
+  closing,
+} = W;
+const telegramUrl = W.telegramUrl;
+const marquee = [
+  "Evaluasi Keyword",
+  "Search Terms",
+  "Setting Campaign",
+  "Landing Page",
+  "CTR · CPC · CVR",
+  "Optimasi Lebih Terarah",
+];
+
+const icons = {
+  calendar:
+    '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  clock:
+    '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  video:
+    '<rect x="2" y="6" width="14" height="12" rx="2"/><path d="M22 8l-6 4 6 4V8z"/>',
+  user: '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  tag: '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>',
+  search:
+    '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+  sliders:
+    '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>',
+  layout:
+    '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>',
+  chart:
+    '<line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/>',
+  mouse:
+    '<rect x="6" y="3" width="12" height="18" rx="6"/><line x1="12" y1="7" x2="12" y2="11"/>',
+  wallet:
+    '<rect x="2" y="6" width="20" height="14" rx="2"/><path d="M16 13h2"/><path d="M2 10h20"/>',
+  eye: '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>',
+  door: '<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
+};
+const problemIcons = [icons.mouse, icons.wallet, icons.eye, icons.door];
+const curriculumIcons = [
+  icons.search,
+  icons.sliders,
+  icons.layout,
+  icons.chart,
+];
+
+const detailRows = [
+  { label: "Pembicara", value: speaker.name, icon: icons.user },
+  { label: "Tanggal", value: event.date, icon: icons.calendar },
+  { label: "Waktu", value: event.time, icon: icons.clock },
+  { label: "Lokasi", value: event.location, icon: icons.video },
+  { label: "Biaya", value: event.price, icon: icons.tag, free: true },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  keywords={seo.keywords}
+  bareHeader={true}
+  bareLayout={true}
+  noindex={false}
+  gtmId="GTM-T2FDL7NM"
+  disableGads={true}
+  themeColor="#F7F7F8"
+>
+  <Fragment slot="head">
+    <!-- Meta Pixel Code -->
+    <script is:inline>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js",
+      );
+      fbq("set", "autoConfig", false, "1341980327384883");
+      fbq("init", "1341980327384883");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=1341980327384883&ev=PageView&noscript=1"
+      /></noscript
+    >
+    <!-- End Meta Pixel Code -->
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Event",
+        name: `${hero.title} ${hero.titleAccent} — Webinar Google Ads Gratis`,
+        description: seo.description,
+        startDate: event.isoDate,
+        eventAttendanceMode: "https://schema.org/OnlineEventAttendanceMode",
+        eventStatus: "https://schema.org/EventScheduled",
+        location: { "@type": "VirtualLocation", name: "Online" },
+        organizer: {
+          "@type": "Organization",
+          name: "Tentaklik",
+          url: "https://tentaklik.com",
+        },
+        performer: { "@type": "Person", name: speaker.name },
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "IDR",
+          availability: "https://schema.org/InStock",
+        },
+      })}
+    />
+
+    <style is:global>
+      html {
+        scroll-behavior: smooth;
+      }
+      .footer {
+        margin-top: 0 !important;
+      }
+    </style>
+    <style>
+      .s2-audience-card {
+        max-width: 980px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        gap: 28px;
+        align-items: center;
+        padding: 40px;
+      }
+
+      .s2-aud-mascot {
+        max-width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 720px) {
+        .s2-audience-card {
+          grid-template-columns: minmax(0, 1fr);
+          gap: 20px;
+          padding: 24px;
+          overflow-wrap: anywhere;
+        }
+
+        .s2-aud-mascot {
+          width: 112px;
+          justify-self: center;
+        }
+      }
+    </style>
+  </Fragment>
+
+  <div class="s2 s2-page-pad">
+    <!-- ═══ HERO ═══ -->
+    <section class="s2-hero" id="top">
+      <div class="s2-hero-grid-bg" aria-hidden="true"></div>
+      <div class="container">
+        <div class="s2-hero-grid">
+          <div class="s2-hero-copy">
+            <span class="s2-eyebrow"
+              ><span class="s2-eyebrow-dot"></span>{hero.badge}</span
+            >
+            <h1 class="s2-h1">
+              {hero.title}<br />
+              <span class="s2-accent">{hero.titleAccent}</span>
+            </h1>
+            <p class="s2-hero-subheading" style="margin-bottom: 14px;">
+              {hero.subheading}
+            </p>
+            <p class="s2-hero-desc">{hero.desc}</p>
+
+            <ul class="s2-chips" aria-label="Jadwal webinar">
+              <li class="s2-chip">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={icons.calendar}
+                />{event.dateShort}
+              </li>
+              <li class="s2-chip">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={icons.clock}
+                />{event.time}
+              </li>
+              <li class="s2-chip">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={icons.video}
+                />{event.location}
+              </li>
+            </ul>
+
+            <div class="s2-cta-row" data-cta-card>
+              <a
+                href={telegramUrl}
+                target="_blank"
+                rel="noopener"
+                class="s2-btn s2-btn-primary s2-btn-wiggle"
+              >
+                {hero.ctaText}
+                <ArrowRight size={16} />
+              </a>
+              <span class="s2-cta-note"
+                ><span class="s2-live-dot"></span>100% Gratis · Tanpa biaya</span
+              >
+            </div>
+          </div>
+
+          <div class="s2-visual" aria-hidden="true">
+            <div class="s2-ring"></div>
+            <div class="s2-blob"></div>
+            <img
+              src={hero.imageSrc}
+              alt=""
+              class="s2-visual-img"
+              width="420"
+              height="420"
+              fetchpriority="high"
+              decoding="async"
+            />
+            <div class="s2-float s2-float--a">
+              <span class="s2-float-ic"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={icons.mouse}
+                /></span
+              >
+              <span>Klik banyak<small>leads sepi?</small></span>
+            </div>
+            <div class="s2-float s2-float--b">
+              <span class="s2-float-ic s2-float-ic--dark"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={icons.chart}
+                /></span
+              >
+              <span>CTR · CPC · CVR<small>baca performa</small></span>
+            </div>
+            <div class="s2-float s2-float--c">
+              <span class="s2-float-ic s2-float-ic--green"
+                ><svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><polyline points="20 6 9 17 4 12"></polyline></svg
+                ></span
+              >
+              <span>Evaluasi iklan<small>lebih terarah</small></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ MARQUEE ═══ -->
+    <div class="s2-marquee" aria-hidden="true">
+      <div class="s2-marquee-track">
+        {
+          [...marquee, ...marquee].map((m) => (
+            <span class="s2-marquee-item">{m}</span>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- ═══ PROBLEMS ═══ -->
+    <section class="s2-section">
+      <div class="container">
+        <div class="s2-head reveal">
+          <span class="s2-eyebrow">Kendala Utama</span><br />
+          <h2 class="s2-h2">
+            {problems.heading}
+            <svg
+              class="s2-squiggle"
+              viewBox="0 0 40 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              aria-hidden="true"
+              ><path d="M6 26 L14 8"></path><path d="M18 30 L30 14"></path><path
+                d="M22 36 L36 30"></path></svg
+            >
+          </h2>
+          <p class="s2-lead">{problems.intro}</p>
+        </div>
+        <div class="s2-problem-grid s2-problem-grid--2">
+          {
+            problems.items.map((item, i) => (
+              <div
+                class="s2-card s2-problem-card reveal s2-tilt"
+                style={`--d:${i * 90}ms`}
+              >
+                <span class="s2-problem-num">0{i + 1}</span>
+                <div class={`s2-icon ${i === 3 ? "s2-icon--dark" : ""}`}>
+                  <svg
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    set:html={problemIcons[i]}
+                  />
+                </div>
+                <p>{item}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CURRICULUM ═══ -->
+    <section class="s2-section s2-section--soft">
+      <div class="container">
+        <div class="s2-head reveal">
+          <span class="s2-eyebrow">Materi Sesi</span><br />
+          <h2 class="s2-h2">
+            {curriculum.heading}
+            <svg
+              class="s2-squiggle"
+              viewBox="0 0 40 40"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="3.5"
+              stroke-linecap="round"
+              aria-hidden="true"
+              ><path d="M6 26 L14 8"></path><path d="M18 30 L30 14"></path><path
+                d="M22 36 L36 30"></path></svg
+            >
+          </h2>
+          <p class="s2-lead">{curriculum.intro}</p>
+        </div>
+        <div class="s2-steps">
+          {
+            curriculum.items.map((item, i) => (
+              <article
+                class={`s2-card s2-step s2-step--wide reveal ${i % 2 ? "s2-right" : "s2-left"}`}
+                style={`--d:${(i % 2) * 120}ms`}
+              >
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                  <span class="s2-step-num">0{i + 1}</span>
+                  <span
+                    class={`s2-icon ${i === 0 ? "s2-icon--white" : i === 3 ? "s2-icon--green" : ""}`}
+                    style="margin-bottom:20px;"
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                      set:html={curriculumIcons[i]}
+                    />
+                  </span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ AUDIENCE ═══ -->
+    <section class="s2-section s2-section--tight">
+      <div class="container">
+        <div class="s2-card s2-card--green s2-audience-card reveal s2-zoom">
+          <img
+            src="/assets/kraken-hero-560.avif"
+            alt=""
+            aria-hidden="true"
+            width="140"
+            height="140"
+            loading="lazy"
+            decoding="async"
+            class="s2-aud-mascot hidden md:block"
+          />
+          <div>
+            <h2
+              class="s2-h2"
+              style="margin-top:0; font-size:clamp(24px,3vw,34px);"
+            >
+              {audience.heading}
+            </h2>
+            <p class="s2-lead" style="color:var(--k-70); margin-bottom:18px;">
+              {audience.desc}
+            </p>
+            <ul class="s2-pills" style="margin:0;">
+              {
+                audience.tags.map((t) => (
+                  <li style="background:#fff; border-color:var(--g-100); color:var(--g-600);">
+                    ✓ {t}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ DETAIL WEBINAR + SPEAKER ═══ -->
+    <section class="s2-section s2-section--warm" id="detail">
+      <div class="container">
+        <div class="s2-speaker-grid" style="margin-bottom:48px;">
+          <div class="s2-speaker-photo reveal s2-left w-5/6! md:w-full">
+            <img
+              src={speaker.photoSrc}
+              alt={speaker.name}
+              width="420"
+              height="525"
+              loading="lazy"
+              decoding="async"
+            />
+            <span class="s2-speaker-tag"
+              ><span class="s2-live-dot"></span>Live Online</span
+            >
+          </div>
+          <div class="reveal s2-right">
+            <span class="s2-eyebrow">{details.heading}</span>
+            <h2 class="s2-speaker-name">{speaker.name}</h2>
+            <p class="s2-speaker-role">{speaker.role} Webinar Google Ads</p>
+            <p class="s2-speaker-bio">{closing.desc}</p>
+            <div class="s2-cta-row" data-cta-card>
+              <a
+                href={telegramUrl}
+                target="_blank"
+                rel="noopener"
+                class="s2-btn s2-btn-dark s2-btn-wiggle"
+              >
+                {hero.ctaText}
+                <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <dl class="s2-details">
+          {
+            detailRows.map((row, i) => (
+              <div
+                class={`s2-detail reveal s2-zoom s2-shake ${row.free ? "s2-detail--free" : ""}`}
+                style={`--d:${i * 80}ms`}
+              >
+                <div class={`s2-icon ${row.free ? "s2-icon--green" : ""}`}>
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                    set:html={row.icon}
+                  />
+                </div>
+                <dt>{row.label}</dt>
+                <dd>{row.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <!-- ═══ CLOSING CTA ═══ -->
+    <section class="s2-section">
+      <div class="container">
+        <div class="s2-cta-panel reveal s2-zoom" data-cta-card>
+          <span class="s2-eyebrow s2-eyebrow--green"
+            ><span class="s2-eyebrow-dot"></span>{event.dateShort} · {
+              event.time
+            }</span
+          ><br />
+          <h2 class="s2-h2">{closing.heading}</h2>
+          <p class="s2-lead" style="max-width:560px; margin:0 auto 30px;">
+            {closing.desc}
+          </p>
+          <div class="s2-cta-row">
+            <a
+              href={telegramUrl}
+              target="_blank"
+              rel="noopener"
+              class="s2-btn s2-btn-primary s2-btn-wiggle"
+            >
+              {closing.ctaText}
+              <ArrowRight size={16} />
+            </a>
+          </div>
+        </div>
+      </div>
+      <p class="s2-footline">
+        {closing.footer}
+      </p>
+    </section>
+
+    <!-- ═══ MOBILE STICKY CTA ═══ -->
+    <div class="s2-mobile-cta" id="mobile-cta-bar">
+      <div class="s2-mobile-cta-info">
+        <strong>Webinar Gratis</strong>
+        <span>{event.dateShort} · {event.time}</span>
+      </div>
+      <a
+        href={telegramUrl}
+        target="_blank"
+        rel="noopener"
+        class="s2-btn s2-btn-primary s2-btn-sm">Daftar</a
+      >
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var tgLinks = document.querySelectorAll('a[href*="t.me"]');
+      tgLinks.forEach(function (link) {
+        link.addEventListener("click", function () {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "join_telegram",
+            form_platform: "telegram",
+            form_kategori: "webinar_gads",
+            form_source: window.location.pathname,
+          });
+
+          if (typeof window.fbq === "function") {
+            window.fbq("track", "Lead", {
+              content_name: "Webinar Google Ads",
+              content_category: "Webinar",
+            });
+          }
+        });
+      });
+
+      var mobileCta = document.getElementById("mobile-cta-bar");
+      var ctaCards = document.querySelectorAll("[data-cta-card]");
+      if (mobileCta && ctaCards.length && "IntersectionObserver" in window) {
+        var visible = new Set();
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) visible.add(e.target);
+              else visible.delete(e.target);
+            });
+            mobileCta.classList.toggle(
+              "s2-mobile-cta--hidden",
+              visible.size > 0,
+            );
+          },
+          { threshold: 0.15 },
+        );
+        ctaCards.forEach(function (c) {
+          io.observe(c);
+        });
+      }
+    })();
+  </script>
+</BaseLayout>
